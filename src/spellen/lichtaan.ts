@@ -11,8 +11,8 @@ import type { SpelBlok } from "../content/types";
 import { toetsVoorCode, type Rij } from "../logica/indeling";
 import { lichtAanRondes } from "../logica/reeksen";
 import { el } from "../weergave/dom";
-import { fien, jef } from "../weergave/figuren";
-import { enterHint, schud } from "../blokken/gedeeld";
+import { schud } from "../blokken/gedeeld";
+import { oefenscherm } from "../blokken/oefenscherm";
 
 const VERDIEPINGEN: Rij[] = ["zolder", "woonkamer", "kelder"];
 const RAMEN_PER_VERDIEPING = 3;
@@ -39,17 +39,16 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
     verdiepingen.set(rij, v);
     huis.append(v);
   }
-  const ballon = el("p", { class: "ballon grote-tekst" });
-  const zwaaiers = el("div", { class: "figuren zwaai", hidden: true }, fien("zwaai", 150), jef("zwaai", 150));
-  const rechts = el("div", { class: "naast-figuren" }, el("div", { class: "met-figuren" }, zwaaiers, ballon));
-  ctx.podium.append(el("div", { class: "blok blok-lichtaan" }, el("h2", {}, blok.titel), el("div", { class: "spel-rij" }, huis, rechts)));
+  // Het huis staat in het midden in een vaste zone; Fien en Jef staan links. De
+  // opdracht wisselt per ronde, maar huis en figuren blijven op hun plaats.
+  const scherm = oefenscherm(ctx, { kop: blok.titel, figuren: "zwaai" });
+  scherm.element.classList.add("blok-lichtaan");
+  scherm.veld.append(huis);
 
   function startRonde(): void {
     const rij = rondes[ronde];
     for (const [r, v] of verdiepingen) v.classList.toggle("knippert", r === rij);
-    const tekst = t("lichtaan.opdracht", { rij: t(`rij.${rij}` as TekstSleutel) });
-    ballon.textContent = tekst;
-    ctx.zeg(tekst);
+    scherm.zetOpdracht(t("lichtaan.opdracht", { rij: t(`rij.${rij}` as TekstSleutel) }));
   }
 
   function aantalAan(rij: Rij): number {
@@ -90,10 +89,8 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
       klaar = true;
       for (const v of verdiepingen.values()) v.classList.remove("knippert");
       for (const lijst of ramen.values()) for (const r of lijst) r.classList.add("aan");
-      ballon.textContent = t("lichtaan.klaar");
-      zwaaiers.hidden = false;
-      ctx.zeg(t("lichtaan.klaar"));
-      rechts.append(enterHint(ctx));
+      scherm.zetOpdracht(t("lichtaan.klaar"));
+      scherm.toonEnter();
     },
   };
 };

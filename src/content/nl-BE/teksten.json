@@ -17,8 +17,7 @@
   "voorlezen.aan": "Voorlezen staat aan",
   "voorlezen.uit": "Voorlezen staat uit",
 
-  "hint.enter": "Druk op {toets} om verder te gaan.",
-  "toets.enter": "Enter \u21b5",
+  "hint.enter": "Druk op [Enter \u21b5] om verder te gaan.",
   "teller": "{nummer} van {totaal}",
   "teken.spatie": "spatie",
 
@@ -55,14 +54,14 @@
   "rij.kelder": "kelder",
   "rij.spatie": "spatiebalk",
 
-  "hulp.teken": "Druk op de {teken} met je {vinger}.",
+  "hulp.teken": "Druk op [{teken}] met je {vinger}.",
 
   "melding.hoofdletters": "De hoofdletters staan aan. Zet ze uit (op een Chromebook: Alt en de zoektoets samen), of vraag hulp aan je juf of meester.",
   "melding.toetsenbord": "Je toetsenbord staat niet goed ingesteld. Vraag even hulp aan je juf of meester.",
 
   "check.bezig": "Even kijken of je toetsenbord klopt...",
-  "check.drukA": "Zoek de toets met de letter A en druk erop.",
-  "check.druk6": "Druk nu op de toets met het cijfer 6.",
+  "check.drukA": "Zoek de toets met de letter [A] en druk erop.",
+  "check.druk6": "Druk nu op de toets met het cijfer [6].",
   "check.ok": "Je toetsenbord klopt!",
   "check.fout": "Vraag even hulp aan je juf of meester.",
   "check.verderMag": "Je mag gewoon verder doen.",
@@ -76,18 +75,17 @@
   "eind.nietGehaald": "Nog geen ster. Dat geeft niet: probeer de eindoefening nog eens. Rustig en juist, wij wachten op je.",
 
   "houding.zeg": "Voeten plat, rug recht!",
-  "houding.uitleg": "Leg je handen in de woonkamer. Druk op de spatiebalk als Jef in zijn handen klapt.",
+  "houding.opdracht": "Druk op [spatie] als Jef in zijn handen klapt.",
   "houding.klap": "Klap!",
-  "houding.druk": "Jef klapt: druk op de spatiebalk!",
-  "houding.wacht": "Goed zo. Wacht op de volgende klap...",
   "houding.klaar": "Klaar voor de start!",
   "houding.teller": "{aantal} van {totaal}",
 
-  "lichtaan.opdracht": "Druk op een toets van de {rij}.",
+  "lichtaan.opdracht": "Druk op een toets van de **{rij}**.",
   "lichtaan.klaar": "Alle lichten branden! Fien en Jef zwaaien uit het raam.",
 
   "beek.teller": "Beek {nummer} van {totaal}",
   "beek.klaar": "Droge voeten!",
+  "beek.opdracht": "Typ de letter op de steen. Op een lange steen druk je op [spatie].",
 
   "oefenbord.titel": "Oefenbord",
   "oefenbord.uitleg": "Druk op een toets. Je ziet welke toets het is en welke vinger hem typt.",

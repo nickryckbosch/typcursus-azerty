@@ -107,7 +107,7 @@ Extra afspraken uit document 10 die de app raken:
       "duurMinuten": 0.5,
       "toetsen": [" "],
       "aantal": 5,
-      "tekst": "Leg je duimen op de spatiebalk. Druk erop als het lampje van het huis aangaat."
+      "tekst": "Leg je duimen op de spatiebalk. Druk op [spatie] als de lamp aangaat."
     },
     {
       "type": "spel",

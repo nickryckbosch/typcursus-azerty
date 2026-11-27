@@ -14,9 +14,9 @@ Test op een Chromebook in Chrome. Duur: ongeveer 20 minuten. Noteer bij elk punt
 ## Les 0
 
 - [ ] **Toetsenbordcheck:** zegt de app dat je toetsenbord klopt? Zet de Chromebook daarna eens op een andere invoermethode (bijvoorbeeld Engels) en doe les 0 opnieuw: verschijnt de melding "Vraag even hulp aan je juf of meester", met uitleg voor de leerkracht? Zet het daarna terug op Belgisch.
-- [ ] **Duim op de spatiebalk:** gaat het lampje aan, en kan je pas drukken als het brandt?
+- [ ] **Duim op de spatiebalk:** gaat de lamp aan, en kan je pas drukken als ze brandt? Blijft de lamp op dezelfde plek staan als de kaart "spatie" verschijnt?
 - [ ] **Licht aan in het huis:** knippert de juiste verdieping? Licht bij een verkeerde rij de juiste rij op het toetsenbord op? Branden na 9 rondes alle ramen?
-- [ ] **Klaar voor de start:** verschijnt "Klap!" en telt de spatiebalk telkens mee (3 keer)?
+- [ ] **Klaar voor de start:** is meteen duidelijk dat je op de spatiebalk moet drukken? Verschijnt "Klap!" zonder dat er iets verspringt, en telt de spatiebalk telkens mee (3 keer)?
 - [ ] Op het einde: kan je met de knop meteen naar les 1?
 
 ## Les 1
@@ -32,6 +32,8 @@ Test op een Chromebook in Chrome. Duur: ongeveer 20 minuten. Noteer bij elk punt
 ## Algemeen
 
 - [ ] Past alles op het scherm, zonder te scrollen? Zijn de letters groot genoeg?
+- [ ] Verspringt er ergens iets (de lamp, Fien en Jef, het huis, de opdracht) terwijl je bezig bent?
+- [ ] Is de opdracht bovenaan in elke stap het duidelijkste wat je ziet?
 - [ ] Kan je alles met het toetsenbord doen (Enter om verder te gaan, Tab om een andere knop te kiezen, Esc om terug te gaan)?
 - [ ] Zet de hoofdletters aan (Alt + zoektoets): verschijnt er een melding?
 - [ ] **Oefenbord:** toont het de gedrukte toets groot, in de kleur van de vinger, met de vinger op de hand?

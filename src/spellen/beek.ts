@@ -11,7 +11,8 @@ import { nieuweOefening, teltAlsTeken, typ, volgendTeken, type TypOefening } fro
 import { el } from "../weergave/dom";
 import { fien, jef } from "../weergave/figuren";
 import { tekenTonen } from "../weergave/tekens";
-import { enterHint, schud } from "../blokken/gedeeld";
+import { schud } from "../blokken/gedeeld";
+import { oefenscherm } from "../blokken/oefenscherm";
 
 const STENEN = 12;
 const BEKEN = 3;
@@ -26,7 +27,6 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
   let wacht = false;
   let hulpTimer: number | undefined;
 
-  const teller = el("p", { class: "teller" });
   const rij = el("div", { class: "stenen" });
   const springers = el("div", { class: "springers" }, fien("blij", 80), jef("blij", 80));
   const water = el(
@@ -37,9 +37,10 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
     el("div", { class: "oever oever-rechts" }, el("div", { class: "huisje", "aria-hidden": "true" })),
     springers,
   );
-  const melding = el("p", { class: "grote-tekst", hidden: true });
-  ctx.podium.append(el("div", { class: "blok blok-beek" }, el("h2", {}, blok.titel), teller, water, melding));
-  ctx.zeg(blok.titel);
+  const scherm = oefenscherm(ctx, { breed: true });
+  scherm.element.classList.add("blok-beek");
+  scherm.veld.append(water);
+  scherm.zetOpdracht(t("beek.opdracht"));
 
   function zetSpringers(): void {
     // Op de oever (voor de eerste steen) of op de laatst gesprongen steen.
@@ -63,7 +64,7 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
     oef = nieuweOefening(tekens.join(""));
     stenen = tekens.map((x) => el("div", { class: x === " " ? "steen steen-plat" : "steen" }, tekenTonen(x)));
     rij.replaceChildren(...stenen);
-    teller.textContent = t("beek.teller", { nummer: nummer + 1, totaal: BEKEN });
+    scherm.zetKop(`${blok.titel} \u00b7 ${t("beek.teller", { nummer: nummer + 1, totaal: BEKEN })}`);
     markeerVolgende();
     requestAnimationFrame(zetSpringers);
     startHulpTimer();
@@ -102,10 +103,8 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
         }, 900);
       } else {
         klaar = true;
-        melding.hidden = false;
-        melding.textContent = t("beek.klaar");
-        melding.after(enterHint(ctx));
-        ctx.zeg(t("beek.klaar"));
+        scherm.zetOpdracht(t("beek.klaar"));
+        scherm.toonEnter();
       }
     },
     opruimen() {

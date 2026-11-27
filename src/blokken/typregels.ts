@@ -1,6 +1,7 @@
 // Oefenregels typen, gebruikt door "reeks" (oefenregels) en "eindoefening".
-// De huidige regel staat groot, de volgende regels kleiner eronder.
-// Bij een fout blijft de cursor staan en lichten toets en vinger op.
+// De huidige regel staat groot, de volgende regels kleiner eronder (altijd
+// twee regels hoog, ook als er geen volgende regels meer zijn: zo verspringt
+// er niets). Bij een fout blijft de cursor staan en lichten toets en vinger op.
 // Wacht het kind langer dan HULP_NA_MS, dan verschijnt de hulp ook.
 
 import { t } from "../content";
@@ -8,11 +9,13 @@ import { nieuweOefening, teltAlsTeken, typ, volgendTeken, type TypOefening } fro
 import { el } from "../weergave/dom";
 import type { BlokContext, BlokInstantie } from "./context";
 import { schud } from "./gedeeld";
+import { oefenscherm } from "./oefenscherm";
 
 const HULP_NA_MS = 3000;
 
 export function typRegels(
   ctx: BlokContext,
+  titel: string,
   regels: string[],
   opdracht: string,
   opKlaar: (oefeningen: TypOefening[]) => void,
@@ -22,13 +25,12 @@ export function typRegels(
   let hulpTimer: number | undefined;
   let klaar = false;
 
-  const teller = el("p", { class: "teller" });
+  const scherm = oefenscherm(ctx, { breed: true });
   const huidige = el("div", { class: "typregel", "aria-hidden": "true" });
   const volgende = el("div", { class: "volgende-regels", "aria-hidden": "true" });
   const voorlezer = el("p", { class: "verborgen" });
-  ctx.podium.append(
-    el("div", { class: "blok blok-typen" }, el("p", { class: "opdracht" }, opdracht), teller, huidige, volgende, voorlezer),
-  );
+  scherm.veld.append(huidige, volgende, voorlezer);
+  scherm.zetOpdracht(opdracht);
 
   function tekenRegel(): void {
     const oef = oefeningen[r];
@@ -43,8 +45,10 @@ export function typRegels(
         ),
       ),
     );
-    volgende.replaceChildren(...regels.slice(r + 1, r + 3).map((regel) => el("div", {}, regel)));
-    teller.textContent = t("reeks.regel", { nummer: r + 1, totaal: regels.length });
+    volgende.replaceChildren(
+      ...[1, 2].map((n) => el("div", { class: "volgende-regel" }, regels[r + n] ?? " ")),
+    );
+    scherm.zetKop(`${titel} · ${t("reeks.regel", { nummer: r + 1, totaal: regels.length })}`);
     voorlezer.textContent = oef.doel;
   }
 
@@ -59,7 +63,6 @@ export function typRegels(
 
   tekenRegel();
   startHulpTimer();
-  ctx.zeg(opdracht);
 
   return {
     opToets(e) {

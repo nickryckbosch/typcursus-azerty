@@ -6,11 +6,10 @@ import { t } from "../content";
 import type { EindoefeningBlok } from "../content/types";
 import { nauwkeurigheid, woordenPerMinuut } from "../logica/typen";
 import { DOEL_NAUWKEURIGHEID, moetKortZijn, registreerEindoefening } from "../logica/voortgang";
-import { el } from "../weergave/dom";
 import type { BlokFunctie, BlokInstantie } from "./context";
 import { houding } from "./houding";
 import { typRegels } from "./typregels";
-import { enterHint, metFienEnJef } from "./gedeeld";
+import { oefenscherm } from "./oefenscherm";
 
 export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
   if (blok.soort === "houding") return houding(blok, ctx);
@@ -23,7 +22,7 @@ export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
     ctx.podium.replaceChildren();
     ctx.toetsenbord.toonEnter(false);
     ctx.toonToetsenbord(true);
-    actief = typRegels(ctx, regels, blok.tekst ?? "", (oefeningen) => {
+    actief = typRegels(ctx, blok.titel, regels, blok.tekst ?? "", (oefeningen) => {
       const aanslagen = oefeningen.flatMap((o) => o.aanslagen);
       const nauwk = nauwkeurigheid(aanslagen);
       const tekens = oefeningen.reduce((som, o) => som + o.doel.length, 0);
@@ -45,17 +44,10 @@ export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
   if (!kort) {
     start();
   } else {
-    // Eerst een aanmoediging, dan de korte oefening.
-    ctx.toonToetsenbord(false);
-    ctx.podium.append(
-      el(
-        "div",
-        { class: "blok blok-intro" },
-        metFienEnJef("aanmoedigend", el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, t("eind.aanmoediging")))),
-        enterHint(ctx, start),
-      ),
-    );
-    ctx.zeg(t("eind.aanmoediging"));
+    // Eerst een aanmoediging van Fien en Jef, dan de korte oefening.
+    const scherm = oefenscherm(ctx, { kop: blok.titel, figuren: "aanmoedigend" });
+    scherm.zetOpdracht(t("eind.aanmoediging"));
+    scherm.toonEnter(start);
   }
 
   return {

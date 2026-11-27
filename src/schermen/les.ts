@@ -5,7 +5,8 @@ import type { App, Scherm } from "../app";
 import { t, type TekstSleutel } from "../content";
 import type { Les } from "../content/types";
 import { blokFunctie } from "../blokken";
-import { metFienEnJef } from "../blokken/gedeeld";
+import { oefenscherm } from "../blokken/oefenscherm";
+import { tekstMetToetsen, zonderOpmaak } from "../weergave/tekst";
 import { verderBij, zetBezigBij } from "../logica/voortgang";
 import type { BlokContext, BlokInstantie } from "../blokken/context";
 import { toetsVoorTeken } from "../logica/indeling";
@@ -87,14 +88,18 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: n
       }
       toetsenbord.markeer([gevonden.toets.code]);
       handen.toon([gevonden.toets.vinger]);
-      hulpregel.textContent = t("hulp.teken", {
-        teken: tekenNaam(teken),
-        vinger: t(`vinger.${gevonden.toets.vinger}` as TekstSleutel),
-      });
+      hulpregel.replaceChildren(
+        ...tekstMetToetsen(
+          t("hulp.teken", {
+            teken: tekenNaam(teken),
+            vinger: t(`vinger.${gevonden.toets.vinger}` as TekstSleutel),
+          }),
+        ),
+      );
     },
     zeg(tekst) {
-      laatsteTekst = tekst;
-      spreek(tekst);
+      laatsteTekst = zonderOpmaak(tekst);
+      spreek(laatsteTekst);
     },
     volgende() {
       toonBlok(index + 1);
@@ -152,6 +157,8 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: n
     werkStapjesBij();
     werkToetsenbordMeldingBij();
     const blok = les.online[i];
+    // Voor tests en opmaak: welk soort blok staat er in het podium?
+    podium.dataset.blok = blok.type === "spel" ? `spel-${blok.spel}` : blok.type;
     const functie = blokFunctie(blok);
     instantie = functie ? functie(blok, ctx) : null;
   }
@@ -176,15 +183,10 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: n
       { class: "knop knop-hoofd", type: "button", onclick: () => toonBlok(blok) },
       t("verder.knop", { nummer: blok + 1, titel }),
     );
-    podium.append(
-      el(
-        "div",
-        { class: "blok blok-verder" },
-        metFienEnJef("blij", el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, tekst))),
-        el("div", { class: "knoppen" }, verder, opnieuw),
-      ),
-    );
-    ctx.zeg(tekst);
+    podium.dataset.blok = "verder";
+    const scherm = oefenscherm(ctx, { kop: les.titel, figuren: "blij" });
+    scherm.zetOpdracht(tekst);
+    scherm.voet.replaceChildren(el("div", { class: "knoppen" }, verder, opnieuw));
     // Enter kiest "verdergaan" (de knop heeft de focus); met Tab kies je "opnieuw beginnen".
     verder.focus();
   }

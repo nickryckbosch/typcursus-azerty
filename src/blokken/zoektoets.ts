@@ -1,7 +1,8 @@
 // Zoek de toets: een letter verschijnt groot, het kind drukt de toets.
 // Hier is de hulp altijd zichtbaar: toets en vinger lichten op.
-// Bestaat het blok alleen uit de spatie (les 0), dan gaat er een lampje aan
-// en mag het kind pas drukken als het brandt.
+// Bestaat het blok alleen uit de spatie (les 0), dan gaat er een lamp aan en
+// mag het kind pas drukken als ze brandt. Lamp en kaart staan er van bij het
+// begin en veranderen nooit van plaats; alleen hun zichtbaarheid wisselt.
 
 import { t } from "../content";
 import type { ZoekToetsBlok } from "../content/types";
@@ -11,36 +12,29 @@ import { el } from "../weergave/dom";
 import { tekenTonen } from "../weergave/tekens";
 import type { BlokFunctie } from "./context";
 import { schud } from "./gedeeld";
+import { oefenscherm, startVerborgen, toon } from "./oefenscherm";
 
 export const zoekToets: BlokFunctie<ZoekToetsBlok> = (blok, ctx) => {
   const reeks = zoekReeks(blok.toetsen, blok.nadruk, blok.aantal);
   const oef = nieuweOefening(reeks.join(""));
-  const metLampje = blok.toetsen.every((x) => x === " ");
-  let lampAan = !metLampje;
+  const metLamp = blok.toetsen.every((x) => x === " ");
+  let lampAan = !metLamp;
 
-  const kaart = el("div", { class: "grote-toets" });
+  const scherm = oefenscherm(ctx);
   const lamp = el("div", { class: "lamp", "aria-hidden": "true" });
-  const teller = el("p", { class: "teller" });
-  ctx.podium.append(
-    el(
-      "div",
-      { class: "blok blok-zoek" },
-      el("p", { class: "opdracht" }, blok.tekst ?? ""),
-      metLampje ? lamp : null,
-      kaart,
-      teller,
-    ),
-  );
-  ctx.zeg(blok.tekst ?? "");
+  const kaart = startVerborgen(el("div", { class: "grote-toets" }));
+  if (metLamp) scherm.veld.append(lamp);
+  scherm.veld.append(kaart);
+  scherm.zetOpdracht(blok.tekst ?? "");
 
   function toonHuidig(): void {
     const teken = volgendTeken(oef);
     if (teken === null) return;
     kaart.textContent = tekenTonen(teken);
     kaart.classList.toggle("is-spatie", teken === " ");
-    kaart.hidden = !lampAan;
+    toon(kaart, lampAan);
     lamp.classList.toggle("aan", lampAan);
-    teller.textContent = t("teller", { nummer: oef.positie + 1, totaal: reeks.length });
+    scherm.zetKop(`${blok.titel} · ${t("teller", { nummer: oef.positie + 1, totaal: reeks.length })}`);
     ctx.toonHulp(lampAan ? teken : null);
   }
 
@@ -49,7 +43,7 @@ export const zoekToets: BlokFunctie<ZoekToetsBlok> = (blok, ctx) => {
     toonHuidig();
   }
 
-  if (metLampje) ctx.later(zetLampAan, 900);
+  if (metLamp) ctx.later(zetLampAan, 900);
   toonHuidig();
 
   return {
@@ -67,7 +61,7 @@ export const zoekToets: BlokFunctie<ZoekToetsBlok> = (blok, ctx) => {
         ctx.later(() => ctx.volgende(), 400);
         return;
       }
-      if (metLampje) {
+      if (metLamp) {
         lampAan = false;
         toonHuidig();
         ctx.later(zetLampAan, 700 + Math.random() * 800);

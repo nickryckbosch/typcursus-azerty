@@ -4,21 +4,17 @@ import type { IntroBlok } from "../content/types";
 import { toetsVoorTeken } from "../logica/indeling";
 import { el } from "../weergave/dom";
 import type { BlokFunctie } from "./context";
-import { enterHint, metFienEnJef } from "./gedeeld";
+import { oefenscherm } from "./oefenscherm";
 
 export const intro: BlokFunctie<IntroBlok> = (blok, ctx) => {
   const toetsen = ctx.les.nieuweToetsen.map((teken) => toetsVoorTeken(teken)?.toets).filter((x) => x !== undefined);
   ctx.toetsenbord.markeer(toetsen.map((x) => x.code));
   ctx.handen.toon(toetsen.map((x) => x.vinger));
 
-  ctx.podium.append(
-    el(
-      "div",
-      { class: "blok blok-intro" },
-      metFienEnJef("zwaai", el("div", { class: "ballon" }, el("h2", {}, blok.titel), el("p", { class: "grote-tekst" }, blok.tekst ?? ""))),
-      enterHint(ctx),
-    ),
-  );
+  const scherm = oefenscherm(ctx, { figuren: "zwaai" });
+  scherm.zetOpdracht(blok.titel, false);
+  scherm.veld.append(el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, blok.tekst ?? "")));
+  scherm.toonEnter();
   ctx.zeg(blok.tekst ?? "");
 
   return {

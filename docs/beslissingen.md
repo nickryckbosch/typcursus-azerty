@@ -109,6 +109,41 @@ Beslist met Nick (27 november 2026):
 - **Getest** op 1366 x 768, 1366 x 657, 1280 x 600, 1280 x 560, 1024 x 600 en 1280 x 500: in geen enkele stap van les 0 en les 1 moet er nog gescrold worden.
 - **Tegen:** op een heel klein scherm worden de letters en figuren kleiner. De ondergrenzen zorgen dat ze leesbaar blijven.
 
+## 12c. Rustige schermen: vaste zones, niets verspringt
+
+**Steunt op:** eigen keuze, en een vaststelling van Nick bij het testen (27 november 2026). Sluit aan bij K16 in document 14.
+
+**Wat Nick zag:**
+- In les 0, "Duim op de spatiebalk", verscheen de grote kaart "spatie" pas als de lamp aanging, en de lamp sprong dan naar boven.
+- In "Klaar voor de start" was het scherm te druk. De opdracht viel weg in het geheel: zelfs als volwassene had Nick niet door dat hij op de spatiebalk moest drukken.
+- Op het eindscherm van "Licht aan in het huis" kwam een schuifbalk, en "Druk op Enter" en de knop Verder vielen half weg.
+
+**Waarom dit belangrijk is:** een kind van 9 of 10 dat leert typen, moet zijn aandacht bij de toetsen en het scherm houden. Een element dat verspringt, trekt de blik weg van de opdracht. En een opdracht die niet opvalt, kan het kind niet uitvoeren.
+
+**De regel, voor elk oefenscherm, ook voor toekomstige oefeningen en spelletjes:**
+1. **Vaste zones.** Elk oefenscherm gebruikt dezelfde zones, met een vaste plaats en hoogte:
+   - de opdracht bovenaan;
+   - Fien en Jef links;
+   - de prent of het spel in het midden;
+   - "Druk op Enter" onderaan;
+   - daaronder de hulpregel, de handen en het toetsenbord.
+
+   De code staat in `src/blokken/oefenscherm.ts`. Een nieuw blok of spel gebruikt `oefenscherm()` en zet zijn inhoud in `veld`.
+2. **Wat later verschijnt, staat er van bij het begin.** Het neemt zijn ruimte al in. Tonen en verbergen gaat via zichtbaarheid (`startVerborgen()`, `toon()`), nooit door elementen toe te voegen of weg te halen. Dat geldt ook voor het toetsenbord en de handen: waar niets te typen valt, worden ze onzichtbaar, maar ze houden hun plaats.
+3. **Fien en Jef, de lamp en de prent veranderen nooit van plaats**, ook niet als de opdracht langer of korter wordt. Een andere uitdrukking van Fien en Jef verschijnt in hetzelfde vak.
+4. **Verschijnen gaat met een korte, rustige overgang** van 180 ms. Vraagt het toestel om minder beweging (`prefers-reduced-motion`), dan gebeurt het meteen.
+5. **De opdracht is het duidelijkste element:** groot en vet, altijd op dezelfde plek. De toets die het kind moet indrukken, staat getekend in de zin. In de teksten schrijf je dat als `[spatie]`, `[A]` of `[Enter ↵]`, en vet als `**zolder**`.
+6. **Een signaal**, zoals de lamp of "Klap!", staat op een vaste plek in het midden, dicht bij de opdracht. Het verschijnt en verdwijnt alleen, en concurreert niet met de opdracht.
+7. **Ook de hulpregel onder het podium** ("Druk op [F] met je linkerwijsvinger") heeft een vaste hoogte. De waarschuwing over het toetsenbord ligt als een laag erboven en duwt niets weg.
+
+**Hoe we het controleren:** een testscript (Playwright) doorloopt elke les op zeven schermformaten, van 1920 x 950 tot 1280 x 500. Per stap meet het of er gescrold moet worden, of een zone te vol is, en of de opdracht, Fien en Jef, de lamp, het huis, de beek of het toetsenbord tijdens die stap van plaats veranderen. Les 0 en 1 zijn getest in de gepubliceerde versie. Bij les 2 tot 5 zijn alle stappen getest in de ontwikkelversie, waar een spel dat nog niet gebouwd is tijdelijk wordt vervangen.
+
+**Tegen:**
+- Een vaste zone laat soms lege ruimte, bijvoorbeeld onder de opdracht tot "Druk op Enter" verschijnt, of bij de afsluiter, waar het toetsenbord onzichtbaar is maar zijn plaats houdt. Dat is bewust: liever een rustige lege plek dan iets dat verspringt.
+- Overgangen tussen stappen met een andere indeling (bijvoorbeeld van de aanmoediging naar de oefenregels, die de hele breedte gebruiken) gebeuren alleen nadat het kind zelf op Enter drukt. De opdrachtzone en het toetsenbord blijven dan op hun plaats.
+
+**Later:** het huis van "Licht aan" krijgt een mooiere tekening. Het heeft nu al zijn vaste zone in het midden.
+
 ## 13. Privacy en veiligheid
 
 - Geen externe bronnen: geen lettertypes, geen CDN, geen analytics. Het systeemlettertype van het toestel wordt gebruikt.
