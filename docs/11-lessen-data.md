@@ -231,7 +231,9 @@ Extra afspraken uit document 10 die de app raken:
       "spel": "beek",
       "duurMinuten": 3,
       "tekens": ["f", "j", " "],
-      "beschrijving": "Fien en Jef staan aan de ene kant van een beek, hun huis staat aan de overkant. In de beek liggen 12 stapstenen. Op elke steen staat een f of een j; om de drie stenen ligt een lange platte steen voor de spatie. Een juiste toets: Fien en Jef springen samen naar die steen. Een foute toets: de steen wiebelt even en licht de juiste vinger op, er valt niemand in het water. Na 12 stenen zijn ze aan de overkant en komt er een nieuwe beek. Drie beken (36 sprongen). Geen tijd, geen punten; op het einde: \"Droge voeten!\""
+      "doel": "Ons huis staat aan de overkant van de beek. Elke goede letter legt een stapsteen. Leg drie rijen stenen, dan zijn we thuis!",
+      "tekst": "Typ wat je ziet.",
+      "beschrijving": "Het spel gebruikt het spelsjabloon. Bovenaan staat de opdracht. In het midden staat, groot, een regel van 12 tekens: f, j en de spatie (elk derde teken is een spatie), in dezelfde vorm als bij de oefenregels. Links staat de doelzin in een tekstballon. Onderaan staat de strook: Fien en Jef aan deze kant van de beek, hun huis aan de overkant, en in het water drie rijen van 12 plaatsen voor een stapsteen. Een juiste toets: er ligt een steen bij, en de plaats van de volgende steen krijgt een donkere rand. Een foute toets: de letter krijgt een stippelrand, en de juiste toets en de juiste vinger lichten op. Na 12 tekens komt er een nieuwe regel. Drie regels (36 toetsen). Fien en Jef staan stil; pas op het einde staan ze bij hun huis: \"Droge voeten! We zijn thuis.\" Geen tijd, geen punten."
     },
     {
       "type": "reeks",

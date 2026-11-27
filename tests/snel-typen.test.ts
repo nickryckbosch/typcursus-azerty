@@ -112,18 +112,40 @@ describe("snel typen: geen enkele aanslag gaat verloren", () => {
     expect(aantalVolgende()).toBe(1);
   });
 
-  it("over de beek: ook meteen na het oversteken van een beek", () => {
+  it("over de beek: ook meteen na het einde van een regel", () => {
     const les = LESSEN[1];
     const blok = vind<SpelBlok>(les, (b) => b.type === "spel" && b.spel === "beek");
-    const { ctx, aanslagen } = maakContext(les);
+    const { ctx, aanslagen, aantalVolgende } = maakContext(les);
     const inst = beek(blok, ctx);
     for (let i = 0; i < 36; i++) {
-      const steen = ctx.podium.querySelector(".steen-nu")!.textContent!;
-      druk(inst, steen === "spatie" ? " " : steen);
+      // de letter die aan de beurt is, staat in het midden (spelsjabloon, K22)
+      const teken = ctx.podium.querySelector(".spel-regel .cursor")!.textContent!;
+      druk(inst, teken === "\u00A0" ? " " : teken);
+      // elke goede toets legt een steen in de strook
+      if (i < 35) expect(ctx.podium.querySelectorAll(".beek-steen")).toHaveLength(i + 1);
     }
     expect(aanslagen()).toHaveLength(36);
     expect(aanslagen().every((a) => a.juist)).toBe(true);
-    expect(ctx.podium.querySelector(".beek-einde")!.classList.contains("onzichtbaar")).toBe(false);
+    // het slot: alle stenen liggen er, de slotzin staat op de plaats van de opdracht, de knop Verder verschijnt
+    expect(ctx.podium.querySelectorAll(".beek-steen")).toHaveLength(36);
+    expect(ctx.podium.querySelector(".opdracht-tekst")!.textContent).toBe("Droge voeten! We zijn thuis.");
+    expect(ctx.podium.querySelector(".spel-slot")!.classList.contains("onzichtbaar")).toBe(false);
+    druk(inst, "Enter");
+    expect(aantalVolgende()).toBe(1);
+  });
+
+  it("over de beek: een foute toets legt geen steen en geeft de letter een stippelrand", () => {
+    const les = LESSEN[1];
+    const blok = vind<SpelBlok>(les, (b) => b.type === "spel" && b.spel === "beek");
+    const { ctx } = maakContext(les);
+    const inst = beek(blok, ctx);
+    druk(inst, "k");
+    expect(ctx.podium.querySelectorAll(".beek-steen")).toHaveLength(0);
+    expect(ctx.podium.querySelector(".spel-regel .cursor")!.classList.contains("fout")).toBe(true);
+    // na de juiste toets is de rand weg en ligt er een steen
+    druk(inst, ctx.podium.querySelector(".spel-regel .cursor")!.textContent!);
+    expect(ctx.podium.querySelectorAll(".beek-steen")).toHaveLength(1);
+    expect(ctx.podium.querySelector(".spel-regel .fout")).toBeNull();
   });
 
   it("licht aan in het huis: negen juiste rijen 30 ms na elkaar", () => {

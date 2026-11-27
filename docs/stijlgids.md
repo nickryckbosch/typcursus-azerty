@@ -117,7 +117,7 @@ Kleurstrepen per vinger en getekende handen: **andere cursussen** doen dat ook (
 - **Typscherm:** bovenbalk met de knop "Lessen", in het midden "Les 2 · Oefenregels 1" met een balkje per blok, rechts voorlezen. Links een stilstaand figuurtje met een korte tip in een tekstballon. In het midden een witte kaart met de oefenregels. Onderaan het toetsenbord met de handen.
 - **Oefenkaart (intro, zoek de toets, de lamp, "Licht aan", "Klaar voor de start", afsluiter):** dezelfde bovenbalk, en een witte kaart met vaste zones: de opdracht groot bovenaan (met de toets getekend in de zin), Fien en Jef links, de prent of het signaal in het midden, de knop Verder (met de Enter-toets erin) rechts. Bij de lamp staat de knop Start onder de lamp.
 - **Praatscherm (K27: de intro, het einde van extra oefenen):** Fien en Jef, hun tekstballon en de prent staan als een groep in het midden van de kaart, de knoppen er vlak onder (`oefenscherm(ctx, { opbouw: "midden" })`). Zie deel 10.
-- **Voortgang (K20):** een dunne, grijze balk langs de onderrand van de witte kaart, met rechts klein de teller. Bij "Over de beek" drie bolletjes voor de beken. Geen vingerkleur.
+- **Voortgang (K20):** een dunne, grijze balk langs de onderrand van de witte kaart, met rechts klein de teller. Geen vingerkleur. Een spel heeft geen balk: daar toont de strook zelf hoe ver je bent (deel 11).
 - **Spelscherm:** dezelfde bovenbalk, een witte kaart met bovenaan de vaste prent en eronder de vooruitgang, onderaan het toetsenbord met de handen.
 - Alles past op een Chromebook van 1366 x 768 zonder scrollen (zie beslissing 12b).
 
@@ -127,9 +127,9 @@ Waarop steunt dit? **Eigen keuze** (startscherm per deel, een kaart "Verder waar
 
 - **Tekenstijl: klare lijn (stripstijl).** Dunne, even dikke zwarte omtrek, vlakke kleuren zonder verloop, zachte kleuren, een creme achtergrond. Ogen met wit, een iris met een lichtpuntje en wenkbrauwen, zodat de figuren levendig kijken.
 - Fien en Jef komen uit het modelblad (`docs/beelden/fien-en-jef-modelblad.png`): twee rijen van vijf houdingen. De losse prenten staan in `src/beelden/` en worden geknipt met `scripts/knip-figuren.py`.
-- De andere prenten in dezelfde stijl (welkomprent van het dorp, houdingskaart, de spelprenten voor beek, overgooien, dijk, slee en egel) staan in `docs/beelden/prenten/`. Alleen de beekprent wordt nu in de app gebruikt.
+- De andere prenten in dezelfde stijl (welkomprent van het dorp, houdingskaart, de spelprenten voor beek, overgooien, dijk, slee en egel) staan in `docs/beelden/prenten/`. Ze worden nu niet in de app gebruikt: in een spel tekent de app de strook zelf (deel 11).
 - Een spelprent blijft volledig in beeld: liever een kleinere, gecentreerde prent met afgeronde hoeken dan een bijgesneden prent.
-- "Over de beek" gebruikt de beekprent (Fien en Jef links vooraan, het huis aan de overkant, een brede beek zonder stenen). De stenen tekent de app zelf, onder de prent.
+- "Over de beek" gebruikt de beekprent niet meer. De app tekent de strook zelf, met dezelfde onderdelen als de prent (de beek, het huis met de puntgevel, de knotwilgen, de haag). De strook is in lagen gebouwd, zodat de achtergrond later een prent kan worden (deel 11).
 
 Waarop steunt dit? **Eigen keuze** van Nick (27 november 2026, projectdocument 17, W7): de eerste stijl met dikke bruine lijnen oogde te kleuterachtig voor het vijfde en zesde leerjaar. Te toetsen in de klastest.
 
@@ -216,3 +216,19 @@ Elk scherm volgt deze acht regels. Ze gelden ook voor elk nieuw scherm en elk ni
 
 - **Onderzoek**, voor het principe dat details die niets met de taak te maken hebben afleiden: Rey (2012) en Sundararajan en Adesope (2020), zie deel 1. Kanttekening: dat onderzoek gaat over leren uit tekst en uitleg, niet over typen.
 - **Eigen keuze**, voor de acht concrete regels, na de vaststelling van Nick en de testers op 27 november 2026 (de schermen oogden druk; zie `docs/beslissingen.md`, punt 12j). Te toetsen in de klastest.
+
+## 11. Het spelsjabloon (K22)
+
+Elk spel in een les gebruikt dezelfde indeling (`src/spellen/sjabloon.ts`). Een nieuw spel is een strook, een lijst met wat het kind typt, en een slotzin.
+
+1. **De opdracht bovenaan**, even groot als op de andere oefenschermen: "Typ wat je ziet."
+2. **Wat het kind typt, staat in het midden**, groot en altijd op dezelfde plek, in dezelfde vorm als bij de oefenregels: getypte letters grijs, de volgende letter in de lichte vingerkleur met een streep in de volle kleur. Nooit op een steen, een bal of een vlaggetje.
+3. **De doelzin (deel 9) staat links in een tekstballon**, het hele spel. Het staartje wijst naar Fien en Jef in de strook.
+4. **De strook onderaan** is de prent van het spel en toont de vooruitgang: bij "Over de beek" ligt er per goede toets een stapsteen bij. Er is geen teller en geen balk; de strook zegt het zelf. Wie iets toevoegt, haalt iets weg (deel 10).
+5. **Wat aan de beurt is in de strook, krijgt een donkere rand** (`#1b2a4a`), nooit blauw: blauw is de kleur van de wijsvinger.
+6. **Bij een fout** krijgt de letter een stippelrand, en lichten de juiste toets en vinger op. Er schudt niets.
+7. **Er beweegt niets tijdens het typen.** Alleen op het einde verandert de strook (Fien en Jef staan bij hun huis), komt de slotzin op de plaats van de opdracht en de knop Verder op de plaats van de regel.
+
+**De strook** heeft een vaste verhouding: 1270 op 150, zo breed als de kaart en hoogstens 38% van de hoogte van het podium. Ze is in drie lagen gebouwd (`src/spellen/beek-strook.ts`): de achtergrond, de stenen, en Fien en Jef. De app tekent de achtergrond zelf, in de klare lijn (deel 7 en 8). Wie later een prent uit een beeldgenerator wil gebruiken, vervangt alleen de achtergrond en past de plaats van de stenen en de figuren aan; het spel zelf verandert niet.
+
+**Waarop steunt dit? Eigen keuze**, als toepassing van deel 1 (rust), deel 6 (vaste zones), deel 9 (opdrachten) en deel 10 (overzicht). Nick zag een mockup en koos op 27 november 2026: de app tekent de strook, de letters staan in het midden, Fien en Jef zwaaien op het einde. Te toetsen in de klastest: vinden kinderen de spelletjes saai, of zien ze geen verschil met de oefenregels? Dan krijgt elk spel een korte beloning op het einde of een kleine verandering in de strook, nooit in de tekst.

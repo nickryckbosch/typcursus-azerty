@@ -125,8 +125,9 @@
   "lichtaan.onderste": "de onderste rij",
   "lichtaan.klaar": "Alle lichten branden! Goed gedaan!",
 
-  "beek.klaar": "Droge voeten!",
-  "beek.prent": "Fien en Jef staan bij de beek. Hun huis staat aan de overkant.",
+  "beek.klaar": "Droge voeten! We zijn thuis.",
+  "beek.strook": "De beek. Er liggen {gelegd} van de {totaal} stapstenen. Het huis van Fien en Jef staat aan de overkant.",
+  "beek.thuis": "Alle stapstenen liggen in de beek. Fien en Jef staan bij hun huis en zwaaien.",
 
   "oefenbord.titel": "Oefenbord",
   "oefenbord.uitleg": "Druk op een toets. Je ziet welke toets het is en welke vinger hem typt.",
