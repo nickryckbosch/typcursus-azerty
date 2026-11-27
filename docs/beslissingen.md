@@ -319,6 +319,33 @@ Steunt op: eigen keuze van Nick, na het testen. De tekenstijl en de indeling bli
 - **`oefenscherm.toonEnter(actie, "start")`** toont de Enter-regel met "om te starten" en de knop Start; `verbergEnter()` verbergt ze weer. Geldt voor elke toekomstige oefening waarin iets vanzelf gebeurt, zoals Letterregen (K24).
 - **Test:** `tests/snel-typen.test.ts`: zonder Start gaat de lamp nooit aan, ook niet na 10 seconden; een spatie voor de start geeft "Druk eerst op Start." en telt niet.
 
+## 12l. Het spelsjabloon, met "Over de beek" erin (K22)
+
+Gebouwd op 27 november 2026 (tak `claude/spelsjabloon`), na een mockup die Nick zag. Opdracht: `docs/opdrachten/2026-11-27-spelsjabloon.md`. Regels: `docs/stijlgids.md`, deel 11.
+
+- **Keuze:** elk spel in een les krijgt dezelfde indeling: de opdracht bovenaan, wat het kind typt groot in het midden (zoals bij de oefenregels), de doelzin links in een tekstballon, en onderaan een strook: de prent van het spel, die ook de vooruitgang toont.
+- **Waarom:**
+  - De letter stond op de steen die aan de beurt was, klein, en schoof bij elke toets een plaats op. Nick en zijn dochter misten eerder een opdracht omdat er iets versprong (12c). Nu kijkt het kind in elk spel naar dezelfde plek, en dat is dezelfde plek als bij de oefenregels.
+  - Een volwassene zonder uitleg vroeg bij dit spel: "Hoe ben ik aan het huis geraakt?" De prent toonde de reis niet. Nu ligt er bij elke goede toets een steen bij in de beek, en staan Fien en Jef op het einde bij hun huis: wat de tekst belooft, zie je gebeuren (12h).
+  - Er stonden drie lagen onder elkaar (prent, rij stenen, bolletjes). Nu is er een: de strook. De teller en de bolletjes zijn weg, want de stenen tonen zelf hoe ver je bent (12j: wie iets toevoegt, haalt iets weg).
+  - De spelletjes van les 2 tot 5 zijn nog niet gebouwd. Een sjabloon bouw je een keer; daarna is een spel een strook, een lijst en een slotzin.
+- **Drie keuzes van Nick (27 november 2026):**
+  1. *De app tekent de strook zelf*, in de klare lijn. Waarom: ze past altijd exact en er is geen nieuwe prent per spel nodig. De strook is in lagen gebouwd (achtergrond, stenen, figuren), zodat de achtergrond later een prent uit een beeldgenerator kan worden zonder het spel te herbouwen. Kanttekening: de verhouding (1270 op 150) is erg breed en laag voor een beeldgenerator.
+  2. *De letters staan in het midden*, niet op de stenen. Het spel lijkt daardoor meer op de oefenregels; dat is de bewuste prijs.
+  3. *Fien en Jef zwaaien op het einde.* Alleen van die houding bestaat een prent van kop tot voeten.
+- **Kleine keuzes bij het bouwen:**
+  - De opdracht is "Typ wat je ziet.", dezelfde woorden als bij de oefenregels. "Typ de letter op de steen" klopt niet meer.
+  - De slotzin is "Droge voeten! We zijn thuis." en staat op de plaats van de opdracht; de knop Verder komt op de plaats van de regel. Zo staat alles in de middenkolom (12j) en verspringt er niets (12c).
+  - De plaats van de volgende steen heeft een donkere rand, niet blauw: blauw is de kleur van de wijsvinger.
+  - Bij een fout krijgt de letter een stippelrand; er schudt niets (12).
+  - De plaatsen waar nog een steen komt, zijn te zien als een dun stippellijntje: het kind ziet van bij het begin de drie rijen uit de doelzin.
+  - De beekprent (`src/beelden/beek.webp`) is uit de app gehaald; ze blijft bewaard in `docs/beelden/prenten/spel-beek.webp`.
+  - De strook is hoogstens 38% van het podium hoog. Op een lager scherm krimpt de tekening; de vlakken lopen door buiten het kader, zodat de strook gevuld blijft.
+- **Tegen:** het spel lijkt meer op de oefenregels, en de getekende strook is eenvoudiger dan de prenten uit de beeldgenerator.
+- **Waarop steunt dit? Eigen keuze**, als toepassing van 12 (rust), 12c (vaste zones), 12h (opdrachten) en 12j (overzicht). Het onderzoek achter 12 gaat over leren uit tekst en uitleg, niet over typen.
+- **Wat ons van mening zou doen veranderen:** zegt een kind van 9 of 10 jaar dat het spel saai is, of ziet het geen verschil met de oefenregels, dan krijgt het spel een korte beloning op het einde of een kleine verandering in de strook, nooit in de tekst.
+- **Nog niet gedaan:** het huis op de strook is het huis van de prenten (met een puntgevel), niet het huis met vier lagen van "Licht aan in het huis" (12e). Dat zijn nu twee huizen in de app. Niet getest op een echte Chromebook.
+
 ## 13. Privacy en veiligheid
 
 - Geen externe bronnen: geen CDN, geen analytics, geen Google Fonts.

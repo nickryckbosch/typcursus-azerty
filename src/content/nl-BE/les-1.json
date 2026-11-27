@@ -100,9 +100,9 @@
         "j",
         " "
       ],
-      "beschrijving": "Bovenaan staat een vaste prent: Fien en Jef aan de ene kant van een beek, hun huis aan de overkant. De prent verandert niet tijdens het spel. Onder de prent ligt een rij van 12 stenen. Op elke steen staat een f of een j; elke derde steen is breder en is voor de spatie. De steen die aan de beurt is, is groter en heeft een blauwe rand. Een juiste toets: de steen wordt grijs met een vinkje en de volgende steen is aan de beurt. Een foute toets: er beweegt niets, alleen de juiste toets en de juiste vinger lichten op. Na 12 stenen komt er een nieuwe rij. Drie beken (36 toetsen). Fien en Jef staan stil; pas op het einde steken ze hun duim op: \"Droge voeten!\" Geen tijd, geen punten.",
+      "beschrijving": "Het spel gebruikt het spelsjabloon. Bovenaan staat de opdracht. In het midden staat, groot, een regel van 12 tekens: f, j en de spatie (elk derde teken is een spatie), in dezelfde vorm als bij de oefenregels. Links staat de doelzin in een tekstballon. Onderaan staat de strook: Fien en Jef aan deze kant van de beek, hun huis aan de overkant, en in het water drie rijen van 12 plaatsen voor een stapsteen. Een juiste toets: er ligt een steen bij, en de plaats van de volgende steen krijgt een donkere rand. Een foute toets: de letter krijgt een stippelrand, en de juiste toets en de juiste vinger lichten op. Na 12 tekens komt er een nieuwe regel. Drie regels (36 toetsen). Fien en Jef staan stil; pas op het einde staan ze bij hun huis: \"Droge voeten! We zijn thuis.\" Geen tijd, geen punten.",
       "doel": "Ons huis staat aan de overkant van de beek. Elke goede letter legt een stapsteen. Leg drie rijen stenen, dan zijn we thuis!",
-      "tekst": "Typ de letter op de steen."
+      "tekst": "Typ wat je ziet."
     },
     {
       "type": "reeks",

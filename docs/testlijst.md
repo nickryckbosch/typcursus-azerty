@@ -13,8 +13,8 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 - [ ] **Rust:** beweegt er tijdens het typen niets, behalve de toets en de vinger die oplichten? Geen schuddende letters, geen knipperende vlakken, geen zwaaiende of springende figuurtjes?
 - [ ] **Niets verspringt:** blijven de lamp, Fien en Jef, het huis en de opdracht op hun plaats terwijl je bezig bent, ook als er iets bij verschijnt?
 - [ ] **De opdracht:** is de opdracht bovenaan in elke stap het duidelijkste wat je ziet, met de toets getekend in de zin?
-- [ ] **Voortgang:** staat er op elk oefenscherm onderaan de witte kaart een dunne grijze balk met rechts een teller (bij "Over de beek" drie bolletjes)?
-- [ ] **Snel typen:** typ zo snel als je kan, ook net als er een nieuwe letter, regel of beek verschijnt. Telt elke toets?
+- [ ] **Voortgang:** staat er op elk oefenscherm onderaan de witte kaart een dunne grijze balk met rechts een teller (een spel heeft geen balk: de strook toont de stenen)?
+- [ ] **Snel typen:** typ zo snel als je kan, ook net als er een nieuwe letter, regel verschijnt, ook in "Over de beek". Telt elke toets?
 - [ ] **Startscherm:** staan Fien en Jef met hun tekstballon volledig in beeld, zonder scrollen, ook in een laag venster?
 - [ ] **Kleuren:** kan je de vier vingerkleuren en de duim goed uit elkaar houden? Vraag het zeker aan een kind of collega die kleurenblind is.
 
@@ -42,7 +42,7 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 - [ ] **Licht aan in het huis:** wordt het woord van de juiste verdieping donker (zonder te knipperen)? Zijn de woorden links van het huis goed leesbaar? Licht bij een verkeerde rij de juiste rij op het toetsenbord op? Branden na 9 rondes alle ramen?
 - [ ] **Eerst lezen, dan starten:** blijft bij "Duim op de spatiebalk" en "Klaar voor de start" de lamp uit tot je op Start (of Enter) drukt? Heeft een kind genoeg tijd om de opdracht te lezen? Zegt een spatie voor de start "Druk eerst op Start."?
 - [ ] **Licht aan, doelzin:** staat boven Fien en Jef "Het wordt donker. Doe jij de lichten aan? Elke goede toets laat een raam branden."? Kan iemand zonder uitleg zeggen wat hij moet doen, en waar hij naartoe werkt?
-- [ ] **Over de beek, doelzin en opdracht:** staat de doelzin boven de opdracht, en is de opdracht even groot als op de andere schermen? Kan iemand zonder uitleg zeggen waar hij naartoe werkt?
+- [ ] **Over de beek, doelzin en opdracht:** staat de opdracht bovenaan, even groot als op de andere schermen, en de doelzin links in een tekstballon boven Fien en Jef? Kan iemand zonder uitleg zeggen wat hij moet doen, en waar hij naartoe werkt?
 - [ ] **Oefenbord:** staat elke letter netjes in de kaart, ook de p, g en j, zonder de onderrand te raken? Houdt de kaart dezelfde maat bij "spatie"?
 - [ ] **Licht aan, hulp:** licht in de eerste drie rondes de juiste rij op het toetsenbord op, met dezelfde rand rond het woord in het huis? Zegt de opdracht "de middelste rij"? Verschijnt de hulp later alleen na een fout of na even wachten?
 - [ ] **Klaar voor de start:** is meteen duidelijk dat je op de spatiebalk moet drukken als de lamp aangaat? Telt de spatiebalk telkens mee (3 keer)?
@@ -58,7 +58,8 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 - [ ] Is de toets die moet komen al zichtbaar voor je typt (hulp altijd zichtbaar)?
 - [ ] Typ expres een fout. Blijft de cursor staan, en lichten de juiste toets en vinger even sterker op, zonder dat er iets schudt?
 - [ ] Na een regel: staat de afgewerkte regel grijs met een vinkje boven de nieuwe regel?
-- [ ] **Over de beek:** staat de prent bovenaan volledig in beeld (Fien en Jef links, het huisje rechts)? Ligt eronder een rij van 12 stenen, met bredere stenen voor de spatie? Worden afgewerkte stenen grijs met een vinkje, en is de huidige steen groter met een blauwe rand? Blijft de prent stil? Drie beken en dan "Droge voeten!" met de duim omhoog?
+- [ ] **Over de beek (spelsjabloon):** staat de regel groot in het midden, zoals bij de oefenregels? Ligt er bij elke goede toets een stapsteen bij in de beek onderaan, en heeft de plaats van de volgende steen een donkere rand? Krijgt de letter bij een foute toets een stippelrand, zonder dat er iets schudt? Blijft alles op zijn plaats? Staan Fien en Jef na drie rijen stenen bij hun huis, met "Droge voeten! We zijn thuis." en de knop Verder?
+- [ ] **Over de beek, saai of leuk:** wat zegt het kind over het spel? Ziet het een verschil met de oefenregels?
 - [ ] **Eindoefening, met veel fouten:** 0 sterren, Fien en Jef moedigen aan, en de knop "Probeer de eindoefening opnieuw".
 - [ ] **Nog een keer met veel fouten:** daarna komt een aanmoediging van Fien en Jef, en is de eindoefening korter (1 regel).
 - [ ] **Eindoefening zonder fouten:** 3 sterren. Op het startscherm heeft les 1 een vinkje en sterren, en de knop "Opnieuw".
