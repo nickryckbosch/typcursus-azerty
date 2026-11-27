@@ -6,7 +6,7 @@ Voorstel van 27 november 2026. Alles hierin is een voorstel; wat beslist wordt, 
 
 **Voorstel:**
 
-> Na deze cursus typen kinderen vanaf het vierde leerjaar blind met tien vingers op een Belgisch AZERTY-toetsenbord. Ze kennen de plaats van alle letters, hoofdletters en de belangrijkste leestekens, en typen een korte tekst nauwkeurig zonder naar hun handen te kijken. De cursus is gratis, open source en bruikbaar in elke Belgische school, met of zonder begeleiding van een leerkracht.
+> Na deze cursus typen kinderen vanaf het vierde leerjaar blind met tien vingers op een Belgisch AZERTY-toetsenbord. Ze kennen de plaats van alle letters, hoofdletters en de belangrijkste leestekens, en typen een korte tekst nauwkeurig zonder naar hun handen te kijken. De cursus is gratis en bruikbaar in elke Belgische school, met of zonder begeleiding van een leerkracht.
 
 **Meetbaar einddoel (voorstel):** minstens 90% nauwkeurig, aan een rustig tempo van ongeveer 10 woorden per minuut, zonder naar het toetsenbord te kijken. Snelheid is geen doel van de basiscursus; die groeit vanzelf met oefenen.
 

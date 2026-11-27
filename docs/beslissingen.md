@@ -296,3 +296,15 @@ De volledige uitleg staat in projectdocument 12 ("Metingen per toets") van het c
 - **Waarop steunt dit? Andere cursussen en eigen keuze.** Typing.com en Keybr bieden ook extra oefening. De grenzen (4 regels, 15 tot 25 tekens, drie kwart uit de huidige les, vier keer dezelfde vinger, zeven letters dezelfde hand) zijn een eigen keuze, te toetsen in de klastest.
 - **Tegen:** samengestelde regels zijn minder mooi dan met de hand geschreven regels (bijvoorbeeld een groepje uit een vroegere les tussen woorden).
 
+
+## 19. Licentie: alle rechten voorbehouden (27 november 2026)
+
+- **Keuze:** de code, de lesinhoud, de teksten en de prenten vallen vanaf nu onder "alle rechten voorbehouden" in plaats van AGPL-3.0. De repository blijft publiek. Anderen mogen de code bekijken, maar niet gebruiken, kopieren, aanpassen of verspreiden zonder schriftelijke toestemming van Nick.
+- **Waarom:** Nick wil de mogelijkheid openhouden om van de cursus (een deel van) zijn job te maken, bijvoorbeeld met een betalend leerkrachtoverzicht of een opdrachtgever die de ontwikkeling betaalt. Zolang het verdienmodel niet vastligt, houdt hij alle rechten bij zichzelf. De cursus blijft gratis voor leerlingen.
+- **Waarom niet langer AGPL:** AGPL was gekozen zodat we onderdelen van Keybr mochten hergebruiken (projectdocument 01). Dat is niet gebeurd (punt 15), dus die verplichting geldt niet.
+- **Waarom publiek en niet privé:** GitHub Pages is op het gratis plan alleen beschikbaar voor publieke repositories (GitHub Docs, "GitHub Pages limits"). Een publieke repository houdt de testlink voor de klastest gratis werkend. Een privé-repository blijft mogelijk als Nick ook niet wil dat anderen de code zien; dan moet de app via GitHub Pro, Netlify of Cloudflare Pages online.
+- **Wat niet terug te draaien is:** versies van voor 27 november 2026 werden onder AGPL-3.0 verspreid. Wie die al kopieerde, mag die versie onder AGPL blijven gebruiken. De repository was toen een paar dagen oud.
+- **Bijdragen:** voorlopig aanvaarden we geen pull requests van anderen. Zo blijft Nick de enige eigenaar en kan hij later vrij een licentie kiezen (opnieuw open source, een dubbele licentie of betalend). Wie later meewerkt, tekent eerst een akkoord dat Nick die vrijheid geeft.
+- **Uitzondering:** de lettertypes Andika en Nunito houden hun eigen licentie (SIL Open Font License 1.1).
+- **Nog na te gaan (buiten de code):** of de werkgever rechten heeft op software die deels tijdens het werk gemaakt is, en hoe sterk AI-prenten beschermd zijn. Zie projectdocument 01.
+- **Waarop steunt dit? Eigen keuze.**
