@@ -118,6 +118,10 @@
   "houding.klaar": "Klaar voor de start!",
 
   "lichtaan.opdracht": "Druk op een toets van de **{rij}**.",
+  "lichtaan.opdrachtMetPlaats": "Druk op een toets van de **{rij}**: {plaats}.",
+  "lichtaan.bovenste": "de bovenste rij",
+  "lichtaan.middelste": "de middelste rij",
+  "lichtaan.onderste": "de onderste rij",
   "lichtaan.klaar": "Alle lichten branden! Goed gedaan!",
 
   "beek.klaar": "Droge voeten!",

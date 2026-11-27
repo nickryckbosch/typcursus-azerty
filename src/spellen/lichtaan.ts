@@ -84,6 +84,8 @@ function woord(rij: Rij): SVGGElement {
   return svg(
     "g",
     { class: "huis-woord" },
+    // de rand van de hulp: dezelfde rand als de rij op het toetsenbord (stijl.css)
+    svg("rect", { class: "woord-hulp-rand", x: x - 7, y: midden - VAK.hoogte / 2 - 7, width: VAK.breedte + 14, height: VAK.hoogte + 14, rx: VAK.hoogte / 2 + 7 }),
     svg("rect", { x, y: midden - VAK.hoogte / 2, width: VAK.breedte, height: VAK.hoogte, rx: VAK.hoogte / 2, stroke: LIJN, "stroke-width": 1.5 }),
     svg("text", { x: x + VAK.breedte / 2, y: midden, "text-anchor": "middle", "dominant-baseline": "central" }, t(`rij.${rij}` as TekstSleutel)),
   );
@@ -123,6 +125,13 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
   // zodat rammen niet helpt. Na een juiste toets is de volgende ronde meteen aan de beurt.
   let wacht = false;
   let klaar = false;
+  let hulpTimer: number | undefined;
+
+  // Hulp: de rij die aan de beurt is, licht op het toetsenbord op, en het woord in
+  // het huis krijgt dezelfde rand. In de eerste drie rondes (woonkamer, zolder,
+  // kelder) altijd; daarna alleen na een foute toets of na even wachten.
+  const RONDES_MET_HULP = 3;
+  const PLAATS: Record<string, string> = { zolder: "lichtaan.bovenste", woonkamer: "lichtaan.middelste", kelder: "lichtaan.onderste" };
 
   const { svg: huis, ramen, woorden } = maakHuis(blok.titel);
 
@@ -130,11 +139,31 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
   const scherm = oefenscherm(ctx, { figuren: "blij", klasse: "blok-lichtaan" });
   scherm.veld.append(huis);
 
+  function toonHulp(aan: boolean): void {
+    const rij = aan ? rondes[ronde] : null;
+    ctx.toetsenbord.toonRij(rij);
+    for (const [r, w] of woorden) w.classList.toggle("met-hulp", r === rij);
+    if (aan) {
+      // De opdracht zegt dan ook waar de rij ligt: "de middelste rij".
+      const naam = t(`rij.${rondes[ronde]}` as TekstSleutel);
+      scherm.zetOpdracht(t("lichtaan.opdrachtMetPlaats", { rij: naam, plaats: t(PLAATS[rondes[ronde]] as TekstSleutel) }), false);
+    }
+  }
+
   function startRonde(): void {
     const rij = rondes[ronde];
+    clearTimeout(hulpTimer);
     for (const [r, w] of woorden) w.classList.toggle("aan-de-beurt", r === rij);
-    scherm.zetOpdracht(t("lichtaan.opdracht", { rij: t(`rij.${rij}` as TekstSleutel) }));
     scherm.voortgang.zetBalk(ronde, rondes.length);
+    const naam = t(`rij.${rij}` as TekstSleutel);
+    if (ronde < RONDES_MET_HULP) {
+      scherm.zetOpdracht(t("lichtaan.opdrachtMetPlaats", { rij: naam, plaats: t(PLAATS[rij] as TekstSleutel) }));
+      toonHulp(true);
+    } else {
+      scherm.zetOpdracht(t("lichtaan.opdracht", { rij: naam }));
+      toonHulp(false);
+      hulpTimer = window.setTimeout(() => toonHulp(true), ctx.hulpNaMs);
+    }
   }
 
   function aantalAan(rij: Rij): number {
@@ -156,7 +185,9 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
       const juist = toets.rij === gevraagd;
       ctx.toetsenbord.flits(e.code, juist);
       if (!juist) {
-        ctx.toetsenbord.lichtRijOp(gevraagd);
+        // Het lukt niet: de hulp verschijnt en blijft tot de juiste toets er is.
+        clearTimeout(hulpTimer);
+        toonHulp(true);
         wacht = true;
         ctx.later(() => (wacht = false), 900);
         return;
@@ -170,11 +201,17 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
       }
       // Het einde: alle ramen branden, Fien en Jef steken hun duim op (op dezelfde plaats).
       klaar = true;
+      clearTimeout(hulpTimer);
+      toonHulp(false);
       for (const w of woorden.values()) w.classList.remove("aan-de-beurt");
       scherm.voortgang.zetBalk(rondes.length, rondes.length);
       scherm.zetFiguren("duim");
       scherm.zetOpdracht(t("lichtaan.klaar"));
       scherm.toonEnter();
+    },
+    opruimen() {
+      clearTimeout(hulpTimer);
+      ctx.toetsenbord.toonRij(null);
     },
   };
 };
