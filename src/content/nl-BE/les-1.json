@@ -1,0 +1,160 @@
+{
+  "id": 1,
+  "titel": "Fien en Jef wonen op de thuisrij",
+  "nieuweToetsen": [
+    "f",
+    "j"
+  ],
+  "geleerdeToetsen": [
+    "f",
+    "j",
+    " "
+  ],
+  "doelen": [
+    "Ik vind de F en de J zonder te kijken, aan de bultjes.",
+    "Ik typ f met mijn linkerwijsvinger en j met mijn rechterwijsvinger.",
+    "Ik typ een spatie met mijn duim.",
+    "Na elke toets gaat mijn vinger terug naar huis."
+  ],
+  "klassikaal": {
+    "duurMinuten": 10,
+    "materiaal": "Nodig: de Chromebooks en het gewone bord (krijt of whiteboard). Handig als je het hebt, maar niet nodig: een digibord, de klasplaat, losse toetsenborden, een doek of handdoek per kind. In de eerste sessie zitten de kinderen al aan hun Chromebook (na het online deel van les 0).",
+    "stappen": [
+      {
+        "titel": "Herhaling van les 0 (alleen als les 1 een aparte sessie is)",
+        "duurMinuten": 2,
+        "optioneel": true,
+        "leerkracht": "Valt weg in de eerste sessie. Geef je les 1 op een andere dag, neem dan 2 minuten: \"Waar is de zolder? De woonkamer? De kelder?\" en de kleurenvingers.",
+        "kinderen": "Wijzen de verdiepingen aan op hun toetsenbord en laten de vingers van een geroepen kleur wiebelen."
+      },
+      {
+        "titel": "Fien en Jef ontdekken",
+        "duurMinuten": 3,
+        "leerkracht": "\"Sluit je ogen en voel met je wijsvingers over de woonkamer. Op twee toetsen zit een klein bultje. Gevonden? Daar wonen Fien en Jef: Fien op de F, Jef op de J.\" Wandel rond en kijk of elke wijsvinger op het bultje ligt. Leg uit: \"De andere vingers liggen ernaast in de woonkamer, de duimen op de spatiebalk.\"",
+        "kinderen": "Zoeken met gesloten ogen de bultjes, openen de ogen en controleren: linkerwijsvinger op F, rechterwijsvinger op J. Drie keer: handen in de schoot, en weer zoeken."
+      },
+      {
+        "titel": "De hele startzin",
+        "duurMinuten": 2,
+        "leerkracht": "\"Nu kennen we de hele startzin: Voeten plat, rug recht, Fien en Jef thuis!\" Zeg hem drie keer, de laatste keer met de ogen dicht.",
+        "kinderen": "Zeggen de startzin mee en nemen de houding aan. Bij \"Fien en Jef thuis\" liggen de wijsvingers op de bultjes."
+      },
+      {
+        "titel": "Droog typen",
+        "duurMinuten": 4,
+        "leerkracht": "Laat het oefenbord van de app openen (dat toont alleen de toets die je drukt, groot en in kleur, zonder punten). Roep \"Fien!\", \"Jef!\" of \"Spatie!\". Eerst traag, met na elke toets \"Terug naar huis!\", dan sneller, en eens een reeksje (\"Fien, Fien, Jef!\"). Kijk vooral naar de handen: welke vinger drukt?",
+        "kinderen": "Drukken de juiste toets met de juiste vinger en laten de vinger meteen terugvallen op het bultje. Ze kijken naar het scherm om te zien of het klopt."
+      },
+      {
+        "titel": "Afspraak",
+        "duurMinuten": 1,
+        "leerkracht": "\"Tijdens het typen kijken we naar het scherm, niet naar onze handen. Foutjes mogen, de app wacht op je.\" Wie wil, legt een doek of trui over de handen.",
+        "kinderen": "Spreken af om naar het scherm te kijken. Wie een doek heeft, legt hem klaar."
+      }
+    ]
+  },
+  "online": [
+    {
+      "type": "intro",
+      "titel": "Fien en Jef stellen zich voor",
+      "duurMinuten": 1,
+      "tekst": "Hier wonen wij! Ik ben Fien en ik woon op de F. Ik ben Jef en ik woon op de J. Voel je de bultjes? Daar liggen je wijsvingers. Ze zijn blauw, net als op het scherm."
+    },
+    {
+      "type": "zoek-toets",
+      "titel": "Zoek Fien, zoek Jef",
+      "duurMinuten": 2,
+      "toetsen": [
+        "f",
+        "j",
+        " "
+      ],
+      "nadruk": [
+        "f",
+        "j"
+      ],
+      "aantal": 20,
+      "tekst": "Druk op de letter die je ziet. De hand op het scherm toont welke vinger."
+    },
+    {
+      "type": "reeks",
+      "titel": "Oefenregels 1",
+      "duurMinuten": 3,
+      "tekst": "Typ wat je ziet. Na elke toets terug naar huis.",
+      "regels": [
+        "fff jjj fff jjj",
+        "ff jj ff jj fj jf",
+        "fj jf fj jf fj jf",
+        "f j ff jj fj"
+      ]
+    },
+    {
+      "type": "spel",
+      "titel": "Over de beek",
+      "spel": "beek",
+      "duurMinuten": 3,
+      "tekens": [
+        "f",
+        "j",
+        " "
+      ],
+      "beschrijving": "Fien en Jef staan aan de ene kant van een beek, hun huis staat aan de overkant. In de beek liggen 12 stapstenen. Op elke steen staat een f of een j; om de drie stenen ligt een lange platte steen voor de spatie. Een juiste toets: Fien en Jef springen samen naar die steen. Een foute toets: de steen wiebelt even en licht de juiste vinger op, er valt niemand in het water. Na 12 stenen zijn ze aan de overkant en komt er een nieuwe beek. Drie beken (36 sprongen). Geen tijd, geen punten; op het einde: \"Droge voeten!\""
+    },
+    {
+      "type": "reeks",
+      "titel": "Oefenregels 2",
+      "duurMinuten": 2,
+      "tekst": "Nog wat oefenregels. Kijk naar het scherm, niet naar je handen.",
+      "regels": [
+        "fjf jfj fjf jfj",
+        "ffj jjf ffj jjf",
+        "fj jf fjj"
+      ]
+    },
+    {
+      "type": "eindoefening",
+      "titel": "Eindoefening",
+      "duurMinuten": 3,
+      "doelNauwkeurigheid": 0.9,
+      "tekst": "Nu de eindoefening. Neem je tijd: juist is belangrijker dan snel.",
+      "regels": [
+        "fj jf ff jj fjf jfj",
+        "jjf ffj fj jf fjj jff"
+      ],
+      "regelsKort": [
+        "fj jf ff jj fjf"
+      ]
+    },
+    {
+      "type": "afsluiter",
+      "titel": "Goed gedaan",
+      "duurMinuten": 1,
+      "tekst": "Goed gedaan! Je weet nu waar wij wonen. Nog niet alle sterren? Probeer de eindoefening nog eens, wij wachten op je."
+    }
+  ],
+  "groepjes": [
+    "fj",
+    "jf",
+    "ff",
+    "jj",
+    "fff",
+    "jjj",
+    "ffj",
+    "jjf",
+    "fjf",
+    "jfj",
+    "fjj",
+    "jff",
+    "fjfj",
+    "jfjf",
+    "ffjj",
+    "jjff",
+    "fjjf",
+    "jffj",
+    "fffj",
+    "jjjf"
+  ],
+  "woorden": [],
+  "zinnen": [],
+  "tipLeerkracht": "Typische fouten: kinderen kijken naar hun handen, typen alles met een vinger, drukken de spatie met een wijsvinger, of houden hun vingers als klauwtjes boven de toetsen in plaats van erop. Stuur bij met een vaste zin: \"Fien en Jef thuis\" voor de startpositie, \"Terug naar huis\" als een vinger blijft hangen. Drukken kinderen te hard: \"Tik zacht, zoals een vlinder.\" Zijn de bultjes op de Chromebook moeilijk te voelen, dan helpt een klein stukje plakband op de F en de J. Een kind dat telkens naar zijn handen kijkt, krijgt een doek of trui over de handen; zeg erbij dat fouten mogen, want de app wacht tot de juiste toets er is."
+}

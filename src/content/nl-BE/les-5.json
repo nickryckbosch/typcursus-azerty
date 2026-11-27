@@ -1,0 +1,198 @@
+{
+  "id": 5,
+  "titel": "Fien en Jef gaan op bezoek",
+  "nieuweToetsen": [
+    "g",
+    "h"
+  ],
+  "geleerdeToetsen": [
+    "f",
+    "j",
+    "d",
+    "k",
+    "e",
+    "i",
+    "s",
+    "l",
+    "g",
+    "h",
+    " "
+  ],
+  "doelen": [
+    "Ik typ g en h: mijn wijsvinger schuift even opzij en komt terug op het bultje.",
+    "Ik voel aan het bultje dat mijn vinger weer thuis is.",
+    "Ik typ korte zinnen met tien letters."
+  ],
+  "klassikaal": {
+    "duurMinuten": 12,
+    "materiaal": "Nodig: de Chromebooks en het gewone bord (krijt of whiteboard). Handig als je het hebt, maar niet nodig: een digibord, de klasplaat, losse toetsenborden, een doek of handdoek per kind. Schrijf op het bord: jef is de held.",
+    "stappen": [
+      {
+        "titel": "Startzin en zinnendictee",
+        "duurMinuten": 2,
+        "leerkracht": "Startzin. Zeg daarna langzaam de zin \"ik kies de slee\". De kinderen typen hem op het oefenbord.",
+        "kinderen": "Nemen de houding aan en typen de zin, met een spatie tussen elk woord."
+      },
+      {
+        "titel": "Op bezoek in het midden",
+        "duurMinuten": 3,
+        "leerkracht": "\"Tussen het huis van Fien en het huis van Jef wonen nog twee buren: de G en de H. Fien schuift een stapje naar rechts naar de G, Jef een stapje naar links naar de H. Daarna gaan ze meteen terug naar huis. Hoe weet je dat je weer thuis bent? Je voelt het bultje!\" Laat traag typen: \"f - g - f\", \"j - h - j\".",
+        "kinderen": "Schuiven met de wijsvinger opzij en terug, en voelen bij het terugkomen het bultje. De andere vingers blijven liggen."
+      },
+      {
+        "titel": "Welke hand? (stil spel)",
+        "duurMinuten": 2,
+        "leerkracht": "Het stille handenspel, nu met alle tien letters. Zeg een letter; de kinderen steken de juiste hand op en wiebelen met de juiste vinger. Kies vooral g en h, en letters die op elkaar lijken in de klank (s en f, d en k).",
+        "kinderen": "Antwoorden zonder te spreken met hand en vinger."
+      },
+      {
+        "titel": "Woordenjagers met de G en de H",
+        "duurMinuten": 4,
+        "leerkracht": "\"Welke woorden kan je nu maken met de G of de H erin?\" Schrijf voorstellen op het bord (bijvoorbeeld hij, geel, egel, held, leeg). Laat er een paar typen, en daarna de zin op het bord: jef is de held.",
+        "kinderen": "Bedenken woorden, controleren of alle letters al geleerd zijn, typen woorden en de zin."
+      },
+      {
+        "titel": "Wat gaan we doen?",
+        "duurMinuten": 1,
+        "leerkracht": "\"Vandaag help je een egel de weg naar huis vinden.\"",
+        "kinderen": "Starten met het online deel."
+      }
+    ]
+  },
+  "online": [
+    {
+      "type": "intro",
+      "titel": "Op bezoek bij de buren",
+      "duurMinuten": 1,
+      "tekst": "Wij gaan op bezoek bij de buren in het midden: de G en de H. Even opzij schuiven, en terug naar je bultje. Dan voel je dat je weer thuis bent. Vandaag typ je nog meer zinnen!"
+    },
+    {
+      "type": "zoek-toets",
+      "titel": "Zoek de G en de H",
+      "duurMinuten": 1,
+      "toetsen": [
+        "g",
+        "h",
+        "f",
+        "j",
+        "s",
+        "l"
+      ],
+      "nadruk": [
+        "g",
+        "h"
+      ],
+      "aantal": 12,
+      "tekst": "Druk op de letter die je ziet. Voel daarna het bultje."
+    },
+    {
+      "type": "reeks",
+      "titel": "Oefenregels 1",
+      "duurMinuten": 3,
+      "tekst": "Opzij en terug. Typ wat je ziet.",
+      "regels": [
+        "fgf jhj fgf jhj",
+        "fg jh gf hj fg jh",
+        "gh hg ghg hgh gh hg",
+        "hij heg hek geel"
+      ]
+    },
+    {
+      "type": "spel",
+      "titel": "De egel gaat naar huis",
+      "spel": "egel",
+      "duurMinuten": 3,
+      "tekens": [],
+      "woorden": [
+        "hij",
+        "heg",
+        "hek",
+        "geel",
+        "leeg",
+        "egel",
+        "held",
+        "geld",
+        "gids",
+        "hik",
+        "deeg",
+        "heel",
+        "lig",
+        "geef"
+      ],
+      "beschrijving": "Een egel staat aan het begin van een tuinpad. Zijn huisje zit onder de heg aan de andere kant van de tuin. Het pad bestaat uit 12 tegels met elk een woord. Het kind typt het woord op de volgende tegel; bij elke juiste letter zet de egel een stapje. Een foute letter: de egel blijft staan en snuffelt even, de juiste vinger licht op. Na 12 tegels kruipt de egel in zijn huisje en zeggen Fien en Jef: \"Slaapwel, egel!\" Woorden willekeurig uit de lijst, elk woord hoogstens twee keer. Geen tijd, geen punten."
+    },
+    {
+      "type": "reeks",
+      "titel": "Oefenregels 2",
+      "duurMinuten": 3,
+      "tekst": "Echte woorden met de G en de H.",
+      "regels": [
+        "heel held hiel hik",
+        "leeg geld deeg gids",
+        "hij hield hesje"
+      ]
+    },
+    {
+      "type": "eindoefening",
+      "titel": "Eindoefening",
+      "duurMinuten": 3,
+      "doelNauwkeurigheid": 0.9,
+      "tekst": "De eindoefening. Rustig en juist, en na elke toets terug naar huis.",
+      "regels": [
+        "hij heg hek gids",
+        "hij is heel lief",
+        "de fles is leeg",
+        "jef is de held"
+      ],
+      "regelsKort": [
+        "geel leeg egel",
+        "jef is de held"
+      ]
+    },
+    {
+      "type": "afsluiter",
+      "titel": "Goed gedaan",
+      "duurMinuten": 1,
+      "tekst": "Je kent nu tien letters! Volgende keer komen de pinken aan de beurt, en dan is de woonkamer helemaal vol."
+    }
+  ],
+  "groepjes": [],
+  "woorden": [
+    "hij",
+    "hek",
+    "heg",
+    "heel",
+    "hele",
+    "held",
+    "hiel",
+    "hield",
+    "heide",
+    "hik",
+    "hesje",
+    "geel",
+    "gele",
+    "leeg",
+    "lege",
+    "deeg",
+    "gids",
+    "geld",
+    "geef",
+    "lig",
+    "egel",
+    "egels",
+    "kegel",
+    "kegels",
+    "eigeel"
+  ],
+  "zinnen": [
+    "hij is heel lief",
+    "de fles is leeg",
+    "ik kies de gele slee",
+    "jef is de held",
+    "kijk die egel",
+    "ik geef je elf ijsjes",
+    "eigeel is geel",
+    "ik lees de gids"
+  ],
+  "tipLeerkracht": "Typische fout: de wijsvinger schuift naar de G of de H en komt niet terug. Daarna typt het kind g waar het f bedoelt, of h in plaats van j, en lijkt het alsof de hele les fout loopt. Je ziet het aan een wijsvinger die naast het bultje ligt. Stuur bij met \"Voel je het bultje?\" en laat \"f - g - f\" en \"j - h - j\" traag herhalen. Andere fout: g met de middelvinger, omdat de hand mee opschuift. Bij de zinnen: let op dat kinderen niet versnellen omdat ze de woorden al kennen. Juist blijft belangrijker dan snel."
+}
