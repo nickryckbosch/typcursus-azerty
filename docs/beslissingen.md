@@ -6,6 +6,7 @@ Beslist met Nick (27 november 2026):
 
 - **Voorlezen staat standaard uit**, met een duidelijke knop om het aan te zetten.
 - **Sterren:** 1 vanaf 90%, 2 vanaf 95%, 3 vanaf 98%.
+- **Eigen login:** elk kind heeft een eigen Google-login van de school op de Chromebooks (zie document 01). De voortgang per browserprofiel is dus per kind; er komt geen "kies je naam"-scherm.
 
 ## 1. Vite + TypeScript, zonder framework
 
@@ -56,7 +57,7 @@ Beslist met Nick (27 november 2026):
 
 - **localStorage**, onder de sleutel `typcursus-azerty`, met een versienummer (nu 1). Elke lees- en schrijfactie zit in try/catch: lukt het niet, dan werkt de app gewoon verder, alleen zonder te bewaren.
 - **Kapotte of onbekende gegevens** worden vervangen door een lege voortgang, veld per veld (`zetOm` in `src/logica/opslag.ts`). Komt er ooit een versie 2, dan komt de omzetting daar.
-- **Tegen:** de voortgang hoort bij het browserprofiel. Delen kinderen een Chromebook met dezelfde login, dan lopen hun gegevens door elkaar. Zie de open vraag onderaan.
+- **Tegen:** de voortgang hoort bij het browserprofiel. Dat is geen probleem: elk kind heeft een eigen Google-login van de school, dus een eigen profiel.
 
 ## 9. Lessen openen
 
@@ -102,7 +103,3 @@ Beslist met Nick (27 november 2026):
 ## 15. Keybr
 
 - Er is geen code of data van Keybr (of een ander project) hergebruikt. Alles is zelf geschreven, dus er is geen vermelding nodig.
-
-## Open vraag voor Nick
-
-**Heeft elk kind een eigen Chromebook of een eigen Google-login?** Met een eigen login werkt alles zoals het nu is. Delen kinderen een toestel met dezelfde login, dan kan ik een eenvoudig "kies je naam"-scherm toevoegen (alleen op het toestel, zonder wachtwoord).
