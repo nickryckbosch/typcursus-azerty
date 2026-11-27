@@ -1,0 +1,37 @@
+import { describe, expect, it } from "vitest";
+import { LESSEN } from "../src/content";
+
+// Dezelfde controle als in docs/11-lessen-data.md: elk item bevat alleen
+// geleerde toetsen plus de spatie.
+describe("lesinhoud", () => {
+  it("bevat les 0 tot 5 in volgorde", () => {
+    expect(LESSEN.map((l) => l.id)).toEqual([0, 1, 2, 3, 4, 5]);
+  });
+
+  it("gebruikt alleen geleerde toetsen", () => {
+    let aantal = 0;
+    for (const les of LESSEN) {
+      const geleerd = new Set(les.geleerdeToetsen);
+      const items = [...les.groepjes, ...les.woorden, ...les.zinnen];
+      for (const blok of les.online) {
+        if ("regels" in blok) items.push(...blok.regels);
+        if ("regelsKort" in blok && blok.regelsKort) items.push(...blok.regelsKort);
+        if ("toetsen" in blok) items.push(...blok.toetsen);
+        if ("tekens" in blok) items.push(...blok.tekens);
+        if ("woorden" in blok && blok.woorden) items.push(...blok.woorden);
+      }
+      for (const item of items) {
+        aantal++;
+        for (const teken of item) expect(geleerd.has(teken), `les ${les.id}: "${item}"`).toBe(true);
+      }
+    }
+    expect(aantal).toBe(262);
+  });
+
+  it("heeft een eindoefening met doel 90% in les 1 tot 5", () => {
+    for (const les of LESSEN.filter((l) => l.id > 0)) {
+      const eind = les.online.find((b) => b.type === "eindoefening");
+      expect(eind && "doelNauwkeurigheid" in eind ? eind.doelNauwkeurigheid : null).toBe(0.9);
+    }
+  });
+});
