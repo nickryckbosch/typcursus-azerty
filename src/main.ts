@@ -1,7 +1,7 @@
 // Startpunt van de app.
 //
-// Typcursus AZERTY - gratis, open source typcursus op Belgisch AZERTY.
-// Licentie: AGPL-3.0 (zie LICENSE).
+// Typcursus AZERTY - gratis typcursus op Belgisch AZERTY.
+// (c) 2026 Nick Ryckbosch. Alle rechten voorbehouden (zie LICENSE).
 
 import "./stijl.css";
 import { App } from "./app";
