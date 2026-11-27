@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isLesOpen, lesAanDeBeurt, markeerAfgewerkt, moetKortZijn, nieuweVoortgang, registreerEindoefening, verderBij, zetBezigBij } from "../src/logica/voortgang";
+import { isExtraOpen, isLesOpen, lesAanDeBeurt, markeerAfgewerkt, markeerEindeBereikt, moetKortZijn, nieuweVoortgang, registreerEindoefening, verderBij, zetBezigBij } from "../src/logica/voortgang";
 
 const VOLGORDE = [0, 1, 2];
 
@@ -83,5 +83,24 @@ describe("de les die aan de beurt is (kaart Verder waar je was)", () => {
     const v = nieuweVoortgang();
     for (const id of VOLGORDE) markeerAfgewerkt(v, id);
     expect(lesAanDeBeurt(v, VOLGORDE)).toBeNull();
+  });
+});
+
+describe("extra oefenen gaat open (K15)", () => {
+  it("zodra de les een keer tot het einde gedaan is, ook zonder 90%", () => {
+    const v = nieuweVoortgang();
+    expect(isExtraOpen(v, 1)).toBe(false);
+    registreerEindoefening(v, 1, 0.6, 5);
+    expect(isExtraOpen(v, 1)).toBe(false); // nog niet bij de afsluiter geweest
+    markeerEindeBereikt(v, 1);
+    expect(isExtraOpen(v, 1)).toBe(true);
+    // De volgende les blijft op slot tot 90% op de eindoefening.
+    expect(isLesOpen(v, 2, VOLGORDE)).toBe(false);
+  });
+
+  it("is ook open voor een les die al gelukt was (oudere gegevens)", () => {
+    const v = nieuweVoortgang();
+    registreerEindoefening(v, 1, 0.95, 5);
+    expect(isExtraOpen(v, 1)).toBe(true);
   });
 });

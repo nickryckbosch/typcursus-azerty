@@ -29,6 +29,8 @@ export interface BlokContext {
    * HULP_NA_MS wachten (instelling op het leerkrachtscherm)?
    */
   hulpAltijd: boolean;
+  /** extra oefenen (K15): niets telt mee voor de voortgang, alleen de metingen per toets */
+  extra: boolean;
   /** het nummer van dit blok in de les (vanaf 0) */
   blokNummer(): number;
   /** lees voor (als voorlezen aan staat) en onthoud voor "lees nog eens" */

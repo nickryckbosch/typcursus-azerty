@@ -55,7 +55,12 @@ export class App {
 
   /** Open een les. Zonder blok: verdergaan waar het kind gestopt is (de les vraagt het eerst). */
   naarLes(les: Les, blok?: number): void {
-    this.toon("les", (w) => lesScherm(this, les, w, blok));
+    this.toon("les", (w) => lesScherm(this, les, w, { startBlok: blok }));
+  }
+
+  /** Extra oefenen bij een les (K15): 4 nieuwe oefenregels, telt niet mee voor de voortgang. */
+  naarExtra(les: Les): void {
+    this.toon("les", (w) => lesScherm(this, les, w, { extra: true }));
   }
 
   naarOefenbord(): void {

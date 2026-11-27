@@ -478,7 +478,7 @@ button {
 .verder-knoppen {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: clamp(5px, 1.3vh, 10px);
   width: 250px;
   flex: none;
 }
@@ -488,12 +488,12 @@ button {
 }
 
 .knop-start {
-  min-height: 54px;
+  min-height: clamp(42px, 7vh, 54px);
   font-size: 19px;
 }
 
 .verder-knoppen .knop-tweede {
-  min-height: 44px;
+  min-height: clamp(36px, 5.7vh, 44px);
   border-radius: 12px;
   font-size: 16px;
 }
@@ -921,7 +921,7 @@ button {
 .teken {
   display: inline-block;
   min-width: 0.36em;
-  padding: 0 0.07em;
+  padding: 0 0.04em;
   text-align: center;
   border-bottom: 4px solid transparent;
   border-radius: 6px;

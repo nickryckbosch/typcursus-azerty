@@ -22,7 +22,7 @@ describe("opslag", () => {
   it("bewaart en leest dezelfde voortgang", () => {
     const o = geheugen();
     const v = nieuweVoortgang();
-    v.lessen["1"] = { afgewerkt: true, pogingen: 2, mislukt: 0, besteNauwkeurigheid: 0.95, sterren: 2, snelheden: [6.5], bezigBij: 3 };
+    v.lessen["1"] = { afgewerkt: true, pogingen: 2, mislukt: 0, besteNauwkeurigheid: 0.95, sterren: 2, snelheden: [6.5], bezigBij: 3, eindeBereikt: true };
     v.toetsen.f = { aanslagen: 10, fouten: 1, totaleTijdMs: 4000, getimed: 9 };
     v.instellingen.voorlezen = true;
     v.toetsenbord = "ok";
@@ -41,6 +41,14 @@ describe("opslag", () => {
     // Oudere gegevens zonder dit veld: de hulp blijft altijd zichtbaar.
     o.setItem(SLEUTEL, JSON.stringify({ versie: VERSIE, instellingen: { voorlezen: true } }));
     expect(leesVoortgang(o).instellingen).toEqual({ voorlezen: true, hulpPasNaFout: false });
+  });
+
+  it("oudere gegevens zonder eindeBereikt: een gelukte les telt als tot het einde gedaan", () => {
+    const o = geheugen();
+    o.setItem(SLEUTEL, JSON.stringify({ versie: VERSIE, lessen: { "1": { afgewerkt: true }, "2": { afgewerkt: false, pogingen: 1 } } }));
+    const v = leesVoortgang(o);
+    expect(v.lessen["1"].eindeBereikt).toBe(true);
+    expect(v.lessen["2"].eindeBereikt).toBe(false);
   });
 
   it("geeft een nieuwe voortgang als er niets is", () => {

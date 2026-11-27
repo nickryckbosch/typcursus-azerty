@@ -8,8 +8,9 @@ import type { App, Scherm } from "../app";
 import { DELEN, t, type TekstSleutel } from "../content";
 import type { Deel, Les } from "../content/types";
 import { isBeschikbaar } from "../blokken";
+import { heeftExtraOefenen } from "../logica/extraoefenen";
 import { kleurVanVinger, toetsVoorTeken } from "../logica/indeling";
-import { isLesOpen, legeLesVoortgang, lesAanDeBeurt } from "../logica/voortgang";
+import { isExtraOpen, isLesOpen, legeLesVoortgang, lesAanDeBeurt } from "../logica/voortgang";
 import { el, svg } from "../weergave/dom";
 import { fien, jef, slotje, sterIcoon, vinkje } from "../weergave/figuren";
 import { voorleesKnop } from "../weergave/kop";
@@ -44,6 +45,9 @@ export function startScherm(app: App, wortel: HTMLElement): Scherm {
     if (lv(les).afgewerkt) return "klaar";
     return isLesOpen(app.voortgang, les.id, volgorde) ? "nu" : "slot";
   }
+
+  /** Extra oefenen (K15): open zodra de les een keer tot het einde gedaan is. Les 0 heeft er geen. */
+  const magExtra = (les: Les) => heeftExtraOefenen(les) && isExtraOpen(app.voortgang, les.id);
 
   const beurtId = lesAanDeBeurt(app.voortgang, volgorde);
   const beurt = app.lessen.find((l) => l.id === beurtId);
@@ -81,6 +85,19 @@ export function startScherm(app: App, wortel: HTMLElement): Scherm {
         );
       }
     }
+    // "Extra oefenen bij les X": de les die aan de beurt is als ze al eens tot het
+    // einde gedaan is, anders de laatste les ervoor waar extra oefenen open is.
+    const plaats = beurt ? app.lessen.indexOf(beurt) : app.lessen.length - 1;
+    const extraLes = app.lessen.slice(0, plaats + 1).reverse().find(magExtra);
+    if (extraLes) {
+      knoppen.push(
+        el(
+          "button",
+          { class: `knop knop-tweede ${knoppen.length === 0 ? "knop-start" : ""}`, type: "button", onclick: () => app.naarExtra(extraLes) },
+          t("knop.extraBij", { nummer: extraLes.id }),
+        ),
+      );
+    }
     return el(
       "section",
       { class: "kaart verder-kaart", "aria-label": t("start.verder") },
@@ -113,6 +130,9 @@ export function startScherm(app: App, wortel: HTMLElement): Scherm {
       acties.push(el("span", { class: "rij-tekst" }, t("les.binnenkort")));
     } else if (vorige) {
       acties.push(el("span", { class: "rij-tekst" }, t("les.na", { nummer: vorige.id })));
+    }
+    if ((staat === "klaar" || staat === "nu") && magExtra(les)) {
+      acties.push(el("button", { class: "knop knop-rij knop-tweede", type: "button", onclick: () => app.naarExtra(les) }, t("knop.extra")));
     }
 
     return el(

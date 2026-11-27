@@ -4,9 +4,10 @@
 
 import type { App, Scherm } from "../app";
 import { t, type TekstSleutel } from "../content";
-import type { Les } from "../content/types";
+import type { Blok, Les } from "../content/types";
 import { blokFunctie } from "../blokken";
 import { metFienEnJef } from "../blokken/gedeeld";
+import { maakExtraRegels } from "../logica/extraoefenen";
 import { verderBij, zetBezigBij } from "../logica/voortgang";
 import type { BlokContext, BlokInstantie } from "../blokken/context";
 import { kleurVanVinger, toetsVoorTeken } from "../logica/indeling";
@@ -18,7 +19,37 @@ import { kop, voorleesKnop } from "../weergave/kop";
 import { spreek } from "../weergave/spraak";
 import { maakToetsenbord } from "../weergave/toetsenbord";
 
-export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: number): Scherm {
+export interface LesOpties {
+  /** begin bij dit blok, zonder te vragen of het kind wil verdergaan */
+  startBlok?: number;
+  /** extra oefenen (K15) in plaats van de les zelf */
+  extra?: boolean;
+}
+
+/**
+ * De blokken van een beurt extra oefenen: 4 nieuw samengestelde oefenregels
+ * en een korte afsluiter van Fien en Jef. Ze gebruiken dezelfde blokken als
+ * een gewone les, maar er telt niets mee voor de voortgang.
+ */
+function extraBlokken(app: App, les: Les): Blok[] {
+  const vroegere = app.lessen.filter((l) => l.id < les.id);
+  return [
+    {
+      type: "reeks",
+      titel: t("extra.titel"),
+      duurMinuten: 3,
+      tekst: t("extra.opdracht"),
+      tip: t("extra.tip"),
+      regels: maakExtraRegels(les, vroegere),
+    },
+    { type: "afsluiter", titel: t("extra.eindeTitel"), duurMinuten: 1, tekst: t("extra.klaar") },
+  ];
+}
+
+export function lesScherm(app: App, les: Les, wortel: HTMLElement, opties: LesOpties = {}): Scherm {
+  const { startBlok } = opties;
+  const extra = opties.extra === true;
+  const blokken: Blok[] = extra ? extraBlokken(app, les) : les.online;
   const toetsenbord = maakToetsenbord(les.geleerdeToetsen);
   const handen = maakHanden(t("hand.links"), t("hand.rechts"));
   const podium = el("main", { class: "podium", "aria-live": "polite" });
@@ -62,7 +93,7 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: n
   let instantie: BlokInstantie | null = null;
   let timers: number[] = [];
   const sessie: BlokContext["sessie"] = {};
-  const huidigType = () => les.online[index]?.type;
+  const huidigType = () => blokken[index]?.type;
 
   // Controleer de indeling bij de start van elke les (stil, zonder het kind te storen).
   void vraagIndelingOp().then((indeling) => {
@@ -102,6 +133,7 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: n
       toetsenbord.benadruk();
       handen.benadruk();
     },
+    extra,
     hulpAltijd: !app.voortgang.instellingen.hulpPasNaFout,
     hulpNaMs: 3000,
     blokNummer() {
@@ -118,7 +150,7 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: n
       toonBlok(i);
     },
     indexVan(type) {
-      return les.online.findIndex((b) => b.type === type);
+      return blokken.findIndex((b) => b.type === type);
     },
     bewaarAanslagen(aanslagen) {
       voegAanslagenToe(app.voortgang.toetsen, aanslagen);
@@ -134,7 +166,7 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: n
 
   function werkStapjesBij(): void {
     stapjes.replaceChildren(
-      ...les.online.map((blok, i) =>
+      ...blokken.map((blok, i) =>
         el(
           "li",
           {
@@ -142,7 +174,7 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: n
             "aria-current": i === index ? "step" : undefined,
             title: blok.titel,
           },
-          el("span", { class: "verborgen" }, t("les.stap", { nummer: i + 1, totaal: les.online.length, titel: blok.titel })),
+          el("span", { class: "verborgen" }, t("les.stap", { nummer: i + 1, totaal: blokken.length, titel: blok.titel })),
         ),
       ),
     );
@@ -157,24 +189,27 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: n
     ctx.toonToetsenbord(true);
     podium.replaceChildren();
     (document.activeElement as HTMLElement | null)?.blur?.();
-    if (i >= les.online.length) {
+    if (i >= blokken.length) {
       app.naarStart();
       return;
     }
     index = i;
-    zetBezigBij(app.voortgang, les.id, i, les.online.length);
-    app.bewaar();
+    // Extra oefenen verandert niets aan waar het kind in de les zelf zat.
+    if (!extra) {
+      zetBezigBij(app.voortgang, les.id, i, blokken.length);
+      app.bewaar();
+    }
     werkStapjesBij();
     werkToetsenbordMeldingBij();
-    const blok = les.online[i];
+    const blok = blokken[i];
     titel.textContent = t("les.kop", { nummer: les.id, titel: blok.titel });
     const functie = blokFunctie(blok);
     instantie = functie ? functie(blok, ctx) : null;
   }
 
   // Was het kind al bezig met deze les? Dan eerst vragen: verdergaan of opnieuw beginnen.
-  const bezig = startBlok === undefined ? verderBij(app.voortgang, les.id) : null;
-  if (bezig !== null && bezig < les.online.length) {
+  const bezig = startBlok === undefined && !extra ? verderBij(app.voortgang, les.id) : null;
+  if (bezig !== null && bezig < blokken.length) {
     toonVerderVraag(bezig);
   } else {
     toonBlok(startBlok ?? 0);
@@ -184,7 +219,7 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: n
     index = blok;
     werkStapjesBij();
     ctx.toonToetsenbord(false);
-    const blokTitel = les.online[blok].titel;
+    const blokTitel = blokken[blok].titel;
     titel.textContent = t("les.kop", { nummer: les.id, titel: blokTitel });
     const tekst = t("verder.vraag", { nummer: blok + 1, titel: blokTitel });
     const opnieuw = el("button", { class: "knop", type: "button", onclick: () => toonBlok(0) }, t("verder.opnieuw"));

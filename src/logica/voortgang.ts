@@ -22,6 +22,11 @@ export interface LesVoortgang {
   snelheden: number[];
   /** bij welk blok het kind gestopt is (om later verder te gaan); null: niet bezig */
   bezigBij: number | null;
+  /**
+   * Het kind heeft de les een keer tot het einde gedaan (tot bij de afsluiter),
+   * ook als het de 90% niet haalde. Vanaf dan is "Extra oefenen" open (K15).
+   */
+  eindeBereikt: boolean;
 }
 
 export type ToetsenbordStatus = "ok" | "fout" | "onbekend";
@@ -57,7 +62,7 @@ export function nieuweVoortgang(): Voortgang {
 }
 
 export function legeLesVoortgang(): LesVoortgang {
-  return { afgewerkt: false, pogingen: 0, mislukt: 0, besteNauwkeurigheid: null, sterren: 0, snelheden: [], bezigBij: null };
+  return { afgewerkt: false, pogingen: 0, mislukt: 0, besteNauwkeurigheid: null, sterren: 0, snelheden: [], bezigBij: null, eindeBereikt: false };
 }
 
 export function lesVoortgang(v: Voortgang, lesId: number): LesVoortgang {
@@ -125,4 +130,20 @@ export function verderBij(v: Voortgang, lesId: number): number | null {
  */
 export function lesAanDeBeurt(v: Voortgang, volgorde: number[]): number | null {
   return volgorde.find((id) => v.lessen[String(id)]?.afgewerkt !== true) ?? null;
+}
+
+/** Het kind is tot bij de afsluiter van de les geraakt. */
+export function markeerEindeBereikt(v: Voortgang, lesId: number): void {
+  lesVoortgang(v, lesId).eindeBereikt = true;
+}
+
+/**
+ * Is "Extra oefenen" open voor deze les (K15)? Zodra het kind de les een keer
+ * tot het einde gedaan heeft, ook zonder 90%. De volgende les gaat pas open
+ * bij 90% op de eindoefening (isLesOpen). Een score bij extra oefenen telt
+ * nooit mee voor de voortgang.
+ */
+export function isExtraOpen(v: Voortgang, lesId: number): boolean {
+  const lv = v.lessen[String(lesId)];
+  return lv?.eindeBereikt === true || lv?.afgewerkt === true;
 }

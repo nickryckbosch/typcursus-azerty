@@ -78,6 +78,8 @@ export function zetOm(ruw: unknown): Voortgang {
         sterren: getal(l.sterren, 0),
         snelheden: Array.isArray(l.snelheden) ? l.snelheden.filter((s) => typeof s === "number") : leeg.snelheden,
         bezigBij: typeof l.bezigBij === "number" && l.bezigBij > 0 ? l.bezigBij : null,
+        // Oudere gegevens zonder dit veld: een les die gelukt is, is ook tot het einde gedaan.
+        eindeBereikt: l.eindeBereikt === true || l.afgewerkt === true,
       };
     }
   }
