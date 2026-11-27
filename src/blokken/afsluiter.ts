@@ -20,10 +20,14 @@ export const afsluiter: BlokFunctie<AfsluiterBlok> = (blok, ctx) => {
 
   // Extra oefenen (K15): een korte afsluiter. Er telt niets mee voor de voortgang.
   if (ctx.extra) {
-    const nogEens = el("button", { class: "knop knop-hoofd", type: "button", onclick: () => app.naarExtra(les) }, t("extra.nogEens"));
-    const terug = el("button", { class: "knop", type: "button", onclick: () => app.naarStart() }, t("knop.naarLessen"));
-    const scherm = oefenscherm(ctx, { figuren: "duim", klasse: "blok-extra-einde" });
-    scherm.zetOpdracht(blok.tekst ?? "");
+    // K27: Fien en Jef en wat ze zeggen staan als een groep in het midden, de
+    // knoppen eronder. De hoofdknop (vol blauw) is de knop die Enter kiest.
+    const terug = el("button", { class: "knop knop-hoofd", type: "button", onclick: () => app.naarStart() }, t("knop.naarLessen"));
+    const nogEens = el("button", { class: "knop knop-tweede", type: "button", onclick: () => app.naarExtra(les) }, t("extra.nogEens"));
+    const scherm = oefenscherm(ctx, { figuren: "duim", opbouw: "midden", klasse: "blok-extra-einde" });
+    const tekst = blok.tekst ?? "";
+    scherm.veld.append(el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, tekst)));
+    ctx.zeg(tekst);
     scherm.voet.replaceChildren(el("div", { class: "knoppen" }, terug, nogEens));
     terug.focus();
     return {};
