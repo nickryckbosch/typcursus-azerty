@@ -1,10 +1,18 @@
 // Het datamodel van de voortgang en de regels om lessen te openen.
 // Opslaan en lezen gebeurt in opslag.ts.
 
-import type { ToetsStat } from "./statistieken";
+import type { MetingenOpslag } from "./metingen";
 import { sterren } from "./typen";
 
-export const VERSIE = 1;
+/**
+ * Versie 2 (metingen per toets, projectdocument 12): de oude tellingen per toets
+ * ("toetsen": elke verkeerde aanslag was een fout, gemiddelde tijd) zijn vervangen
+ * door samenvattingen per poging ("metingen") en tellingen van oudere pogingen
+ * ("metingenOuder": een fout telt een keer per positie). De betekenis van de
+ * cijfers verandert, dus gaat het versienummer omhoog. Gegevens van versie 1
+ * worden omgezet in opslag.ts; er gaat geen voortgang verloren.
+ */
+export const VERSIE = 2;
 
 export const DOEL_NAUWKEURIGHEID = 0.9;
 
@@ -31,10 +39,9 @@ export interface LesVoortgang {
 
 export type ToetsenbordStatus = "ok" | "fout" | "onbekend";
 
-export interface Voortgang {
+export interface Voortgang extends MetingenOpslag {
   versie: number;
   lessen: Record<string, LesVoortgang>;
-  toetsen: Record<string, ToetsStat>;
   instellingen: {
     voorlezen: boolean;
     /**
@@ -54,7 +61,8 @@ export function nieuweVoortgang(): Voortgang {
   return {
     versie: VERSIE,
     lessen: {},
-    toetsen: {},
+    metingen: [],
+    metingenOuder: {},
     instellingen: { voorlezen: false, hulpPasNaFout: false },
     toetsenbord: "onbekend",
     allesOpen: false,

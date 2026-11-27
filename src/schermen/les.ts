@@ -11,7 +11,7 @@ import { maakExtraRegels } from "../logica/extraoefenen";
 import { verderBij, zetBezigBij } from "../logica/voortgang";
 import type { BlokContext, BlokInstantie } from "../blokken/context";
 import { kleurVanVinger, toetsVoorTeken } from "../logica/indeling";
-import { voegAanslagenToe } from "../logica/statistieken";
+import { nauwkeurigheidVan, vatSamen, voegPogingToe } from "../logica/metingen";
 import { vraagIndelingOp } from "../logica/toetsenbordcheck";
 import { el } from "../weergave/dom";
 import { maakHanden } from "../weergave/handen";
@@ -152,9 +152,12 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, opties: LesOp
     indexVan(type) {
       return blokken.findIndex((b) => b.type === type);
     },
-    bewaarAanslagen(aanslagen) {
-      voegAanslagenToe(app.voortgang.toetsen, aanslagen);
+    bewaarPoging(regels) {
+      // Extra oefenen bewaart ook (blok "extra"), maar verandert niets aan sterren of slot.
+      const poging = vatSamen(regels, { les: les.id, blok: extra ? "extra" : (blokken[index]?.type ?? "") });
+      voegPogingToe(app.voortgang, poging);
       app.bewaar();
+      return nauwkeurigheidVan(poging);
     },
     toonToetsenbord(aan) {
       scherm.classList.toggle("zonder-toetsenbord", !aan);

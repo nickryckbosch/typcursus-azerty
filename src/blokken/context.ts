@@ -2,7 +2,7 @@
 
 import type { App } from "../app";
 import type { Blok, Les } from "../content/types";
-import type { Aanslag } from "../logica/typen";
+import type { TypOefening } from "../logica/typen";
 import type { HandenWeergave } from "../weergave/handen";
 import type { ToetsenbordWeergave } from "../weergave/toetsenbord";
 
@@ -40,8 +40,12 @@ export interface BlokContext {
   /** naar een bepaald blok (bv. eindoefening opnieuw) */
   gaNaar(index: number): void;
   indexVan(type: Blok["type"]): number;
-  /** voeg aanslagen toe aan de statistieken per toets en bewaar */
-  bewaarAanslagen(aanslagen: Aanslag[]): void;
+  /**
+   * Bewaar de metingen van deze poging: een samenvatting per toets, geen losse
+   * aanslagen (zie logica/metingen.ts). Elke oefening in de lijst is een regel.
+   * Geeft de nauwkeurigheid terug: posities meteen juist / posities.
+   */
+  bewaarPoging(regels: TypOefening[]): number;
   /** toon of verberg het schermtoetsenbord en de handen (bv. verbergen bij de afsluiter) */
   toonToetsenbord(aan: boolean): void;
   /** setTimeout die vanzelf stopt als het blok wisselt */

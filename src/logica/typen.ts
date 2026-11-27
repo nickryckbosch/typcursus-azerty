@@ -1,6 +1,7 @@
 // De kern van het typen: een doeltekst, een cursor en alle aanslagen.
 // Regel uit het ontwerp: bij een fout blijft de cursor staan tot de juiste
-// toets getypt is. De fout telt mee in de nauwkeurigheid.
+// toets getypt is. De nauwkeurigheid (posities meteen juist / posities) en
+// de metingen per toets staan in metingen.ts.
 
 export interface Aanslag {
   /** het teken dat op die plaats moest komen */
@@ -50,13 +51,6 @@ export function typ(oef: TypOefening, getypt: string, nu: number): { juist: bool
   const klaar = isKlaar(oef);
   if (klaar) oef.eindTijd = nu;
   return { juist, klaar };
-}
-
-/** Juiste aanslagen gedeeld door alle aanslagen, tussen 0 en 1. Zonder aanslagen: 1. */
-export function nauwkeurigheid(aanslagen: Aanslag[]): number {
-  if (aanslagen.length === 0) return 1;
-  const juist = aanslagen.filter((a) => a.juist).length;
-  return juist / aanslagen.length;
 }
 
 /**

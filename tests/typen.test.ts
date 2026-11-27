@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { nauwkeurigheid, nieuweOefening, sterren, teltAlsTeken, typ, volgendTeken, woordenPerMinuut } from "../src/logica/typen";
+import { nieuweOefening, sterren, teltAlsTeken, typ, volgendTeken, woordenPerMinuut } from "../src/logica/typen";
 
 describe("typen: cursor bij fout", () => {
   it("schuift op bij een juiste toets", () => {
@@ -47,20 +47,6 @@ describe("typen: cursor bij fout", () => {
     typ(o, "f", 0);
     expect(typ(o, "f", 10)).toEqual({ juist: false, klaar: true });
     expect(o.aanslagen).toHaveLength(1);
-  });
-});
-
-describe("nauwkeurigheid", () => {
-  it("is juist gedeeld door alle aanslagen", () => {
-    const o = nieuweOefening("ffffffffff");
-    for (let i = 0; i < 10; i++) {
-      if (i === 3) typ(o, "j", i);
-      typ(o, "f", i);
-    }
-    expect(nauwkeurigheid(o.aanslagen)).toBeCloseTo(10 / 11);
-  });
-  it("is 1 zonder aanslagen", () => {
-    expect(nauwkeurigheid([])).toBe(1);
   });
 });
 

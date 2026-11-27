@@ -62,7 +62,7 @@ export const zoekToets: BlokFunctie<ZoekToetsBlok> = (blok, ctx) => {
         return;
       }
       if (klaar) {
-        ctx.bewaarAanslagen(oef.aanslagen);
+        ctx.bewaarPoging([oef]);
         ctx.toonHulp(null);
         ctx.later(() => ctx.volgende(), 400);
         return;

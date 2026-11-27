@@ -31,6 +31,8 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
   let klaar = false;
   let wacht = false;
   let hulpTimer: number | undefined;
+  /** de afgewerkte beken: samen een poging voor de metingen per toets */
+  const gedaan: TypOefening[] = [];
 
   const opdracht = blok.tekst ?? blok.titel;
   const rij = el("ol", { class: "stenen" });
@@ -107,7 +109,7 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
 
       clearTimeout(hulpTimer);
       ctx.toonHulp(null);
-      ctx.bewaarAanslagen(oef.aanslagen);
+      gedaan.push(oef);
       nummer++;
       if (nummer < BEKEN) {
         wacht = true;
@@ -118,6 +120,7 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
       } else {
         // Het einde: Fien en Jef steken hun duim op.
         klaar = true;
+        ctx.bewaarPoging(gedaan);
         einde.hidden = false;
         einde.append(
           el("div", { class: "figuren" }, fien("duim", 96), jef("duim", 96)),
