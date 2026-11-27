@@ -156,5 +156,8 @@ vite.config.ts.timestamp-*
 .nx/workspace-data
 .nx/migrate-runs
 
+# Ook een koppeling (symlink) met de naam node_modules hoort niet in de repository.
+node_modules
+
 # Vite
 dist/
