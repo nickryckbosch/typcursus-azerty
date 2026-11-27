@@ -1749,7 +1749,7 @@ button {
 }
 
 .lamp-tekening.aan .lamp-draad {
-  stroke: #4a2e1a;
+  stroke: #1f1f1f;
 }
 
 .lamp-stralen {
@@ -1779,7 +1779,7 @@ button {
   font-size: clamp(20px, 13cqh, 46px);
   font-weight: 800;
   padding: 0.1em 0.9em;
-  border: 3px solid #4a2e1a;
+  border: 3px solid #1f1f1f;
   border-radius: 999px;
   background: #ffee99;
 }
