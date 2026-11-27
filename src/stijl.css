@@ -1693,6 +1693,23 @@ button {
   background: var(--vlak);
 }
 
+/* Een nieuwe kaart: de letter verschijnt kort opnieuw (alleen doorzichtigheid,
+   geen beweging). Zo zie je ook bij twee keer dezelfde letter dat de toets telde. */
+.grote-toets span.verschijnt {
+  animation: letter-verschijnt 180ms ease-out;
+}
+
+@keyframes letter-verschijnt {
+  from { opacity: 0.15; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grote-toets span.verschijnt {
+    animation: none;
+  }
+}
+
 .grote-toets.is-spatie span {
   font-family: var(--kop);
   font-size: 0.4em;
@@ -1793,7 +1810,7 @@ button {
 .huis-woord text {
   font-family: var(--lees);
   font-weight: 400;
-  font-size: 17px;
+  font-size: 24px;
   fill: #1b2a4a;
 }
 

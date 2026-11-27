@@ -14,7 +14,7 @@ De volledige bronnenlijst staat in projectdocument 13 (onderzoeksagenda) en 14 (
 
 - Tijdens het typen beweegt er niets, behalve de toets en de vinger die oplichten.
 - Niets verspringt: elk oefenscherm heeft vaste zones, en wat later verschijnt, staat er van bij het begin en neemt zijn ruimte al in (beslissing 12c).
-- Verschijnen en aangaan (de Enter-regel, "Klap!", de lamp, een raam) gebeurt met een korte, rustige overgang van 180 ms, en meteen als het toestel om minder beweging vraagt. Dat is de enige beweging.
+- Verschijnen en aangaan (de Enter-regel, "Klap!", de lamp, een raam, een nieuwe letter op de kaart) gebeurt met een korte, rustige overgang van 180 ms, en meteen als het toestel om minder beweging vraagt. Dat is de enige beweging.
 - Geen animaties: niets schudt, wiebelt, knippert, springt of schuift. Een fout zie je doordat de cursor blijft staan en de juiste toets en vinger even sterker oplichten.
 - Fien en Jef staan stil. Ze veranderen alleen van houding bij de start (zwaaien) en op het einde (duim omhoog of aanmoedigen), nooit bij elke toets of fout.
 - Een spel heeft een vaste prent bovenaan. De vooruitgang staat eronder (bijvoorbeeld een rij stenen), niet in de prent.
@@ -135,7 +135,7 @@ Voorwerpen die de app zelf tekent, hebben dezelfde tekenstijl als de prenten van
 
 - Vier even hoge lagen van 66: dak, zolder, woonkamer en kelder (onder de grondlijn). Het dak is de cijferrij, een vierde rij boven de zolder; het blijft leeg in les 0 tot 5.
 - Negen even grote ramen van 38 x 38 met een kruis, geen vensterbank. De rijen zijn gelijk, omdat de rijen op het toetsenbord ook gelijk zijn.
-- De woorden staan in een eigen kolom links, in afgeronde vakjes, in Andika. Nooit over de tekening.
+- De woorden staan in een eigen kolom links, in afgeronde vakjes van 150 x 40, in Andika (24). Nooit over de tekening. De vakjes zijn groter dan in de eerste referentie, voor de leesbaarheid op een kleine Chromebook.
 - Het vakje van de verdieping die aan de beurt is, wordt donker (`#1B2A4A` met witte tekst) en blijft stil staan. Er knippert niets.
 - Fien en Jef staan naast het huis, niet in een raam.
 - De referentietekening staat in de code: `src/spellen/lichtaan.ts`.

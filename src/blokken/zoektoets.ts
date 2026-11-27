@@ -72,6 +72,11 @@ export const zoekToets: BlokFunctie<ZoekToetsBlok> = (blok, ctx) => {
         ctx.later(zetLampAan, 700 + Math.random() * 800);
       } else {
         toonHuidig();
+        // Een nieuwe kaart: de letter verschijnt kort opnieuw. Zo zie je ook bij twee
+        // keer dezelfde letter dat de vorige toets telde. Alleen visueel, er beweegt niets.
+        letter.classList.remove("verschijnt");
+        void letter.offsetWidth;
+        letter.classList.add("verschijnt");
       }
     },
   };

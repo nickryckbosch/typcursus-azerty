@@ -29,15 +29,21 @@ const VERDIEPINGEN: Rij[] = ["zolder", "woonkamer", "kelder"];
 const BRUIN = "#4A2E1A";
 const RAAM_X = [291, 351, 411];
 
-// De plaats van de ramen en van het woord, per laag. Het dak staat er al in,
-// zodat er later een vierde rij ramen en het woord "dak" bij kan zonder de
-// tekening te veranderen: zet "dak" dan bij in VERDIEPINGEN.
-const LAAG: Record<string, { ramen: number; woord: number }> = {
-  dak: { ramen: 64, woord: 69 },
-  zolder: { ramen: 130, woord: 135 },
-  woonkamer: { ramen: 196, woord: 201 },
-  kelder: { ramen: 262, woord: 267 },
+// De plaats van de ramen en het midden van het woord, per laag. Het dak staat
+// er al in, zodat er later een vierde rij ramen en het woord "dak" bij kan
+// zonder de tekening te veranderen: zet "dak" dan bij in VERDIEPINGEN.
+const LAAG: Record<string, { ramen: number; midden: number }> = {
+  dak: { ramen: 64, midden: 83 },
+  zolder: { ramen: 130, midden: 149 },
+  woonkamer: { ramen: 196, midden: 215 },
+  kelder: { ramen: 262, midden: 281 },
 };
+
+// De woordvakjes zijn groter dan in de referentie van K21 (150 x 40 in plaats
+// van 100 x 28), zodat de woorden ook op een kleine Chromebook leesbaar zijn.
+// Ze staan op dezelfde hoogte (het midden van hun laag) en eindigen op dezelfde
+// plaats rechts (x = 170), dus nooit over de tekening.
+const VAK = { breedte: 150, hoogte: 40, rechts: 170 };
 
 /** Het huis zonder ramen: de referentietekening van K21 (viewBox 0 0 680 350). */
 function huisVorm(): SVGGElement {
@@ -73,12 +79,13 @@ function raam(x: number, y: number): SVGGElement {
 
 /** Het woord van een verdieping in een afgerond vakje, links van de tekening. */
 function woord(rij: Rij): SVGGElement {
-  const y = LAAG[rij].woord;
+  const midden = LAAG[rij].midden;
+  const x = VAK.rechts - VAK.breedte;
   return svg(
     "g",
     { class: "huis-woord" },
-    svg("rect", { x: 70, y, width: 100, height: 28, rx: 14, stroke: BRUIN, "stroke-width": 1.5 }),
-    svg("text", { x: 120, y: y + 14, "text-anchor": "middle", "dominant-baseline": "central" }, t(`rij.${rij}` as TekstSleutel)),
+    svg("rect", { x, y: midden - VAK.hoogte / 2, width: VAK.breedte, height: VAK.hoogte, rx: VAK.hoogte / 2, stroke: BRUIN, "stroke-width": 2 }),
+    svg("text", { x: x + VAK.breedte / 2, y: midden, "text-anchor": "middle", "dominant-baseline": "central" }, t(`rij.${rij}` as TekstSleutel)),
   );
 }
 
@@ -93,7 +100,7 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
   const woorden = new Map<Rij, SVGGElement>();
   // De viewBox is het deel van de referentie waar iets staat, zodat de tekening
   // zo groot mogelijk in haar zone past. De verhoudingen blijven die van K21.
-  const huis = svg("svg", { class: "huis", viewBox: "64 14 482 316", role: "img", "aria-label": blok.titel }, huisVorm());
+  const huis = svg("svg", { class: "huis", viewBox: "14 14 532 316", role: "img", "aria-label": blok.titel }, huisVorm());
   for (const rij of VERDIEPINGEN) {
     const lijst = RAAM_X.map((x) => raam(x, LAAG[rij].ramen));
     ramen.set(rij, lijst);
