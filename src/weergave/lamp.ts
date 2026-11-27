@@ -1,5 +1,5 @@
 // De lamp van "Duim op de spatiebalk" (les 0): een getekende gloeilamp, in
-// dezelfde stijl als het huis van "Licht aan" (omtrek #4A2E1A, afgeronde lijnen).
+// dezelfde stijl als het huis van "Licht aan" (omtrek #1F1F1F, afgeronde lijnen).
 // Ze staat van bij het begin (uit) in beeld en gaat zichtbaar aan.
 //   uit: donker glas (#3B4256), geen stralen
 //   aan: lichtgeel glas (#FFEE99) met stralen errond
@@ -8,11 +8,11 @@
 
 import { svg } from "./dom";
 
-const BRUIN = "#4A2E1A";
+const LIJN = "#1F1F1F";
 
 /** Acht korte stralen in een boog boven en naast het glas (alleen zichtbaar als de lamp aan is). */
 function stralen(): SVGGElement {
-  const g = svg("g", { class: "lamp-stralen", stroke: BRUIN, "stroke-width": 4, "stroke-linecap": "round" });
+  const g = svg("g", { class: "lamp-stralen", stroke: LIJN, "stroke-width": 2.5, "stroke-linecap": "round" });
   for (let hoek = -180; hoek <= 0; hoek += 30) {
     const r = (hoek * Math.PI) / 180;
     const punt = (afstand: number) => `${(70 + Math.cos(r) * afstand).toFixed(1)} ${(64 + Math.sin(r) * afstand).toFixed(1)}`;
@@ -29,7 +29,7 @@ export function lampTekening(klein = false): SVGSVGElement {
     stralen(),
     svg(
       "g",
-      { stroke: BRUIN, "stroke-width": 3, "stroke-linejoin": "round", "stroke-linecap": "round" },
+      { stroke: LIJN, "stroke-width": 1.8, "stroke-linejoin": "round", "stroke-linecap": "round" },
       // het glas: een ronde bol die naar onder smaller wordt
       svg("path", {
         class: "lamp-glas",
@@ -38,11 +38,11 @@ export function lampTekening(klein = false): SVGSVGElement {
       // een glans op het glas
       svg("path", { class: "lamp-glans", d: "M46 58c2-10 9-17 18-19", fill: "none", "stroke-width": 4 }),
       // het gloeidraadje
-      svg("path", { class: "lamp-draad", d: "M60 108V86l5-8 5 8 5-8 5 8v22", fill: "none", "stroke-width": 2.5 }),
+      svg("path", { class: "lamp-draad", d: "M60 108V86l5-8 5 8 5-8 5 8v22", fill: "none", "stroke-width": 1.6 }),
       // de fitting met twee ribbels en het contactpunt
       svg("rect", { x: 52, y: 108, width: 36, height: 24, rx: 5, fill: "#CFC7BA" }),
-      svg("path", { d: "M52 116h36M52 124h36", fill: "none", "stroke-width": 2.5 }),
-      svg("path", { d: "M62 132h16l-3 8h-10z", fill: BRUIN }),
+      svg("path", { d: "M52 116h36M52 124h36", fill: "none", "stroke-width": 1.6 }),
+      svg("path", { d: "M62 132h16l-3 8h-10z", fill: LIJN }),
     ),
   );
 }

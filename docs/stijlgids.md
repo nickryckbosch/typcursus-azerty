@@ -123,13 +123,17 @@ Waarop steunt dit? **Eigen keuze** (startscherm per deel, een kaart "Verder waar
 
 ## 7. Prenten
 
-- Fien en Jef komen uit het modelblad (`docs/beelden/`). De losse prenten staan in `src/beelden/`.
+- **Tekenstijl: klare lijn (stripstijl).** Dunne, even dikke zwarte omtrek, vlakke kleuren zonder verloop, zachte kleuren, een creme achtergrond. Ogen met wit, een iris met een lichtpuntje en wenkbrauwen, zodat de figuren levendig kijken.
+- Fien en Jef komen uit het modelblad (`docs/beelden/fien-en-jef-modelblad.png`): twee rijen van vijf houdingen. De losse prenten staan in `src/beelden/` en worden geknipt met `scripts/knip-figuren.py`.
+- De andere prenten in dezelfde stijl (welkomprent van het dorp, houdingskaart, de spelprenten voor beek, overgooien, dijk, slee en egel) staan in `docs/beelden/prenten/`. Alleen de beekprent wordt nu in de app gebruikt.
 - Een spelprent blijft volledig in beeld: liever een kleinere, gecentreerde prent met afgeronde hoeken dan een bijgesneden prent.
-- "Over de beek" gebruikt de beekprent op maat (Fien en Jef links, het huisje rechts, een brede beek zonder stenen). De stenen tekent de app zelf, onder de prent.
+- "Over de beek" gebruikt de beekprent (Fien en Jef links vooraan, het huis aan de overkant, een brede beek zonder stenen). De stenen tekent de app zelf, onder de prent.
+
+Waarop steunt dit? **Eigen keuze** van Nick (27 november 2026, projectdocument 17, W7): de eerste stijl met dikke bruine lijnen oogde te kleuterachtig voor het vijfde en zesde leerjaar. Te toetsen in de klastest.
 
 ## 8. Getekende voorwerpen: het huis en de lamp
 
-Voorwerpen die de app zelf tekent, hebben dezelfde tekenstijl als de prenten van Fien en Jef: een bruine omtrek (`#4A2E1A`, 3 dik in de tekening van het huis), afgeronde hoeken en vlakke kleuren.
+Voorwerpen die de app zelf tekent, hebben dezelfde tekenstijl als de prenten van Fien en Jef: een dunne zwarte omtrek (`#1F1F1F`, 1,8 dik in de tekening van het huis), afgeronde hoeken en vlakke, zachte kleuren.
 
 ### Het huis van "Licht aan in het huis" (K21)
 

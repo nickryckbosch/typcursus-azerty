@@ -26,7 +26,7 @@ import { lichtAanRondes } from "../logica/reeksen";
 import { svg } from "../weergave/dom";
 
 const VERDIEPINGEN: Rij[] = ["zolder", "woonkamer", "kelder"];
-const BRUIN = "#4A2E1A";
+const LIJN = "#1F1F1F";
 const RAAM_X = [291, 351, 411];
 
 // De plaats van de ramen en het midden van het woord, per laag. Het dak staat
@@ -49,21 +49,21 @@ const VAK = { breedte: 150, hoogte: 40, rechts: 170 };
 function huisVorm(): SVGGElement {
   return svg(
     "g",
-    { stroke: BRUIN, "stroke-width": 3, "stroke-linejoin": "round" },
+    { stroke: LIJN, "stroke-width": 1.8, "stroke-linejoin": "round" },
     // de grond met de kelder erin, het gras en de struiken
-    svg("rect", { x: 200, y: 252, width: 340, height: 72, rx: 8, fill: "#D8BC94" }),
-    svg("rect", { x: 200, y: 244, width: 340, height: 12, rx: 6, fill: "#8FC454" }),
-    svg("circle", { cx: 220, cy: 241, r: 10, fill: "#6FAE3C" }),
-    svg("circle", { cx: 236, cy: 235, r: 14, fill: "#6FAE3C" }),
-    svg("circle", { cx: 520, cy: 238, r: 12, fill: "#6FAE3C" }),
+    svg("rect", { x: 200, y: 252, width: 340, height: 72, rx: 8, fill: "#D9C3A0" }),
+    svg("rect", { x: 200, y: 244, width: 340, height: 12, rx: 6, fill: "#A9BF6B" }),
+    svg("circle", { cx: 220, cy: 241, r: 10, fill: "#7FA04A" }),
+    svg("circle", { cx: 236, cy: 235, r: 14, fill: "#7FA04A" }),
+    svg("circle", { cx: 520, cy: 238, r: 12, fill: "#7FA04A" }),
     // de schoorsteen en het dak (leeg in les 0 tot 5)
-    svg("rect", { x: 440, y: 26, width: 22, height: 34, fill: "#E0703F" }),
-    svg("rect", { x: 436, y: 20, width: 30, height: 9, rx: 3, fill: "#E0703F" }),
-    svg("polygon", { points: "232,116 266,50 474,50 508,116", fill: "#D9503A" }),
+    svg("rect", { x: 440, y: 26, width: 22, height: 34, fill: "#C9824F" }),
+    svg("rect", { x: 436, y: 20, width: 30, height: 9, rx: 3, fill: "#C9824F" }),
+    svg("polygon", { points: "232,116 266,50 474,50 508,116", fill: "#D8693B" }),
     // de zolder, de woonkamer en de kelder
-    svg("rect", { x: 250, y: 116, width: 240, height: 66, fill: "#F4E4CB" }),
-    svg("rect", { x: 250, y: 182, width: 240, height: 66, fill: "#FFF3D6" }),
-    svg("rect", { x: 250, y: 248, width: 240, height: 66, fill: "#CFC7BA" }),
+    svg("rect", { x: 250, y: 116, width: 240, height: 66, fill: "#FBE8D3" }),
+    svg("rect", { x: 250, y: 182, width: 240, height: 66, fill: "#FBE8D3" }),
+    svg("rect", { x: 250, y: 248, width: 240, height: 66, fill: "#BDB8AE" }),
   );
 }
 
@@ -72,8 +72,8 @@ function raam(x: number, y: number): SVGGElement {
   return svg(
     "g",
     { class: "raam" },
-    svg("rect", { class: "raam-glas", x, y, width: 38, height: 38, rx: 5, stroke: BRUIN, "stroke-width": 2.5 }),
-    svg("path", { d: `M${x + 19} ${y}V${y + 38}M${x} ${y + 19}H${x + 38}`, stroke: BRUIN, "stroke-width": 2, fill: "none" }),
+    svg("rect", { class: "raam-glas", x, y, width: 38, height: 38, rx: 5, stroke: LIJN, "stroke-width": 1.8 }),
+    svg("path", { d: `M${x + 19} ${y}V${y + 38}M${x} ${y + 19}H${x + 38}`, stroke: LIJN, "stroke-width": 1.5, fill: "none" }),
   );
 }
 
@@ -84,7 +84,7 @@ function woord(rij: Rij): SVGGElement {
   return svg(
     "g",
     { class: "huis-woord" },
-    svg("rect", { x, y: midden - VAK.hoogte / 2, width: VAK.breedte, height: VAK.hoogte, rx: VAK.hoogte / 2, stroke: BRUIN, "stroke-width": 2 }),
+    svg("rect", { x, y: midden - VAK.hoogte / 2, width: VAK.breedte, height: VAK.hoogte, rx: VAK.hoogte / 2, stroke: LIJN, "stroke-width": 1.5 }),
     svg("text", { x: x + VAK.breedte / 2, y: midden, "text-anchor": "middle", "dominant-baseline": "central" }, t(`rij.${rij}` as TekstSleutel)),
   );
 }

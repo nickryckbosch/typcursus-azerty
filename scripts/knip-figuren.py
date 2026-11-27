@@ -1,104 +1,85 @@
-"""Knipt Fien en Jef uit het modelblad en maakt de witte achtergrond doorzichtig.
+"""Knipt Fien en Jef uit het modelblad en maakt de achtergrond doorzichtig.
 
-Gebruik (vanuit de hoofdmap van het project, Python 3 met Pillow):
+Gebruik (vanuit de hoofdmap van het project, Python 3 met Pillow, numpy en scipy):
     python3 scripts/knip-figuren.py
 
-Invoer:  docs/beelden/fien-en-jef-modelblad.png
+Invoer:  docs/beelden/fien-en-jef-modelblad.png (klare lijn, 1536 x 1024)
 Uitvoer: src/beelden/<naam>.png
 
-De vakken hieronder zijn ruwe zones op het modelblad (links, boven, rechts, onder).
-Binnen elke zone wordt de figuur precies afgebakend. Alleen het wit dat aan de
-rand van de uitsnede raakt wordt doorzichtig, zodat het wit van ogen en tanden blijft.
+Het modelblad toont twee rijen van vijf houdingen: boven Fien, onder Jef.
+De vakken hieronder zijn ruwe zones (links, boven, rechts, onder). Binnen elke zone:
+- de achtergrond die aan de rand raakt, wordt doorzichtig;
+- ingesloten stukken achtergrond groter dan 350 pixels ook (tussen arm en lijf);
+  kleinere stukken blijven, zo blijft het wit van ogen en tanden;
+- losse spikkels kleiner dan 40 pixels verdwijnen;
+- de figuur wordt precies afgebakend en verkleind tot hoogstens 360 hoog.
+
+"trots" is dezelfde prent als "duim": het modelblad heeft geen aparte houding.
 """
 
-from collections import deque
 from pathlib import Path
 
+import numpy as np
 from PIL import Image
+from scipy import ndimage as ndi
 
 BRON = Path("docs/beelden/fien-en-jef-modelblad.png")
 DOEL = Path("src/beelden")
 MAX_HOOGTE = 360
+ACHTERGROND = np.array([252, 248, 242])
+SPELING = 11
 
 ZONES = {
-    "fien-zwaai": (445, 20, 725, 525),
-    "jef-zwaai": (1170, 15, 1445, 525),
-    "fien-blij": (20, 545, 310, 805),
-    "fien-trots": (340, 545, 670, 805),
-    "fien-nadenkend": (20, 810, 310, 1086),
-    "fien-aanmoedigend": (335, 810, 670, 1086),
-    "jef-blij": (785, 540, 1010, 805),
-    "jef-trots": (1075, 540, 1365, 805),
-    "jef-nadenkend": (765, 810, 1010, 1086),
-    "jef-aanmoedigend": (1065, 810, 1375, 1086),
+    "fien-zwaai": (445, 15, 668, 512),
+    "fien-blij": (668, 15, 866, 512),
+    "fien-duim": (866, 15, 1070, 512),
+    "fien-nadenkend": (1070, 15, 1276, 512),
+    "fien-aanmoedigend": (1276, 15, 1510, 512),
+    "jef-zwaai": (445, 512, 672, 1020),
+    "jef-blij": (672, 512, 872, 1020),
+    "jef-duim": (872, 512, 1084, 1020),
+    "jef-nadenkend": (1084, 512, 1284, 1020),
+    "jef-aanmoedigend": (1284, 512, 1520, 1020),
 }
 
 
-def is_achtergrond(p):
-    r, g, b = p[:3]
-    return min(r, g, b) >= 236 and max(r, g, b) - min(r, g, b) <= 12
-
-
-def afbakenen(im):
-    """Kleinste kader rond alles wat geen achtergrond is."""
-    b, h = im.size
-    px = im.load()
-    xs, ys = [], []
-    for y in range(h):
-        for x in range(b):
-            if not is_achtergrond(px[x, y]):
-                xs.append(x)
-                ys.append(y)
-    marge = 4
-    return (max(min(xs) - marge, 0), max(min(ys) - marge, 0), min(max(xs) + marge + 1, b), min(max(ys) + marge + 1, h))
-
-
-def maak_doorzichtig(im):
-    """Vul vanaf de randen: wit dat met de rand verbonden is, wordt doorzichtig."""
-    im = im.convert("RGBA")
-    b, h = im.size
-    px = im.load()
-    gezien = bytearray(b * h)
-    rij = deque()
-    for x in range(b):
-        rij.extend([(x, 0), (x, h - 1)])
-    for y in range(h):
-        rij.extend([(0, y), (b - 1, y)])
-    while rij:
-        x, y = rij.popleft()
-        if x < 0 or y < 0 or x >= b or y >= h or gezien[y * b + x]:
-            continue
-        gezien[y * b + x] = 1
-        if not is_achtergrond(px[x, y]):
-            continue
-        px[x, y] = (255, 255, 255, 0)
-        rij.extend([(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)])
-    # Zachte rand: lichte pixels naast doorzichtige pixels half doorzichtig maken.
-    kopie = im.copy().load()
-    for y in range(1, h - 1):
-        for x in range(1, b - 1):
-            r, g, bl, a = kopie[x, y]
-            if a == 0:
-                continue
-            buren = (kopie[x + 1, y][3], kopie[x - 1, y][3], kopie[x, y + 1][3], kopie[x, y - 1][3])
-            if 0 in buren and min(r, g, bl) > 200:
-                px[x, y] = (r, g, bl, 255 - min(r, g, bl))
-    return im
+def knip(blad, zone):
+    x0, y0, x1, y1 = zone
+    stuk = blad[y0:y1, x0:x1]
+    achtergrond = np.abs(stuk - ACHTERGROND).max(axis=2) <= SPELING
+    labels, aantal = ndi.label(achtergrond)
+    rand = set(labels[0]) | set(labels[-1]) | set(labels[:, 0]) | set(labels[:, -1])
+    rand.discard(0)
+    groottes = ndi.sum(achtergrond, labels, range(1, aantal + 1))
+    weg = np.isin(labels, list(rand))
+    for nr, grootte in enumerate(groottes, 1):
+        if nr not in rand and grootte > 350:
+            weg |= labels == nr
+    zichtbaar = ~weg
+    labels2, aantal2 = ndi.label(zichtbaar)
+    groottes2 = ndi.sum(zichtbaar, labels2, range(1, aantal2 + 1))
+    for nr, grootte in enumerate(groottes2, 1):
+        if grootte < 40:
+            zichtbaar[labels2 == nr] = False
+    ys, xs = np.where(zichtbaar)
+    kader = (xs.min(), ys.min(), xs.max() + 1, ys.max() + 1)
+    rgba = np.dstack([stuk, np.where(zichtbaar, 255, 0)]).astype("uint8")
+    prent = Image.fromarray(rgba).crop(kader)
+    if prent.height > MAX_HOOGTE:
+        prent = prent.resize((round(prent.width * MAX_HOOGTE / prent.height), MAX_HOOGTE), Image.LANCZOS)
+    # 256 kleuren volstaan voor vlakke prenten en maken de bestanden veel kleiner.
+    return prent.quantize(256, method=Image.Quantize.FASTOCTREE)
 
 
 def main():
-    blad = Image.open(BRON).convert("RGB")
+    blad = np.array(Image.open(BRON).convert("RGB")).astype(int)
     DOEL.mkdir(parents=True, exist_ok=True)
     for naam, zone in ZONES.items():
-        stuk = blad.crop(zone)
-        stuk = stuk.crop(afbakenen(stuk))
-        stuk = maak_doorzichtig(stuk)
-        if stuk.height > MAX_HOOGTE:
-            stuk = stuk.resize((round(stuk.width * MAX_HOOGTE / stuk.height), MAX_HOOGTE), Image.LANCZOS)
-        # 256 kleuren volstaan voor tekenfilmprenten en maken de bestanden veel kleiner.
-        stuk = stuk.quantize(256, method=Image.Quantize.FASTOCTREE)
-        stuk.save(DOEL / f"{naam}.png", optimize=True)
-        print(naam, stuk.size)
+        prent = knip(blad, zone)
+        prent.save(DOEL / f"{naam}.png", optimize=True)
+        print(naam, prent.size)
+        if naam.endswith("-duim"):
+            prent.save(DOEL / f"{naam[:-5]}-trots.png", optimize=True)
 
 
 if __name__ == "__main__":
