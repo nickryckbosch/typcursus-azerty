@@ -8,6 +8,7 @@
 //   | Jef       |  (lamp, huis, beek)   |           |
 //   +-----------+-----------------------+-----------+
 //   |  Druk op [Enter] om verder te gaan   [Verder] |   zone-voet
+//   |  ______________________________   10 van 12  |   voortgang (onderrand)
 //   +-----------------------------------------------+
 //   (daaronder, buiten het podium: hulpregel, handen en toetsenbord)
 //
@@ -36,10 +37,15 @@ export interface OefenschermOpties {
 export interface Oefenscherm {
   element: HTMLElement;
   veld: HTMLElement;
+  /** midden van de voetzone: hier staat "Druk op Enter", of knoppen (afsluiter) */
   voet: HTMLElement;
   zetKop(tekst: string): void;
-  /** zet de opdracht (opmaak: [toets], **vet**) en lees ze voor */
-  zetOpdracht(tekst: string, voorlezen?: boolean): void;
+  /** zet de opdracht (opmaak: [toets], **vet**) en lees ze voor; beelden: zie tekstMetToetsen */
+  zetOpdracht(tekst: string, voorlezen?: boolean, beelden?: Record<string, () => Node>): void;
+  /** dunne voortgangsbalk langs de onderrand, met rechts klein de teller ("10 van 12") */
+  zetVoortgang(gedaan: number, totaal: number): void;
+  /** kleine bolletjes in plaats van een balk (bv. de drie beken); huidig = 0-gebaseerd */
+  zetBolletjes(huidig: number, totaal: number): void;
   zetFiguren(uitdrukking: Uitdrukking): void;
   /** toon "Druk op [Enter] om verder te gaan" met de knop Verder */
   toonEnter(actie?: () => void): void;
@@ -75,7 +81,13 @@ export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): O
       el("button", { class: "knop knop-hoofd", type: "button", tabindex: "-1", onclick: () => enterActie() }, t("knop.verder")),
     ),
   );
-  const voet = el("div", { class: "zone-voet" }, enterRij);
+  // Voortgang: altijd aanwezig (dus nooit verspringen), onzichtbaar tot een blok hem gebruikt.
+  const balkVulling = el("div", { class: "voortgang-vulling" });
+  const balk = el("div", { class: "voortgang-balk" }, balkVulling);
+  const bolletjes = el("div", { class: "voortgang-bolletjes" });
+  const teller = el("span", { class: "voortgang-teller" });
+  const voortgang = startVerborgen(el("div", { class: "voortgang", role: "status" }, balk, bolletjes, teller));
+  const voet = el("div", { class: "zone-voet" }, el("div", { class: "voet-midden" }, enterRij), voortgang);
 
   const element = el(
     "div",
@@ -90,13 +102,32 @@ export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): O
   const scherm: Oefenscherm = {
     element,
     veld,
-    voet,
+    voet: voet.firstElementChild as HTMLElement,
     zetKop(tekst) {
       kop.textContent = tekst;
     },
-    zetOpdracht(tekst, voorlezen = true) {
-      opdracht.replaceChildren(...tekstMetToetsen(tekst));
+    zetOpdracht(tekst, voorlezen = true, beelden = {}) {
+      opdracht.replaceChildren(...tekstMetToetsen(tekst, beelden));
       if (voorlezen) ctx.zeg(tekst);
+    },
+    zetVoortgang(gedaan, totaal) {
+      balk.hidden = false;
+      bolletjes.hidden = true;
+      balkVulling.style.width = `${Math.round((100 * gedaan) / Math.max(totaal, 1))}%`;
+      teller.textContent = t("teller", { nummer: gedaan, totaal });
+      toon(voortgang);
+    },
+    zetBolletjes(huidig, totaal) {
+      balk.hidden = true;
+      bolletjes.hidden = false;
+      bolletjes.replaceChildren(
+        ...Array.from({ length: totaal }, (_, i) =>
+          el("span", { class: i < huidig ? "bolletje gedaan" : i === huidig ? "bolletje huidig" : "bolletje" }),
+        ),
+      );
+      teller.textContent = "";
+      voortgang.setAttribute("aria-label", t("teller", { nummer: huidig + 1, totaal }));
+      toon(voortgang);
     },
     zetFiguren(uitdrukking) {
       figuren.replaceChildren(fien(uitdrukking), jef(uitdrukking));

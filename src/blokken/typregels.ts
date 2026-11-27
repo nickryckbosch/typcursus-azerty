@@ -4,7 +4,6 @@
 // er niets). Bij een fout blijft de cursor staan en lichten toets en vinger op.
 // Wacht het kind langer dan HULP_NA_MS, dan verschijnt de hulp ook.
 
-import { t } from "../content";
 import { nieuweOefening, teltAlsTeken, typ, volgendTeken, type TypOefening } from "../logica/typen";
 import { el } from "../weergave/dom";
 import type { BlokContext, BlokInstantie } from "./context";
@@ -25,7 +24,7 @@ export function typRegels(
   let hulpTimer: number | undefined;
   let klaar = false;
 
-  const scherm = oefenscherm(ctx, { breed: true });
+  const scherm = oefenscherm(ctx, { breed: true, kop: titel });
   const huidige = el("div", { class: "typregel", "aria-hidden": "true" });
   const volgende = el("div", { class: "volgende-regels", "aria-hidden": "true" });
   const voorlezer = el("p", { class: "verborgen" });
@@ -48,7 +47,7 @@ export function typRegels(
     volgende.replaceChildren(
       ...[1, 2].map((n) => el("div", { class: "volgende-regel" }, regels[r + n] ?? " ")),
     );
-    scherm.zetKop(`${titel} · ${t("reeks.regel", { nummer: r + 1, totaal: regels.length })}`);
+    scherm.zetVoortgang(r, regels.length);
     voorlezer.textContent = oef.doel;
   }
 
@@ -93,6 +92,7 @@ export function typRegels(
         nieuweKaart(huidige);
       } else {
         klaar = true;
+        scherm.zetVoortgang(regels.length, regels.length);
         clearTimeout(hulpTimer);
         opKlaar(oefeningen);
       }

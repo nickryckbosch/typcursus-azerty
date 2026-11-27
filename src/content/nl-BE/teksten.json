@@ -69,7 +69,6 @@
   "check.uitlegFrans": "Dit toestel staat op Frans AZERTY in plaats van Belgisch AZERTY. De letters staan op dezelfde plaats, maar sommige tekens (zoals de punt en de cijfers) niet.",
   "check.uitlegAnders": "Dit toestel staat niet op Belgisch AZERTY (bijvoorbeeld op QWERTY of op een andere taal). Dan geven de toetsen andere letters dan wat erop staat.",
 
-  "reeks.regel": "Regel {nummer} van {totaal}",
 
   "eind.aanmoediging": "Fien en Jef: Het lukt bijna! We maken de eindoefening wat korter. Rustig en juist, jij kan dat!",
   "eind.nietGehaald": "Nog geen ster. Dat geeft niet: probeer de eindoefening nog eens. Rustig en juist, wij wachten op je.",
@@ -78,12 +77,10 @@
   "houding.opdracht": "Druk op [spatie] als Jef in zijn handen klapt.",
   "houding.klap": "Klap!",
   "houding.klaar": "Klaar voor de start!",
-  "houding.teller": "{aantal} van {totaal}",
 
   "lichtaan.opdracht": "Druk op een toets van de **{rij}**.",
   "lichtaan.klaar": "Alle lichten branden! Fien en Jef zwaaien uit het raam.",
 
-  "beek.teller": "Beek {nummer} van {totaal}",
   "beek.klaar": "Droge voeten!",
   "beek.opdracht": "Typ de letter op de steen. Op een lange steen druk je op [spatie].",
 

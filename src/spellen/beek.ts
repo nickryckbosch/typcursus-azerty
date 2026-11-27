@@ -36,7 +36,7 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
     el("div", { class: "oever oever-rechts" }, el("div", { class: "huisje", "aria-hidden": "true" })),
     springers,
   );
-  const scherm = oefenscherm(ctx, { breed: true });
+  const scherm = oefenscherm(ctx, { breed: true, kop: blok.titel });
   scherm.element.classList.add("blok-beek");
   scherm.veld.append(water);
   scherm.zetOpdracht(t("beek.opdracht"));
@@ -63,7 +63,8 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
     oef = nieuweOefening(tekens.join(""));
     stenen = tekens.map((x) => el("div", { class: x === " " ? "steen steen-plat" : "steen" }, tekenTonen(x)));
     rij.replaceChildren(...stenen);
-    scherm.zetKop(`${blok.titel} \u00b7 ${t("beek.teller", { nummer: nummer + 1, totaal: BEKEN })}`);
+    // De stenen tonen zelf hoe ver je bent; onderaan alleen drie bolletjes voor de beken.
+    scherm.zetBolletjes(nummer, BEKEN);
     markeerVolgende();
     requestAnimationFrame(zetSpringers);
     startHulpTimer();
@@ -100,6 +101,7 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
         nieuweKaart(rij);
       } else {
         klaar = true;
+        scherm.zetBolletjes(BEKEN, BEKEN);
         scherm.zetOpdracht(t("beek.klaar"));
         scherm.toonEnter();
       }

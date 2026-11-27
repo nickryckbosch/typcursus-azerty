@@ -7,7 +7,11 @@ import { el } from "./dom";
 
 const PATROON = /\[([^\]]+)\]|\*\*([^*]+)\*\*/g;
 
-export function tekstMetToetsen(tekst: string): Node[] {
+/**
+ * @param beelden optioneel: zet een klein beeldje meteen na een woord in de tekst,
+ *   bv. { lamp: () => lampIcoon() } zet het beeldje van de lamp na het woord "lamp".
+ */
+export function tekstMetToetsen(tekst: string, beelden: Record<string, () => Node> = {}): Node[] {
   const uit: Node[] = [];
   let vanaf = 0;
   for (const m of tekst.matchAll(PATROON)) {
@@ -16,7 +20,23 @@ export function tekstMetToetsen(tekst: string): Node[] {
     vanaf = m.index + m[0].length;
   }
   if (vanaf < tekst.length) uit.push(document.createTextNode(tekst.slice(vanaf)));
-  return uit;
+  return Object.keys(beelden).length === 0 ? uit : uit.flatMap((n) => voegBeeldenToe(n, beelden));
+}
+
+function voegBeeldenToe(node: Node, beelden: Record<string, () => Node>): Node[] {
+  if (node.nodeType !== Node.TEXT_NODE) return [node];
+  const tekst = node.textContent ?? "";
+  for (const [woord, maak] of Object.entries(beelden)) {
+    const m = new RegExp(`\\b${woord}\\b`, "i").exec(tekst);
+    if (!m) continue;
+    const einde = m.index + m[0].length;
+    return [
+      document.createTextNode(tekst.slice(0, einde) + "\u00a0"),
+      el("span", { class: "beeld-in-tekst", "aria-hidden": "true" }, maak()),
+      document.createTextNode(tekst.slice(einde)),
+    ];
+  }
+  return [node];
 }
 
 /** Dezelfde tekst zonder opmaak, om voor te lezen. */

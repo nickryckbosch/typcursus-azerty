@@ -5,6 +5,16 @@
   - Gemaakt voor Chromebooks vanaf 1366 x 768.
 */
 
+/* Andika (SIL Global, Open Font License), meegeleverd: zie src/lettertypes/LEESMIJ.md.
+   Gebruikt voor de woorden bij het huis van "Licht aan in het huis". */
+@font-face {
+  font-family: "Andika";
+  src: url("./lettertypes/Andika-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --blauw: #0072b2;
   --oranje: #e69f00;
@@ -395,13 +405,23 @@ button {
 }
 
 /* zoek-toets: de grote letter */
+/* De kaart met de letter heeft een vaste maat en een vaste basislijn voor elk
+   teken: boven is er plaats voor stokletters, hoofdletters en accenten (b, k, É),
+   onder voor staartletters (g, j, p, q, y). Zo staat elke letter mooi in de
+   kaart en springt hij niet op en neer van de ene kaart naar de volgende. */
 .grote-toets {
+  /* Kaart 1,7em hoog (regel 1,2em + 0,25em boven en onder): de kleine letters
+     staan mooi in het midden, met ruimte voor accenten (É) en staarten (j, g). */
+  box-sizing: content-box;
+  width: 1.6em;
+  height: 1.2em;
+  line-height: 1.2em;
+  padding: 0.25em 0.15em 0.25em;
+  overflow: hidden;
   text-align: center;
-  min-width: 2.2em;
-  padding: 0 0.3em;
+  white-space: nowrap;
   font-size: clamp(60px, 14vh, 130px);
   font-weight: 700;
-  line-height: 1.25;
   border: 5px solid var(--rand);
   border-radius: 24px;
   background: var(--vlak);
@@ -409,25 +429,8 @@ button {
 
 .grote-toets.is-spatie {
   font-size: clamp(32px, 7vh, 64px);
-  min-width: 7em;
-  padding: 0.4em 0.5em;
-}
-
-.lamp {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: 4px solid var(--rand);
-  background: #cfcfcf;
-}
-
-.lamp {
-  transition: background-color 180ms ease, box-shadow 180ms ease;
-}
-
-.lamp.aan {
-  background: var(--geel);
-  box-shadow: 0 0 24px 8px #ffe680;
+  width: 7em;
+  padding: 0.15em 0.5em 0.45em;
 }
 
 /* oefenregels */
@@ -745,76 +748,6 @@ button {
 
 /* ---------- spel: licht aan ---------- */
 
-.spel-rij {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-
-.huis {
-  width: 360px;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-
-.huis-dak {
-  height: 50px;
-  background: #8c4a2f;
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-}
-
-.verdieping {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: #e9d8b9;
-  border: 3px solid var(--rand);
-  border-top-width: 0;
-  padding: 0.4rem 0.6rem;
-}
-
-.verdieping:first-of-type {
-  border-top-width: 3px;
-}
-
-.verdieping-naam {
-  width: 7.2em;
-  text-align: left;
-  font-weight: 700;
-}
-
-.ramen {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.raam {
-  width: 52px;
-  height: 40px;
-  border: 3px solid var(--rand);
-  background: #4a4f63;
-  border-radius: 4px;
-}
-
-.raam.aan {
-  background: var(--geel);
-}
-
-.verdieping.knippert {
-  outline: 6px solid #000;
-  outline-offset: -3px;
-  animation: knipper 1s steps(2, start) infinite;
-}
-
-.verdieping.knippert .verdieping-naam::before {
-  content: "\25B6  ";
-}
-
-@keyframes knipper {
-  50% { background: #fff6c7; }
-}
-
 /* ---------- spel: beek ---------- */
 
 .beek {
@@ -1054,8 +987,6 @@ button {
 .podium .volgende-regels { min-height: 0; }
 
 /* Licht aan in het huis */
-.podium .huis { width: auto; }
-.podium .spel-rij { gap: clamp(12px, 4cqh, 32px); }
 
 /* Over de beek */
 .podium .steen {
@@ -1099,7 +1030,7 @@ button {
   margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 3fr) minmax(0, 1fr);
-  grid-template-rows: 32cqh minmax(0, 1fr) 17cqh;
+  grid-template-rows: 31cqh minmax(0, 1fr) 18cqh;
   column-gap: 1rem;
   animation: verschijn 180ms ease-out;
 }
@@ -1232,9 +1163,7 @@ button {
 }
 
 .podium .ballon .grote-tekst { font-size: clamp(14px, 7cqh, 26px); }
-.podium .huis { height: 100%; max-height: 100%; justify-content: center; }
-.podium .lamp { width: clamp(28px, 16cqh, 64px); height: clamp(28px, 16cqh, 64px); }
-.podium .grote-toets { font-size: clamp(36px, 30cqh, 130px); }
+.podium .grote-toets { font-size: clamp(34px, 27cqh, 120px); }
 .podium .grote-toets.is-spatie { font-size: clamp(22px, 13cqh, 60px); }
 .podium .klap { font-size: clamp(18px, 12cqh, 44px); }
 .podium .sterren .ster { width: clamp(30px, 22cqh, 90px); height: clamp(30px, 22cqh, 90px); }
@@ -1242,10 +1171,6 @@ button {
 
 /* Licht aan in het huis en Over de beek: passen in de vaste middenzone (55cqh hoog).
    Het huis zelf wordt later mooier getekend; de zone ligt nu al vast. */
-.podium .huis-dak { height: clamp(14px, 9cqh, 50px); }
-.podium .verdieping { padding: clamp(2px, 1cqh, 8px) 0.8rem; }
-.podium .verdieping-naam { font-size: clamp(13px, 6cqh, 22px); }
-.podium .raam { height: clamp(16px, 11cqh, 46px); width: clamp(22px, 15cqh, 62px); }
 .podium .beek { height: clamp(80px, 50cqh, 200px); padding-top: clamp(26px, 19cqh, 75px); }
 .podium .oever { margin-top: calc(-1 * clamp(26px, 19cqh, 75px)); }
 .podium .steen { width: clamp(32px, 19cqh, 72px); height: clamp(26px, 16cqh, 60px); font-size: clamp(15px, 9cqh, 32px); }
@@ -1287,7 +1212,6 @@ button {
 .podium .typregel { padding: 0.04em 0.35em; line-height: 1.3; }
 .podium .teken { border-bottom-width: 0.08em; }
 
-
 /* Een nieuwe kaart of regel: een korte, rustige "pop", ook als de letter dezelfde
    is als de vorige. Alleen visueel; de invoer wordt nooit tegengehouden. */
 .nieuw {
@@ -1297,4 +1221,147 @@ button {
 @keyframes nieuw {
   from { opacity: 0.35; transform: scale(0.94); }
   to { opacity: 1; transform: none; }
+}
+
+/* ---------- Licht aan in het huis (K21, zie docs/stijlgids.md) ----------
+   Raamkleuren nagemeten tegen de vingerkleuren (palet C, Machado e.a. 2009):
+   niet veranderen zonder nieuwe meting. */
+.huis {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.raam-glas {
+  fill: #3b4256; /* licht uit */
+  transition: fill 180ms ease;
+}
+
+.raam.aan .raam-glas {
+  fill: #ffee99; /* licht aan */
+}
+
+.huis-woord rect {
+  fill: #ffffff;
+}
+
+.huis-woord text {
+  font-family: "Andika", system-ui, sans-serif;
+  font-size: 19px;
+  fill: #1b2a4a;
+}
+
+/* De verdieping die aan de beurt is: haar woord wordt donker en blijft stil staan. */
+.huis-woord.aan-de-beurt rect {
+  fill: #1b2a4a;
+}
+
+.huis-woord.aan-de-beurt text {
+  fill: #ffffff;
+}
+
+/* ---------- De lamp (Duim op de spatiebalk) ---------- */
+.lamp-tekening {
+  display: block;
+  height: clamp(44px, 26cqh, 130px);
+  width: auto;
+  overflow: visible;
+}
+
+.lamp-bol {
+  fill: #3b4256; /* uit */
+  transition: fill 180ms ease;
+}
+
+.lamp-tekening.aan .lamp-bol {
+  fill: #ffee99; /* aan */
+}
+
+.lamp-stralen {
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.lamp-tekening.aan .lamp-stralen {
+  opacity: 1;
+}
+
+/* Het kleine beeldje naast een woord in de opdracht */
+.beeld-in-tekst {
+  display: inline-block;
+  vertical-align: -0.25em;
+}
+
+.beeld-in-tekst .lamp-tekening {
+  display: inline-block;
+  height: 1.2em;
+}
+
+/* ---------- Voortgang langs de onderrand van het oefenscherm (K20) ----------
+   Dun, rustig, grijs: het kind kijkt er maar af en toe naar. */
+.zone-voet {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.voet-midden {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.voortgang {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  height: clamp(12px, 3.5cqh, 16px);
+  padding: 0 0.25rem;
+}
+
+.voortgang-balk {
+  flex: 1;
+  height: 5px;
+  border-radius: 3px;
+  background: #e2ddd3;
+  overflow: hidden;
+}
+
+.voortgang-vulling {
+  height: 100%;
+  width: 0;
+  background: #6b6b6b;
+  transition: width 180ms ease;
+}
+
+.voortgang-bolletjes {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.bolletje {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid #6b6b6b;
+}
+
+.bolletje.gedaan {
+  background: #6b6b6b;
+}
+
+.bolletje.huidig {
+  border-width: 3px;
+  border-color: #1a1a1a;
+}
+
+.voortgang-teller {
+  min-width: 4.5em;
+  text-align: right;
+  font-size: clamp(12px, 4cqh, 15px);
+  color: var(--zacht);
+  font-variant-numeric: tabular-nums;
 }

@@ -20,12 +20,11 @@ export function houding(blok: EindoefeningBlok, ctx: BlokContext): BlokInstantie
   let aantal = 0;
   const scherm = oefenscherm(ctx, { kop: blok.titel, figuren: "blij" });
   const klap = startVerborgen(el("div", { class: "klap", "aria-hidden": "true" }, t("houding.klap")));
-  const teller = el("p", { class: "teller" });
-  scherm.veld.append(klap, teller);
+  scherm.veld.append(klap);
   ctx.handen.toon(["duim"]);
 
   function zetTeller(): void {
-    teller.textContent = t("houding.teller", { aantal, totaal: AANTAL });
+    scherm.zetVoortgang(aantal, AANTAL);
   }
 
   function klapNu(): void {
