@@ -256,6 +256,17 @@ Steunt op: eigen keuze van Nick, na het testen. De tekenstijl en de indeling bli
 5. **De afsluiter voegt zelf "Nog niet alle sterren? Probeer de eindoefening nog eens, wij wachten op je." toe** als het kind minder dan drie sterren heeft, voor elke les (tekst `eind.nietAlleSterren`). De zin staat niet meer in de lestekst van les 1. Waarom: vroeger stond hij er ook bij drie sterren.
 6. **De intro van les 0 toont het huis van "Licht aan in het huis"**, met alle ramen uit, het dak leeg en de woorden zolder, woonkamer en kelder links, naast de tekst "Dit is ons huis: het toetsenbord...". Het is dezelfde tekening (`maakHuis` in `src/spellen/lichtaan.ts`), en het veld `"prent": "huis"` in de lesdata zet ze aan. Waarom: woord en beeld kloppen, en het kind kent het huis al voor het spel begint.
 
+## 12g. Hulp bij "Licht aan in het huis": welke rij is de woonkamer?
+
+**Steunt op:** vaststelling van Nick ("Druk op een toets van de woonkamer" is voor een kind vaag) en eigen keuze, door Nick goedgekeurd.
+
+- **In de eerste drie rondes (woonkamer, zolder, kelder) licht de gevraagde rij op het schermtoetsenbord op.** Het woordvakje in het huis krijgt dezelfde blauwe rand. De opdracht zegt er ook bij waar de rij ligt: "Druk op een toets van de **woonkamer**: de middelste rij." Voor de zolder is dat "de bovenste rij", voor de kelder "de onderste rij".
+- **Vanaf ronde 4 verschijnt die hulp alleen als het niet lukt:** na een foute toets, of als het kind 3 seconden wacht. Ze blijft staan tot de juiste toets er is.
+- **De kleur van de hulp:** accentblauw, de kleur van de knoppen. Geen vingerkleur, en geen geel, want geel betekent "licht aan".
+- **Waarom:** huis en toetsenbord staan op een andere plek, en niets verbond ze. Dezelfde rand op beide toont dat ze bij elkaar horen. De hulp wordt afgebouwd, zoals bij de hulp in de oefenregels (K17), zodat het kind daarna zelf leert welke rij welke verdieping is.
+- **En de leerkracht?** In het klassikale deel van les 0 roept de leerkracht "Hand op de zolder!" en wijst de rij aan. De app herhaalt dat. Toch is de hulp in de app nodig: de cursus moet ook zonder leerkracht werken (doel in document 08), en tijdens het online deel zitten veel kinderen tegelijk aan hun Chromebook.
+- **Test:** `tests/snel-typen.test.ts` gaat na dat de hulp er is in de rondes 1 tot 3, er niet is in ronde 4, en verschijnt na een fout en na 3 seconden wachten.
+
 ## 13. Privacy en veiligheid
 
 - Geen externe bronnen: geen CDN, geen analytics, geen Google Fonts.

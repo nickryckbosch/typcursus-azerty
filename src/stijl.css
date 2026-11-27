@@ -1081,6 +1081,10 @@ button {
   display: block;
 }
 
+/* De rij die aan de beurt is (hulp bij "Licht aan in het huis"): dezelfde rand
+   als het woordvakje in het huis, zodat het kind ziet dat ze bij elkaar horen.
+   Accentblauw: geen vingerkleur, en geen geel (geel betekent "licht aan"). */
+.tb-rij.rij-hulp,
 .tb-rij.rij-op {
   outline: 4px solid var(--accent);
   outline-offset: 3px;
@@ -1813,7 +1817,7 @@ button {
   fill: #ffee99; /* licht aan */
 }
 
-.huis-woord rect {
+.huis-woord rect:not(.woord-hulp-rand) {
   fill: #ffffff;
 }
 
@@ -1825,7 +1829,19 @@ button {
 }
 
 /* De verdieping die aan de beurt is: haar woord wordt donker en blijft stil staan. */
-.huis-woord.aan-de-beurt rect {
+/* De rand van de hulp rond het woord: dezelfde rand als de rij op het toetsenbord. */
+.huis-woord .woord-hulp-rand {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 4;
+  visibility: hidden;
+}
+
+.huis-woord.met-hulp .woord-hulp-rand {
+  visibility: visible;
+}
+
+.huis-woord.aan-de-beurt rect:not(.woord-hulp-rand) {
   fill: #1b2a4a;
 }
 

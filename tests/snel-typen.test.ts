@@ -23,12 +23,13 @@ function maakContext(les: Les) {
   const podium = document.createElement("main");
   document.body.replaceChildren(podium);
   const regels: TypOefening[] = [];
+  const rijen: (string | null)[] = [];
   let volgende = 0;
   const ctx: BlokContext = {
     app: { voortgang: nieuweVoortgang(), bewaar() {}, lessen: LESSEN } as unknown as BlokContext["app"],
     les,
     podium,
-    toetsenbord: { element: document.createElement("div"), markeer() {}, flits() {}, lichtRijOp() {}, toonEnter() {}, benadruk() {} } as unknown as BlokContext["toetsenbord"],
+    toetsenbord: { element: document.createElement("div"), markeer() {}, flits() {}, lichtRijOp() {}, toonEnter() {}, benadruk() {}, toonRij: (r: string | null) => void rijen.push(r) } as unknown as BlokContext["toetsenbord"],
     handen: { toon() {}, benadruk() {} } as unknown as BlokContext["handen"],
     toonHulp() {},
     toonFout() {},
@@ -48,7 +49,7 @@ function maakContext(les: Les) {
     later: (fn, ms) => void setTimeout(fn, ms),
     sessie: {},
   };
-  return { ctx, aanslagen: () => regels.flatMap((r) => r.aanslagen), aantalVolgende: () => volgende };
+  return { ctx, aanslagen: () => regels.flatMap((r) => r.aanslagen), aantalVolgende: () => volgende, laatsteRij: () => rijen[rijen.length - 1] ?? null };
 }
 
 function druk(blok: BlokInstantie, teken: string): void {
@@ -157,5 +158,35 @@ describe("snel typen: geen enkele aanslag gaat verloren", () => {
     }
     expect(aanslagen()).toHaveLength(blok.aantal);
     expect(aanslagen().every((a) => a.juist)).toBe(true);
+  });
+
+  it("licht aan: hulp in de eerste drie rondes, daarna alleen na een fout of na even wachten", () => {
+    const les = LESSEN[0];
+    const blok = vind<SpelBlok>(les, (b) => b.type === "spel" && b.spel === "licht-aan");
+    const { ctx, laatsteRij } = maakContext(les);
+    const inst = lichtAan(blok, ctx);
+    const toetsVoorRij: Record<string, string> = { zolder: "e", woonkamer: "f", kelder: "c" };
+    const opdracht = () => ctx.podium.querySelector(".opdracht-tekst")!.textContent!;
+    const gevraagd = () => Object.keys(toetsVoorRij).find((r) => opdracht().includes(r))!;
+    // ronde 1 tot 3: woonkamer, zolder, kelder, telkens met hulp en met de plaats van de rij
+    for (const [rij, plaats] of [["woonkamer", "middelste"], ["zolder", "bovenste"], ["kelder", "onderste"]]) {
+      expect(gevraagd()).toBe(rij);
+      expect(laatsteRij()).toBe(rij);
+      expect(opdracht()).toContain(plaats);
+      druk(inst, toetsVoorRij[rij]);
+    }
+    // ronde 4: geen hulp
+    expect(laatsteRij()).toBeNull();
+    // een foute toets: de hulp verschijnt
+    const rij4 = gevraagd();
+    const fout = rij4 === "zolder" ? "f" : "e";
+    druk(inst, fout);
+    expect(laatsteRij()).toBe(rij4);
+    vi.advanceTimersByTime(1000);
+    druk(inst, toetsVoorRij[rij4]);
+    // ronde 5: eerst geen hulp, na 3 seconden wachten wel
+    expect(laatsteRij()).toBeNull();
+    vi.advanceTimersByTime(3000);
+    expect(laatsteRij()).toBe(gevraagd());
   });
 });

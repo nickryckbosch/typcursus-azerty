@@ -18,6 +18,8 @@ export interface ToetsenbordWeergave {
   flits(code: string, juist: boolean): void;
   /** laat een hele rij kort oplichten */
   lichtRijOp(rij: Rij): void;
+  /** toon een rij blijvend (hulp bij "Licht aan in het huis"); null: geen rij */
+  toonRij(rij: Rij | null): void;
   /** toon of verberg dat het kind op Enter moet drukken */
   toonEnter(aan: boolean): void;
 }
@@ -127,6 +129,9 @@ export function maakToetsenbord(geleerd: string[]): ToetsenbordWeergave {
     },
     toonEnter(aan) {
       for (const d of enterDelen) d.classList.toggle("enter-wacht", aan);
+    },
+    toonRij(rij) {
+      for (const [r, el] of perRij) el.classList.toggle("rij-hulp", r === rij);
     },
     lichtRijOp(rij) {
       const r = perRij.get(rij);
