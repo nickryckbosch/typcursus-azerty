@@ -1,6 +1,7 @@
 {
   "id": 0,
   "titel": "Welkom in het toetsenbordhuis",
+  "begroeting": "Hoi! Wij zijn Fien en Jef. Kom je mee naar het toetsenbordhuis?",
   "nieuweToetsen": [
     " "
   ],
@@ -54,7 +55,7 @@
       "type": "intro",
       "titel": "Fien en Jef stellen hun huis voor",
       "duurMinuten": 1,
-      "tekst": "Hallo! Ik ben Fien. En ik ben Jef. Dit is ons huis: het toetsenbord. Het heeft een zolder, een woonkamer en een kelder. In de woonkamer wonen je vingers. Kom je mee kijken?"
+      "tekst": "Hallo! Wij zijn Fien en Jef. Dit is ons huis: het toetsenbord. Het heeft een zolder, een woonkamer en een kelder. In de woonkamer wonen je vingers. Kom je mee kijken?"
     },
     {
       "type": "toetsenbordcheck",
@@ -86,7 +87,7 @@
       ],
       "rondes": 9,
       "tekens": [],
-      "beschrijving": "Op het scherm staat het huis met drie verdiepingen, alle ramen donker. Een verdieping knippert en Fien zegt: \"Druk op een toets van de zolder.\" Elke toets van die rij is goed (herkend via de toetscode, dus los van de indeling): het raam gaat aan en de toets licht op het schermtoetsenbord op in de kleur van de vinger. Een toets van een andere rij: de juiste rij licht even op, er gaat niets verloren. Alleen de eerste toets per ronde telt, zodat rammen niet helpt. Ronde 1 tot 3 in vaste volgorde (woonkamer, zolder, kelder), daarna willekeurig. Na 9 rondes branden alle ramen en zwaaien Fien en Jef uit het raam. Geen tijd, geen punten."
+      "beschrijving": "Op het scherm staat het huis met drie verdiepingen, alle ramen donker. Een verdieping licht op (zonder te knipperen) en Fien zegt: \"Druk op een toets van de zolder.\" Elke toets van die rij is goed (herkend via de toetscode, dus los van de indeling): het raam gaat aan en de toets licht op het schermtoetsenbord op in de kleur van de vinger. Een toets van een andere rij: de juiste rij licht even op, er gaat niets verloren. Alleen de eerste toets per ronde telt, zodat rammen niet helpt. Ronde 1 tot 3 in vaste volgorde (woonkamer, zolder, kelder), daarna willekeurig. Na 9 rondes branden alle ramen. Fien en Jef staan stil; pas op het einde zwaaien ze. Geen tijd, geen punten."
     },
     {
       "type": "eindoefening",

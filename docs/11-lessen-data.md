@@ -1,5 +1,7 @@
 # Lessen 0 tot 5: data voor de app
 
+> **Let op: dit document is niet meer de bron.** De lesinhoud staat in `src/content/nl-BE/` (les-0.json tot les-5.json). Daar gebeuren de aanpassingen; dit document kan dus een verouderde kopie zijn. Zo zijn de spelbeschrijvingen (K16: geen beweging) en de tips en begroetingen alleen in de JSON-bestanden aangepast.
+
 De inhoud van les 0 tot 5 in JSON, om in te lezen door de prototypechat. Voor leerkrachten staat dezelfde inhoud leesbaar in document 10 (in het claude.ai-project). Dit document is gemaakt met een script vanuit dezelfde bron als document 10, dus beide zijn gelijk.
 
 **Controle:** 262 items gecontroleerd, 0 fouten. Elk item bevat alleen geleerde toetsen plus de spatie.
@@ -91,7 +93,7 @@ Extra afspraken uit document 10 die de app raken:
       "type": "intro",
       "titel": "Fien en Jef stellen hun huis voor",
       "duurMinuten": 1,
-      "tekst": "Hallo! Ik ben Fien. En ik ben Jef. Dit is ons huis: het toetsenbord. Het heeft een zolder, een woonkamer en een kelder. In de woonkamer wonen je vingers. Kom je mee kijken?"
+      "tekst": "Hallo! Wij zijn Fien en Jef. Dit is ons huis: het toetsenbord. Het heeft een zolder, een woonkamer en een kelder. In de woonkamer wonen je vingers. Kom je mee kijken?"
     },
     {
       "type": "toetsenbordcheck",
@@ -323,7 +325,7 @@ Extra afspraken uit document 10 die de app raken:
       "type": "intro",
       "titel": "De buren van Fien en Jef",
       "duurMinuten": 1,
-      "tekst": "We hebben buren! Naast mij, Fien, woont de D. Naast mij, Jef, woont de K. Je oranje middelvingers typen ze. En wij? Wij blijven gewoon thuis op de bultjes."
+      "tekst": "We hebben buren! Naast mij, Fien, woont de D. Naast mij, Jef, woont de K. Je oranje middelvingers typen ze. Wij blijven gewoon thuis op de bultjes."
     },
     {
       "type": "zoek-toets",
@@ -447,7 +449,7 @@ Extra afspraken uit document 10 die de app raken:
       "type": "intro",
       "titel": "Naar de zolder",
       "duurMinuten": 1,
-      "tekst": "Vandaag gaan je middelvingers naar de zolder! Daar wonen de E en de I. Even naar boven, en meteen terug naar huis. En weet je wat? Nu kan je echte woorden typen!"
+      "tekst": "Vandaag gaan je middelvingers naar de zolder! Daar wonen de E en de I. Even naar boven, en meteen terug naar huis. Weet je wat? Nu kan je echte woorden typen!"
     },
     {
       "type": "zoek-toets",
@@ -574,7 +576,7 @@ Extra afspraken uit document 10 die de app raken:
       "type": "intro",
       "titel": "De ringvingers",
       "duurMinuten": 1,
-      "tekst": "Nu worden je ringvingers wakker. Zij zijn groen en typen de S en de L. Daarmee kan je al ijs, slee en fles typen. En vandaag typ je je eerste zin!"
+      "tekst": "Nu worden je ringvingers wakker. Zij zijn groen en typen de S en de L. Daarmee kan je al ijs, slee en fles typen. Vandaag typ je ook je eerste zin!"
     },
     {
       "type": "zoek-toets",

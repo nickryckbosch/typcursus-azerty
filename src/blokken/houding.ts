@@ -11,14 +11,14 @@ import type { BlokContext, BlokInstantie } from "./context";
 
 const AANTAL = 3;
 
-export function houding(blok: EindoefeningBlok, ctx: BlokContext): BlokInstantie {
+export function houding(_blok: EindoefeningBlok, ctx: BlokContext): BlokInstantie {
   let geklapt = false;
   let aantal = 0;
   const klap = el("div", { class: "klap", "aria-hidden": "true" }, t("houding.klap"));
   const tekst = el("p", { class: "grote-tekst" }, t("houding.zeg"));
   const teller = el("p", { class: "teller" }, t("houding.teller", { aantal, totaal: AANTAL }));
   ctx.podium.append(
-    el("div", { class: "blok blok-houding" }, el("h2", {}, blok.titel), el("div", { class: "figuren" }, fien("blij"), jef("blij"), klap), tekst, teller),
+    el("div", { class: "blok blok-houding" }, el("div", { class: "figuren" }, fien("blij"), jef("blij"), klap), tekst, teller),
   );
   ctx.zeg(`${t("houding.zeg")} ${t("houding.uitleg")}`);
   ctx.handen.toon(["duim"]);

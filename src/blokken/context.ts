@@ -2,7 +2,7 @@
 
 import type { App } from "../app";
 import type { Blok, Les } from "../content/types";
-import type { Aanslag } from "../logica/typen";
+import type { TypOefening } from "../logica/typen";
 import type { HandenWeergave } from "../weergave/handen";
 import type { ToetsenbordWeergave } from "../weergave/toetsenbord";
 
@@ -22,6 +22,17 @@ export interface BlokContext {
   handen: HandenWeergave;
   /** toon op toetsenbord en hand welke toets en vinger nodig zijn (null: niets tonen) */
   toonHulp(teken: string | null): void;
+  /** na een fout: toon de juiste toets en vinger, en laat ze even sterker oplichten */
+  toonFout(teken: string | null): void;
+  /**
+   * Is de hulp altijd zichtbaar (K17, standaard), of pas na een fout of na
+   * HULP_NA_MS wachten (instelling op het leerkrachtscherm)?
+   */
+  hulpAltijd: boolean;
+  /** extra oefenen (K15): niets telt mee voor de voortgang, alleen de metingen per toets */
+  extra: boolean;
+  /** het nummer van dit blok in de les (vanaf 0) */
+  blokNummer(): number;
   /** lees voor (als voorlezen aan staat) en onthoud voor "lees nog eens" */
   zeg(tekst: string): void;
   /** naar het volgende blok */
@@ -29,10 +40,18 @@ export interface BlokContext {
   /** naar een bepaald blok (bv. eindoefening opnieuw) */
   gaNaar(index: number): void;
   indexVan(type: Blok["type"]): number;
-  /** voeg aanslagen toe aan de statistieken per toets en bewaar */
-  bewaarAanslagen(aanslagen: Aanslag[]): void;
+  /**
+   * Bewaar de metingen van deze poging: een samenvatting per toets, geen losse
+   * aanslagen (zie logica/metingen.ts). Elke oefening in de lijst is een regel.
+   * Geeft de nauwkeurigheid terug: posities meteen juist / posities.
+   */
+  bewaarPoging(regels: TypOefening[]): number;
+  /** toon of verberg het schermtoetsenbord en de handen (bv. verbergen bij de afsluiter) */
+  toonToetsenbord(aan: boolean): void;
   /** setTimeout die vanzelf stopt als het blok wisselt */
   later(fn: () => void, ms: number): void;
+  /** wacht zo lang voor de hulp verschijnt, als de hulp niet altijd zichtbaar is */
+  hulpNaMs: number;
   /** gegevens die blokken binnen deze les doorgeven (eindoefening naar afsluiter) */
   sessie: { resultaat?: EindResultaat };
 }

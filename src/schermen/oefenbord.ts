@@ -22,8 +22,8 @@ export function oefenbordScherm(app: App, wortel: HTMLElement): Scherm {
       "div",
       { class: "scherm scherm-les scherm-oefenbord" },
       kop(app, t("oefenbord.titel")),
-      el("main", { class: "podium" }, groot, vinger),
-      el("footer", { class: "typzone" }, handen.links, toetsenbord.element, handen.rechts),
+      el("main", { class: "podium" }, el("div", { class: "blok blok-oefenbord" }, groot, vinger)),
+      el("footer", { class: "typzone" }, el("div", { class: "typzone-rij" }, handen.links, toetsenbord.element, handen.rechts)),
     ),
   );
 

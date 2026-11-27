@@ -1,11 +1,10 @@
 // Intro: Fien en Jef vertellen wat er komt. De nieuwe toetsen en vingers lichten op.
 
-import { t } from "../content";
 import type { IntroBlok } from "../content/types";
 import { toetsVoorTeken } from "../logica/indeling";
 import { el } from "../weergave/dom";
 import type { BlokFunctie } from "./context";
-import { metFienEnJef, verderKnop } from "./gedeeld";
+import { enterHint, metFienEnJef } from "./gedeeld";
 
 export const intro: BlokFunctie<IntroBlok> = (blok, ctx) => {
   const toetsen = ctx.les.nieuweToetsen.map((teken) => toetsVoorTeken(teken)?.toets).filter((x) => x !== undefined);
@@ -16,9 +15,8 @@ export const intro: BlokFunctie<IntroBlok> = (blok, ctx) => {
     el(
       "div",
       { class: "blok blok-intro" },
-      metFienEnJef("zwaai", el("div", { class: "ballon" }, el("h2", {}, blok.titel), el("p", { class: "grote-tekst" }, blok.tekst ?? ""))),
-      el("p", { class: "hint" }, t("hint.enter")),
-      verderKnop(ctx),
+      metFienEnJef("zwaai", el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, blok.tekst ?? ""))),
+      enterHint(ctx),
     ),
   );
   ctx.zeg(blok.tekst ?? "");

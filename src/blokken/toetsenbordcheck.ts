@@ -7,17 +7,17 @@ import type { ToetsenbordcheckBlok } from "../content/types";
 import { stapA, stapZes, vraagIndelingOp, type Indeling } from "../logica/toetsenbordcheck";
 import { el } from "../weergave/dom";
 import type { BlokFunctie } from "./context";
-import { metFienEnJef, schud, verderKnop } from "./gedeeld";
+import { enterHint, metFienEnJef } from "./gedeeld";
 
 type Stap = "bezig" | "drukA" | "druk6" | "klaar";
 
-export const toetsenbordcheck: BlokFunctie<ToetsenbordcheckBlok> = (blok, ctx) => {
+export const toetsenbordcheck: BlokFunctie<ToetsenbordcheckBlok> = (_blok, ctx) => {
   let stap: Stap = "bezig";
   const vak = el("div", { class: "blok blok-check" });
   ctx.podium.append(vak);
 
   function toon(...inhoud: Node[]): void {
-    vak.replaceChildren(el("h2", {}, blok.titel), ...inhoud);
+    vak.replaceChildren(...inhoud);
   }
 
   function klaar(indeling: Indeling): void {
@@ -27,11 +27,11 @@ export const toetsenbordcheck: BlokFunctie<ToetsenbordcheckBlok> = (blok, ctx) =
     ctx.app.bewaar();
     ctx.toetsenbord.markeer([]);
     if (ok) {
-      toon(metFienEnJef("blij", el("p", { class: "grote-tekst goed" }, t("check.ok"))), el("p", { class: "hint" }, t("hint.enter")), verderKnop(ctx));
+      toon(metFienEnJef("blij", el("div", { class: "ballon" }, el("p", { class: "grote-tekst goed" }, t("check.ok")))), enterHint(ctx));
       ctx.zeg(t("check.ok"));
     } else {
       toon(
-        metFienEnJef("nadenkend", el("p", { class: "grote-tekst" }, t("check.fout")), el("p", {}, t("check.verderMag"))),
+        metFienEnJef("nadenkend", el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, t("check.fout")), el("p", {}, t("check.verderMag")))),
         el(
           "details",
           { class: "leerkracht-uitleg", open: true },
@@ -39,8 +39,7 @@ export const toetsenbordcheck: BlokFunctie<ToetsenbordcheckBlok> = (blok, ctx) =
           el("p", {}, t(indeling === "frans" ? "check.uitlegFrans" : "check.uitlegAnders")),
           el("p", {}, t("leerkracht.toetsenbordInstellen")),
         ),
-        el("p", { class: "hint" }, t("hint.enter")),
-        verderKnop(ctx),
+        enterHint(ctx),
       );
       ctx.zeg(`${t("check.fout")} ${t("check.verderMag")}`);
     }
@@ -56,7 +55,8 @@ export const toetsenbordcheck: BlokFunctie<ToetsenbordcheckBlok> = (blok, ctx) =
   function vraag6(): void {
     stap = "druk6";
     toon(el("p", { class: "grote-tekst" }, t("check.druk6")), el("div", { class: "grote-toets" }, "6"));
-    ctx.toetsenbord.markeer(["Digit6"]);
+    // Het schermtoetsenbord heeft geen cijferrij: de 6 staat groot in het blok zelf.
+    ctx.toetsenbord.markeer([]);
     ctx.zeg(t("check.druk6"));
   }
 
@@ -78,8 +78,6 @@ export const toetsenbordcheck: BlokFunctie<ToetsenbordcheckBlok> = (blok, ctx) =
           ctx.toetsenbord.flits(e.code, true);
           if (e.code === "KeyQ" && stapA(e.key) === "ok") vraag6();
           else klaar("qwerty");
-        } else if (e.key.length === 1) {
-          schud(vak);
         }
         return;
       }
@@ -87,8 +85,6 @@ export const toetsenbordcheck: BlokFunctie<ToetsenbordcheckBlok> = (blok, ctx) =
         if (e.code === "Digit6") {
           ctx.toetsenbord.flits(e.code, true);
           klaar(stapZes(e.key));
-        } else if (e.key.length === 1) {
-          schud(vak);
         }
       }
     },

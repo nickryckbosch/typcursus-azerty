@@ -1,9 +1,10 @@
-// Spel "Licht aan in het huis" (les 0). Een verdieping knippert; elke toets
+// Spel "Licht aan in het huis" (les 0). Een verdieping licht op; elke toets
 // van die rij is goed (herkend via event.code, dus los van de indeling).
 // Goed: een raam gaat aan. Fout: de juiste rij licht op, er gaat niets
 // verloren en dezelfde ronde begint opnieuw. Alleen de eerste toets per
 // ronde telt: tijdens de uitleg na een fout worden toetsen genegeerd, zodat
-// rammen niet helpt. Geen tijd, geen punten.
+// rammen niet helpt. Geen tijd, geen punten. Er beweegt of knippert niets
+// (docs/stijlgids.md, deel 1); Fien en Jef veranderen alleen op het einde van houding.
 
 import { t, type TekstSleutel } from "../content";
 import type { BlokFunctie } from "../blokken/context";
@@ -12,7 +13,7 @@ import { toetsVoorCode, type Rij } from "../logica/indeling";
 import { lichtAanRondes } from "../logica/reeksen";
 import { el } from "../weergave/dom";
 import { fien, jef } from "../weergave/figuren";
-import { schud } from "../blokken/gedeeld";
+import { enterHint } from "../blokken/gedeeld";
 
 const VERDIEPINGEN: Rij[] = ["zolder", "woonkamer", "kelder"];
 const RAMEN_PER_VERDIEPING = 3;
@@ -39,14 +40,14 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
     verdiepingen.set(rij, v);
     huis.append(v);
   }
-  const ballon = el("p", { class: "ballon grote-tekst" });
-  const zwaaiers = el("div", { class: "figuren zwaai", hidden: true }, fien("zwaai", 150), jef("zwaai", 150));
-  const rechts = el("div", { class: "naast-figuren" }, el("div", { class: "met-figuren" }, zwaaiers, ballon));
-  ctx.podium.append(el("div", { class: "blok blok-lichtaan" }, el("h2", {}, blok.titel), el("div", { class: "spel-rij" }, huis, rechts)));
+  const ballon = el("p", { class: "ballon staart-onder grote-tekst" });
+  const zwaaiers = el("div", { class: "figuren" }, fien("blij", 110), jef("blij", 110));
+  const rechts = el("div", { class: "lichtaan-zijde" }, ballon, zwaaiers);
+  ctx.podium.append(el("div", { class: "blok blok-lichtaan" }, el("div", { class: "spel-rij" }, huis, rechts)));
 
   function startRonde(): void {
     const rij = rondes[ronde];
-    for (const [r, v] of verdiepingen) v.classList.toggle("knippert", r === rij);
+    for (const [r, v] of verdiepingen) v.classList.toggle("gevraagd", r === rij);
     const tekst = t("lichtaan.opdracht", { rij: t(`rij.${rij}` as TekstSleutel) });
     ballon.textContent = tekst;
     ctx.zeg(tekst);
@@ -72,7 +73,6 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
       ctx.toetsenbord.flits(e.code, juist);
       if (!juist) {
         ctx.toetsenbord.lichtRijOp(gevraagd);
-        schud(verdiepingen.get(gevraagd)!);
         wacht = true;
         ctx.later(() => (wacht = false), 900);
         return;
@@ -88,12 +88,12 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
         return;
       }
       klaar = true;
-      for (const v of verdiepingen.values()) v.classList.remove("knippert");
+      for (const v of verdiepingen.values()) v.classList.remove("gevraagd");
       for (const lijst of ramen.values()) for (const r of lijst) r.classList.add("aan");
       ballon.textContent = t("lichtaan.klaar");
-      zwaaiers.hidden = false;
+      zwaaiers.replaceChildren(fien("zwaai", 150), jef("zwaai", 150));
       ctx.zeg(t("lichtaan.klaar"));
-      rechts.append(el("p", { class: "hint" }, t("hint.enter")));
+      rechts.append(enterHint(ctx));
     },
   };
 };

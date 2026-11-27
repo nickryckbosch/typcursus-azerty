@@ -3,7 +3,8 @@
 
 import { t } from "../content";
 import type { AfsluiterBlok } from "../content/types";
-import { isLesOpen } from "../logica/voortgang";
+import { heeftExtraOefenen } from "../logica/extraoefenen";
+import { isLesOpen, markeerEindeBereikt } from "../logica/voortgang";
 import { el } from "../weergave/dom";
 import { sterIcoon } from "../weergave/figuren";
 import { metFienEnJef } from "./gedeeld";
@@ -13,6 +14,31 @@ import type { BlokFunctie } from "./context";
 export const afsluiter: BlokFunctie<AfsluiterBlok> = (blok, ctx) => {
   const { app, les } = ctx;
   const resultaat = ctx.sessie.resultaat;
+  // Hier is niets te typen: zonder toetsenbord en handen is er meer plaats.
+  ctx.toonToetsenbord(false);
+
+  // Extra oefenen (K15): een korte afsluiter. Er telt niets mee voor de voortgang.
+  if (ctx.extra) {
+    const nogEens = el("button", { class: "knop knop-hoofd", type: "button", onclick: () => app.naarExtra(les) }, t("extra.nogEens"));
+    const terug = el("button", { class: "knop", type: "button", onclick: () => app.naarStart() }, t("knop.naarLessen"));
+    ctx.podium.append(
+      el(
+        "div",
+        { class: "blok blok-extra-einde" },
+        metFienEnJef("duim", el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, blok.tekst ?? ""))),
+        el("div", { class: "knoppen" }, terug, nogEens),
+      ),
+    );
+    ctx.zeg(blok.tekst ?? "");
+    terug.focus();
+    return {};
+  }
+
+  // Het kind is tot het einde van de les geraakt: vanaf nu is "Extra oefenen" open,
+  // ook als de 90% niet gehaald is.
+  markeerEindeBereikt(app.voortgang, les.id);
+  app.bewaar();
+
   const volgorde = app.lessen.map((l) => l.id);
   const volgendeLes = app.lessen.find((l) => l.id > les.id);
   const volgendeOpen =
@@ -26,8 +52,8 @@ export const afsluiter: BlokFunctie<AfsluiterBlok> = (blok, ctx) => {
   };
 
   const inhoud: Node[] = [];
-  // Niet gehaald: aanmoedigend. Drie sterren: trots. Anders: blij.
-  const uitdrukking = !resultaat ? "blij" : !resultaat.gehaald ? "aanmoedigend" : resultaat.sterren === 3 ? "trots" : "blij";
+  // De houding op het einde: duim omhoog, of aanmoedigen als het doel niet gehaald is.
+  const uitdrukking = resultaat && !resultaat.gehaald ? "aanmoedigend" : "duim";
 
   if (resultaat) {
     const sterren = el(
@@ -48,9 +74,10 @@ export const afsluiter: BlokFunctie<AfsluiterBlok> = (blok, ctx) => {
     inhoud.push(el("p", { class: "grote-tekst" }, blok.tekst ?? ""));
     if (volgendeOpen) knop(t("knop.volgendeLes", { nummer: volgendeLes.id }), () => app.naarLes(volgendeLes));
   }
+  if (heeftExtraOefenen(les)) knop(t("knop.extra"), () => app.naarExtra(les));
   knop(t("knop.naarBegin"), () => app.naarStart());
 
-  ctx.podium.append(el("div", { class: "blok blok-afsluiter" }, metFienEnJef(uitdrukking, ...inhoud), el("div", { class: "knoppen" }, ...knoppen)));
+  ctx.podium.append(el("div", { class: "blok blok-afsluiter" }, metFienEnJef(uitdrukking, el("div", { class: "ballon" }, ...inhoud)), el("div", { class: "knoppen" }, ...knoppen)));
   ctx.zeg(resultaat && !resultaat.gehaald ? t("eind.nietGehaald") : blok.tekst ?? "");
   // Met Enter kies je de eerste knop; met Tab ga je naar de andere.
   knoppen[0].focus();

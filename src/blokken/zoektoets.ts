@@ -10,7 +10,6 @@ import { nieuweOefening, teltAlsTeken, typ, volgendTeken } from "../logica/typen
 import { el } from "../weergave/dom";
 import { tekenTonen } from "../weergave/tekens";
 import type { BlokFunctie } from "./context";
-import { schud } from "./gedeeld";
 
 export const zoekToets: BlokFunctie<ZoekToetsBlok> = (blok, ctx) => {
   const reeks = zoekReeks(blok.toetsen, blok.nadruk, blok.aantal);
@@ -58,11 +57,12 @@ export const zoekToets: BlokFunctie<ZoekToetsBlok> = (blok, ctx) => {
       const { juist, klaar } = typ(oef, e.key, performance.now());
       ctx.toetsenbord.flits(e.code, juist);
       if (!juist) {
-        schud(kaart);
+        // Niets schudt: alleen de juiste toets en vinger lichten sterker op.
+        ctx.toonFout(volgendTeken(oef));
         return;
       }
       if (klaar) {
-        ctx.bewaarAanslagen(oef.aanslagen);
+        ctx.bewaarPoging([oef]);
         ctx.toonHulp(null);
         ctx.later(() => ctx.volgende(), 400);
         return;

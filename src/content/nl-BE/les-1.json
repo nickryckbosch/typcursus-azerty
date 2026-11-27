@@ -1,6 +1,7 @@
 {
   "id": 1,
   "titel": "Fien en Jef wonen op de thuisrij",
+  "begroeting": "Hoi! Vandaag kom je bij ons thuis: op de f en de j.",
   "nieuweToetsen": [
     "f",
     "j"
@@ -86,7 +87,8 @@
         "ff jj ff jj fj jf",
         "fj jf fj jf fj jf",
         "f j ff jj fj"
-      ]
+      ],
+      "tip": "Je wijsvingers liggen op de bultjes. Voel je ze?"
     },
     {
       "type": "spel",
@@ -98,7 +100,8 @@
         "j",
         " "
       ],
-      "beschrijving": "Fien en Jef staan aan de ene kant van een beek, hun huis staat aan de overkant. In de beek liggen 12 stapstenen. Op elke steen staat een f of een j; om de drie stenen ligt een lange platte steen voor de spatie. Een juiste toets: Fien en Jef springen samen naar die steen. Een foute toets: de steen wiebelt even en licht de juiste vinger op, er valt niemand in het water. Na 12 stenen zijn ze aan de overkant en komt er een nieuwe beek. Drie beken (36 sprongen). Geen tijd, geen punten; op het einde: \"Droge voeten!\""
+      "beschrijving": "Bovenaan staat een vaste prent: Fien en Jef aan de ene kant van een beek, hun huis aan de overkant. De prent verandert niet tijdens het spel. Onder de prent ligt een rij van 12 stenen. Op elke steen staat een f of een j; elke derde steen is breder en is voor de spatie. De steen die aan de beurt is, is groter en heeft een blauwe rand. Een juiste toets: de steen wordt grijs met een vinkje en de volgende steen is aan de beurt. Een foute toets: er beweegt niets, alleen de juiste toets en de juiste vinger lichten op. Na 12 stenen komt er een nieuwe rij. Drie beken (36 toetsen). Fien en Jef staan stil; pas op het einde steken ze hun duim op: \"Droge voeten!\" Geen tijd, geen punten.",
+      "tekst": "Help Fien en Jef naar huis. Typ de letter op de steen."
     },
     {
       "type": "reeks",
@@ -109,7 +112,8 @@
         "fjf jfj fjf jfj",
         "ffj jjf ffj jjf",
         "fj jf fjj"
-      ]
+      ],
+      "tip": "Kijk naar het scherm. Je vingers kennen de weg."
     },
     {
       "type": "eindoefening",
@@ -123,7 +127,8 @@
       ],
       "regelsKort": [
         "fj jf ff jj fjf"
-      ]
+      ],
+      "tip": "Rustig aan. Juist is beter dan snel."
     },
     {
       "type": "afsluiter",
