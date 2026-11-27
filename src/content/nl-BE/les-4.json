@@ -88,7 +88,7 @@
       "type": "reeks",
       "titel": "Oefenregels 1",
       "duurMinuten": 3,
-      "tekst": "Typ wat je ziet. Na elke toets terug naar huis.",
+      "tekst": "Typ wat je ziet. Na elke toets terug naar je plek.",
       "regels": [
         "ss ll sl ls sl ls",
         "sd lk sd lk sf lj",
@@ -101,6 +101,8 @@
       "type": "spel",
       "titel": "Met de slee naar beneden",
       "spel": "slee",
+      "doel": "Jef gaat met de slee naar beneden, langs tien vlaggetjes. Elk goed woord brengt hem een vlaggetje verder.",
+      "tekst": "Typ het woord dat je ziet.",
       "duurMinuten": 3,
       "tekens": [],
       "woorden": [

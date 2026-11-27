@@ -16,7 +16,7 @@
     " "
   ],
   "doelen": [
-    "Ik typ e en i: mijn middelvinger gaat even naar de zolder en meteen terug naar huis.",
+    "Ik typ e en i: mijn middelvinger gaat even naar de zolder en meteen terug naar zijn plek.",
     "Ik typ ij als een i en een j.",
     "Ik typ mijn eerste echte woorden."
   ],
@@ -33,7 +33,7 @@
       {
         "titel": "Naar de zolder en terug",
         "duurMinuten": 3,
-        "leerkracht": "\"Vandaag gaan je middelvingers voor het eerst naar de zolder. Boven de D woont de E, boven de K woont de I. Je vinger gaat naar boven, een klein beetje naar links, en meteen terug naar huis.\" Doe het voor met je hand in de lucht. Laat het oefenbord openen en zeg traag op de maat: \"d - e - d\", \"k - i - k\". \"Fien en Jef blijven thuis, alleen de middelvinger gaat op reis.\"",
+        "leerkracht": "\"Vandaag gaan je middelvingers voor het eerst naar de zolder. Boven de D woont de E, boven de K woont de I. Je vinger gaat naar boven, een klein beetje naar links, en meteen terug naar zijn plek in de woonkamer.\" Doe het voor met je hand in de lucht. Laat het oefenbord openen en zeg traag op de maat: \"d - e - d\", \"k - i - k\". \"Fien en Jef blijven thuis, alleen de middelvinger gaat op reis.\"",
         "kinderen": "Typen d, e, d en k, i, k op de maat. Ze voelen dat de wijsvingers op de bultjes blijven liggen terwijl de middelvinger naar boven gaat."
       },
       {
@@ -61,7 +61,7 @@
       "type": "intro",
       "titel": "Naar de zolder",
       "duurMinuten": 1,
-      "tekst": "Vandaag gaan je middelvingers naar de zolder! Daar wonen de E en de I. Even naar boven, en meteen terug naar huis. Weet je wat? Nu kan je echte woorden typen!"
+      "tekst": "Vandaag gaan je middelvingers naar de zolder! Daar wonen de E en de I. Even naar boven, en meteen terug naar je plek in de woonkamer. Weet je wat? Nu kan je echte woorden typen!"
     },
     {
       "type": "zoek-toets",
@@ -80,7 +80,7 @@
         "i"
       ],
       "aantal": 20,
-      "tekst": "Druk op de letter die je ziet. Is het een letter van de zolder, ga dan meteen terug naar huis."
+      "tekst": "Druk op de letter die je ziet. Is het een letter van de zolder, ga dan meteen terug naar je plek."
     },
     {
       "type": "reeks",
@@ -99,6 +99,8 @@
       "type": "spel",
       "titel": "Keien voor de dijk",
       "spel": "dijk",
+      "doel": "Na de regen staat de beek hoog. Elk goed woord is een kei voor de dijk. Bij tien keien is het huis veilig.",
+      "tekst": "Typ het woord dat je ziet.",
       "duurMinuten": 3,
       "tekens": [],
       "woorden": [
@@ -147,7 +149,7 @@
         "ei ik je die",
         "kijk dijk idee"
       ],
-      "tip": "Na de zolder altijd terug naar huis."
+      "tip": "Na de zolder altijd terug naar je plek."
     },
     {
       "type": "afsluiter",

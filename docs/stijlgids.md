@@ -1,6 +1,6 @@
 # Stijlgids
 
-De ontwerpregels voor elk scherm van de typcursus (beslissingen K15 tot K19). Een nieuw scherm volgt deze regels. De waarden staan op een plaats in de code: bovenaan `src/stijl.css`, als CSS-variabelen. Pas je daar een kleur aan, dan verandert ze overal.
+De ontwerpregels voor elk scherm van de typcursus (beslissingen K15 tot K21 en K26). Een nieuw scherm volgt deze regels. De waarden staan op een plaats in de code: bovenaan `src/stijl.css`, als CSS-variabelen. Pas je daar een kleur aan, dan verandert ze overal.
 
 Bij elke regel staat waarop ze steunt:
 
@@ -163,3 +163,24 @@ Het vroegere geel `#FFD34D` haalde maar 13 tegenover het oranje van de middelvin
 - De tekening staat in `src/weergave/lamp.ts`.
 
 Waarop steunt dit? **Eigen keuze**, te toetsen door een kind de oefening zonder uitleg te laten doen.
+
+## 9. Opdrachten en teksten (K26)
+
+Elke tekst die een kind leest, volgt deze regels. Ze gelden ook voor elke nieuwe les en elk nieuw spel.
+
+- **Elke oefening en elk spel heeft een opdracht:** wat doe je (welke toets, welke rij). Hoogstens drie korte zinnen. In de lesdata is dat het veld `tekst`.
+- **Elk spel heeft een doelzin** (veld `doel`): waar werk je naartoe, en wat doet een goede toets. Bijvoorbeeld: "Het wordt donker. Doe jij de lichten aan? Elke goede toets laat een raam branden." De doelzin staat het hele spel in de tekstballon van Fien en Jef (`oefenscherm(ctx, { doel })`), zodat het kind kan teruglezen.
+- **Wat de tekst belooft, moet je zien gebeuren.** Zegt het slot "We zijn thuis", dan toont de prent Fien en Jef bij hun huis. Kan het beeld dat (nog) niet, dan past de tekst zich aan.
+- **Een woord betekent altijd hetzelfde:**
+  - **het huis** is het hele toetsenbord;
+  - **de zolder, de woonkamer en de kelder** zijn de bovenste, middelste en onderste rij;
+  - **je plek**: elke vinger heeft een eigen plek in de woonkamer. Na elke toets gaat de vinger "terug naar zijn plek". Schrijf nooit "terug naar huis": wie op de zolder is, is nog altijd in het huis;
+  - **thuis** alleen in "Fien en Jef thuis": de wijsvingers op de F en de J, zoals in de startzin. In een verhaal (het dorp, de egel) betekent huis gewoon een huis.
+- **Een rij krijgt de eerste keren in een les haar plaats erbij:** "de woonkamer, de middelste rij".
+- **De laatste zin van een intro zegt wat de les brengt** ("Vandaag leer je de f en de j."), geen vraag zonder antwoord.
+- **Woorden die een kind van 9 kent**, korte zinnen, Vlaams Nederlands, zonder klemtoonaccenten.
+
+**Controle:** `tests/inhoud.test.ts` faalt als een oefening geen opdracht heeft, als een spel geen doelzin heeft, als een opdracht of doelzin langer is dan drie zinnen, of als ergens "terug naar huis" staat. De testlijst vraagt bij elk spel: "Kan iemand zonder uitleg zeggen wat hij moet doen, en waar hij naartoe werkt?"
+
+**Waarop steunt dit? Eigen keuze**, na de vaststelling bij drie testers op 27 november 2026: Nick, zijn dochter van 11 en een volwassene zonder uitleg liepen vast op een opdracht. Die laatste vroeg bij "Over de beek": "Hoe ben ik aan het huis geraakt?" Het past bij K20 (woord en beeld kloppen). Uitwerking in projectdocument 21.
+

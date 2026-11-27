@@ -40,6 +40,9 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 - [ ] **Toetsenbordcheck:** zegt de app dat je toetsenbord klopt? Zet de Chromebook daarna eens op een andere invoermethode (bijvoorbeeld Engels) en doe les 0 opnieuw: verschijnt de melding "Vraag even hulp aan je juf of meester", met uitleg voor de leerkracht? Zet het daarna terug op Belgisch.
 - [ ] **Duim op de spatiebalk:** staat de lamp van bij het begin in beeld? Gaat ze duidelijk aan, en kan je pas drukken als ze brandt? Begrijpt een kind zonder uitleg wat het moet doen?
 - [ ] **Licht aan in het huis:** wordt het woord van de juiste verdieping donker (zonder te knipperen)? Zijn de woorden links van het huis goed leesbaar? Licht bij een verkeerde rij de juiste rij op het toetsenbord op? Branden na 9 rondes alle ramen?
+- [ ] **Licht aan, doelzin:** staat boven Fien en Jef "Het wordt donker. Doe jij de lichten aan? Elke goede toets laat een raam branden."? Kan iemand zonder uitleg zeggen wat hij moet doen, en waar hij naartoe werkt?
+- [ ] **Over de beek, doelzin en opdracht:** staat de doelzin boven de opdracht, en is de opdracht even groot als op de andere schermen? Kan iemand zonder uitleg zeggen waar hij naartoe werkt?
+- [ ] **Oefenbord:** staat elke letter netjes in de kaart, ook de p, g en j, zonder de onderrand te raken? Houdt de kaart dezelfde maat bij "spatie"?
 - [ ] **Licht aan, hulp:** licht in de eerste drie rondes de juiste rij op het toetsenbord op, met dezelfde rand rond het woord in het huis? Zegt de opdracht "de middelste rij"? Verschijnt de hulp later alleen na een fout of na even wachten?
 - [ ] **Klaar voor de start:** is meteen duidelijk dat je op de spatiebalk moet drukken als de lamp aangaat? Telt de spatiebalk telkens mee (3 keer)?
 - [ ] **Te vroeg drukken** bij beide lampoefeningen: verschijnt "Wacht op de lamp." onder de lamp, zonder dat er iets verspringt? Verdwijnt de zin als de lamp aangaat?

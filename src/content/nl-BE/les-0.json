@@ -33,7 +33,7 @@
       {
         "titel": "Het toetsenbord is een huis",
         "duurMinuten": 3,
-        "leerkracht": "Wijs het huis op het bord aan. \"Het toetsenbord is een huis met drie verdiepingen. Bovenaan de zolder, in het midden de woonkamer, onderaan de kelder. In de woonkamer wonen je vingers. Ze gaan soms eens naar de zolder of de kelder, maar ze komen altijd terug naar huis.\" Laat de kinderen de Chromebook openen (inloggen hoeft nog niet). Roep: \"Hand op de zolder! Op de kelder! Op de woonkamer!\" Wijs telkens de juiste verdieping op het bord aan.",
+        "leerkracht": "Wijs het huis op het bord aan. \"Het toetsenbord is een huis met drie verdiepingen. Bovenaan de zolder, in het midden de woonkamer, onderaan de kelder. In de woonkamer wonen je vingers. Ze gaan soms eens naar de zolder of de kelder, maar ze komen altijd terug naar hun plek in de woonkamer.\" Laat de kinderen de Chromebook openen (inloggen hoeft nog niet). Roep: \"Hand op de zolder! Op de kelder! Op de woonkamer!\" Wijs telkens de juiste verdieping op het bord aan.",
         "kinderen": "Leggen een vlakke hand op de juiste rij van hun eigen toetsenbord. Wie twijfelt, kijkt naar het bord."
       },
       {
@@ -56,7 +56,7 @@
       "titel": "Fien en Jef stellen hun huis voor",
       "prent": "huis",
       "duurMinuten": 1,
-      "tekst": "Hallo! Wij zijn Fien en Jef. Dit is ons huis: het toetsenbord. Het heeft een zolder, een woonkamer en een kelder. In de woonkamer wonen je vingers. Kom je mee kijken?"
+      "tekst": "Hallo! Wij zijn Fien en Jef. Het toetsenbord is ons huis. De bovenste rij is de zolder, de middelste rij de woonkamer en de onderste rij de kelder. In de woonkamer wonen je vingers. Vandaag leer je ons huis kennen."
     },
     {
       "type": "toetsenbordcheck",
@@ -80,6 +80,7 @@
       "type": "spel",
       "titel": "Licht aan in het huis",
       "spel": "licht-aan",
+      "doel": "Het wordt donker. Doe jij de lichten aan? Elke goede toets laat een raam branden.",
       "duurMinuten": 2,
       "rijen": [
         "zolder",
@@ -103,7 +104,7 @@
       "type": "afsluiter",
       "titel": "Goed gedaan",
       "duurMinuten": 0.5,
-      "tekst": "Goed gedaan! Je kent ons huis. Straks leer je waar wij wonen."
+      "tekst": "Goed gedaan! Je kent ons huis. In les 1 leer je op welke toetsen wij wonen."
     }
   ],
   "groepjes": [],

@@ -43,6 +43,11 @@ export interface ReeksBlok extends BlokBasis {
 export interface SpelBlok extends BlokBasis {
   type: "spel";
   spel: string;
+  /**
+   * De doelzin (K26): waar werkt het kind naartoe, en wat doet een goede toets.
+   * Staat het hele spel in de tekstballon van Fien en Jef.
+   */
+  doel: string;
   tekens: string[];
   woorden?: string[];
   rijen?: ("zolder" | "woonkamer" | "kelder")[];

@@ -136,7 +136,9 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
   const { svg: huis, ramen, woorden } = maakHuis(blok.titel);
 
   // Het huis staat in het midden in zijn vaste zone, Fien en Jef staan links ernaast.
-  const scherm = oefenscherm(ctx, { figuren: "blij", klasse: "blok-lichtaan" });
+  // Boven Fien en Jef staat de doelzin (K26): het kind weet waarom het de toetsen indrukt.
+  const scherm = oefenscherm(ctx, { figuren: "blij", klasse: "blok-lichtaan", doel: blok.doel });
+  ctx.zeg(blok.doel);
   scherm.veld.append(huis);
 
   function toonHulp(aan: boolean): void {

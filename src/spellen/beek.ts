@@ -62,12 +62,15 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
     el(
       "section",
       { class: "kaart blok-beek" },
-      el("div", { class: "beek-boven" }, el("p", { class: "opdracht" }, opdracht), prent, einde),
+      // De doelzin (K26) en daaronder de opdracht, even groot als op de andere
+      // oefenschermen (K20). Fien en Jef staan in de prent, dus de doelzin staat
+      // hier niet in een tekstballon; dat volgt met het spelsjabloon (K22).
+      el("div", { class: "beek-boven" }, el("p", { class: "doel-regel" }, blok.doel), el("p", { class: "opdracht-tekst" }, opdracht), prent, einde),
       el("div", { class: "beek-onder" }, rij),
       voortgang.element,
     ),
   );
-  ctx.zeg(opdracht);
+  ctx.zeg(`${blok.doel} ${opdracht}`);
 
   function tekenStenen(): void {
     rij.replaceChildren(

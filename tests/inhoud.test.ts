@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { DELEN, LESSEN } from "../src/content";
+import { DELEN, LESSEN, t } from "../src/content";
+import tekstenNl from "../src/content/nl-BE/teksten.json";
 import { controleerRegel } from "../src/logica/regelcheck";
 
 // Dezelfde controle als in docs/11-lessen-data.md: elk item bevat alleen
@@ -71,5 +72,41 @@ describe("lesinhoud", () => {
       const eind = les.online.find((b) => b.type === "eindoefening");
       expect(eind && "doelNauwkeurigheid" in eind ? eind.doelNauwkeurigheid : null).toBe(0.9);
     }
+  });
+
+  // K26 (projectdocument 14, docs/stijlgids.md deel "Opdrachten en teksten"):
+  // elke oefening zegt wat je doet, elk spel zegt waar je naartoe werkt.
+  describe("opdrachten en doelzinnen (K26)", () => {
+    const zinnen = (tekst: string) => tekst.split(/(?<=[.!?])\s+/).filter((z) => z.trim() !== "");
+
+    it("elke oefening en elk spel heeft een korte opdracht", () => {
+      for (const les of LESSEN) {
+        for (const blok of les.online) {
+          if (!["zoek-toets", "reeks", "spel", "eindoefening"].includes(blok.type)) continue;
+          // Twee blokken halen hun opdracht uit teksten.json: het spel "Licht aan"
+          // (de opdracht verandert per ronde) en "Klaar voor de start".
+          let opdracht = blok.tekst;
+          if (blok.type === "spel" && blok.spel === "licht-aan") opdracht = t("lichtaan.opdracht", { rij: "woonkamer" });
+          if (blok.type === "eindoefening" && blok.soort === "houding") opdracht = t("houding.opdracht");
+          expect(opdracht, `les ${les.id}: ${blok.titel} heeft geen opdracht`).toBeTruthy();
+          expect(zinnen(opdracht!).length, `les ${les.id}: ${blok.titel}: hoogstens drie korte zinnen`).toBeLessThanOrEqual(3);
+        }
+      }
+    });
+
+    it("elk spel heeft een doelzin: waar werk je naartoe", () => {
+      for (const les of LESSEN) {
+        for (const blok of les.online) {
+          if (blok.type !== "spel") continue;
+          expect(blok.doel?.trim(), `les ${les.id}: ${blok.titel} heeft geen doelzin`).toBeTruthy();
+          expect(zinnen(blok.doel).length, `les ${les.id}: ${blok.titel}: doelzin te lang`).toBeLessThanOrEqual(3);
+        }
+      }
+    });
+
+    it("gebruikt nooit \"terug naar huis\": het huis is het hele toetsenbord", () => {
+      const alles = JSON.stringify(LESSEN) + JSON.stringify(tekstenNl);
+      expect(alles).not.toMatch(/terug naar huis/i);
+    });
   });
 });

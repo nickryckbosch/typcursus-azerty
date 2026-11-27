@@ -84,6 +84,11 @@ export interface OefenschermOpties {
   figuren?: Uitdrukking;
   /** extra klasse op de kaart, voor eigen opmaak van een blok */
   klasse?: string;
+  /**
+   * De doelzin van een spel (K26), in een tekstballon boven Fien en Jef. Hij
+   * blijft het hele spel staan: het kind kan altijd teruglezen waar het naartoe werkt.
+   */
+  doel?: string;
 }
 
 export interface Oefenscherm {
@@ -102,7 +107,12 @@ export interface Oefenscherm {
 
 export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): Oefenscherm {
   const opdracht = el("p", { class: "opdracht-tekst" });
-  const figuren = el("div", { class: "zone-figuren" });
+  // Met een doelzin: de tekstballon bovenaan, Fien en Jef eronder (zelfde opbouw
+  // als de tip naast de oefenregels). Zonder doelzin staan de figuren alleen.
+  const figurenRij = el("div", { class: opties.doel ? "figuren-rij" : "zone-figuren" });
+  const figuren = opties.doel
+    ? el("div", { class: "zone-figuren met-doel" }, el("p", { class: "ballon staart-onder doel-ballon" }, opties.doel), figurenRij)
+    : figurenRij;
   const veld = el("div", { class: "zone-veld" });
   let enterActie = () => ctx.volgende();
   const [voor, na] = t("hint.enter").split("{toets}");
@@ -138,7 +148,7 @@ export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): O
       if (voorlezen) ctx.zeg(tekst);
     },
     zetFiguren(uitdrukking) {
-      figuren.replaceChildren(fien(uitdrukking), jef(uitdrukking));
+      figurenRij.replaceChildren(fien(uitdrukking), jef(uitdrukking));
     },
     toonEnter(actie) {
       if (actie) enterActie = actie;
