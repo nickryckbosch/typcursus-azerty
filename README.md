@@ -1,6 +1,6 @@
 # Typcursus AZERTY
 
-Gratis, open source typcursus op **Belgisch AZERTY** voor kinderen vanaf het vierde leerjaar (9 a 10 jaar). Kinderen leren blind typen met tien vingers, samen met Fien (die op de F woont) en Jef (die op de J woont).
+Gratis typcursus op **Belgisch AZERTY** voor kinderen vanaf het vierde leerjaar (9 a 10 jaar). Kinderen leren blind typen met tien vingers, samen met Fien (die op de F woont) en Jef (die op de J woont).
 
 - Werkt in de browser, ook op Chromebooks. Niets installeren, geen account.
 - Geen tracking, geen cookies, geen reclame, geen CDN's. De lettertypes zitten in de cursus zelf. De voortgang blijft op het toestel zelf.
@@ -60,11 +60,14 @@ src/
 tests/                 de tests
 ```
 
-## Bijdragen
+## Meedenken
 
-Bijdragen zijn welkom, ook van leerkrachten die niet programmeren.
+Voorlopig worden er geen bijdragen (pull requests) van anderen aanvaard: zie [Licentie](#licentie).
 
-- **Een fout of een idee?** Maak een issue aan op GitHub en beschrijf wat je zag (welke les, welke stap, welk toestel).
+- **Een fout of een idee?** Maak een issue aan op GitHub en beschrijf wat je zag (welke les, welke stap, welk toestel). Ideeen en meldingen zijn welkom.
+
+Werkafspraken voor wie met toestemming aan de cursus werkt:
+
 - **Teksten of oefeningen aanpassen?** Die staan in `src/content/nl-BE/`. Je hoeft daarvoor geen code te kennen. Elk item mag alleen letters bevatten die het kind al geleerd heeft, hoogstens vier aanslagen na elkaar met dezelfde vinger en hoogstens zeven letters na elkaar met dezelfde hand; de test `tests/inhoud.test.ts` controleert dat.
 - **Code?** Houd het eenvoudig en leesbaar. Schrijf tests voor nieuwe logica in `src/logica/`, en voer `npm test` uit voor je een pull request maakt.
 - **Een Franstalige versie** komt in `src/content/fr-BE/`, met dezelfde bestanden.
@@ -79,6 +82,8 @@ De cursus gebruikt [Andika](https://software.sil.org/andika/) (SIL International
 
 ## Licentie
 
-[AGPL-3.0](LICENSE). Je mag de cursus gratis gebruiken, aanpassen en verspreiden. Wie een aangepaste versie online zet, moet de broncode daarvan ook delen.
+© 2026 Nick Ryckbosch. **Alle rechten voorbehouden** (zie [LICENSE](LICENSE)). Je mag de code bekijken, maar niet kopieren, gebruiken, aanpassen of verspreiden zonder schriftelijke toestemming. Dat geldt voor de code, de lesinhoud, de teksten en de prenten. De lettertypes vallen onder hun eigen licentie (zie hieronder bij Lettertypes).
+
+Versies van voor 27 november 2026 werden verspreid onder AGPL-3.0 en blijven onder die licentie vallen. Waarom de licentie veranderde: zie punt 19 in [docs/beslissingen.md](docs/beslissingen.md).
 
 Er is geen code of data van andere projecten (zoals Keybr) hergebruikt.
