@@ -59,7 +59,7 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 - [ ] Doe het nog eens ("Nog een keer extra oefenen"): zijn het andere regels?
 - [ ] Na de 4 regels: een korte afsluiter van Fien en Jef, zonder sterren.
 - [ ] Ga terug naar het startscherm: de sterren en het slot van les 2 zijn niet veranderd.
-- [ ] Leerkrachtscherm: zijn de aanslagen van extra oefenen bijgeteld bij "Toetsen"?
+- [ ] Leerkrachtscherm: is het aantal bij "Toetsen" gestegen na extra oefenen?
 - [ ] "Extra oefenen" staat alleen bij een les die je tot het einde gedaan hebt. (Les 2 tot 5 staan nog op "Komt binnenkort".)
 
 ## Algemeen
@@ -68,7 +68,10 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 - [ ] Kan je alles met het toetsenbord doen (Enter om verder te gaan, Tab om een andere knop te kiezen, Esc om terug te gaan)?
 - [ ] Zet de hoofdletters aan (Alt + zoektoets): verschijnt er een melding?
 - [ ] **Oefenbord** (kleine knop bovenaan het startscherm): toont het de gedrukte toets groot, in de kleur van de vinger, met de vinger op de hand?
-- [ ] **Leerkrachtscherm (Ctrl + Shift + L):** zie je de voortgang en de toetsen met de meeste fouten? Kloppen de lesfiches? Probeer de instelling "Toon de hulp pas na een fout": verschijnt de hulp in de oefenregels dan pas na een fout of na 3 seconden? Zet ze daarna terug.
+- [ ] **Leerkrachtscherm (Ctrl + Shift + L):** zie je de voortgang per les? Kloppen de lesfiches?
+- [ ] **Leerkrachtscherm, tabel "Toetsen":** doe eerst de oefenregels van les 1 en typ expres een paar keer j waar f moet komen, en een paar keer g waar f moet komen. Staat er dan bij f: het aantal, het aantal fouten, en als meest getypte verkeerde toets "j ... (spiegelfout)" of "g ... (buurfout)"? Druk op een letter drie keer verkeerd: telt dat als een fout? Wacht bij een toets langer dan 4 seconden: komt er een lange pauze bij? Staat er een tijd (mediaan) in milliseconden?
+- [ ] Ziet het kind nergens cijfers per toets of een snelheid?
+- [ ] **90%-regel:** maak in de eindoefening van les 1 precies 4 fouten (een keer verkeerd drukken op 4 letters): 1 ster en les gelukt. Met 5 fouten: geen ster. Probeer de instelling "Toon de hulp pas na een fout": verschijnt de hulp in de oefenregels dan pas na een fout of na 3 seconden? Zet ze daarna terug.
 - [ ] Sluit het tabblad en open de link opnieuw: is de voortgang bewaard?
 - [ ] Stop midden in les 1 (knop "Lessen") en open de les opnieuw: vraagt de app of je wil verdergaan?
 

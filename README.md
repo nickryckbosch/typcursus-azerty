@@ -13,7 +13,7 @@ Gratis, open source typcursus op **Belgisch AZERTY** voor kinderen vanaf het vie
 - Open de cursus op de Chromebook en begin bij les 0. Les 0 en les 1 doe je in dezelfde eerste sessie.
 - Het klassikale deel van elke les (wat jij zegt en doet, wat de kinderen doen) staat in de app zelf. Druk op **Ctrl + Shift + L** om het leerkrachtscherm te openen. Daar vind je ook:
   - of het toestel op Belgisch AZERTY staat, en hoe je dat aanpast;
-  - de voortgang per les en welke toetsen moeilijk zijn;
+  - de voortgang per les, en per toets het aantal fouten, de toets die het kind het vaakst verkeerd typt (met spiegelfout of buurfout), de tijd en de lange pauzes. Het kind ziet die cijfers nooit;
   - de instelling voor de hulp op het schermtoetsenbord (standaard altijd zichtbaar);
   - een knop om alle lessen open te zetten (om te testen);
   - een knop om de voortgang te wissen (bijvoorbeeld als een ander kind de Chromebook krijgt).

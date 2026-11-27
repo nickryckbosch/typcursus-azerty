@@ -65,24 +65,69 @@ Beslist met Nick (27 november 2026):
   - Yechiam, Erev, Yehene en Gopher (2003), Human Factors: na een typcursus vallen mensen terug op kijken. Daarom bouwen we de hulp later wel af.
 - **Tegen:** er is geen studie bij kinderen over schermtoetsenborden. Hoe lang de hulp zichtbaar blijft, is een eigen keuze, te toetsen in de klastest. Het risico is dat een kind naar het schermtoetsenbord blijft kijken in plaats van te voelen.
 
-## 7. Nauwkeurigheid en snelheid
+## 7. Nauwkeurigheid, snelheid en metingen per toets
 
-- **Nauwkeurigheid** = juiste aanslagen gedeeld door alle aanslagen. Omdat de cursor wacht, zijn er altijd evenveel juiste aanslagen als tekens; elke fout verlaagt het percentage.
-- **Snelheid** in woorden per minuut (5 tekens = 1 woord), gemeten per regel (de pauze tussen twee regels telt niet). Ze wordt bewaard en staat op het leerkrachtscherm, maar het kind ziet ze nooit.
-- **Gemiddelde tijd per toets:** de tijd sinds de vorige aanslag, alleen voor juiste aanslagen. Pauzes langer dan 5 seconden tellen niet mee.
-- **Fouten worden geteld bij de toets die moest komen:** typt het kind j waar f moest staan, dan is dat een fout op de f. Zo zie je welke toetsen moeilijk zijn.
+De volledige uitleg staat in projectdocument 12 ("Metingen per toets") van het claude.ai-project. De code staat in `src/logica/metingen.ts` en `src/logica/foutsoort.ts`; alle drempels staan in `src/logica/instellingen.ts`.
+
+**Definities**
+
+- **Positie:** elk teken in de oefentekst. **Meteen juist:** op die positie meteen de juiste toets.
+- **Fout:** minstens een verkeerde toets op die positie. Een positie telt hoogstens een fout, hoe vaak het kind ook verkeerd drukt. De app onthoudt wel elke verkeerde toets die getypt werd.
+  - Voor: past bij de cursor die wacht; drie keer mis drukken op een letter is een moeilijkheid, geen drie.
+  - Tegen: een kind dat wild drukt, lijkt beter dan het is. Daarom bewaren we ook welke toetsen het typte.
+  - Steunt op: **andere cursussen** (Keybr telt zo) en **eigen keuze**.
+- **Nauwkeurigheid van een oefening** = posities meteen juist / posities. Dit is het getal voor de 90%-regel en de sterren, ook bij de korte eindoefening.
+  - Vroeger was het: juiste aanslagen / alle aanslagen. Voor een kind dat per fout een keer verkeerd drukt, verandert er bijna niets: in de eindoefening van les 1 (40 posities) mag het in beide gevallen 4 fouten maken. Een kind dat op een letter meerdere keren verkeerd drukt, wordt nu minder zwaar gestraft.
+- **Snelheid** in woorden per minuut (5 tekens = 1 woord), gemeten per regel (de pauze tussen twee regels telt niet). Ze wordt bewaard en staat op het leerkrachtscherm, maar het kind ziet ze nooit, en ze beslist niets. Steunt op: **eigen keuze** (eerst juist, dan vlot).
+
+**Tijd per toets**
+
+- **Tijd van een aanslag** = van het indrukken van de vorige toets tot het indrukken van deze toets. Ze telt alleen mee bij een "propere" aanslag:
+  1. deze positie was meteen juist;
+  2. de vorige positie was ook meteen juist (na een fout vertraagt iedereen);
+  3. het is niet de eerste positie van een regel;
+  4. de vorige toets was niet dezelfde toets (zoals in "fff"): zo'n herhaling gaat bij beginners veel sneller en vertekent het beeld;
+  5. de tijd ligt tussen 40 en 4000 ms.
+- **Lange pauze:** een propere aanslag boven 4000 ms telt niet voor de tijd, maar wordt apart geteld. Het beslist niets; in de klastest kijken we of het iets zegt (zoeken, kijken naar de handen, of gewoon afleiding).
+- **Mediaan, niet het gemiddelde:** per toets bewaren we de middelste tijd. Een paar lange pauzes trekken een gemiddelde te hoog. Over meerdere pogingen heen toont het leerkrachtscherm de mediaan van de medianen per poging.
+- **Vergelijken met het kind zelf:** de tijd zegt iets over een toets tegenover de andere toetsen van hetzelfde kind, niet tegenover een norm.
+- **Waarop steunt dit?**
+  - Tijd alleen bij propere aanslagen, herhalingen weg, vergelijken met het kind zelf: **onderzoek** (Van den Bergh, Schmittmann, Hofman en Van der Maas, 2015, Tracing the development of typewriting skills in an adaptive e-learning environment, Perceptual and Motor Skills 121(3)).
+  - De ondergrens van 40 ms: **andere cursussen** (Keybr gebruikt ze ook).
+  - De precieze grenzen (40 en 4000 ms) en de mediaan: **eigen keuze**, te toetsen in de klastest. Een kind van 9 jaar zoekt in les 1 soms langer dan 4 seconden; daarom tellen we die pauzes apart.
+- **Tegen:** er blijven minder tijdmetingen over, zeker in les 1 met veel "fff jjj".
+
+**Soort fout**
+
+- Uit de verkeerde toets leidt de app het soort fout af:
+  - **spiegelfout:** dezelfde vinger op dezelfde plaats, maar met de andere hand (bijvoorbeeld j in plaats van f). Tip voor het kind: "andere hand";
+  - **buurfout:** een toets die er fysiek direct naast, boven of onder ligt (bijvoorbeeld g in plaats van f). Tip: "terug naar huis";
+  - **andere fout:** de rest.
+- De paren g-h, t-y en b-n zijn allebei; het leerkrachtscherm zegt dan "spiegelfout en buurfout".
+- Alles wordt afgeleid uit de fysieke ligging van de toetsen (via `event.code`), niet uit een lijst met de hand. De rijen verspringen, dus een toets raakt twee toetsen in de rij erboven en twee in de rij eronder. De plaats van de spatiebalk (onder x tot ;) is een benadering.
+- Steunt op: **onderzoek** (Grudin, 1983, Error patterns in novice and skilled transcription typing): buurfouten komen het meest voor, daarna spiegelfouten.
+- Wat de app niet kan meten: met welke vinger een kind typt. Dat blijft observatie door de leerkracht.
+
+**Wat we bewaren**
+
+- Per poging van een oefening (oefenregels, eindoefening, zoek de toets, spel, extra oefenen) een samenvatting: les, blok, datum, posities, meteen juist, en per toets (ook de spatie) aantal, fouten, verkeerde toetsen, tijdmediaan, aantal tijdmetingen en lange pauzes. Geen losse aanslagen en geen getypte tekst: dat is genoeg, en beter voor de privacy.
+- Een poging wordt bewaard als de oefening af is. Stopt een kind midden in een oefening, dan wordt die poging niet bewaard.
+- Extra oefenen bewaart ook (blok "extra"), zonder invloed op sterren of slot.
+- **Begrenzing:** de laatste 300 pogingen blijven volledig bewaard. Oudere pogingen worden opgeteld per toets (aantal, fouten, verkeerde toetsen, lange pauzes) en daarna weggegooid; hun tijden vallen weg. Een poging is ongeveer 1 kB, dus 300 pogingen blijven ruim onder de grens van localStorage (ongeveer 5 MB), en ze zijn goed voor ongeveer 60 keer een hele les. Steunt op: **eigen keuze**.
+- **Niets hiervan ziet het kind.** Het leerkrachtscherm toont per toets: aantal, fouten, de meest getypte verkeerde toets (met spiegelfout of buurfout), tijdmediaan en lange pauzes.
 
 ## 8. Voortgang en opslag
 
-- **localStorage**, onder de sleutel `typcursus-azerty`, met een versienummer (nu 1). Elke lees- en schrijfactie zit in try/catch: lukt het niet, dan werkt de app gewoon verder, alleen zonder te bewaren.
-- **Velden die later bijkwamen** (zoals `bezigBij`, `eindeBereikt` en de instelling voor de hulp) krijgen een standaardwaarde als ze ontbreken; het versienummer blijft 1.
+- **localStorage**, onder de sleutel `typcursus-azerty`, met een versienummer (nu 2). Elke lees- en schrijfactie zit in try/catch: lukt het niet, dan werkt de app gewoon verder, alleen zonder te bewaren.
+- **Versie 2 (metingen per toets):** de oude tellingen per toets zijn vervangen door samenvattingen per poging (zie punt 7). Omdat de betekenis van de cijfers verandert (een fout telt nu een keer per positie, de tijd is een mediaan met andere regels), gaat het versienummer omhoog. Voortgang van versie 1 wordt bij het lezen omgezet (`zetOm` in `src/logica/opslag.ts`): lessen, sterren, instellingen en de toetsenbordstatus blijven zoals ze zijn; de oude tellingen per toets worden tellingen van "oudere pogingen" (het aantal fouten is daar een benadering); de oude gemiddelde tijden vallen weg, want ze zijn anders gemeten. Er gaat geen voortgang verloren.
+- **Velden die later bijkwamen** (zoals `bezigBij`, `eindeBereikt` en de instelling voor de hulp) krijgen een standaardwaarde als ze ontbreken; daarvoor moest het versienummer niet omhoog.
 - **Kapotte of onbekende gegevens** worden vervangen door een lege voortgang, veld per veld (`zetOm` in `src/logica/opslag.ts`). Komt er ooit een versie 2, dan komt de omzetting daar.
 - **Tegen:** de voortgang hoort bij het browserprofiel. Dat is geen probleem: elk kind heeft een eigen Google-login van de school, dus een eigen profiel.
 
 ## 9. Lessen openen
 
 - Les 0 is altijd open. Les 0 is af na de houdingsoefening (er wordt niets gemeten).
-- Een volgende les gaat open bij minstens 90% op de eindoefening, ook als dat de korte versie was.
+- Een volgende les gaat open bij minstens 90% op de eindoefening (90% van de posities meteen juist, zie punt 7), ook als dat de korte versie was.
 - Na twee mislukte pogingen op rij komt de korte versie met een aanmoediging. Na een geslaagde poging begint de teller opnieuw.
 - Een les waarvan nog niet alle blokken of spelletjes gebouwd zijn, staat op "Komt binnenkort". Dat gebeurt automatisch: zodra het spel van les 2 bestaat, gaat les 2 open.
 
@@ -92,7 +137,7 @@ Beslist met Nick (27 november 2026):
 - **Hoe:** de app onthoudt per les bij welke stap het kind is (`bezigBij`). Opent het kind de les later opnieuw, dan vraagt de app "Verder bij stap 4: Over de beek?" (Enter) of "Opnieuw beginnen". Op het startscherm staat "Bezig: stap 4 van 7".
 - **Per stap, niet per toets:** stopt een kind midden in een stap, dan begint het die stap opnieuw. Dat is eenvoudiger en duidelijker voor kinderen, en een stap duurt maar een paar minuten.
 - Bij de afsluiter is de les rond en wordt er niets meer onthouden.
-- Oudere opgeslagen gegevens zonder dit veld werken gewoon verder (versienummer blijft 1).
+- Oudere opgeslagen gegevens zonder dit veld werken gewoon verder.
 
 ## 10. Leerkrachtscherm
 
@@ -152,6 +197,7 @@ Beslist met Nick (27 november 2026):
 ## 15. Keybr
 
 - Er is geen code of data van Keybr (of een ander project) hergebruikt. Alles is zelf geschreven, dus er is geen vermelding nodig.
+- Wel hebben we gekeken hoe Keybr telt: een fout een keer per positie, en tijden onder 40 ms niet meetellen (zie punt 7). Dat zijn ideeen, geen code. Projectdocument 12 liet ook toe om de toetsenbordindeling en de telwijze van Keybr over te nemen met bronvermelding; dat was niet nodig.
 
 ## 16. Vormgeving (K19)
 
@@ -172,8 +218,8 @@ Beslist met Nick (27 november 2026):
 ## 18. Extra oefenen (K15)
 
 - **Keuze:** bij elke les (behalve les 0) kan het kind extra oefenen. Een beurt is 4 nieuw samengestelde oefenregels van 15 tot 25 tekens, en daarna een korte afsluiter van Fien en Jef.
-- **Wanneer gaat het open?** Zodra het kind de les een keer tot het einde gedaan heeft (tot bij de afsluiter), ook als het de 90% niet haalde. De volgende les gaat nog altijd pas open bij 90% op de eindoefening. In de voortgang is dat een nieuw veld per les, `eindeBereikt`; het versienummer blijft 1, en een les die al gelukt was, telt meteen mee.
-- **Telt niet mee:** de score van extra oefenen verandert niets aan sterren, pogingen of het slot van de volgende les. De metingen per toets (fouten en tijd) worden wel bewaard, voor het leerkrachtscherm.
+- **Wanneer gaat het open?** Zodra het kind de les een keer tot het einde gedaan heeft (tot bij de afsluiter), ook als het de 90% niet haalde. De volgende les gaat nog altijd pas open bij 90% op de eindoefening. In de voortgang is dat een nieuw veld per les, `eindeBereikt`; een les die al gelukt was, telt meteen mee.
+- **Telt niet mee:** de score van extra oefenen verandert niets aan sterren, pogingen of het slot van de volgende les. De metingen per toets worden wel bewaard (als poging met blok "extra", zie punt 7), voor het leerkrachtscherm.
 - **Waar vind je het?** Op het startscherm: de knop "Extra oefenen bij les X" in de kaart "Verder waar je was", en "Extra oefenen" in de rij van de les. Ook op het einde van een les.
 - **De generator** (`src/logica/extraoefenen.ts`), zelf geschreven, zonder code van Keybr of een ander project:
   - items uit de lijsten van de les: groepjes (les 1 en 2), woorden (les 3 tot 5), zinnen (vanaf les 4; ongeveer de helft van de regels begint dan met een zin);
