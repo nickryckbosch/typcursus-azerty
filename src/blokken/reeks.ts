@@ -9,4 +9,4 @@ export const reeks: BlokFunctie<ReeksBlok> = (blok, ctx) =>
   typRegels(ctx, blok.regels, blok.tekst ?? "", (oefeningen) => {
     ctx.bewaarAanslagen(oefeningen.flatMap((o) => o.aanslagen));
     ctx.volgende();
-  });
+  }, blok.tip);

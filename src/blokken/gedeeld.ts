@@ -5,20 +5,15 @@ import { el } from "../weergave/dom";
 import { fien, jef, type Uitdrukking } from "../weergave/figuren";
 import type { BlokContext } from "./context";
 
-/** Laat een element kort schudden (of flitsen bij "minder beweging", via CSS). */
-export function schud(element: Element): void {
-  element.classList.remove("schud");
-  void (element as HTMLElement).offsetWidth;
-  element.classList.add("schud");
-  setTimeout(() => element.classList.remove("schud"), 400);
-}
-
-/** Fien en Jef links, de inhoud (bv. een tekstballon) rechts ernaast. */
+/**
+ * Fien en Jef links, de inhoud (bv. een tekstballon) rechts ernaast.
+ * Ze staan stil: geen animatie (docs/stijlgids.md, deel 1).
+ */
 export function metFienEnJef(uitdrukking: Uitdrukking, ...inhoud: Node[]): HTMLElement {
   return el(
     "div",
     { class: "met-figuren" },
-    el("div", { class: "figuren zwaai" }, fien(uitdrukking), jef(uitdrukking)),
+    el("div", { class: "figuren" }, fien(uitdrukking), jef(uitdrukking)),
     el("div", { class: "naast-figuren" }, ...inhoud),
   );
 }

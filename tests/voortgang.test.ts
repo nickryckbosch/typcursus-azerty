@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isLesOpen, markeerAfgewerkt, moetKortZijn, nieuweVoortgang, registreerEindoefening, verderBij, zetBezigBij } from "../src/logica/voortgang";
+import { isLesOpen, lesAanDeBeurt, markeerAfgewerkt, moetKortZijn, nieuweVoortgang, registreerEindoefening, verderBij, zetBezigBij } from "../src/logica/voortgang";
 
 const VOLGORDE = [0, 1, 2];
 
@@ -64,5 +64,24 @@ describe("verdergaan na een onderbreking", () => {
     expect(verderBij(v, 1)).toBeNull();
     zetBezigBij(v, 1, 0, 7);
     expect(verderBij(v, 1)).toBeNull();
+  });
+});
+
+describe("de les die aan de beurt is (kaart Verder waar je was)", () => {
+  it("is de eerste les die nog niet gelukt is", () => {
+    const v = nieuweVoortgang();
+    expect(lesAanDeBeurt(v, VOLGORDE)).toBe(0);
+    markeerAfgewerkt(v, 0);
+    expect(lesAanDeBeurt(v, VOLGORDE)).toBe(1);
+    registreerEindoefening(v, 1, 0.5, 5);
+    expect(lesAanDeBeurt(v, VOLGORDE)).toBe(1);
+    registreerEindoefening(v, 1, 0.95, 5);
+    expect(lesAanDeBeurt(v, VOLGORDE)).toBe(2);
+  });
+
+  it("is null als alle lessen klaar zijn", () => {
+    const v = nieuweVoortgang();
+    for (const id of VOLGORDE) markeerAfgewerkt(v, id);
+    expect(lesAanDeBeurt(v, VOLGORDE)).toBeNull();
   });
 });

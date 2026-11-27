@@ -95,6 +95,7 @@ export function zetOm(ruw: unknown): Voortgang {
   }
   if (isObject(ruw.instellingen)) {
     v.instellingen.voorlezen = ruw.instellingen.voorlezen === true;
+    v.instellingen.hulpPasNaFout = ruw.instellingen.hulpPasNaFout === true;
   }
   if (ruw.toetsenbord === "ok" || ruw.toetsenbord === "fout") v.toetsenbord = ruw.toetsenbord;
   v.allesOpen = ruw.allesOpen === true;

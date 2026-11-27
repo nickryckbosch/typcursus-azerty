@@ -1,60 +1,178 @@
-// Startscherm: de lessen als tegels, het oefenbord en de knop voor voorlezen.
+// Startscherm (K18): bovenaan de titel en de startzin, links Fien en Jef met
+// een tekstballon, rechts de kaart "Verder waar je was" en daaronder "Alle
+// lessen", met een tabblad per deel van het toetsenbordhuis en een compacte
+// rij per les. De delen komen uit src/content/nl-BE/delen.json: een deel
+// toevoegen is daar een stukje tekst, geen code.
 
 import type { App, Scherm } from "../app";
-import { t } from "../content";
+import { DELEN, t, type TekstSleutel } from "../content";
+import type { Deel, Les } from "../content/types";
 import { isBeschikbaar } from "../blokken";
-import { isLesOpen, legeLesVoortgang } from "../logica/voortgang";
-import { el } from "../weergave/dom";
-import { fien, jef, sterIcoon } from "../weergave/figuren";
+import { kleurVanVinger, toetsVoorTeken } from "../logica/indeling";
+import { isLesOpen, legeLesVoortgang, lesAanDeBeurt } from "../logica/voortgang";
+import { el, svg } from "../weergave/dom";
+import { fien, jef, slotje, sterIcoon, vinkje } from "../weergave/figuren";
 import { voorleesKnop } from "../weergave/kop";
+import { tekenTonen } from "../weergave/tekens";
+
+type Toestand = "klaar" | "nu" | "slot" | "binnenkort";
+
+/** Een kleine toets met de streep van zijn vinger, zoals op het schermtoetsenbord. */
+function toetsChip(teken: string, klasse = ""): HTMLElement {
+  const vinger = toetsVoorTeken(teken)?.toets.vinger;
+  return el(
+    "span",
+    { class: `chip ${vinger ? `kleur-${kleurVanVinger(vinger)}` : ""} ${teken === " " ? "chip-spatie" : ""} ${klasse}` },
+    tekenTonen(teken),
+  );
+}
+
+/** "Nieuwe letters voor je middelvingers": afgeleid uit de vingers van de nieuwe toetsen. */
+function nieuwVoor(les: Les): string {
+  const kleuren = new Set(les.nieuweToetsen.map((x) => toetsVoorTeken(x)?.toets.vinger).map((v) => (v ? kleurVanVinger(v) : "")));
+  const sleutel = kleuren.size === 1 ? `start.nieuw.${[...kleuren][0]}` : "start.nieuw.gemengd";
+  return t(sleutel as TekstSleutel);
+}
 
 export function startScherm(app: App, wortel: HTMLElement): Scherm {
   const volgorde = app.lessen.map((l) => l.id);
+  const lv = (les: Les) => app.voortgang.lessen[String(les.id)] ?? legeLesVoortgang();
+  const vorigeVan = (les: Les): Les | undefined => app.lessen[app.lessen.indexOf(les) - 1];
 
-  const tegels = app.lessen.map((les) => {
-    const beschikbaar = isBeschikbaar(les);
-    const open = beschikbaar && isLesOpen(app.voortgang, les.id, volgorde);
-    const lv = app.voortgang.lessen[String(les.id)] ?? legeLesVoortgang();
+  function toestand(les: Les): Toestand {
+    if (!isBeschikbaar(les)) return "binnenkort";
+    if (lv(les).afgewerkt) return "klaar";
+    return isLesOpen(app.voortgang, les.id, volgorde) ? "nu" : "slot";
+  }
+
+  const beurtId = lesAanDeBeurt(app.voortgang, volgorde);
+  const beurt = app.lessen.find((l) => l.id === beurtId);
+
+  // ---------- kaart "Verder waar je was" ----------
+
+  function verderKaart(): HTMLElement {
+    const knoppen: HTMLElement[] = [];
+    let inhoud: (Node | null)[];
+    if (!beurt) {
+      inhoud = [el("h2", { class: "verder-titel" }, t("start.allesKlaar")), el("p", { class: "verder-uitleg" }, t("start.allesKlaarUitleg"))];
+    } else {
+      const staat = toestand(beurt);
+      const bezig = lv(beurt).bezigBij;
+      inhoud = [
+        el("h2", { class: "verder-titel" }, t("les.kop", { nummer: beurt.id, titel: beurt.titel })),
+        el(
+          "div",
+          { class: "verder-toetsen" },
+          ...beurt.nieuweToetsen.map((x) => toetsChip(x, "chip-groot")),
+          el("span", { class: "verder-uitleg" }, staat === "binnenkort" ? t("start.binnenkort") : nieuwVoor(beurt)),
+        ),
+        bezig !== null && staat === "nu"
+          ? el("p", { class: "verder-bezig" }, t("les.bezig", { nummer: bezig + 1, totaal: beurt.online.length }))
+          : null,
+      ];
+      if (staat === "nu") {
+        knoppen.push(
+          el(
+            "button",
+            { class: "knop knop-hoofd knop-start", type: "button", onclick: () => app.naarLes(beurt) },
+            t("knop.startLes"),
+            svg("svg", { class: "icoon", viewBox: "0 0 24 24", width: 20, height: 20, "aria-hidden": "true" }, svg("path", { d: "M9 6l6 6-6 6" })),
+          ),
+        );
+      }
+    }
+    return el(
+      "section",
+      { class: "kaart verder-kaart", "aria-label": t("start.verder") },
+      el("div", { class: "verder-links" }, el("p", { class: "verder-label" }, t("start.verder")), ...inhoud),
+      el("div", { class: "verder-knoppen" }, ...knoppen),
+    );
+  }
+
+  // ---------- "Alle lessen": een rij per les ----------
+
+  function lesRij(les: Les): HTMLElement {
+    const staat = toestand(les);
+    const voortgang = lv(les);
     const heeftMeting = les.online.some((b) => b.type === "eindoefening" && b.doelNauwkeurigheid !== null);
-    const status = !beschikbaar
-      ? t("les.binnenkort")
-      : !open
-        ? t("les.slot")
-        : lv.bezigBij !== null
-          ? t("les.bezig", { nummer: lv.bezigBij + 1, totaal: les.online.length })
-          : lv.afgewerkt
-            ? t("les.af")
-            : t("les.open");
+    const vorige = vorigeVan(les);
+
+    const icoon =
+      staat === "klaar"
+        ? el("span", { class: "rij-status", role: "img", "aria-label": t("status.klaar") }, vinkje(22))
+        : staat === "nu"
+          ? el("span", { class: "rij-status", role: "img", "aria-label": t("status.nu") }, el("span", { class: "stip-nu" }))
+          : el("span", { class: "rij-status", role: "img", "aria-label": t("status.slot") }, slotje(18));
+
+    const acties: (Node | null)[] = [];
+    if (staat === "klaar") {
+      acties.push(el("button", { class: "knop knop-rij", type: "button", onclick: () => app.naarLes(les, 0) }, t("knop.lesOpnieuw")));
+    } else if (staat === "nu") {
+      acties.push(el("button", { class: "knop knop-rij knop-hoofd", type: "button", onclick: () => app.naarLes(les) }, t("knop.startLes")));
+    } else if (staat === "binnenkort") {
+      acties.push(el("span", { class: "rij-tekst" }, t("les.binnenkort")));
+    } else if (vorige) {
+      acties.push(el("span", { class: "rij-tekst" }, t("les.na", { nummer: vorige.id })));
+    }
 
     return el(
       "li",
-      {},
+      { class: `les-rij les-rij-${staat}` },
+      icoon,
+      el("span", { class: "rij-nummer" }, t("les.nummer", { nummer: les.id })),
+      el("span", { class: "rij-titel" }, les.titel),
+      el("span", { class: "rij-toetsen" }, ...les.nieuweToetsen.map((x) => toetsChip(x))),
       el(
-        "button",
-        {
-          class: `tegel ${open ? "tegel-open" : "tegel-dicht"} ${lv.afgewerkt ? "tegel-af" : ""}`,
-          type: "button",
-          disabled: !open,
-          onclick: () => app.naarLes(les),
-        },
-        el("span", { class: "tegel-nummer" }, t("les.nummer", { nummer: les.id })),
-        el("span", { class: "tegel-titel" }, les.titel),
-        el(
-          "span",
-          { class: "tegel-status" },
-          !open ? el("span", { class: "slotje", "aria-hidden": "true" }, "\u{1F512}") : null,
-          status,
-        ),
-        lv.afgewerkt && heeftMeting
+        "span",
+        { class: "rij-sterren" },
+        staat === "klaar" && heeftMeting
           ? el(
               "span",
-              { class: "tegel-sterren", "aria-label": t("les.sterren", { aantal: lv.sterren }) },
-              ...[1, 2, 3].map((i) => sterIcoon(i <= lv.sterren, 26)),
+              { class: "sterren-klein", role: "img", "aria-label": t("les.sterren", { aantal: voortgang.sterren }) },
+              ...[1, 2, 3].map((i) => sterIcoon(i <= voortgang.sterren, 18)),
             )
           : null,
       ),
+      el("span", { class: "rij-acties" }, ...acties),
     );
-  });
+  }
+
+  // ---------- tabbladen per deel ----------
+
+  const lessenVan = (deel: Deel): Les[] => deel.lessen.map((id) => app.lessen.find((l) => l.id === id)).filter((l): l is Les => l !== undefined);
+  // Een deel is op slot zolang geen enkele les ervan open of klaar is.
+  const deelOpSlot = (deel: Deel) => lessenVan(deel).every((l) => toestand(l) === "slot" || toestand(l) === "binnenkort") && !lessenVan(deel).some((l) => l.id === beurtId);
+  const startDeel = DELEN.find((d) => beurtId !== null && d.lessen.includes(beurtId)) ?? DELEN[DELEN.length - 1];
+
+  const lijst = el("ul", { class: "les-rijen" });
+  const tabs = el("div", { class: "tabs", role: "tablist", "aria-label": t("start.delen") });
+  function kiesDeel(deel: Deel): void {
+    lijst.replaceChildren(...lessenVan(deel).map(lesRij));
+    for (const knop of tabs.children) {
+      const gekozen = knop.getAttribute("data-deel") === String(deel.nummer);
+      knop.setAttribute("aria-selected", String(gekozen));
+    }
+  }
+  for (const deel of DELEN) {
+    const slot = deelOpSlot(deel);
+    tabs.append(
+      el(
+        "button",
+        { class: "tab", type: "button", role: "tab", "data-deel": deel.nummer, disabled: slot, onclick: () => kiesDeel(deel) },
+        slot ? slotje(13) : null,
+        t("start.deel", { nummer: deel.nummer, titel: deel.titel }),
+      ),
+    );
+  }
+  if (startDeel) kiesDeel(startDeel);
+
+  // ---------- Fien en Jef met een tekstballon ----------
+
+  const begroeting = !beurt
+    ? t("begroeting.allesKlaar")
+    : toestand(beurt) === "binnenkort"
+      ? t("begroeting.binnenkort")
+      : (beurt.begroeting ?? t("begroeting.standaard"));
 
   wortel.append(
     el(
@@ -63,16 +181,41 @@ export function startScherm(app: App, wortel: HTMLElement): Scherm {
       el(
         "header",
         { class: "start-kop" },
-        el("div", { class: "figuren" }, fien("zwaai", 130), jef("zwaai", 130)),
-        el("div", {}, el("h1", {}, t("app.titel")), el("p", { class: "startzin" }, t("startzin"))),
-        el("div", { class: "start-knoppen" }, voorleesKnop(app), el("button", { class: "knop", type: "button", onclick: () => app.naarOefenbord() }, t("knop.oefenbord"))),
+        el("div", { class: "start-merk", "aria-hidden": "true" }, toetsChip("f", "chip-merk"), toetsChip("j", "chip-merk")),
+        el("div", { class: "start-titel" }, el("h1", {}, t("app.titel")), el("p", {}, t("app.ondertitel"))),
+        el(
+          "div",
+          { class: "start-knoppen" },
+          voorleesKnop(app),
+          el("button", { class: "knop knop-klein", type: "button", onclick: () => app.naarOefenbord() }, t("knop.oefenbord")),
+        ),
+        el("p", { class: "startzin" }, t("startzin")),
       ),
-      el("main", {}, el("h2", { class: "verborgen" }, t("start.lessen")), el("ol", { class: "tegels" }, ...tegels)),
+      el(
+        "main",
+        { class: "start-inhoud" },
+        el(
+          "aside",
+          { class: "start-figuren" },
+          el("p", { class: "ballon staart-onder" }, begroeting),
+          el("div", { class: "figuren" }, fien("zwaai", 320), jef("zwaai", 320)),
+        ),
+        el(
+          "div",
+          { class: "start-kolom" },
+          verderKaart(),
+          el(
+            "section",
+            { class: "kaart lessen-kaart", "aria-label": t("start.alleLessen") },
+            el("div", { class: "lessen-kop" }, el("h2", {}, t("start.alleLessen")), tabs),
+            lijst,
+          ),
+        ),
+      ),
     ),
   );
 
-  // Zet de focus op de eerste les die open en nog niet af is: Enter start ze meteen.
-  const eerste = wortel.querySelector<HTMLButtonElement>(".tegel-open:not(.tegel-af)") ?? wortel.querySelector<HTMLButtonElement>(".tegel-open");
-  eerste?.focus();
+  // Zet de focus op "Start de les": Enter start ze meteen.
+  (wortel.querySelector<HTMLButtonElement>(".knop-start") ?? wortel.querySelector<HTMLButtonElement>(".les-rij-nu .knop"))?.focus();
   return {};
 }

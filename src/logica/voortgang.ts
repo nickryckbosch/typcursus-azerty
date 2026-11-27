@@ -30,7 +30,16 @@ export interface Voortgang {
   versie: number;
   lessen: Record<string, LesVoortgang>;
   toetsen: Record<string, ToetsStat>;
-  instellingen: { voorlezen: boolean };
+  instellingen: {
+    voorlezen: boolean;
+    /**
+     * Uit (standaard): de toets en de vinger die moeten komen, zijn altijd
+     * zichtbaar (beslissing K17 voor les 0 tot 5). Aan: de hulp verschijnt pas
+     * na een fout of na een paar seconden wachten. Zo kan K17 de hulp later
+     * afbouwen zonder dat er code terug moet komen.
+     */
+    hulpPasNaFout: boolean;
+  };
   toetsenbord: ToetsenbordStatus;
   /** leerkracht heeft alle lessen opengezet (om te testen) */
   allesOpen: boolean;
@@ -41,7 +50,7 @@ export function nieuweVoortgang(): Voortgang {
     versie: VERSIE,
     lessen: {},
     toetsen: {},
-    instellingen: { voorlezen: false },
+    instellingen: { voorlezen: false, hulpPasNaFout: false },
     toetsenbord: "onbekend",
     allesOpen: false,
   };
@@ -108,4 +117,12 @@ export function zetBezigBij(v: Voortgang, lesId: number, blok: number, aantalBlo
 /** Bij welk blok kan het kind verdergaan? null: opnieuw beginnen. */
 export function verderBij(v: Voortgang, lesId: number): number | null {
   return v.lessen[String(lesId)]?.bezigBij ?? null;
+}
+
+/**
+ * De les die aan de beurt is: de eerste les in de volgorde die nog niet
+ * gelukt is. null: alle lessen zijn klaar. (Voor de kaart "Verder waar je was".)
+ */
+export function lesAanDeBeurt(v: Voortgang, volgorde: number[]): number | null {
+  return volgorde.find((id) => v.lessen[String(id)]?.afgewerkt !== true) ?? null;
 }

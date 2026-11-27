@@ -28,8 +28,8 @@ export const afsluiter: BlokFunctie<AfsluiterBlok> = (blok, ctx) => {
   };
 
   const inhoud: Node[] = [];
-  // Niet gehaald: aanmoedigend. Drie sterren: trots. Anders: blij.
-  const uitdrukking = !resultaat ? "blij" : !resultaat.gehaald ? "aanmoedigend" : resultaat.sterren === 3 ? "trots" : "blij";
+  // De houding op het einde: duim omhoog, of aanmoedigen als het doel niet gehaald is.
+  const uitdrukking = resultaat && !resultaat.gehaald ? "aanmoedigend" : "duim";
 
   if (resultaat) {
     const sterren = el(
@@ -52,7 +52,7 @@ export const afsluiter: BlokFunctie<AfsluiterBlok> = (blok, ctx) => {
   }
   knop(t("knop.naarBegin"), () => app.naarStart());
 
-  ctx.podium.append(el("div", { class: "blok blok-afsluiter" }, metFienEnJef(uitdrukking, ...inhoud), el("div", { class: "knoppen" }, ...knoppen)));
+  ctx.podium.append(el("div", { class: "blok blok-afsluiter" }, metFienEnJef(uitdrukking, el("div", { class: "ballon" }, ...inhoud)), el("div", { class: "knoppen" }, ...knoppen)));
   ctx.zeg(resultaat && !resultaat.gehaald ? t("eind.nietGehaald") : blok.tekst ?? "");
   // Met Enter kies je de eerste knop; met Tab ga je naar de andere.
   knoppen[0].focus();

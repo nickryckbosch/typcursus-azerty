@@ -1,40 +1,89 @@
 /*
-  Opmaak van de typcursus.
-  - Kleuren per vinger uit het Okabe-Ito-palet (goed te onderscheiden bij kleurenblindheid).
-  - Geen externe lettertypes: het systeemlettertype van het toestel.
+  Opmaak van de typcursus. De ontwerpregels staan in docs/stijlgids.md.
+  - Alle kleuren staan hier bovenaan, als variabelen: een kleur aanpassen is een regel.
+  - Lettertypes zitten in de repository (src/lettertypes), geen CDN.
+  - Er zijn geen animaties: tijdens het typen beweegt er niets (stijlgids, deel 1).
   - Gemaakt voor Chromebooks vanaf 1366 x 768.
 */
 
-:root {
-  --blauw: #0072b2;
-  --oranje: #e69f00;
-  --groen: #009e73;
-  --paars: #cc79a7;
-  --grijs: #9a9a9a;
-  --blauw-licht: #c7e0f0;
-  --oranje-licht: #f8e2b0;
-  --groen-licht: #bde6d8;
-  --paars-licht: #f1d5e5;
-  --grijs-licht: #e3e3e3;
+@font-face {
+  font-family: "Andika";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("./lettertypes/andika-latin-400-normal.woff2") format("woff2");
+}
 
-  --achtergrond: #fbf8f2;
+@font-face {
+  font-family: "Andika";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("./lettertypes/andika-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Nunito";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("./lettertypes/nunito-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Nunito";
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  src: url("./lettertypes/nunito-latin-800-normal.woff2") format("woff2");
+}
+
+:root {
+  /* Vingerkleuren, palet C (stijlgids, deel 2): vol en licht. */
+  --blauw: #1f5fc8; /* wijsvinger */
+  --blauw-licht: #d6e4fa;
+  --oranje: #f0a030; /* middelvinger */
+  --oranje-licht: #fce6c4;
+  --groen: #2e9d63; /* ringvinger */
+  --groen-licht: #d3eedf;
+  --paars: #c9a3f0; /* pink */
+  --paars-licht: #f1e7fc;
+  --grijs: #8a94a6; /* duim */
+  --grijs-licht: #e3e7ee;
+
+  --achtergrond: #f6f1e9;
   --vlak: #ffffff;
-  --tekst: #1a1a1a;
-  --zacht: #555555;
-  --rand: #2b2b2b;
-  --focus: #1a1a1a;
-  --goed: #0b6b3a;
+  --rand: #e6ded1;
+  --rand-knop: #d9d0c2;
+  --tekst: #1b2a4a;
+  --zacht: #4a5a78;
+  --vaag: #8a96aa;
+  --accent: #1f5fbf;
+  --accent-donker: #174a94;
+  --accent-licht: #e4eefc;
+  --goed: #2e9d63;
   --geel: #ffd84d;
 
-  /* grootte van een toets op het schermtoetsenbord */
-  --k: clamp(30px, min(3.2vw, 6vh), 62px);
+  --lees: "Andika", system-ui, sans-serif; /* wat kinderen lezen en typen */
+  --kop: "Nunito", system-ui, "Segoe UI", Roboto, Arial, sans-serif; /* koppen en knoppen */
 
-  font-family: system-ui, "Segoe UI", Roboto, Arial, sans-serif;
-  font-size: 18px;
-  line-height: 1.4;
+  /* grootte van een toets op het schermtoetsenbord */
+  --k: clamp(28px, min(3.5vw, 6.2vh), 56px);
+
+  font-family: var(--kop);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.35;
   color: var(--tekst);
   background: var(--achtergrond);
 }
+
+/* Elke vinger heeft een volle en een lichte kleur. */
+.kleur-blauw { --vol: var(--blauw); --licht: var(--blauw-licht); }
+.kleur-oranje { --vol: var(--oranje); --licht: var(--oranje-licht); }
+.kleur-groen { --vol: var(--groen); --licht: var(--groen-licht); }
+.kleur-paars { --vol: var(--paars); --licht: var(--paars-licht); }
+.kleur-grijs { --vol: var(--grijs); --licht: var(--grijs-licht); }
 
 * {
   box-sizing: border-box;
@@ -47,8 +96,13 @@ body {
 
 h1,
 h2 {
-  margin: 0 0 0.4em;
+  margin: 0;
   line-height: 1.2;
+  font-weight: 800;
+}
+
+p {
+  margin: 0;
 }
 
 button {
@@ -56,7 +110,7 @@ button {
 }
 
 :focus-visible {
-  outline: 4px solid var(--focus);
+  outline: 3px solid var(--tekst);
   outline-offset: 3px;
 }
 
@@ -69,45 +123,135 @@ button {
   white-space: nowrap;
 }
 
+.onzichtbaar {
+  visibility: hidden;
+}
+
 [hidden] {
   display: none !important;
+}
+
+.icoon,
+.vinkje,
+.slot-icoon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+
+.vinkje {
+  stroke: var(--goed);
+  stroke-width: 3;
+}
+
+.slot-icoon {
+  stroke: #6b7a90;
+  stroke-width: 2.2;
+}
+
+/* ---------- kaarten en tekstballonnen ---------- */
+
+.kaart,
+.blok {
+  background: var(--vlak);
+  border: 1px solid var(--rand);
+  border-radius: 22px;
+}
+
+/* Wat Fien en Jef zeggen: een witte ballon met een staartje naar het figuurtje. */
+.ballon {
+  position: relative;
+  background: var(--vlak);
+  border: 1px solid var(--rand-knop);
+  border-radius: 18px;
+  padding: 0.7rem 1.1rem;
+  text-align: left;
+}
+
+.ballon::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: var(--vlak);
+  border: 1px solid var(--rand-knop);
+  border-top-color: transparent;
+  border-right-color: transparent;
+  /* standaard: staartje links, naar het figuurtje naast de ballon */
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* staartje onderaan, naar het figuurtje onder de ballon */
+.ballon.staart-onder::after {
+  left: 50%;
+  top: auto;
+  bottom: -8px;
+  transform: translateX(-50%) rotate(-45deg);
 }
 
 /* ---------- knoppen ---------- */
 
 .knop {
-  border: 3px solid var(--rand);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 2px solid var(--rand-knop);
+  border-radius: 10px;
   background: var(--vlak);
   color: var(--tekst);
-  border-radius: 12px;
-  padding: 0.45em 1em;
-  font-weight: 600;
+  font-family: var(--kop);
+  font-size: 15px;
+  font-weight: 800;
   cursor: pointer;
 }
 
 .knop:hover {
-  background: #f0ede6;
+  background: #f8f5f0;
 }
 
 .knop-hoofd {
-  background: var(--blauw);
-  border-color: #00466e;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 14px;
+  border-color: var(--accent);
+  background: var(--accent);
   color: #fff;
-  font-size: 1.2rem;
-  padding: 0.55em 1.4em;
+  font-size: 18px;
 }
 
 .knop-hoofd:hover {
-  background: #005f94;
+  background: var(--accent-donker);
+}
+
+.knop-tweede {
+  border-color: var(--accent);
+  background: var(--accent-licht);
+  color: var(--accent-donker);
+}
+
+.knop-tweede:hover {
+  background: #d5e4fa;
 }
 
 .knop-klein {
-  font-size: 0.9rem;
-  padding: 0.3em 0.7em;
+  min-height: 40px;
+  border-width: 1px;
+  border-color: var(--rand);
+  border-radius: 12px;
 }
 
 .knop-voorlezen[aria-pressed="true"] {
-  background: var(--geel);
+  border-color: var(--accent);
+  background: var(--accent-licht);
+  color: var(--accent-donker);
 }
 
 .knop-gevaar {
@@ -120,18 +264,15 @@ button {
   gap: 0.8rem;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 0.8rem;
 }
 
 /* ---------- meldingen ---------- */
 
 .melding {
-  background: var(--geel);
-  border: 3px solid var(--rand);
-  border-radius: 10px;
+  background: #fff3c4;
+  border: 2px solid #e0b93b;
+  border-radius: 12px;
   padding: 0.4rem 0.8rem;
-  margin: 0.3rem 1rem;
-  font-weight: 600;
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -147,141 +288,401 @@ button {
   max-width: 90vw;
 }
 
-/* ---------- kop ---------- */
+/* ---------- bovenbalk ---------- */
 
 .kop {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 1rem;
-  padding: 0.4rem 1rem;
-  border-bottom: 2px solid #ddd6c8;
-  background: var(--vlak);
+  min-height: 44px;
+}
+
+.knop-terug {
+  justify-self: start;
+}
+
+.kop-midden {
+  text-align: center;
+}
+
+.kop-rechts {
+  justify-self: end;
+  display: flex;
+  gap: 8px;
 }
 
 .kop-titel {
-  font-size: 1.2rem;
-  margin: 0;
-  flex: 1;
+  font-size: 18px;
 }
 
-.stapjes {
+.kop-les {
   display: flex;
-  gap: 0.4rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+/* een balkje per blok van de les */
+.balkjes {
+  display: flex;
+  gap: 6px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.stapje {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 3px solid var(--rand);
-  background: var(--vlak);
+.balkje {
+  width: 34px;
+  height: 8px;
+  border-radius: 4px;
+  background: #ddd4c6;
 }
 
-.stapje.klaar {
-  background: var(--rand);
+.balkje.klaar,
+.balkje.huidig {
+  background: var(--accent);
 }
 
-.stapje.huidig {
-  background: var(--geel);
-  transform: scale(1.25);
+.balkje.huidig {
+  box-shadow: 0 0 0 2px var(--achtergrond), 0 0 0 4px var(--accent);
 }
 
 /* ---------- startscherm ---------- */
 
 .scherm-start {
-  max-width: 1200px;
+  min-height: 100vh;
+  max-width: 1366px;
   margin: 0 auto;
-  padding: 1rem 1.5rem;
+  padding: clamp(10px, 3vh, 24px) clamp(16px, 3.5vw, 48px) clamp(10px, 3.5vh, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 2.3vh, 18px);
 }
 
 .start-kop {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 1rem;
+  gap: 14px;
 }
 
-.start-kop h1 {
-  font-size: 2.2rem;
+.start-merk {
+  display: flex;
+  gap: 6px;
 }
 
-.startzin {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin: 0;
+.start-titel h1 {
+  font-size: clamp(22px, 3.9vh, 30px);
+  letter-spacing: -0.01em;
+}
+
+.start-titel p {
+  font-size: 15px;
+  color: var(--zacht);
 }
 
 .start-knoppen {
   margin-left: auto;
   display: flex;
-  gap: 0.8rem;
+  gap: 8px;
 }
 
-.tegels {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+.startzin {
+  background: var(--vlak);
+  border: 1px solid var(--rand);
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 17px;
 }
 
-.tegel {
-  width: 100%;
-  min-height: 140px;
+.start-inhoud {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: clamp(14px, 2.4vw, 32px);
+}
+
+.start-figuren {
+  width: clamp(170px, 18.5vw, 250px);
+  flex: none;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0.3rem;
-  text-align: left;
-  padding: 0.9rem 1.1rem;
-  border: 3px solid var(--rand);
-  border-radius: 16px;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.start-figuren .ballon {
+  font-size: clamp(15px, 2.3vh, 18px);
+  padding: 14px 16px;
+}
+
+.start-figuren .figuren {
+  justify-content: center;
+  gap: 2px;
+}
+
+.start-figuren .figuur {
+  height: min(var(--h), 40vh, 15vw);
+}
+
+.start-kolom {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 2vh, 16px);
+}
+
+/* kaart "Verder waar je was" */
+.verder-kaart {
+  border: 3px solid var(--accent);
+  box-shadow: 0 8px 24px rgba(31, 95, 191, 0.12);
+  padding: clamp(10px, 2.6vh, 20px) 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.verder-links {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 1vh, 8px);
+  min-width: 0;
+}
+
+.verder-label {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.verder-titel {
+  font-size: clamp(20px, 3.4vh, 26px);
+}
+
+.verder-toetsen {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.verder-uitleg,
+.verder-bezig {
+  font-size: 16px;
+  color: var(--zacht);
+}
+
+.verder-knoppen {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 250px;
+  flex: none;
+}
+
+.verder-knoppen:empty {
+  display: none;
+}
+
+.knop-start {
+  min-height: 54px;
+  font-size: 19px;
+}
+
+.verder-knoppen .knop-tweede {
+  min-height: 44px;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+/* een kleine toets met de streep van zijn vinger */
+.chip {
+  min-width: 30px;
+  height: 30px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
   background: var(--vlak);
-  color: var(--tekst);
+  border: 1px solid var(--rand-knop);
+  border-bottom: 3px solid var(--vol, var(--rand-knop));
+  font-family: var(--lees);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.chip-spatie {
+  font-family: var(--kop);
+  font-size: 13px;
+}
+
+.chip-groot {
+  min-width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  border-bottom-width: 4px;
+  font-size: 20px;
+}
+
+.chip-groot.chip-spatie {
+  font-size: 15px;
+  padding: 0 10px;
+}
+
+.chip-merk {
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+  border-bottom-width: 4px;
+  font-size: 22px;
+}
+
+/* "Alle lessen" */
+.lessen-kaart {
+  flex: 1;
+  min-height: 0;
+  padding: clamp(8px, 2vh, 16px) 20px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 1.5vh, 12px);
+  overflow: auto;
+}
+
+.lessen-kop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lessen-kop h2 {
+  font-size: 18px;
+}
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--rand);
+  background: #f8f5f0;
+  color: var(--zacht);
+  font-size: 14px;
+  font-weight: 800;
   cursor: pointer;
 }
 
-.tegel-open:hover {
-  background: #f0ede6;
+.tab[aria-selected="true"] {
+  border: 2px solid var(--tekst);
+  background: var(--tekst);
+  color: #fff;
 }
 
-.tegel-dicht {
-  cursor: not-allowed;
-  border-style: dashed;
-  border-color: #8a8a8a;
-  color: #4a4a4a;
-  background: #f1efea;
-}
-
-.tegel-nummer {
-  font-weight: 700;
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.tegel-titel {
-  font-size: 1.3rem;
+.tab:disabled {
+  cursor: default;
   font-weight: 700;
 }
 
-.tegel-status {
-  margin-top: auto;
-  font-size: 0.95rem;
-}
-
-.tegel-af .tegel-status::before {
-  content: "\2713  ";
-  font-weight: 700;
-}
-
-.tegel-sterren {
+.les-rijen {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
-  gap: 2px;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.les-rij {
+  display: grid;
+  grid-template-columns: 26px 52px minmax(0, 1fr) auto 62px auto;
+  align-items: center;
+  gap: 14px;
+  min-height: clamp(38px, 5.9vh, 46px);
+  padding: 0 10px;
+  border-radius: 12px;
+}
+
+.les-rij-nu {
+  background: #eef4fd;
+}
+
+.rij-status {
+  display: flex;
+  justify-content: center;
+}
+
+.stip-nu {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.rij-nummer {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--zacht);
+}
+
+.rij-titel {
+  font-size: 17px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.les-rij-slot .rij-titel,
+.les-rij-binnenkort .rij-titel,
+.les-rij-slot .chip,
+.les-rij-binnenkort .chip {
+  color: var(--zacht);
+}
+
+.rij-toetsen {
+  display: flex;
+  gap: 5px;
+  min-width: 72px;
+}
+
+.sterren-klein {
+  display: flex;
+  gap: 1px;
+}
+
+.rij-acties {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+  min-width: 236px;
+}
+
+.rij-tekst {
+  font-size: 14px;
+  color: var(--zacht);
+}
+
+.knop-rij {
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.knop-rij.knop-hoofd {
+  min-height: 38px;
+  padding: 0 16px;
+  border-radius: 10px;
+  font-size: 14px;
 }
 
 /* ---------- lesscherm ---------- */
@@ -290,6 +691,8 @@ button {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  gap: clamp(6px, 1.6vh, 14px);
+  padding: clamp(8px, 2vh, 18px) clamp(14px, 3.5vw, 48px) clamp(6px, 1.6vh, 14px);
   overflow: hidden;
 }
 
@@ -303,65 +706,86 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: safe center;
-  padding: 0.4rem 1rem;
   overflow: auto;
-}
-
-.hulpregel {
-  min-height: 1.6em;
-  margin: 0;
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.zonder-toetsenbord .typzone,
-.zonder-toetsenbord .hulpregel {
-  display: none;
 }
 
 .typzone {
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 0.3rem 0.5rem 0.6rem;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(4px, 1vh, 10px);
 }
 
+.typzone-rij {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: calc(var(--k) * 0.6);
+}
+
+/* "Typ de k met je rechtermiddelvinger", met een stip in de vingerkleur */
+.hulpregel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 1.5em;
+  font-size: clamp(15px, 2.4vh, 18px);
+}
+
+.hulp-stip {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--vol, transparent);
+  flex: none;
+}
+
+.hulpregel.leeg .hulp-stip {
+  visibility: hidden;
+}
+
+.zonder-toetsenbord .typzone {
+  display: none;
+}
+
+/* Een blok is een witte kaart die het podium vult. */
 .blok {
+  width: 100%;
+  max-width: 1270px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: safe center;
   text-align: center;
   gap: 0.5rem;
-  max-width: 1100px;
+  overflow: auto;
 }
 
 .grote-tekst {
   font-size: 1.5rem;
-  margin: 0;
   max-width: 900px;
 }
 
 .opdracht {
-  font-size: 1.2rem;
-  margin: 0;
+  font-size: 17px;
+  color: var(--zacht);
 }
 
 .hint {
   color: var(--zacht);
-  margin: 0;
 }
 
 .teller {
+  font-size: 15px;
+  font-weight: 800;
   color: var(--zacht);
-  margin: 0;
-  font-weight: 600;
+  white-space: nowrap;
 }
 
 .goed {
-  color: var(--goed);
-  font-weight: 700;
+  color: #1e7f56;
 }
 
 .figuren {
@@ -373,7 +797,7 @@ button {
 .met-figuren {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 1.4rem;
 }
 
 .naast-figuren {
@@ -383,26 +807,28 @@ button {
   gap: 0.4rem;
 }
 
-.ballon {
-  background: var(--vlak);
-  border: 3px solid var(--rand);
-  border-radius: 20px;
-  padding: 0.7rem 1.2rem;
+.figuur {
+  height: var(--h);
+  width: auto;
+  display: block;
 }
 
 /* zoek-toets: de grote letter */
 .grote-toets {
   min-width: 2.2em;
   padding: 0 0.3em;
+  font-family: var(--lees);
   font-size: clamp(60px, 14vh, 130px);
   font-weight: 700;
   line-height: 1.25;
-  border: 5px solid var(--rand);
+  border: 2px solid var(--rand-knop);
+  border-bottom-width: 8px;
   border-radius: 24px;
   background: var(--vlak);
 }
 
 .grote-toets.is-spatie {
+  font-family: var(--kop);
   font-size: clamp(32px, 7vh, 64px);
   min-width: 7em;
   padding: 0.4em 0.5em;
@@ -412,271 +838,323 @@ button {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  border: 4px solid var(--rand);
-  background: #cfcfcf;
+  border: 3px solid var(--rand-knop);
+  background: #dcd5c9;
 }
 
 .lamp.aan {
   background: var(--geel);
-  box-shadow: 0 0 24px 8px #ffe680;
+  border-color: #c79a00;
 }
 
-/* oefenregels */
+/* ---------- oefenregels ---------- */
+
+.blok-typen {
+  width: 100%;
+  max-width: 1270px;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  gap: clamp(12px, 2vw, 28px);
+}
+
+.tip-zijde {
+  width: clamp(150px, 17vw, 230px);
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 14px;
+}
+
+.tip {
+  font-size: clamp(14px, 5.2cqh, 17px);
+  padding: clamp(6px, 3.5cqh, 14px) 16px;
+}
+
+.typkaart {
+  flex: 1;
+  min-width: 0;
+  padding: clamp(6px, 5cqh, 26px) clamp(16px, 3vw, 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(3px, 3.6cqh, 16px);
+}
+
+.typkaart-kop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.regel-klaar,
+.volgende-regels {
+  font-family: var(--lees);
+  font-weight: 400;
+  font-size: clamp(15px, 7.5cqh, 26px);
+  letter-spacing: 0.05em;
+  white-space: pre;
+}
+
+.regel-klaar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--vaag);
+}
+
 .typregel {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  font-size: clamp(36px, 8.5vh, 68px);
-  font-weight: 600;
-  background: var(--vlak);
-  border: 3px solid var(--rand);
-  border-radius: 16px;
-  padding: 0.15em 0.4em;
+  padding: 0.2em 0.3em;
+  border-radius: 14px;
+  background: #f4f8fe;
+  font-family: var(--lees);
+  font-weight: 400;
+  font-size: clamp(22px, 14cqh, 48px);
+  line-height: 1.4;
 }
 
 .teken {
   display: inline-block;
-  min-width: 0.7em;
+  min-width: 0.36em;
+  padding: 0 0.07em;
   text-align: center;
-  border-bottom: 6px solid transparent;
-}
-
-.teken.is-spatie {
-  min-width: 0.55em;
+  border-bottom: 4px solid transparent;
+  border-radius: 6px;
 }
 
 .teken.gedaan {
-  color: #8a8a8a;
+  color: var(--vaag);
 }
 
+/* het teken dat moet komen: lichte vingerkleur, met een streep in de volle kleur */
 .teken.cursor {
-  border-bottom-color: var(--tekst);
-  background: #fff3b8;
-  border-radius: 6px 6px 0 0;
+  background: var(--licht, var(--accent-licht));
+  border-bottom-color: var(--vol, var(--accent));
 }
 
 .volgende-regels {
-  font-size: 1.6rem;
+  padding-left: 32px;
+  min-height: 2.7em;
   color: var(--zacht);
-  min-height: 2em;
+}
+
+.volgende-regels div + div {
+  color: var(--vaag);
 }
 
 /* ---------- schermtoetsenbord ---------- */
 
 .toetsenbord {
+  --tussen: calc(var(--k) * 7 / 48);
   display: flex;
   flex-direction: column;
-  gap: calc(var(--k) * 0.1);
-  padding: calc(var(--k) * 0.15);
-  background: #dcd6cb;
-  border-radius: 12px;
+  gap: calc(var(--k) * 8 / 48);
 }
 
 .tb-rij {
   display: flex;
-  gap: calc(var(--k) * 0.1);
-  border-radius: 8px;
+  align-items: flex-start;
+  gap: var(--tussen);
+  border-radius: calc(var(--k) * 0.19);
 }
 
 .toets,
 .toets-leeg {
-  width: calc(var(--k) * var(--b, 1) + var(--k) * 0.1 * (var(--b, 1) - 1));
+  width: calc(var(--k) * var(--w, 48) / 48);
   height: var(--k);
   flex: none;
 }
 
+/* Niet geleerd: vaag. De streep onderaan heeft de (lichte) kleur van de vinger. */
 .toets {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #6b6b6b;
-  border-radius: 7px;
-  font-size: calc(var(--k) * 0.42);
-  font-weight: 600;
-  color: #4d4d4d;
-  opacity: 0.55;
+  border: 1px solid #e2dacd;
+  border-bottom: calc(var(--k) * 0.1) solid var(--licht, #e2dacd);
+  border-radius: calc(var(--k) * 0.19);
+  background: #efeae2;
+  color: #a39b8f;
+  font-family: var(--lees);
+  font-size: calc(var(--k) * 0.44);
+  font-weight: 700;
+  line-height: 1;
 }
 
-.toets-rand {
-  background: #ecebe8;
-  opacity: 0.6;
+/* Geleerd: wit met een donkere letter en een streep in de volle vingerkleur. */
+.toets.geleerd {
+  background: var(--vlak);
+  color: var(--tekst);
+  border-color: var(--rand-knop);
+  border-bottom-color: var(--vol);
+}
+
+/* De toets die moet komen: lichte vingerkleur en een ring in de volle kleur. */
+.toets.volgende {
+  background: var(--licht);
+  color: var(--tekst);
+  border-color: var(--vol);
+  box-shadow: 0 0 0 3px var(--vol);
+  z-index: 1;
+}
+
+/* Na een fout licht de juiste toets even sterker op. */
+.toets.volgende.nadruk {
+  box-shadow: 0 0 0 6px var(--vol);
+}
+
+.toets.ingedrukt {
+  background: var(--licht);
+}
+
+.spatiebalk {
+  height: calc(var(--k) * 42 / 48);
+  font-family: var(--kop);
+  font-size: calc(var(--k) * 0.31);
+  color: #a39b8f;
+}
+
+.spatiebalk.geleerd {
+  color: var(--zacht);
+}
+
+/* het bultje op f en j */
+.toets.bultje::after {
+  content: "";
+  position: absolute;
+  bottom: 12%;
+  width: 21%;
+  height: calc(var(--k) * 0.065);
+  border-radius: 2px;
+  background: currentColor;
 }
 
 /* De Enter-toets: twee delen die samen een grote toets vormen. */
-.toets-enter {
-  background: #ecebe8;
-  opacity: 0.85;
-  color: var(--tekst);
+.toets-enter-boven {
+  height: calc(var(--k) + var(--k) * 8 / 48);
+  margin-bottom: calc(var(--k) * -8 / 48);
+  border-bottom: 0;
+  border-bottom-right-radius: 0;
 }
 
-.toets-enter-boven {
-  border-bottom-left-radius: 0;
-  border-bottom-width: 0;
-  border-bottom-right-radius: 0;
-  margin-left: auto;
+.toets-enter-boven::after {
+  /* het stukje onderrand links, waar het bovenste deel breder is */
+  content: "";
+  position: absolute;
+  left: 6px;
+  bottom: 0;
+  width: calc(var(--k) * 18 / 48 - 6px);
+  border-bottom: 1px solid #e2dacd;
 }
 
 .toets-enter-onder {
-  margin-top: calc(var(--k) * -0.1 - 2px);
-  height: calc(var(--k) * 1.1 + 2px);
-  border-top-width: 0;
+  border-top: 0;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
 .enter-label {
-  font-size: calc(var(--k) * 0.3);
-  font-weight: 700;
+  display: none;
+  font-family: var(--kop);
+  font-size: calc(var(--k) * 0.27);
+  font-weight: 800;
   white-space: nowrap;
 }
 
+/* Moet het kind op Enter drukken, dan licht de Enter-toets op, met opschrift. */
 .toets-enter.enter-wacht {
-  opacity: 1;
-  background: var(--geel);
-  border-color: #000;
-  border-width: 4px;
+  background: var(--accent-licht);
+  border-color: var(--accent);
+  color: var(--accent-donker);
 }
 
-.toets-enter-boven.enter-wacht { border-bottom-width: 0; }
-.toets-enter-onder.enter-wacht { border-top-width: 0; }
+.toets-enter-onder.enter-wacht {
+  border-bottom-color: var(--accent);
+}
+
+.toets-enter-boven.enter-wacht::after {
+  border-bottom-color: var(--accent);
+}
+
+.enter-wacht .enter-label {
+  display: block;
+}
+
+.tb-rij.rij-op {
+  outline: 4px solid var(--accent);
+  outline-offset: 3px;
+  background: var(--accent-licht);
+}
 
 /* Een getekende toets in de tekst, bv. "Druk op [Enter] om verder te gaan." */
 .toets-in-tekst {
   display: inline-block;
   padding: 0.05em 0.5em;
   margin: 0 0.15em;
-  border: 3px solid #000;
-  border-bottom-width: 5px;
+  border: 1px solid var(--accent);
+  border-bottom-width: 4px;
   border-radius: 8px;
-  background: var(--geel);
-  font-weight: 700;
+  background: var(--accent-licht);
+  color: var(--accent-donker);
+  font-weight: 800;
   white-space: nowrap;
 }
 
 .hint-enter {
-  font-size: 1.25rem;
-  color: var(--tekst);
-  margin: 0;
+  font-size: 1.15rem;
 }
 
-.toets.geleerd {
-  opacity: 1;
-  color: var(--tekst);
-  border-color: var(--rand);
-  font-weight: 700;
-}
-
-.toets-label-dubbel {
+.enter-rij {
   display: flex;
-  flex-direction: column;
-  font-size: calc(var(--k) * 0.28);
-  line-height: 1.05;
-}
-
-.kleur-blauw { background: var(--blauw-licht); }
-.kleur-oranje { background: var(--oranje-licht); }
-.kleur-groen { background: var(--groen-licht); }
-.kleur-paars { background: var(--paars-licht); }
-.kleur-grijs { background: var(--grijs-licht); }
-
-/* het bultje op F en J */
-.toets.bultje::after {
-  content: "";
-  position: absolute;
-  bottom: 14%;
-  width: 28%;
-  height: 3px;
-  border-radius: 2px;
-  background: currentColor;
-}
-
-/* de toets die nu moet komen: volle kleur, dikke rand en een pijltje erboven */
-.toets.volgende {
-  opacity: 1;
-  border: 4px solid #000;
-  transform: translateY(-2px);
-  box-shadow: 0 0 0 3px #fff, 0 0 0 6px #000;
-  z-index: 1;
-}
-
-.toets.volgende.kleur-blauw { background: var(--blauw); color: #fff; }
-.toets.volgende.kleur-oranje { background: var(--oranje); color: #000; }
-.toets.volgende.kleur-groen { background: var(--groen); color: #000; }
-.toets.volgende.kleur-paars { background: var(--paars); color: #000; }
-.toets.volgende.kleur-grijs { background: var(--grijs); color: #000; }
-
-.toets.flits-juist {
-  animation: flits 0.35s ease-out;
-}
-
-.toets.flits-fout {
-  outline: 4px dashed #000;
-  outline-offset: 1px;
-}
-
-@keyframes flits {
-  from { filter: brightness(0.7); transform: translateY(2px); }
-  to { filter: none; transform: none; }
-}
-
-.tb-rij.rij-op {
-  outline: 5px solid #000;
-  outline-offset: 2px;
-  background: var(--geel);
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 /* ---------- handen ---------- */
 
 .hand {
-  width: calc(var(--k) * 4.4);
+  width: calc(var(--k) * 150 / 48);
   height: auto;
   flex: none;
 }
 
-.hand .palm {
-  fill: #f4eee6;
-  stroke: #6b6b6b;
-  stroke-width: 2;
-}
-
-.hand-vinger .vinger-vorm {
-  stroke: #6b6b6b;
-  stroke-width: 2;
-}
-
-.hand-vinger.kleur-blauw .vinger-vorm { fill: var(--blauw-licht); }
-.hand-vinger.kleur-oranje .vinger-vorm { fill: var(--oranje-licht); }
-.hand-vinger.kleur-groen .vinger-vorm { fill: var(--groen-licht); }
-.hand-vinger.kleur-paars .vinger-vorm { fill: var(--paars-licht); }
-.hand-vinger.kleur-grijs .vinger-vorm { fill: var(--grijs-licht); }
-
-/* SVG-elementen zelf hebben geen achtergrond: reset de klasse van de toetsen */
-.hand-vinger { background: none; }
-
-.hand-vinger .vinger-stip {
+/* Eerst alle vormen met alleen een omtrek ... */
+.hand-omtrek > * {
   fill: none;
+  stroke: #5e6b82;
+  stroke-width: 3.5;
+  stroke-linejoin: round;
 }
 
-.hand-vinger.actief .vinger-vorm {
-  stroke: #000;
-  stroke-width: 6;
+/* ... daarna dezelfde vormen gevuld erbovenop. */
+.vinger-vlak {
+  fill: var(--licht);
 }
 
-.hand-vinger.actief.kleur-blauw .vinger-vorm { fill: var(--blauw); }
-.hand-vinger.actief.kleur-oranje .vinger-vorm { fill: var(--oranje); }
-.hand-vinger.actief.kleur-groen .vinger-vorm { fill: var(--groen); }
-.hand-vinger.actief.kleur-paars .vinger-vorm { fill: var(--paars); }
-.hand-vinger.actief.kleur-grijs .vinger-vorm { fill: var(--grijs); }
-
-.hand-vinger.actief .vinger-stip {
-  fill: #000;
+.palm {
+  fill: #fbf9f6;
 }
 
-.hand-opschrift {
-  font-size: 20px;
-  font-weight: 600;
-  fill: var(--zacht);
+/* De vinger die moet typen: volle kleur en een dikkere, donkere omtrek. */
+.vinger-vlak.actief {
+  fill: var(--vol);
+}
+
+.hand-omtrek .actief {
+  stroke: var(--tekst);
+  stroke-width: 7;
+}
+
+.hand-omtrek .actief.nadruk {
+  stroke-width: 11;
 }
 
 /* ---------- toetsenbordcheck ---------- */
@@ -684,15 +1162,15 @@ button {
 .leerkracht-uitleg {
   text-align: left;
   max-width: 820px;
-  background: var(--vlak);
-  border: 2px solid var(--rand);
-  border-radius: 10px;
+  background: #f8f5f0;
+  border: 1px solid var(--rand);
+  border-radius: 12px;
   padding: 0.4rem 1rem;
   font-size: 1rem;
 }
 
 .leerkracht-uitleg summary {
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
 }
 
@@ -702,14 +1180,14 @@ button {
   font-size: 2rem;
   font-weight: 800;
   padding: 0.2em 0.5em;
-  border: 4px dashed transparent;
+  border: 3px solid transparent;
   border-radius: 14px;
   visibility: hidden;
 }
 
 .klap.aan {
   visibility: visible;
-  border-color: var(--rand);
+  border-color: #c79a00;
   background: var(--geel);
 }
 
@@ -718,25 +1196,33 @@ button {
 .sterren {
   display: flex;
   gap: 0.6rem;
+  justify-content: center;
 }
 
 .ster path {
-  stroke: #000;
+  stroke: #b88400;
 }
 
 .ster-vol path {
-  fill: var(--geel);
+  fill: #f5b301;
 }
 
 .ster-leeg path {
   fill: #fff;
-  stroke-dasharray: 2 1.5;
+  stroke: #c9bfae;
 }
 
 .sterren-tekst {
-  margin: 0;
-  font-weight: 700;
-  font-size: 1.2rem;
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.blok-afsluiter .ballon,
+.blok-extra-einde .ballon {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 /* ---------- spel: licht aan ---------- */
@@ -747,8 +1233,15 @@ button {
   align-items: center;
 }
 
+.lichtaan-zijde {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 460px;
+}
+
 .huis {
-  width: 360px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -756,7 +1249,7 @@ button {
 
 .huis-dak {
   height: 50px;
-  background: #8c4a2f;
+  background: #b5553a;
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
 
@@ -764,20 +1257,20 @@ button {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  background: #e9d8b9;
-  border: 3px solid var(--rand);
+  background: #f3e6cc;
+  border: 2px solid #b9a888;
   border-top-width: 0;
-  padding: 0.4rem 0.6rem;
+  padding: 0.4rem 0.8rem;
 }
 
 .verdieping:first-of-type {
-  border-top-width: 3px;
+  border-top-width: 2px;
 }
 
 .verdieping-naam {
   width: 7.2em;
   text-align: left;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .ramen {
@@ -788,7 +1281,7 @@ button {
 .raam {
   width: 52px;
   height: 40px;
-  border: 3px solid var(--rand);
+  border: 3px solid #6b5d48;
   background: #4a4f63;
   border-radius: 4px;
 }
@@ -797,101 +1290,137 @@ button {
   background: var(--geel);
 }
 
-.verdieping.knippert {
-  outline: 6px solid #000;
-  outline-offset: -3px;
-  animation: knipper 1s steps(2, start) infinite;
-}
-
-.verdieping.knippert .verdieping-naam::before {
-  content: "\25B6  ";
-}
-
-@keyframes knipper {
-  50% { background: #fff6c7; }
-}
-
-/* ---------- spel: beek ---------- */
-
-.beek {
+/* De gevraagde verdieping licht op (zonder te knipperen). */
+.verdieping.gevraagd {
+  background: var(--accent-licht);
+  outline: 4px solid var(--accent);
+  outline-offset: -2px;
   position: relative;
+  z-index: 1;
+}
+
+.verdieping.gevraagd .verdieping-naam::before {
+  content: "\25B6  ";
+  color: var(--accent);
+}
+
+/* ---------- spel: over de beek ---------- */
+
+.blok-beek {
+  width: 100%;
+  max-width: 1270px;
+  height: 100%;
   display: flex;
-  align-items: center;
-  width: min(1200px, 96vw);
-  height: 170px;
-  background: #5aa6d6;
-  border: 3px solid var(--rand);
-  border-radius: 16px;
-  padding-top: 60px;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.oever {
-  width: 80px;
-  align-self: stretch;
-  background: #7fb06b;
-  margin-top: -60px;
-  flex: none;
-}
-
-.oever-links {
-  border-radius: 13px 0 0 13px;
-}
-
-.oever-rechts {
-  border-radius: 0 13px 13px 0;
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.huisje {
-  width: 50px;
-  height: 50px;
-  background: #e9d8b9;
-  border: 3px solid var(--rand);
-  clip-path: polygon(50% 0, 100% 40%, 100% 100%, 0 100%, 0 40%);
-}
-
-.stenen {
-  display: flex;
-  gap: 10px;
-  padding: 0 12px;
+/* De vaste prent, volledig in beeld: liever kleiner en gecentreerd dan bijgesneden. */
+.beek-boven {
+  position: relative;
   flex: 1;
-  justify-content: center;
-}
-
-.steen {
-  width: 64px;
-  height: 52px;
+  min-height: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #b9b3a8;
-  border: 3px solid #4d4a44;
-  border-radius: 45% 50% 40% 55%;
-  font-size: 1.7rem;
-  font-weight: 700;
+  gap: clamp(3px, 2.5cqh, 10px);
+  padding: clamp(4px, 2.5cqh, 12px) 16px;
 }
 
-.steen-plat {
-  width: 100px;
-  height: 36px;
-  font-size: 1rem;
+.beek-prent {
+  display: block;
+  height: clamp(70px, 56cqh, 320px);
+  width: auto;
+  max-width: 100%;
   border-radius: 14px;
 }
 
-.steen.volgende {
-  background: #fff;
-  border: 4px solid #000;
+.beek-onder {
+  background: #e6f2fb;
+  padding: clamp(4px, 3cqh, 14px) 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
 }
 
-.springers {
-  position: absolute;
-  top: 0;
-  left: 0;
+/* De vooruitgang: een rij van 12 stenen, onder de prent. */
+.stenen {
+  --s: clamp(26px, min(13cqh, 4.1vw), 56px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
-  transition: transform 0.3s ease-out;
+  align-items: center;
+  gap: clamp(3px, 0.7vw, 10px);
+  /* de rij is altijd zo hoog als de grote steen: niets verspringt */
+  min-height: calc(var(--s) * 1.3);
+}
+
+.steen {
+  width: var(--s);
+  height: var(--s);
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border: 2px solid #c9d3e3;
+  border-radius: 999px;
+  background: var(--vlak);
+  font-family: var(--lees);
+  font-size: calc(var(--s) * 0.4);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.steen-spatie {
+  width: calc(var(--s) * 1.86);
+  font-family: var(--kop);
+  font-size: calc(var(--s) * 0.3);
+}
+
+.steen-klaar {
+  background: #d3dee9;
+  border-color: #d3dee9;
+  color: #6b7a90;
+}
+
+.steen-klaar .vinkje {
+  width: calc(var(--s) * 0.25);
+  height: calc(var(--s) * 0.25);
+}
+
+.steen-nu {
+  width: calc(var(--s) * 1.28);
+  height: calc(var(--s) * 1.28);
+  border: 4px solid var(--accent);
+  font-size: calc(var(--s) * 0.64);
+  box-shadow: 0 6px 16px rgba(31, 95, 191, 0.22);
+}
+
+.steen-nu.steen-spatie {
+  width: calc(var(--s) * 2.2);
+  font-size: calc(var(--s) * 0.38);
+}
+
+/* Het einde: Fien en Jef steken hun duim op. */
+.beek-einde {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  background: rgba(255, 255, 255, 0.93);
+}
+
+.beek-einde-tekst {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
 }
 
 /* ---------- oefenbord ---------- */
@@ -900,35 +1429,52 @@ button {
   min-width: 2em;
   min-height: 1.3em;
   padding: 0 0.3em;
+  font-family: var(--lees);
   font-size: clamp(80px, 22vh, 200px);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.3;
   text-align: center;
-  border: 6px solid var(--rand);
+  border: 2px solid var(--vol, var(--rand-knop));
+  border-bottom: 10px solid var(--vol, var(--rand-knop));
   border-radius: 28px;
-  background: var(--vlak);
+  background: var(--licht, var(--vlak));
 }
 
 .oefenbord-toets.is-spatie {
+  font-family: var(--kop);
   font-size: clamp(40px, 10vh, 90px);
   padding: 0.3em 0.8em;
 }
 
 .oefenbord-vinger {
-  font-size: 1.6rem;
-  font-weight: 700;
+  font-size: 1.5rem;
 }
 
 /* ---------- leerkracht ---------- */
 
+.scherm-leerkracht {
+  padding: 1rem clamp(14px, 3.5vw, 48px);
+  font-weight: 400;
+  font-family: var(--lees);
+}
+
 .scherm-leerkracht main {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 1rem 1.5rem 3rem;
+  padding: 1rem 0 3rem;
 }
 
 .scherm-leerkracht section {
   margin: 1.5rem 0;
+}
+
+.scherm-leerkracht h2 {
+  font-family: var(--kop);
+  margin-bottom: 0.4em;
+}
+
+.scherm-leerkracht p {
+  margin: 0.4rem 0;
 }
 
 .scherm-leerkracht table {
@@ -943,21 +1489,22 @@ button {
 
 .scherm-leerkracht th,
 .scherm-leerkracht td {
-  border: 1px solid #bbb;
+  border: 1px solid var(--rand-knop);
   padding: 0.3rem 0.6rem;
   text-align: left;
 }
 
 .lesfiche {
   background: var(--vlak);
-  border: 2px solid #bbb;
-  border-radius: 10px;
+  border: 1px solid var(--rand);
+  border-radius: 12px;
   padding: 0.4rem 1rem;
   margin: 0.5rem 0;
 }
 
 .lesfiche summary {
-  font-weight: 700;
+  font-family: var(--kop);
+  font-weight: 800;
   cursor: pointer;
 }
 
@@ -973,125 +1520,69 @@ button {
 .invoer {
   font: inherit;
   padding: 0.3rem 0.5rem;
-  border: 2px solid var(--rand);
+  border: 2px solid var(--rand-knop);
   border-radius: 8px;
 }
 
 .gevaar {
-  border: 3px solid #8b0000;
+  border: 2px solid #8b0000;
   border-radius: 12px;
   padding: 0.5rem 1rem 1rem;
 }
 
-/* ---------- beweging ---------- */
-
-.schud {
-  animation: schud 0.35s;
-}
-
-@keyframes schud {
-  25% { transform: translateX(-6px) rotate(-2deg); }
-  75% { transform: translateX(6px) rotate(2deg); }
-}
-
-.zwaai .figuur {
-  animation: zwaai 1.6s ease-in-out infinite alternate;
-  transform-origin: bottom center;
-}
-
-.zwaai .figuur:nth-child(2) {
-  animation-delay: 0.4s;
-}
-
-@keyframes zwaai {
-  from { transform: rotate(-4deg); }
-  to { transform: rotate(4deg); }
-}
-
-/* Vraagt het toestel om minder beweging, dan valt alle animatie weg.
-   Een fout blijft zichtbaar via een stippelrand in plaats van schudden. */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation: none !important;
-    transition: none !important;
-  }
-
-  .schud {
-    outline: 4px dashed #000;
-    outline-offset: 2px;
-  }
-}
-
-/* ---------- Fien en Jef ---------- */
-
-.figuur {
-  height: var(--h);
-  width: auto;
-}
-
 /* ---------- Schalen met de hoogte ----------
-   1cqh = 1% van de hoogte van het podium (het vlak tussen de kop en het
+   1cqh = 1% van de hoogte van het podium (het vlak tussen de bovenbalk en het
    toetsenbord). Elke maat heeft een onder- en bovengrens met clamp(). */
 
-.podium .blok { gap: clamp(4px, 2.2cqh, 12px); }
-.podium h2 { font-size: clamp(15px, 8cqh, 28px); margin: 0; }
-.podium .grote-tekst { font-size: clamp(15px, 8.5cqh, 28px); }
-.podium .opdracht,
-.podium .hint-enter { font-size: clamp(14px, 7cqh, 22px); }
-.podium .teller { font-size: clamp(13px, 5cqh, 18px); }
-.podium .ballon { padding: clamp(4px, 2cqh, 12px) 1.1rem; }
-.podium .knop-hoofd { font-size: clamp(15px, 7cqh, 22px); padding: 0.35em 1.2em; }
-.podium .figuur-heel { height: min(var(--h), 62cqh); }
-.podium .figuur-gezicht { height: min(var(--h), 44cqh); }
-.podium .met-figuren { gap: clamp(8px, 3cqh, 20px); }
+.podium .blok {
+  gap: clamp(4px, 2.6cqh, 14px);
+  padding: clamp(4px, 3cqh, 20px) clamp(12px, 3vw, 40px);
+}
+.podium .grote-tekst { font-size: clamp(15px, 7.4cqh, 26px); }
+.podium .blok > .opdracht,
+.podium .hint-enter { font-size: clamp(14px, 6cqh, 20px); }
+.podium .ballon { padding: clamp(4px, 2.6cqh, 14px) 1.1rem; }
+.podium .enter-rij .knop-hoofd,
+.podium .knoppen .knop { font-size: clamp(14px, 5.6cqh, 18px); min-height: clamp(30px, 13cqh, 48px); }
+.podium .figuur-heel { height: min(var(--h), 56cqh); }
+.podium .figuur-gezicht { height: min(var(--h), 38cqh); }
+.podium .met-figuren { gap: clamp(10px, 4cqh, 24px); }
+.podium .leerkracht-uitleg { font-size: clamp(11px, 4.3cqh, 16px); }
+.podium .leerkracht-uitleg p { margin: 0.2em 0; }
+.podium .blok-check:has(.leerkracht-uitleg) .figuur { height: min(var(--h), 22cqh); }
 
-.podium .grote-toets { font-size: clamp(40px, 44cqh, 140px); }
-.podium .grote-toets.is-spatie { font-size: clamp(24px, 17cqh, 64px); }
-.podium .lamp { width: clamp(28px, 15cqh, 56px); height: clamp(28px, 15cqh, 56px); }
+.podium .grote-toets { font-size: clamp(40px, 40cqh, 130px); }
+.podium .grote-toets.is-spatie { font-size: clamp(24px, 16cqh, 60px); }
+.podium .lamp { width: clamp(28px, 14cqh, 56px); height: clamp(28px, 14cqh, 56px); }
 
-.podium .typregel { font-size: clamp(26px, 24cqh, 72px); }
-.podium .volgende-regels { font-size: clamp(14px, 8cqh, 30px); min-height: 0; }
-
-.podium .sterren .ster { width: clamp(30px, 17cqh, 72px); height: clamp(30px, 17cqh, 72px); }
+.podium .sterren .ster { width: clamp(28px, 15cqh, 64px); height: clamp(28px, 15cqh, 64px); }
 .podium .klap { font-size: clamp(18px, 8cqh, 32px); }
 
 /* Licht aan in het huis */
-.podium .huis { width: auto; }
-.podium .huis-dak { height: clamp(16px, 13cqh, 60px); }
+.podium .huis-dak { height: clamp(16px, 12cqh, 56px); }
 .podium .verdieping { padding: clamp(2px, 1.6cqh, 9px) 0.8rem; }
-.podium .verdieping-naam { font-size: clamp(13px, 7cqh, 22px); }
-.podium .raam { height: clamp(18px, 16cqh, 52px); width: clamp(24px, 22cqh, 68px); }
-.podium .spel-rij { gap: clamp(12px, 4cqh, 32px); }
+.podium .verdieping-naam { font-size: clamp(13px, 6.4cqh, 21px); }
+.podium .raam { height: clamp(18px, 15cqh, 50px); width: clamp(24px, 21cqh, 66px); }
+.podium .spel-rij { gap: clamp(12px, 5cqh, 40px); }
+.podium .lichtaan-zijde { gap: clamp(8px, 4cqh, 16px); }
 
 /* Over de beek */
-.podium .beek { height: clamp(90px, 64cqh, 200px); padding-top: clamp(30px, 24cqh, 75px); }
-.podium .oever { margin-top: calc(-1 * clamp(30px, 24cqh, 75px)); }
-.podium .steen {
-  width: clamp(34px, 22cqh, 72px);
-  height: clamp(28px, 19cqh, 60px);
-  font-size: clamp(16px, 10cqh, 32px);
-  flex: 0 1 auto;
-}
-.podium .steen-plat { width: clamp(54px, 34cqh, 110px); height: clamp(22px, 14cqh, 44px); font-size: clamp(12px, 6cqh, 18px); }
-.podium .huisje { width: clamp(28px, 18cqh, 60px); height: clamp(28px, 18cqh, 60px); }
-.podium .springers .figuur { height: min(var(--h), 23cqh); }
+.podium .beek-boven .opdracht { font-size: clamp(14px, 5.4cqh, 18px); color: var(--tekst); }
+.podium .beek-einde .figuur { height: min(var(--h), 30cqh); }
 
 /* Oefenbord */
-.podium .oefenbord-toets { font-size: clamp(60px, 48cqh, 200px); }
-.podium .oefenbord-toets.is-spatie { font-size: clamp(30px, 22cqh, 90px); }
-.podium .oefenbord-vinger { font-size: clamp(16px, 8cqh, 26px); margin: 0.3em 0 0; }
+.podium .oefenbord-toets { font-size: clamp(60px, 44cqh, 190px); }
+.podium .oefenbord-toets.is-spatie { font-size: clamp(30px, 20cqh, 86px); }
+.podium .oefenbord-vinger { font-size: clamp(16px, 7cqh, 24px); }
 
-/* "Druk op Enter om verder te gaan" met de knop Verder op dezelfde regel */
-.enter-rij {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+/* Smalle schermen: de zijkolommen worden kleiner of vallen weg. */
+@media (max-width: 900px) {
+  .start-figuren,
+  .tip-zijde {
+    display: none;
+  }
+
+  .startzin {
+    display: none;
+  }
 }
-
-/* Startscherm: ook op een laag scherm alles zichtbaar */
-.start-kop .figuur { height: min(var(--h), 18vh); }
-.tegel { min-height: clamp(84px, 19vh, 140px); }

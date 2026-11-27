@@ -96,6 +96,21 @@ export function leerkrachtScherm(app: App, wortel: HTMLElement): Scherm {
     t(v.allesOpen ? "leerkracht.allesDicht" : "leerkracht.allesOpen"),
   );
 
+  // Hulp op het schermtoetsenbord: altijd zichtbaar (standaard, K17) of pas na een fout.
+  const hulpKnop = el(
+    "button",
+    {
+      class: "knop",
+      type: "button",
+      onclick: () => {
+        v.instellingen.hulpPasNaFout = !v.instellingen.hulpPasNaFout;
+        app.bewaar();
+        app.naarLeerkracht();
+      },
+    },
+    t(v.instellingen.hulpPasNaFout ? "leerkracht.hulpAltijdKnop" : "leerkracht.hulpNaFoutKnop"),
+  );
+
   const bevestig = el("input", { type: "text", id: "wis-bevestig", autocomplete: "off", class: "invoer" });
   const wisMelding = el("p", { "aria-live": "polite" });
   const wisKnop = el(
@@ -136,6 +151,13 @@ export function leerkrachtScherm(app: App, wortel: HTMLElement): Scherm {
           ? el("p", {}, t("leerkracht.geenToetsen"))
           : tabel([t("leerkracht.kolToets"), t("leerkracht.kolAanslagen"), t("leerkracht.kolFouten"), t("leerkracht.kolFoutPct"), t("leerkracht.kolTijd")], toetsRijen)),
         el("section", {}, el("h2", {}, t("leerkracht.fichesTitel")), ...fiches),
+        el(
+          "section",
+          {},
+          el("h2", {}, t("leerkracht.hulpTitel")),
+          el("p", {}, t(v.instellingen.hulpPasNaFout ? "leerkracht.hulpNaFout" : "leerkracht.hulpAltijd")),
+          hulpKnop,
+        ),
         el("section", {}, el("h2", {}, t("leerkracht.testTitel")), el("p", {}, t("leerkracht.testUitleg")), allesOpenKnop),
         el(
           "section",

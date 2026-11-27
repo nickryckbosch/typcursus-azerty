@@ -39,7 +39,7 @@ export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
       ctx.app.bewaar();
       ctx.sessie.resultaat = { nauwkeurigheid: nauwk, gehaald, sterren, kort };
       ctx.volgende();
-    });
+    }, blok.tip);
   }
 
   if (!kort) {

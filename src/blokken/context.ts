@@ -22,6 +22,15 @@ export interface BlokContext {
   handen: HandenWeergave;
   /** toon op toetsenbord en hand welke toets en vinger nodig zijn (null: niets tonen) */
   toonHulp(teken: string | null): void;
+  /** na een fout: toon de juiste toets en vinger, en laat ze even sterker oplichten */
+  toonFout(teken: string | null): void;
+  /**
+   * Is de hulp altijd zichtbaar (K17, standaard), of pas na een fout of na
+   * HULP_NA_MS wachten (instelling op het leerkrachtscherm)?
+   */
+  hulpAltijd: boolean;
+  /** het nummer van dit blok in de les (vanaf 0) */
+  blokNummer(): number;
   /** lees voor (als voorlezen aan staat) en onthoud voor "lees nog eens" */
   zeg(tekst: string): void;
   /** naar het volgende blok */
@@ -35,6 +44,8 @@ export interface BlokContext {
   toonToetsenbord(aan: boolean): void;
   /** setTimeout die vanzelf stopt als het blok wisselt */
   later(fn: () => void, ms: number): void;
+  /** wacht zo lang voor de hulp verschijnt, als de hulp niet altijd zichtbaar is */
+  hulpNaMs: number;
   /** gegevens die blokken binnen deze les doorgeven (eindoefening naar afsluiter) */
   sessie: { resultaat?: EindResultaat };
 }

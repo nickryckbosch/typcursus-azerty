@@ -31,6 +31,18 @@ describe("opslag", () => {
     expect(JSON.parse(o.data.get(SLEUTEL)!).versie).toBe(VERSIE);
   });
 
+  it("hulp is standaard altijd zichtbaar, en de instelling wordt bewaard", () => {
+    const o = geheugen();
+    const v = nieuweVoortgang();
+    expect(v.instellingen.hulpPasNaFout).toBe(false);
+    v.instellingen.hulpPasNaFout = true;
+    bewaarVoortgang(v, o);
+    expect(leesVoortgang(o).instellingen.hulpPasNaFout).toBe(true);
+    // Oudere gegevens zonder dit veld: de hulp blijft altijd zichtbaar.
+    o.setItem(SLEUTEL, JSON.stringify({ versie: VERSIE, instellingen: { voorlezen: true } }));
+    expect(leesVoortgang(o).instellingen).toEqual({ voorlezen: true, hulpPasNaFout: false });
+  });
+
   it("geeft een nieuwe voortgang als er niets is", () => {
     expect(leesVoortgang(geheugen())).toEqual(nieuweVoortgang());
     expect(leesVoortgang(null)).toEqual(nieuweVoortgang());

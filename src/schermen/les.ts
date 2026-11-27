@@ -1,5 +1,6 @@
-// Het lesscherm: bovenaan de stapjes, in het midden het blok, onderaan het
-// schermtoetsenbord tussen de twee getekende handen.
+// Het lesscherm: bovenaan de balk met "Les 2 · Oefenregels 1" en een balkje
+// per blok, in het midden het blok, onderaan het schermtoetsenbord tussen de
+// twee getekende handen, met eronder de zin "Typ de k met je ...".
 
 import type { App, Scherm } from "../app";
 import { t, type TekstSleutel } from "../content";
@@ -8,22 +9,24 @@ import { blokFunctie } from "../blokken";
 import { metFienEnJef } from "../blokken/gedeeld";
 import { verderBij, zetBezigBij } from "../logica/voortgang";
 import type { BlokContext, BlokInstantie } from "../blokken/context";
-import { toetsVoorTeken } from "../logica/indeling";
+import { kleurVanVinger, toetsVoorTeken } from "../logica/indeling";
 import { voegAanslagenToe } from "../logica/statistieken";
 import { vraagIndelingOp } from "../logica/toetsenbordcheck";
 import { el } from "../weergave/dom";
 import { maakHanden } from "../weergave/handen";
 import { kop, voorleesKnop } from "../weergave/kop";
 import { spreek } from "../weergave/spraak";
-import { tekenNaam } from "../weergave/tekens";
 import { maakToetsenbord } from "../weergave/toetsenbord";
 
 export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: number): Scherm {
   const toetsenbord = maakToetsenbord(les.geleerdeToetsen);
   const handen = maakHanden(t("hand.links"), t("hand.rechts"));
   const podium = el("main", { class: "podium", "aria-live": "polite" });
-  const hulpregel = el("p", { class: "hulpregel", "aria-live": "polite" });
-  const stapjes = el("ol", { class: "stapjes", "aria-label": t("les.stapjes") });
+  const hulpStip = el("span", { class: "hulp-stip", "aria-hidden": "true" });
+  const hulpTekst = el("span", {});
+  const hulpregel = el("p", { class: "hulpregel leeg", "aria-live": "polite" }, hulpStip, hulpTekst);
+  const titel = el("h1", { class: "kop-titel" });
+  const stapjes = el("ol", { class: "balkjes", "aria-label": t("les.stapjes") });
   let laatsteTekst = "";
   const leesNogEens = el(
     "button",
@@ -46,14 +49,13 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: n
   const scherm = el("div", { class: "scherm scherm-les" });
   wortel.append(scherm);
   scherm.append(
-    kop(app, t("les.titel", { nummer: les.id, titel: les.titel }), stapjes, leesNogEens, voorleesKnop(app, () => {
+    kop(app, el("div", { class: "kop-les" }, titel, stapjes), leesNogEens, voorleesKnop(app, () => {
       werkLeesKnopBij();
       spreek(laatsteTekst);
     })),
     toetsenbordMelding,
     podium,
-    hulpregel,
-    el("footer", { class: "typzone" }, handen.links, toetsenbord.element, handen.rechts),
+    el("footer", { class: "typzone" }, el("div", { class: "typzone-rij" }, handen.links, toetsenbord.element, handen.rechts), hulpregel),
   );
 
   let index = startBlok ?? 0;
@@ -82,15 +84,28 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: n
       if (!gevonden || teken === null) {
         toetsenbord.markeer([]);
         handen.toon([]);
-        hulpregel.textContent = "";
+        hulpTekst.textContent = "";
+        hulpregel.classList.add("leeg");
         return;
       }
       toetsenbord.markeer([gevonden.toets.code]);
       handen.toon([gevonden.toets.vinger]);
-      hulpregel.textContent = t("hulp.teken", {
-        teken: tekenNaam(teken),
-        vinger: t(`vinger.${gevonden.toets.vinger}` as TekstSleutel),
-      });
+      hulpStip.className = `hulp-stip kleur-${kleurVanVinger(gevonden.toets.vinger)}`;
+      hulpregel.classList.remove("leeg");
+      hulpTekst.textContent =
+        teken === " "
+          ? t("hulp.spatie")
+          : t("hulp.teken", { teken, vinger: t(`vinger.${gevonden.toets.vinger}` as TekstSleutel) });
+    },
+    toonFout(teken) {
+      ctx.toonHulp(teken);
+      toetsenbord.benadruk();
+      handen.benadruk();
+    },
+    hulpAltijd: !app.voortgang.instellingen.hulpPasNaFout,
+    hulpNaMs: 3000,
+    blokNummer() {
+      return index;
     },
     zeg(tekst) {
       laatsteTekst = tekst;
@@ -123,7 +138,7 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: n
         el(
           "li",
           {
-            class: i < index ? "stapje klaar" : i === index ? "stapje huidig" : "stapje",
+            class: i < index ? "balkje klaar" : i === index ? "balkje huidig" : "balkje",
             "aria-current": i === index ? "step" : undefined,
             title: blok.titel,
           },
@@ -152,6 +167,7 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: n
     werkStapjesBij();
     werkToetsenbordMeldingBij();
     const blok = les.online[i];
+    titel.textContent = t("les.kop", { nummer: les.id, titel: blok.titel });
     const functie = blokFunctie(blok);
     instantie = functie ? functie(blok, ctx) : null;
   }
@@ -168,19 +184,20 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: n
     index = blok;
     werkStapjesBij();
     ctx.toonToetsenbord(false);
-    const titel = les.online[blok].titel;
-    const tekst = t("verder.vraag", { nummer: blok + 1, titel });
+    const blokTitel = les.online[blok].titel;
+    titel.textContent = t("les.kop", { nummer: les.id, titel: blokTitel });
+    const tekst = t("verder.vraag", { nummer: blok + 1, titel: blokTitel });
     const opnieuw = el("button", { class: "knop", type: "button", onclick: () => toonBlok(0) }, t("verder.opnieuw"));
     const verder = el(
       "button",
       { class: "knop knop-hoofd", type: "button", onclick: () => toonBlok(blok) },
-      t("verder.knop", { nummer: blok + 1, titel }),
+      t("verder.knop", { nummer: blok + 1, titel: blokTitel }),
     );
     podium.append(
       el(
         "div",
         { class: "blok blok-verder" },
-        metFienEnJef("blij", el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, tekst))),
+        metFienEnJef("zwaai", el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, tekst))),
         el("div", { class: "knoppen" }, verder, opnieuw),
       ),
     );
