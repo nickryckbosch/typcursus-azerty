@@ -14,7 +14,7 @@ De volledige bronnenlijst staat in projectdocument 13 (onderzoeksagenda) en 14 (
 
 - Tijdens het typen beweegt er niets, behalve de toets en de vinger die oplichten.
 - Niets verspringt: elk oefenscherm heeft vaste zones, en wat later verschijnt, staat er van bij het begin en neemt zijn ruimte al in (beslissing 12c).
-- Verschijnen en aangaan (de Enter-regel, "Klap!", de lamp, een raam, een nieuwe letter op de kaart) gebeurt met een korte, rustige overgang van 180 ms, en meteen als het toestel om minder beweging vraagt. Dat is de enige beweging.
+- Verschijnen en aangaan (de Enter-regel, "Wacht op de lamp.", de lamp, een raam, een nieuwe letter op de kaart) gebeurt met een korte, rustige overgang van 180 ms, en meteen als het toestel om minder beweging vraagt. Dat is de enige beweging.
 - Geen animaties: niets schudt, wiebelt, knippert, springt of schuift. Een fout zie je doordat de cursor blijft staan en de juiste toets en vinger even sterker oplichten.
 - Fien en Jef staan stil. Ze veranderen alleen van houding bij de start (zwaaien) en op het einde (duim omhoog of aanmoedigen), nooit bij elke toets of fout.
 - Een spel heeft een vaste prent bovenaan. De vooruitgang staat eronder (bijvoorbeeld een rij stenen), niet in de prent.

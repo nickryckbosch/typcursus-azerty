@@ -89,18 +89,22 @@ function woord(rij: Rij): SVGGElement {
   );
 }
 
-export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
-  const rijen = (blok.rijen ?? VERDIEPINGEN) as Rij[];
-  const rondes = lichtAanRondes(rijen, blok.rondes ?? 9);
-  let ronde = 0;
-  let wacht = false;
-  let klaar = false;
+export interface HuisTekening {
+  svg: SVGSVGElement;
+  ramen: Map<Rij, SVGGElement[]>;
+  woorden: Map<Rij, SVGGElement>;
+}
 
+/**
+ * Het huis met de ramen (alle lichten uit) en de woorden links. Dezelfde
+ * tekening staat in de intro van les 0 en in het spel "Licht aan in het huis".
+ */
+export function maakHuis(label: string): HuisTekening {
   const ramen = new Map<Rij, SVGGElement[]>();
   const woorden = new Map<Rij, SVGGElement>();
   // De viewBox is het deel van de referentie waar iets staat, zodat de tekening
   // zo groot mogelijk in haar zone past. De verhoudingen blijven die van K21.
-  const huis = svg("svg", { class: "huis", viewBox: "14 14 532 316", role: "img", "aria-label": blok.titel }, huisVorm());
+  const huis = svg("svg", { class: "huis", viewBox: "14 14 532 316", role: "img", "aria-label": label }, huisVorm());
   for (const rij of VERDIEPINGEN) {
     const lijst = RAAM_X.map((x) => raam(x, LAAG[rij].ramen));
     ramen.set(rij, lijst);
@@ -108,6 +112,19 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
     woorden.set(rij, w);
     huis.append(...lijst, w);
   }
+  return { svg: huis, ramen, woorden };
+}
+
+export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
+  const rijen = (blok.rijen ?? VERDIEPINGEN) as Rij[];
+  const rondes = lichtAanRondes(rijen, blok.rondes ?? 9);
+  let ronde = 0;
+  // Alleen de eerste toets per ronde telt: na een foute toets telt even niets,
+  // zodat rammen niet helpt. Na een juiste toets is de volgende ronde meteen aan de beurt.
+  let wacht = false;
+  let klaar = false;
+
+  const { svg: huis, ramen, woorden } = maakHuis(blok.titel);
 
   // Het huis staat in het midden in zijn vaste zone, Fien en Jef staan links ernaast.
   const scherm = oefenscherm(ctx, { figuren: "blij", klasse: "blok-lichtaan" });

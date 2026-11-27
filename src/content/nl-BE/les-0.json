@@ -54,6 +54,7 @@
     {
       "type": "intro",
       "titel": "Fien en Jef stellen hun huis voor",
+      "prent": "huis",
       "duurMinuten": 1,
       "tekst": "Hallo! Wij zijn Fien en Jef. Dit is ons huis: het toetsenbord. Het heeft een zolder, een woonkamer en een kelder. In de woonkamer wonen je vingers. Kom je mee kijken?"
     },
@@ -96,7 +97,7 @@
       "regels": [],
       "doelNauwkeurigheid": null,
       "soort": "houding",
-      "beschrijving": "Fien en Jef zeggen \"Voeten plat, rug recht!\". Het kind legt de handen in de woonkamer en drukt drie keer de spatiebalk in, telkens als Jef in zijn handen klapt. Er wordt niets gemeten; les 1 gaat open zodra les 0 afgewerkt is."
+      "beschrijving": "Fien en Jef zeggen \"Voeten plat, rug recht!\". Daarna legt het kind de handen in de woonkamer en drukt drie keer de spatiebalk in, telkens als de lamp aangaat (dezelfde lamp als in \"Duim op de spatiebalk\"). Drukt het kind te vroeg, dan verschijnt onder de lamp \"Wacht op de lamp.\"; dat telt niet als fout. Er wordt niets gemeten; les 1 gaat open zodra les 0 afgewerkt is."
     },
     {
       "type": "afsluiter",

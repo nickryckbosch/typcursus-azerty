@@ -60,7 +60,9 @@ export const afsluiter: BlokFunctie<AfsluiterBlok> = (blok, ctx) => {
       el("p", { class: "sterren-tekst" }, t("les.sterren", { aantal: resultaat.sterren })),
     );
     if (resultaat.gehaald) {
-      scherm.zetOpdracht(blok.tekst ?? "");
+      // Minder dan drie sterren: de app voegt zelf de uitnodiging toe, voor elke les.
+      const tekst = resultaat.sterren < 3 ? `${blok.tekst ?? ""} ${t("eind.nietAlleSterren")}`.trim() : blok.tekst ?? "";
+      scherm.zetOpdracht(tekst);
       if (volgendeOpen) knop(t("knop.volgendeLes", { nummer: volgendeLes.id }), () => app.naarLes(volgendeLes));
       if (resultaat.sterren < 3) knop(t("knop.meerSterren"), () => ctx.gaNaar(ctx.indexVan("eindoefening")));
     } else {

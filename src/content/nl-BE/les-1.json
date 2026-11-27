@@ -75,7 +75,7 @@
         "j"
       ],
       "aantal": 20,
-      "tekst": "Druk op de letter die je ziet. De hand op het scherm toont welke vinger."
+      "tekst": "Druk op de toets die je ziet. De hand op het scherm toont welke vinger."
     },
     {
       "type": "reeks",
@@ -134,7 +134,7 @@
       "type": "afsluiter",
       "titel": "Goed gedaan",
       "duurMinuten": 1,
-      "tekst": "Goed gedaan! Je weet nu waar wij wonen. Nog niet alle sterren? Probeer de eindoefening nog eens, wij wachten op je."
+      "tekst": "Goed gedaan! Je weet nu waar wij wonen."
     }
   ],
   "groepjes": [

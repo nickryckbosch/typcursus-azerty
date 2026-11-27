@@ -4,7 +4,11 @@
 // Bestaat het blok alleen uit de spatie (les 0, "Duim op de spatiebalk"), dan
 // staat er een getekende lamp. Ze staat van bij het begin (uit) in beeld, op
 // een vaste plek, en gaat zichtbaar aan: dan mag het kind drukken. Een doel,
-// een voorwerp, een signaal: er komt geen kaart "spatie" meer bij.
+// een voorwerp, een signaal: er komt geen kaart "spatie" meer bij. Drukt het
+// kind te vroeg, dan verschijnt onder de lamp "Wacht op de lamp." (geen fout).
+//
+// Bij de spatie staat in de kaart een getekende spatiebalk in plaats van het
+// woord "spatie": de spatie is geen letter.
 //
 // Een aanslag gaat nooit verloren: de volgende letter is geldig vanaf het
 // moment dat de vorige juist getypt is, en op het einde gaat het blok meteen
@@ -14,7 +18,8 @@ import type { ZoekToetsBlok } from "../content/types";
 import { zoekReeks } from "../logica/reeksen";
 import { nieuweOefening, teltAlsTeken, typ, volgendTeken } from "../logica/typen";
 import { el } from "../weergave/dom";
-import { lampTekening } from "../weergave/lamp";
+import { t } from "../content";
+import { lampMetWachtzin, lampTekening } from "../weergave/lamp";
 import { tekenTonen } from "../weergave/tekens";
 import type { BlokFunctie } from "./context";
 import { oefenscherm } from "./oefenscherm";
@@ -27,8 +32,11 @@ export const zoekToets: BlokFunctie<ZoekToetsBlok> = (blok, ctx) => {
 
   const scherm = oefenscherm(ctx, { klasse: "blok-zoek" });
   const letter = el("span", {});
-  const kaart = el("div", { class: "grote-toets" }, letter);
-  scherm.veld.append(metLamp ? lampTekening() : kaart);
+  // De spatie is geen letter: in de kaart staat dan een getekende spatiebalk (zelfde kaartmaat).
+  const spatiebalk = el("span", { class: "spatiebalk-tekening", role: "img", "aria-label": t("teken.spatie"), hidden: true });
+  const kaart = el("div", { class: "grote-toets" }, letter, spatiebalk);
+  const lamp = lampMetWachtzin(t("lamp.wacht"), () => scherm.element);
+  scherm.veld.append(metLamp ? lamp.element : kaart);
   // In de opdracht staat naast het woord "lamp" een klein beeldje van dezelfde lamp.
   scherm.zetOpdracht(blok.tekst ?? "", true, metLamp ? { lamp: () => lampTekening(true) } : {});
 
@@ -36,9 +44,11 @@ export const zoekToets: BlokFunctie<ZoekToetsBlok> = (blok, ctx) => {
     const teken = volgendTeken(oef);
     scherm.voortgang.zetBalk(oef.positie, reeks.length);
     if (teken === null) return;
-    letter.textContent = tekenTonen(teken);
-    kaart.classList.toggle("is-spatie", teken === " ");
-    for (const l of scherm.element.querySelectorAll(".lamp-tekening")) l.classList.toggle("aan", lampAan);
+    const isSpatie = teken === " ";
+    letter.textContent = isSpatie ? "" : tekenTonen(teken);
+    letter.hidden = isSpatie;
+    spatiebalk.hidden = !isSpatie;
+    if (metLamp) lamp.zetAan(lampAan);
     ctx.toonHulp(lampAan ? teken : null);
   }
 
@@ -52,7 +62,12 @@ export const zoekToets: BlokFunctie<ZoekToetsBlok> = (blok, ctx) => {
 
   return {
     opToets(e) {
-      if (!teltAlsTeken(e) || !lampAan) return;
+      if (!teltAlsTeken(e)) return;
+      if (!lampAan) {
+        // Te vroeg: geen fout, maar wel een reactie, anders voelt de toets kapot.
+        lamp.teVroeg();
+        return;
+      }
       const { juist, klaar } = typ(oef, e.key, performance.now());
       ctx.toetsenbord.flits(e.code, juist);
       if (!juist) {

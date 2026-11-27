@@ -92,6 +92,7 @@ Extra afspraken uit document 10 die de app raken:
     {
       "type": "intro",
       "titel": "Fien en Jef stellen hun huis voor",
+      "prent": "huis",
       "duurMinuten": 1,
       "tekst": "Hallo! Wij zijn Fien en Jef. Dit is ons huis: het toetsenbord. Het heeft een zolder, een woonkamer en een kelder. In de woonkamer wonen je vingers. Kom je mee kijken?"
     },
@@ -128,7 +129,7 @@ Extra afspraken uit document 10 die de app raken:
       "regels": [],
       "doelNauwkeurigheid": null,
       "soort": "houding",
-      "beschrijving": "Fien en Jef zeggen \"Voeten plat, rug recht!\". Het kind legt de handen in de woonkamer en drukt drie keer de spatiebalk in, telkens als Jef in zijn handen klapt. Er wordt niets gemeten; les 1 gaat open zodra les 0 afgewerkt is."
+      "beschrijving": "Fien en Jef zeggen \"Voeten plat, rug recht!\". Daarna legt het kind de handen in de woonkamer en drukt drie keer de spatiebalk in, telkens als de lamp aangaat (dezelfde lamp als in \"Duim op de spatiebalk\"). Drukt het kind te vroeg, dan verschijnt onder de lamp \"Wacht op de lamp.\"; dat telt niet als fout. Er wordt niets gemeten; les 1 gaat open zodra les 0 afgewerkt is."
     },
     {
       "type": "afsluiter",
@@ -209,7 +210,7 @@ Extra afspraken uit document 10 die de app raken:
       "toetsen": ["f", "j", " "],
       "nadruk": ["f", "j"],
       "aantal": 20,
-      "tekst": "Druk op de letter die je ziet. De hand op het scherm toont welke vinger."
+      "tekst": "Druk op de toets die je ziet. De hand op het scherm toont welke vinger."
     },
     {
       "type": "reeks",
@@ -260,7 +261,7 @@ Extra afspraken uit document 10 die de app raken:
       "type": "afsluiter",
       "titel": "Goed gedaan",
       "duurMinuten": 1,
-      "tekst": "Goed gedaan! Je weet nu waar wij wonen. Nog niet alle sterren? Probeer de eindoefening nog eens, wij wachten op je."
+      "tekst": "Goed gedaan! Je weet nu waar wij wonen."
     }
   ],
   "groepjes": ["fj", "jf", "ff", "jj", "fff", "jjj", "ffj", "jjf", "fjf", "jfj", "fjj", "jff", "fjfj", "jfjf", "ffjj", "jjff", "fjjf", "jffj", "fffj", "jjjf"],

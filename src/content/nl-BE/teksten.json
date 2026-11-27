@@ -109,10 +109,12 @@
 
   "eind.aanmoediging": "Fien en Jef: Het lukt bijna! We maken de eindoefening wat korter. Rustig en juist, jij kan dat!",
   "eind.nietGehaald": "Nog geen ster. Dat geeft niet: probeer de eindoefening nog eens. Rustig en juist, wij wachten op je.",
+  "eind.nietAlleSterren": "Nog niet alle sterren? Probeer de eindoefening nog eens, wij wachten op je.",
 
   "houding.zeg": "Voeten plat, rug recht!",
-  "houding.opdracht": "Druk op [spatie] als Jef in zijn handen klapt.",
-  "houding.klap": "Klap!",
+  "houding.opdracht": "Leg je handen in de woonkamer. Gaat de lamp aan? Druk op de spatiebalk.",
+  "lamp.wacht": "Wacht op de lamp.",
+  "intro.huis": "Het huis van Fien en Jef: de zolder, de woonkamer en de kelder.",
   "houding.klaar": "Klaar voor de start!",
 
   "lichtaan.opdracht": "Druk op een toets van de **{rij}**.",
