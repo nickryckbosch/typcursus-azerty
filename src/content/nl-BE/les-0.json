@@ -74,7 +74,7 @@
         " "
       ],
       "aantal": 5,
-      "tekst": "Leg je duimen op de spatiebalk. Gaat de lamp aan? Druk!"
+      "tekst": "Leg je duimen op de spatiebalk. Gaat de lamp aan? Druk [spatie]."
     },
     {
       "type": "spel",
