@@ -40,7 +40,9 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 - [ ] **Toetsenbordcheck:** zegt de app dat je toetsenbord klopt? Zet de Chromebook daarna eens op een andere invoermethode (bijvoorbeeld Engels) en doe les 0 opnieuw: verschijnt de melding "Vraag even hulp aan je juf of meester", met uitleg voor de leerkracht? Zet het daarna terug op Belgisch.
 - [ ] **Duim op de spatiebalk:** staat de lamp van bij het begin in beeld? Gaat ze duidelijk aan, en kan je pas drukken als ze brandt? Begrijpt een kind zonder uitleg wat het moet doen?
 - [ ] **Licht aan in het huis:** wordt het woord van de juiste verdieping donker (zonder te knipperen)? Zijn de woorden links van het huis goed leesbaar? Licht bij een verkeerde rij de juiste rij op het toetsenbord op? Branden na 9 rondes alle ramen?
-- [ ] **Klaar voor de start:** is meteen duidelijk dat je op de spatiebalk moet drukken? Verschijnt "Klap!" zonder dat er iets verspringt, en telt de spatiebalk telkens mee (3 keer)?
+- [ ] **Klaar voor de start:** is meteen duidelijk dat je op de spatiebalk moet drukken als de lamp aangaat? Telt de spatiebalk telkens mee (3 keer)?
+- [ ] **Te vroeg drukken** bij beide lampoefeningen: verschijnt "Wacht op de lamp." onder de lamp, zonder dat er iets verspringt? Verdwijnt de zin als de lamp aangaat?
+- [ ] **Intro van les 0:** staat het huis naast de tekst, met alle ramen uit?
 - [ ] Op het einde: steken Fien en Jef hun duim op, en kan je met de knop meteen naar les 1?
 
 ## Les 1

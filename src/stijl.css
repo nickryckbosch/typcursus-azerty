@@ -1710,14 +1710,35 @@ button {
   }
 }
 
-.grote-toets.is-spatie span {
-  font-family: var(--kop);
-  font-size: 0.4em;
-  position: relative;
-  top: -0.55em;
-}
 
 /* ---------- De lamp (Duim op de spatiebalk) ---------- */
+
+/* De lamp met daaronder een vaste plek voor "Wacht op de lamp.": die plek is
+   er van bij het begin (onzichtbaar), zodat er niets verspringt. */
+.lamp-plek {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2px, 1.5cqh, 8px);
+}
+
+.lamp-plek .lamp-tekening {
+  flex: 0 1 auto;
+  min-height: 0;
+  height: calc(100% - 2.2em);
+  max-height: 190px;
+}
+
+.wachtzin {
+  flex: none;
+  min-height: 1.4em;
+  font-size: clamp(14px, 6cqh, 20px);
+  font-weight: 800;
+  color: var(--zacht);
+}
 
 .lamp-tekening {
   display: block;
@@ -1772,17 +1793,6 @@ button {
   height: 1.35em;
 }
 
-/* ---------- Het signaal "Klap!" (Klaar voor de start) ----------
-   Op een vaste plek in het midden; het verschijnt en verdwijnt alleen. */
-
-.klap {
-  font-size: clamp(20px, 13cqh, 46px);
-  font-weight: 800;
-  padding: 0.1em 0.9em;
-  border: 3px solid #1f1f1f;
-  border-radius: 999px;
-  background: #ffee99;
-}
 
 /* ---------- Licht aan in het huis (K21, stijlgids deel 8) ----------
    De raamkleuren zijn nagemeten tegen de vingerkleuren (palet C): verander ze
@@ -1827,3 +1837,46 @@ button {
 
 .podium .sterren .ster { width: clamp(28px, 22cqh, 84px); height: clamp(28px, 22cqh, 84px); }
 .sterren-tekst { font-size: clamp(13px, 5.4cqh, 18px); color: var(--zacht); }
+
+/* ---------- De getekende spatiebalk in de kaart (zoek de toets) ----------
+   De spatie is geen letter: in de kaart staat een spatiebalk, getekend zoals
+   de spatiebalk van het schermtoetsenbord. De kaart houdt dezelfde maat. */
+.spatiebalk-tekening {
+  display: inline-block;
+  vertical-align: middle;
+  width: 2.1em;
+  height: 0.42em;
+  border: 2px solid var(--rand-knop);
+  border-bottom: 5px solid var(--grijs);
+  border-radius: 0.1em;
+  background: var(--vlak);
+  position: relative;
+  top: -0.05em;
+}
+
+/* ---------- Intro van les 0: het huis naast de tekstballon ---------- */
+.intro-prent {
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 2.5cqw, 28px);
+}
+
+.intro-prent .huis {
+  flex: 0 1 46%;
+  min-width: 0;
+  height: 92%;
+  width: auto;
+}
+
+.intro-prent .ballon {
+  flex: 1 1 54%;
+  min-width: 0;
+}
+
+.blok-intro.met-huis .grote-tekst {
+  font-size: clamp(14px, 6.4cqh, 22px);
+}

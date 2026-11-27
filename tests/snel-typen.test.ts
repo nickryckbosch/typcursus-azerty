@@ -57,6 +57,13 @@ function druk(blok: BlokInstantie, teken: string): void {
   vi.advanceTimersByTime(TUSSENTIJD);
 }
 
+/** Het teken op de kaart: een letter, of de getekende spatiebalk. */
+function kaartTeken(podium: HTMLElement): string {
+  const balk = podium.querySelector(".spatiebalk-tekening") as HTMLElement | null;
+  if (balk && !balk.hidden) return " ";
+  return podium.querySelector(".grote-toets span")!.textContent!;
+}
+
 function vind<T extends Blok>(les: Les, test: (b: Blok) => boolean): T {
   return les.online.find(test) as T;
 }
@@ -75,8 +82,7 @@ describe("snel typen: geen enkele aanslag gaat verloren", () => {
     const { ctx, aanslagen, aantalVolgende } = maakContext(les);
     const inst = zoekToets(blok, ctx);
     for (let i = 0; i < blok.aantal; i++) {
-      const kaart = ctx.podium.querySelector(".grote-toets")!.textContent!;
-      druk(inst, kaart === "spatie" ? " " : kaart);
+      druk(inst, kaartTeken(ctx.podium));
     }
     expect(aanslagen()).toHaveLength(blok.aantal);
     expect(aanslagen().every((a) => a.juist)).toBe(true);
@@ -88,10 +94,8 @@ describe("snel typen: geen enkele aanslag gaat verloren", () => {
     const blok: ZoekToetsBlok = { ...vind<ZoekToetsBlok>(les, (b) => b.type === "zoek-toets"), aantal: 2 };
     const { ctx, aanslagen } = maakContext(les);
     const inst = zoekToets(blok, ctx);
-    const eerste = ctx.podium.querySelector(".grote-toets")!.textContent!;
-    druk(inst, eerste === "spatie" ? " " : eerste);
-    const tweede = ctx.podium.querySelector(".grote-toets")!.textContent!;
-    druk(inst, tweede === "spatie" ? " " : tweede);
+    druk(inst, kaartTeken(ctx.podium));
+    druk(inst, kaartTeken(ctx.podium));
     expect(aanslagen().map((a) => a.juist)).toEqual([true, true]);
   });
 
@@ -134,5 +138,24 @@ describe("snel typen: geen enkele aanslag gaat verloren", () => {
     }
     expect(ctx.podium.querySelectorAll(".raam.aan").length).toBe(9);
     expect(ctx.podium.querySelector(".enter-rij")!.classList.contains("onzichtbaar")).toBe(false);
+  });
+
+  it("te vroeg drukken bij de lamp: geen fout, wel de zin \"Wacht op de lamp.\"", () => {
+    const les = LESSEN[0];
+    const blok = vind<ZoekToetsBlok>(les, (b) => b.type === "zoek-toets");
+    const { ctx, aanslagen } = maakContext(les);
+    const inst = zoekToets(blok, ctx);
+    const zin = ctx.podium.querySelector(".wachtzin")!;
+    expect(zin.classList.contains("onzichtbaar")).toBe(true);
+    druk(inst, " "); // de lamp is nog uit
+    expect(zin.classList.contains("onzichtbaar")).toBe(false);
+    vi.advanceTimersByTime(1000); // de lamp gaat aan
+    expect(zin.classList.contains("onzichtbaar")).toBe(true);
+    for (let i = 0; i < blok.aantal; i++) {
+      druk(inst, " ");
+      vi.advanceTimersByTime(1600);
+    }
+    expect(aanslagen()).toHaveLength(blok.aantal);
+    expect(aanslagen().every((a) => a.juist)).toBe(true);
   });
 });

@@ -6,7 +6,7 @@
 // De stralen zorgen dat je ook zonder op de kleur te letten ziet dat ze brandt.
 // Dezelfde tekening staat klein in de opdracht, naast het woord "lamp".
 
-import { svg } from "./dom";
+import { el, svg } from "./dom";
 
 const LIJN = "#1F1F1F";
 
@@ -45,4 +45,32 @@ export function lampTekening(klein = false): SVGSVGElement {
       svg("path", { d: "M62 132h16l-3 8h-10z", fill: LIJN }),
     ),
   );
+}
+
+export interface LampMetWachtzin {
+  element: HTMLElement;
+  /** zet de lamp (en het beeldje in de opdracht) aan of uit; de wachtzin verdwijnt als de lamp aangaat */
+  zetAan(aan: boolean): void;
+  /** het kind drukte te vroeg: toon "Wacht op de lamp." (telt niet als fout) */
+  teVroeg(): void;
+}
+
+/**
+ * De lamp met daaronder een vaste plek voor de zin "Wacht op de lamp.". Die
+ * plek is er van bij het begin, zodat er niets verspringt als de zin verschijnt.
+ * Gebruikt in "Duim op de spatiebalk" en "Klaar voor de start" (les 0).
+ */
+export function lampMetWachtzin(wachtzin: string, binnen: () => ParentNode): LampMetWachtzin {
+  const zin = el("p", { class: "wachtzin zacht onzichtbaar", "aria-live": "polite" }, wachtzin);
+  const element = el("div", { class: "lamp-plek" }, lampTekening(), zin);
+  return {
+    element,
+    zetAan(aan) {
+      for (const l of binnen().querySelectorAll(".lamp-tekening")) l.classList.toggle("aan", aan);
+      if (aan) zin.classList.add("onzichtbaar");
+    },
+    teVroeg() {
+      zin.classList.remove("onzichtbaar");
+    },
+  };
 }

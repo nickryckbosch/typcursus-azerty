@@ -16,6 +16,8 @@ interface BlokBasis {
 
 export interface IntroBlok extends BlokBasis {
   type: "intro";
+  /** een prent bij de tekst, in de zone van de prent; "huis": het huis van "Licht aan in het huis" */
+  prent?: "huis";
 }
 
 export interface ToetsenbordcheckBlok extends BlokBasis {
