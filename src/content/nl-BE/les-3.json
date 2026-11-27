@@ -1,0 +1,180 @@
+{
+  "id": 3,
+  "titel": "Even naar de zolder",
+  "nieuweToetsen": [
+    "e",
+    "i"
+  ],
+  "geleerdeToetsen": [
+    "f",
+    "j",
+    "d",
+    "k",
+    "e",
+    "i",
+    " "
+  ],
+  "doelen": [
+    "Ik typ e en i: mijn middelvinger gaat even naar de zolder en meteen terug naar huis.",
+    "Ik typ ij als een i en een j.",
+    "Ik typ mijn eerste echte woorden."
+  ],
+  "klassikaal": {
+    "duurMinuten": 12,
+    "materiaal": "Nodig: de Chromebooks en het gewone bord (krijt of whiteboard). Handig als je het hebt, maar niet nodig: een digibord, de klasplaat, losse toetsenborden, een doek of handdoek per kind. Schrijf op het bord vijf woorden: ik, je, ei, die, kijk.",
+    "stappen": [
+      {
+        "titel": "Startzin en opwarmen",
+        "duurMinuten": 2,
+        "leerkracht": "Startzin. Daarna het stille handenspel van vorige keer: zeg f, j, d of k, de kinderen steken de juiste hand op en wiebelen met de juiste vinger. Vijf letters is genoeg.",
+        "kinderen": "Nemen de houding aan en antwoorden zonder te spreken met hand en vinger."
+      },
+      {
+        "titel": "Naar de zolder en terug",
+        "duurMinuten": 3,
+        "leerkracht": "\"Vandaag gaan je middelvingers voor het eerst naar de zolder. Boven de D woont de E, boven de K woont de I. Je vinger gaat naar boven, een klein beetje naar links, en meteen terug naar huis.\" Doe het voor met je hand in de lucht. Laat het oefenbord openen en zeg traag op de maat: \"d - e - d\", \"k - i - k\". \"Fien en Jef blijven thuis, alleen de middelvinger gaat op reis.\"",
+        "kinderen": "Typen d, e, d en k, i, k op de maat. Ze voelen dat de wijsvingers op de bultjes blijven liggen terwijl de middelvinger naar boven gaat."
+      },
+      {
+        "titel": "De ij is een i en een j",
+        "duurMinuten": 2,
+        "leerkracht": "\"In de klas schrijf je de ij als een letter. Op het toetsenbord typ je twee toetsen: eerst de i, dan de j. Niet de y!\" Schrijf ij op het bord en laat het drie keer typen.",
+        "kinderen": "Typen i en j na elkaar en zien op het scherm ij verschijnen."
+      },
+      {
+        "titel": "De eerste woorden",
+        "duurMinuten": 4,
+        "leerkracht": "\"Met deze zes letters kan je al echte woorden typen!\" Lees de woorden op het bord samen. Spel daarna een woord letter per letter (\"k - i - j - k\") en laat het typen. Vraag op het einde: \"Wie kent nog een woord met alleen deze letters?\" Schrijf goede voorstellen op het bord (bijvoorbeeld dik, dek, kei, idee).",
+        "kinderen": "Lezen de woorden mee en typen ze op het oefenbord. Ze bedenken samen nieuwe woorden en controleren of er alleen geleerde letters in zitten."
+      },
+      {
+        "titel": "Wat gaan we doen?",
+        "duurMinuten": 1,
+        "leerkracht": "\"Vandaag help je Jef een dijk bouwen: elk woord dat je typt, wordt een steen.\"",
+        "kinderen": "Starten met het online deel."
+      }
+    ]
+  },
+  "online": [
+    {
+      "type": "intro",
+      "titel": "Naar de zolder",
+      "duurMinuten": 1,
+      "tekst": "Vandaag gaan je middelvingers naar de zolder! Daar wonen de E en de I. Even naar boven, en meteen terug naar huis. En weet je wat? Nu kan je echte woorden typen!"
+    },
+    {
+      "type": "zoek-toets",
+      "titel": "Zoek op de zolder",
+      "duurMinuten": 2,
+      "toetsen": [
+        "e",
+        "i",
+        "d",
+        "k",
+        "f",
+        "j"
+      ],
+      "nadruk": [
+        "e",
+        "i"
+      ],
+      "aantal": 20,
+      "tekst": "Druk op de letter die je ziet. Is het een letter van de zolder, ga dan meteen terug naar huis."
+    },
+    {
+      "type": "reeks",
+      "titel": "Oefenregels 1",
+      "duurMinuten": 3,
+      "tekst": "Naar boven en terug. Typ wat je ziet.",
+      "regels": [
+        "ded kik ded kik",
+        "de ik de ik ei ie",
+        "ei ie ij ei ie ij",
+        "die dik fee kei"
+      ]
+    },
+    {
+      "type": "spel",
+      "titel": "Keien voor de dijk",
+      "spel": "dijk",
+      "duurMinuten": 3,
+      "tekens": [],
+      "woorden": [
+        "ei",
+        "ik",
+        "je",
+        "die",
+        "kei",
+        "eik",
+        "dek",
+        "dik",
+        "jij",
+        "kijk",
+        "dijk",
+        "idee",
+        "fee",
+        "keek",
+        "deed"
+      ],
+      "beschrijving": "Jef bouwt een dijk langs de beek. Bovenaan het scherm hangt een steen met een woord erop. Het kind typt het woord, letter per letter; elke juiste letter maakt de steen een beetje groter. Is het woord af, dan rolt de steen naar zijn plaats in de dijk. Een foute letter: de steen schudt even en de juiste vinger licht op. Na 10 stenen (woorden willekeurig uit de lijst, elk woord hoogstens twee keer) is de dijk klaar en zwaaien Fien en Jef bovenop. Geen tijd, geen punten."
+    },
+    {
+      "type": "reeks",
+      "titel": "Oefenregels 2",
+      "duurMinuten": 2,
+      "tekst": "Allemaal echte woorden. Lees ze eerst, typ ze dan.",
+      "regels": [
+        "ik je jij die",
+        "kei eik dek dijk",
+        "kijk fee jef"
+      ]
+    },
+    {
+      "type": "eindoefening",
+      "titel": "Eindoefening",
+      "duurMinuten": 3,
+      "doelNauwkeurigheid": 0.9,
+      "tekst": "Je eerste eindoefening met echte woorden. Rustig en juist.",
+      "regels": [
+        "ei ik je die kei",
+        "jij dik dek eik fee",
+        "kijk idee dijk deed"
+      ],
+      "regelsKort": [
+        "ei ik je die",
+        "kijk dijk idee"
+      ]
+    },
+    {
+      "type": "afsluiter",
+      "titel": "Goed gedaan",
+      "duurMinuten": 1,
+      "tekst": "Wauw, je typte je eerste echte woorden! Volgende keer worden je ringvingers wakker."
+    }
+  ],
+  "groepjes": [],
+  "woorden": [
+    "ik",
+    "je",
+    "jij",
+    "de",
+    "die",
+    "ei",
+    "eik",
+    "kei",
+    "fee",
+    "idee",
+    "dik",
+    "dikke",
+    "dek",
+    "dekje",
+    "dijk",
+    "kijk",
+    "kijkje",
+    "keek",
+    "deed",
+    "jee"
+  ],
+  "zinnen": [],
+  "tipLeerkracht": "Typische fouten: de e of de i wordt met de wijsvinger getypt, of de hele hand gaat mee naar boven en komt niet terug, waarna de volgende letters allemaal verschoven zijn. Stuur bij met \"Fien en Jef blijven thuis\" en laat \"d - e - d\" en \"k - i - k\" traag herhalen. Veel kinderen typen y in plaats van ij; herhaal dat ij twee toetsen zijn: i en j. Sommige kinderen kijken weer naar hun handen nu ze naar de zolder moeten: dat is normaal in deze les, maar herinner aan de doek en aan de hand op het scherm. Laat de kinderen trots zijn: dit is de les van de eerste echte woorden."
+}

@@ -1,0 +1,198 @@
+{
+  "id": 4,
+  "titel": "De ringvingers worden wakker",
+  "nieuweToetsen": [
+    "s",
+    "l"
+  ],
+  "geleerdeToetsen": [
+    "f",
+    "j",
+    "d",
+    "k",
+    "e",
+    "i",
+    "s",
+    "l",
+    " "
+  ],
+  "doelen": [
+    "Ik typ s en l met mijn ringvingers.",
+    "Ik typ woorden zoals ijs, slee en fles.",
+    "Ik typ mijn eerste korte zin."
+  ],
+  "klassikaal": {
+    "duurMinuten": 12,
+    "materiaal": "Nodig: de Chromebooks en het gewone bord (krijt of whiteboard). Handig als je het hebt, maar niet nodig: een digibord, de klasplaat, losse toetsenborden, een doek of handdoek per kind.",
+    "stappen": [
+      {
+        "titel": "Startzin en woorddictee",
+        "duurMinuten": 2,
+        "leerkracht": "Startzin. Zeg daarna drie woorden van vorige keer (ik, kijk, die). De kinderen typen ze op het oefenbord.",
+        "kinderen": "Nemen de houding aan en typen de woorden zonder naar hun handen te kijken."
+      },
+      {
+        "titel": "De luie vinger",
+        "duurMinuten": 3,
+        "leerkracht": "\"De ringvinger is de luiste vinger: hij beweegt graag mee met de andere. Vandaag maken we hem wakker.\" Laat de handen plat op de bank leggen en alleen de ringvingers optillen, vijf keer. Daarna op het toetsenbord: \"Naast de D woont de S, naast de K woont de L. Daar wonen je groene ringvingers.\" Laat s en l een paar keer drukken.",
+        "kinderen": "Tillen met platte handen alleen de ringvingers op (dat is moeilijk, en dat mag). Daarna drukken ze s en l en voelen dat Fien en Jef thuis blijven."
+      },
+      {
+        "titel": "Woordenjagers",
+        "duurMinuten": 4,
+        "leerkracht": "Schrijf de acht letters op het bord: f j d k e i s l. \"Welke woorden kan je maken met alleen deze letters?\" Geef een voorbeeld: ijs. Schrijf goede voorstellen op het bord en laat er telkens een typen.",
+        "kinderen": "Bedenken woorden (bijvoorbeeld les, slee, fles, lief, elf), controleren samen of er alleen geleerde letters in zitten, en typen ze."
+      },
+      {
+        "titel": "Een eerste zin",
+        "duurMinuten": 2,
+        "leerkracht": "Schrijf op het bord: jef is lief. \"Zonder hoofdletter en zonder punt: die leren we later. Tussen elk woord een spatie met je duim.\" Laat de zin twee keer typen.",
+        "kinderen": "Typen de zin en letten op de spatie tussen de woorden."
+      },
+      {
+        "titel": "Wat gaan we doen?",
+        "duurMinuten": 1,
+        "leerkracht": "\"Vandaag rijdt Jef met de slee de berg af. Elk woord brengt hem een stukje verder.\"",
+        "kinderen": "Starten met het online deel."
+      }
+    ]
+  },
+  "online": [
+    {
+      "type": "intro",
+      "titel": "De ringvingers",
+      "duurMinuten": 1,
+      "tekst": "Nu worden je ringvingers wakker. Zij zijn groen en typen de S en de L. Daarmee kan je al ijs, slee en fles typen. En vandaag typ je je eerste zin!"
+    },
+    {
+      "type": "zoek-toets",
+      "titel": "Zoek de S en de L",
+      "duurMinuten": 1,
+      "toetsen": [
+        "s",
+        "l",
+        "d",
+        "k",
+        "e",
+        "i"
+      ],
+      "nadruk": [
+        "s",
+        "l"
+      ],
+      "aantal": 12,
+      "tekst": "Druk op de letter die je ziet."
+    },
+    {
+      "type": "reeks",
+      "titel": "Oefenregels 1",
+      "duurMinuten": 3,
+      "tekst": "Typ wat je ziet. Na elke toets terug naar huis.",
+      "regels": [
+        "ss ll sl ls sl ls",
+        "sd lk sd lk sf lj",
+        "sds lkl sds lkl",
+        "is les ijs elf"
+      ]
+    },
+    {
+      "type": "spel",
+      "titel": "Met de slee naar beneden",
+      "spel": "slee",
+      "duurMinuten": 3,
+      "tekens": [],
+      "woorden": [
+        "les",
+        "ijs",
+        "slee",
+        "elf",
+        "ski",
+        "fles",
+        "lief",
+        "lied",
+        "kleed",
+        "deel",
+        "ijsje",
+        "keel",
+        "lees",
+        "is"
+      ],
+      "beschrijving": "Jef zit bovenaan een besneeuwde helling op zijn slee. Langs de helling staan 10 vlaggetjes met elk een woord. Het kind typt het woord op het eerstvolgende vlaggetje; bij elke juiste letter glijdt de slee een stukje verder. Een foute letter: de slee staat even stil en de juiste vinger licht op; de slee kantelt nooit. Na 10 vlaggetjes is Jef beneden en staat Fien te wachten met twee ijsjes. Woorden willekeurig uit de lijst, elk woord hoogstens twee keer. Geen tijd, geen punten."
+    },
+    {
+      "type": "reeks",
+      "titel": "Oefenregels 2",
+      "duurMinuten": 3,
+      "tekst": "Echte woorden met de S en de L.",
+      "regels": [
+        "les lees lied lief",
+        "ijs fles slee ski",
+        "kleed keel deel elk"
+      ]
+    },
+    {
+      "type": "eindoefening",
+      "titel": "Eindoefening",
+      "duurMinuten": 3,
+      "doelNauwkeurigheid": 0.9,
+      "tekst": "De eindoefening, met je eerste zinnen. Rustig en juist.",
+      "regels": [
+        "les ijs fles slee elf",
+        "jef is lief",
+        "ik kies de slee",
+        "je kleedje is lief"
+      ],
+      "regelsKort": [
+        "ijs fles slee",
+        "jef is lief"
+      ]
+    },
+    {
+      "type": "afsluiter",
+      "titel": "Goed gedaan",
+      "duurMinuten": 1,
+      "tekst": "Hoera, je typte je eerste zinnen! Volgende keer schuiven Fien en Jef even opzij."
+    }
+  ],
+  "groepjes": [],
+  "woorden": [
+    "is",
+    "les",
+    "lees",
+    "lek",
+    "lied",
+    "lief",
+    "liefde",
+    "kies",
+    "keel",
+    "deel",
+    "slee",
+    "elf",
+    "elk",
+    "ski",
+    "skiles",
+    "ijs",
+    "ijsje",
+    "ijsjes",
+    "fles",
+    "flesje",
+    "kleed",
+    "kleedje",
+    "lelie",
+    "deksel",
+    "slik",
+    "lijf",
+    "dekje",
+    "idee"
+  ],
+  "zinnen": [
+    "jef is lief",
+    "ik kies de slee",
+    "de eik is dik",
+    "ik deel de ijsjes",
+    "kijk die slee",
+    "ik kies elf ijsjes",
+    "je kleedje is lief"
+  ],
+  "tipLeerkracht": "Typische fouten: s en l worden met de middelvinger getypt omdat de hele hand opschuift, of het kind tilt de hele hand op om de ringvinger te kunnen bewegen. Dat zie je aan s en d die door elkaar gaan (\"dlee\" in plaats van \"slee\"). Laat dan de oefening van de luie vinger herhalen en zeg dat de ringvinger trager mag. Bij de zinnen vergeten kinderen vaak de spatie of typen ze er twee; zeg \"een woord, een duim\". Kinderen vragen naar hoofdletters en punten: die komen later, nu typen we alles klein. De spelling in de klas blijft natuurlijk met hoofdletter."
+}

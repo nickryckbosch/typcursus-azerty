@@ -1,0 +1,163 @@
+{
+  "id": 2,
+  "titel": "Fien en Jef krijgen buren",
+  "nieuweToetsen": [
+    "d",
+    "k"
+  ],
+  "geleerdeToetsen": [
+    "f",
+    "j",
+    "d",
+    "k",
+    " "
+  ],
+  "doelen": [
+    "Ik typ d en k met mijn middelvingers.",
+    "Fien en Jef blijven thuis als mijn middelvingers typen.",
+    "Ik wissel mijn linkerhand en rechterhand af.",
+    "Ik typ bijna alles juist zonder naar mijn handen te kijken."
+  ],
+  "klassikaal": {
+    "duurMinuten": 12,
+    "materiaal": "Nodig: de Chromebooks en het gewone bord (krijt of whiteboard). Handig als je het hebt, maar niet nodig: een digibord, de klasplaat, losse toetsenborden, een doek of handdoek per kind.",
+    "stappen": [
+      {
+        "titel": "Startzin en opwarmen",
+        "duurMinuten": 2,
+        "leerkracht": "\"Voeten plat, rug recht, Fien en Jef thuis!\" Laat het oefenbord openen. Roep vijf keer kort \"Fien!\", \"Jef!\" of \"Spatie!\".",
+        "kinderen": "Nemen de houding aan, zoeken de bultjes en drukken de geroepen toets."
+      },
+      {
+        "titel": "Nieuwe buren",
+        "duurMinuten": 3,
+        "leerkracht": "\"Fien en Jef krijgen buren. Naast Fien woont de D, naast Jef woont de K. Daar wonen je middelvingers, de oranje vingers.\" Laat de kinderen de hele hand laten liggen en alleen de middelvingers optillen en neerleggen. \"Kan je alleen je oranje vingers laten dansen, terwijl Fien en Jef thuis blijven?\"",
+        "kinderen": "Laten de hand op de woonkamer liggen en tillen alleen de middelvingers op. Daarna drukken ze een paar keer d en k, en voelen dat de wijsvingers op de bultjes blijven."
+      },
+      {
+        "titel": "Welke hand? (stil spel)",
+        "duurMinuten": 3,
+        "leerkracht": "Zeg een letter: f, j, d of k. Spelregel: niemand roept, iedereen antwoordt met zijn handen. Eerst in de lucht: de kinderen steken de hand op die de letter typt en laten de juiste vinger wiebelen. Daarna op het toetsenbord: ze drukken de letter. Begin traag, versnel, en eindig met \"Terug naar huis!\".",
+        "kinderen": "Steken zonder te spreken de juiste hand op en wiebelen met de juiste vinger. Daarna drukken ze de letter op het oefenbord en kijken of de kleur klopt."
+      },
+      {
+        "titel": "Droog typen op ritme",
+        "duurMinuten": 3,
+        "leerkracht": "Klap een rustig ritme en zeg reeksjes op de maat: \"d - k - d - k\", \"f - d - j - k\", \"k - d - k - d\". Na elk reeksje: \"Terug naar huis!\" Laat de klas een keer met de ogen dicht typen.",
+        "kinderen": "Typen op de maat mee op het oefenbord. Bij \"Terug naar huis\" voelen ze of de wijsvingers op de bultjes liggen."
+      },
+      {
+        "titel": "Wat gaan we doen?",
+        "duurMinuten": 1,
+        "leerkracht": "\"Vandaag laten Fien en Jef een bal over en weer gaan: telkens een letter voor je linkerhand en een voor je rechterhand.\"",
+        "kinderen": "Luisteren en starten met het online deel."
+      }
+    ]
+  },
+  "online": [
+    {
+      "type": "intro",
+      "titel": "De buren van Fien en Jef",
+      "duurMinuten": 1,
+      "tekst": "We hebben buren! Naast mij, Fien, woont de D. Naast mij, Jef, woont de K. Je oranje middelvingers typen ze. En wij? Wij blijven gewoon thuis op de bultjes."
+    },
+    {
+      "type": "zoek-toets",
+      "titel": "Zoek de buren",
+      "duurMinuten": 2,
+      "toetsen": [
+        "d",
+        "k",
+        "f",
+        "j"
+      ],
+      "nadruk": [
+        "d",
+        "k"
+      ],
+      "aantal": 20,
+      "tekst": "Druk op de letter die je ziet. Kijk op de hand welke vinger het is."
+    },
+    {
+      "type": "reeks",
+      "titel": "Oefenregels 1",
+      "duurMinuten": 3,
+      "tekst": "Typ wat je ziet. Fien en Jef blijven thuis.",
+      "regels": [
+        "ddd kkk ddd kkk",
+        "dd kk dk kd dk kd",
+        "fd jk df kj fd jk",
+        "dfd kjk dfd kjk"
+      ]
+    },
+    {
+      "type": "spel",
+      "titel": "Overgooien",
+      "spel": "overgooien",
+      "duurMinuten": 4,
+      "tekens": [
+        "d",
+        "k",
+        "f",
+        "j"
+      ],
+      "beschrijving": "Fien staat links op het scherm, Jef rechts. Ze gooien een bal over en weer. Op de bal staat een letter. Is de bal bij Fien, dan staat er een letter van de linkerhand (d of f); is de bal bij Jef, dan een letter van de rechterhand (k of j). Een juiste toets: de bal vliegt naar de overkant. Een foute toets: de bal blijft zweven en de juiste vinger licht op; de bal valt nooit. Na 10 worpen schuift het spel een stap op: de letters wisselen sneller van vinger (eerst alleen d en k, daarna alle vier). Na 30 worpen: \"De bal is niet een keer gevallen!\" Geen tijd, geen punten."
+    },
+    {
+      "type": "reeks",
+      "titel": "Oefenregels 2",
+      "duurMinuten": 2,
+      "tekst": "Nu alle vier je toetsen door elkaar.",
+      "regels": [
+        "fdk jkd dfj kjf",
+        "dk fj kd jf",
+        "fjdk kdjf dkfj"
+      ]
+    },
+    {
+      "type": "eindoefening",
+      "titel": "Eindoefening",
+      "duurMinuten": 2,
+      "doelNauwkeurigheid": 0.9,
+      "tekst": "De eindoefening. Rustig en juist.",
+      "regels": [
+        "dk kd dfd kjk fdk jkd",
+        "fjdk dkjf kfd djk"
+      ],
+      "regelsKort": [
+        "dk kd dfd kjk"
+      ]
+    },
+    {
+      "type": "afsluiter",
+      "titel": "Goed gedaan",
+      "duurMinuten": 1,
+      "tekst": "Super! Je kent nu vier letters: f, j, d en k. Volgende keer gaan je vingers voor het eerst naar de zolder."
+    }
+  ],
+  "groepjes": [
+    "dk",
+    "kd",
+    "dd",
+    "kk",
+    "fd",
+    "df",
+    "jk",
+    "kj",
+    "dfd",
+    "kjk",
+    "fdk",
+    "jkd",
+    "dkj",
+    "kdf",
+    "fjdk",
+    "dkfj",
+    "kdjf",
+    "jfkd",
+    "ddk",
+    "kkd"
+  ],
+  "woorden": [],
+  "zinnen": [],
+  "tipLeerkracht": "Typische fout: het kind schuift de hele hand een plaats op en typt d met de wijsvinger. Je ziet het aan een wijsvinger die niet meer op het bultje ligt, en daarna typt het kind f waar het d bedoelt. Stuur bij met \"Fien en Jef blijven thuis\": de wijsvinger blijft liggen, alleen de middelvinger beweegt. Andere fout: de hele hand gaat omhoog bij elke aanslag. Laat dan de oefening uit stap 2 herhalen (alleen de oranje vingers laten dansen). Gaat het traag, dan is dat normaal: de middelvinger is minder handig dan de wijsvinger. Zeg dat juist belangrijker is dan snel."
+}
