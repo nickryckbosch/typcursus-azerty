@@ -1,0 +1,152 @@
+// De oefenkaart: elk oefenscherm gebruikt dezelfde vaste zones in de witte kaart.
+//
+//   +-----------------------------------------------+
+//   |  OPDRACHT (groot, met de toets getekend)      |   zone-opdracht
+//   +-----------+-----------------------+-----------+
+//   | Fien en   |  prent, spel of       | Druk op   |   zone-figuren / zone-veld / zone-voet
+//   | Jef       |  signaal (lamp, huis) | [Enter]   |   (rechts, boven de Enter-toets)
+//   +-----------+-----------------------+-----------+
+//   |  ______________________________   10 van 12  |   voortgang (onderrand)
+//   +-----------------------------------------------+
+//   (onder de kaart: de handen, het toetsenbord en de hulpregel)
+//
+// Regels (docs/stijlgids.md, deel 1 en 6; docs/beslissingen.md, 12c):
+// - De zones hebben een vaste plaats en hoogte.
+// - Wat later verschijnt, staat van bij het begin in de pagina en neemt zijn
+//   ruimte al in. Tonen en verbergen gaat met toon() (zichtbaarheid), nooit
+//   door elementen toe te voegen of weg te halen.
+// - Fien en Jef, de lamp en de prent veranderen nooit van plaats.
+// - De opdracht is het duidelijkste element van de kaart.
+
+import { t } from "../content";
+import { el } from "../weergave/dom";
+import { fien, jef, type Uitdrukking } from "../weergave/figuren";
+import { tekstMetToetsen } from "../weergave/tekst";
+import type { BlokContext } from "./context";
+
+/** Maak een element zichtbaar of onzichtbaar; het houdt altijd zijn plaats. */
+export function toon(element: Element, zichtbaar = true): void {
+  element.classList.toggle("onzichtbaar", !zichtbaar);
+}
+
+/** Een element dat later verschijnt: het staat er al, maar is nog onzichtbaar. */
+export function startVerborgen<E extends Element>(element: E): E {
+  element.classList.add("zacht", "onzichtbaar");
+  return element;
+}
+
+export interface Voortgangsbalk {
+  element: HTMLElement;
+  /** dunne balk met rechts klein de teller ("10 van 12") */
+  zetBalk(gedaan: number, totaal: number): void;
+  /** kleine bolletjes in plaats van een balk (bv. de drie beken); huidig telt vanaf 0 */
+  zetBolletjes(huidig: number, totaal: number): void;
+}
+
+/**
+ * De voortgang van een oefening (K20): dun en rustig, langs de onderrand van
+ * de witte kaart. Altijd aanwezig, dus hij verspringt nooit; onzichtbaar tot
+ * een blok hem gebruikt.
+ */
+export function maakVoortgang(): Voortgangsbalk {
+  const vulling = el("div", { class: "voortgang-vulling" });
+  const balk = el("div", { class: "voortgang-balk" }, vulling);
+  const bolletjes = el("div", { class: "voortgang-bolletjes", hidden: true });
+  const teller = el("span", { class: "voortgang-teller" });
+  const element = el("div", { class: "voortgang onzichtbaar", role: "status" }, balk, bolletjes, teller);
+  return {
+    element,
+    zetBalk(gedaan, totaal) {
+      balk.hidden = false;
+      bolletjes.hidden = true;
+      // De balk toont wat af is; de teller toont waar het kind nu is ("3 van 20").
+      vulling.style.width = `${Math.round((100 * gedaan) / Math.max(totaal, 1))}%`;
+      teller.textContent = t("teller", { nummer: Math.min(gedaan + 1, totaal), totaal });
+      toon(element);
+    },
+    zetBolletjes(huidig, totaal) {
+      balk.hidden = true;
+      bolletjes.hidden = false;
+      bolletjes.replaceChildren(
+        ...Array.from({ length: totaal }, (_, i) =>
+          el("span", { class: i < huidig ? "bolletje gedaan" : i === huidig ? "bolletje huidig" : "bolletje" }),
+        ),
+      );
+      teller.textContent = "";
+      element.setAttribute("aria-label", t("teller", { nummer: Math.min(huidig + 1, totaal), totaal }));
+      toon(element);
+    },
+  };
+}
+
+export interface OefenschermOpties {
+  /** Fien en Jef links in hun vaste zone; weglaten: de zone blijft leeg */
+  figuren?: Uitdrukking;
+  /** extra klasse op de kaart, voor eigen opmaak van een blok */
+  klasse?: string;
+}
+
+export interface Oefenscherm {
+  element: HTMLElement;
+  veld: HTMLElement;
+  /** de zone rechts: hier staat "Druk op Enter", of de knoppen van de afsluiter */
+  voet: HTMLElement;
+  voortgang: Voortgangsbalk;
+  /** zet de opdracht (opmaak: [toets], **vet**) en lees ze voor; beelden: zie tekstMetToetsen */
+  zetOpdracht(tekst: string, voorlezen?: boolean, beelden?: Record<string, () => Node>): void;
+  /** een andere houding van Fien en Jef, op dezelfde plaats */
+  zetFiguren(uitdrukking: Uitdrukking): void;
+  /** toon "Druk op [Enter] om verder te gaan" met de knop Verder */
+  toonEnter(actie?: () => void): void;
+}
+
+export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): Oefenscherm {
+  const opdracht = el("p", { class: "opdracht-tekst" });
+  const figuren = el("div", { class: "zone-figuren" });
+  const veld = el("div", { class: "zone-veld" });
+  let enterActie = () => ctx.volgende();
+  const [voor, na] = t("hint.enter").split("{toets}");
+  const enterRij = startVerborgen(
+    el(
+      "div",
+      { class: "enter-rij" },
+      el("p", { class: "hint-enter" }, voor, el("span", { class: "toets-in-tekst" }, t("toets.enter")), na ?? ""),
+      el("button", { class: "knop knop-hoofd", type: "button", tabindex: "-1", onclick: () => enterActie() }, t("knop.verder")),
+    ),
+  );
+  const voet = el("div", { class: "zone-voet" }, enterRij);
+  const voortgang = maakVoortgang();
+
+  const element = el(
+    "section",
+    { class: `blok oefenkaart ${opties.klasse ?? ""}` },
+    el("div", { class: "zone-opdracht" }, opdracht),
+    figuren,
+    veld,
+    voet,
+    voortgang.element,
+  );
+  ctx.podium.append(element);
+
+  const scherm: Oefenscherm = {
+    element,
+    veld,
+    voet,
+    voortgang,
+    zetOpdracht(tekst, voorlezen = true, beelden = {}) {
+      opdracht.replaceChildren(...tekstMetToetsen(tekst, beelden));
+      if (voorlezen) ctx.zeg(tekst);
+    },
+    zetFiguren(uitdrukking) {
+      figuren.replaceChildren(fien(uitdrukking), jef(uitdrukking));
+    },
+    toonEnter(actie) {
+      if (actie) enterActie = actie;
+      ctx.toetsenbord.toonEnter(true);
+      toon(enterRij);
+      enterRij.querySelector("button")?.removeAttribute("tabindex");
+    },
+  };
+  if (opties.figuren) scherm.zetFiguren(opties.figuren);
+  return scherm;
+}

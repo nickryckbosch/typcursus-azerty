@@ -127,6 +127,26 @@ button {
   visibility: hidden;
 }
 
+/* Wat later verschijnt, staat er al (onzichtbaar) en verschijnt met een korte,
+   rustige overgang. Vraagt het toestel om minder beweging, dan meteen. */
+.zacht {
+  transition: opacity 180ms ease, visibility 180ms;
+}
+
+.zacht.onzichtbaar {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zacht,
+  .lamp-glas,
+  .lamp-stralen,
+  .raam-glas,
+  .voortgang-vulling {
+    transition: none !important;
+  }
+}
+
 [hidden] {
   display: none !important;
 }
@@ -745,8 +765,10 @@ button {
   visibility: hidden;
 }
 
+/* Geen toetsenbord nodig (afsluiter, vraag om verder te gaan): onzichtbaar,
+   maar het houdt zijn plaats, zodat er niets verspringt. */
 .zonder-toetsenbord .typzone {
-  display: none;
+  visibility: hidden;
 }
 
 /* Een blok is een witte kaart die het podium vult. */
@@ -794,57 +816,10 @@ button {
   align-items: flex-end;
 }
 
-.met-figuren {
-  display: flex;
-  align-items: center;
-  gap: 1.4rem;
-}
-
-.naast-figuren {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-}
-
 .figuur {
   height: var(--h);
   width: auto;
   display: block;
-}
-
-/* zoek-toets: de grote letter */
-.grote-toets {
-  min-width: 2.2em;
-  padding: 0 0.3em;
-  font-family: var(--lees);
-  font-size: clamp(60px, 14vh, 130px);
-  font-weight: 700;
-  line-height: 1.25;
-  border: 2px solid var(--rand-knop);
-  border-bottom-width: 8px;
-  border-radius: 24px;
-  background: var(--vlak);
-}
-
-.grote-toets.is-spatie {
-  font-family: var(--kop);
-  font-size: clamp(32px, 7vh, 64px);
-  min-width: 7em;
-  padding: 0.4em 0.5em;
-}
-
-.lamp {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: 3px solid var(--rand-knop);
-  background: #dcd5c9;
-}
-
-.lamp.aan {
-  background: var(--geel);
-  border-color: #c79a00;
 }
 
 /* ---------- oefenregels ---------- */
@@ -1176,21 +1151,6 @@ button {
 
 /* ---------- houding ---------- */
 
-.klap {
-  font-size: 2rem;
-  font-weight: 800;
-  padding: 0.2em 0.5em;
-  border: 3px solid transparent;
-  border-radius: 14px;
-  visibility: hidden;
-}
-
-.klap.aan {
-  visibility: visible;
-  border-color: #c79a00;
-  background: var(--geel);
-}
-
 /* ---------- afsluiter ---------- */
 
 .sterren {
@@ -1218,91 +1178,7 @@ button {
   text-align: center;
 }
 
-.blok-afsluiter .ballon,
-.blok-extra-einde .ballon {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
 /* ---------- spel: licht aan ---------- */
-
-.spel-rij {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-
-.lichtaan-zijde {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  max-width: 460px;
-}
-
-.huis {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-
-.huis-dak {
-  height: 50px;
-  background: #b5553a;
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-}
-
-.verdieping {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: #f3e6cc;
-  border: 2px solid #b9a888;
-  border-top-width: 0;
-  padding: 0.4rem 0.8rem;
-}
-
-.verdieping:first-of-type {
-  border-top-width: 2px;
-}
-
-.verdieping-naam {
-  width: 7.2em;
-  text-align: left;
-  font-weight: 800;
-}
-
-.ramen {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.raam {
-  width: 52px;
-  height: 40px;
-  border: 3px solid #6b5d48;
-  background: #4a4f63;
-  border-radius: 4px;
-}
-
-.raam.aan {
-  background: var(--geel);
-}
-
-/* De gevraagde verdieping licht op (zonder te knipperen). */
-.verdieping.gevraagd {
-  background: var(--accent-licht);
-  outline: 4px solid var(--accent);
-  outline-offset: -2px;
-  position: relative;
-  z-index: 1;
-}
-
-.verdieping.gevraagd .verdieping-naam::before {
-  content: "\25B6  ";
-  color: var(--accent);
-}
 
 /* ---------- spel: over de beek ---------- */
 
@@ -1353,7 +1229,7 @@ button {
   padding: 0;
   display: flex;
   align-items: center;
-  gap: clamp(3px, 0.7vw, 10px);
+  gap: max(clamp(3px, 0.7vw, 10px), calc(var(--s) * 0.2));
   /* de rij is altijd zo hoog als de grote steen: niets verspringt */
   min-height: calc(var(--s) * 1.3);
 }
@@ -1392,17 +1268,14 @@ button {
   height: calc(var(--s) * 0.25);
 }
 
+/* De steen die aan de beurt is: groter en met een blauwe rand. Hij wordt
+   vergroot zonder plaats in te nemen, zodat de andere stenen niet verschuiven. */
 .steen-nu {
-  width: calc(var(--s) * 1.28);
-  height: calc(var(--s) * 1.28);
-  border: 4px solid var(--accent);
-  font-size: calc(var(--s) * 0.64);
-  box-shadow: 0 6px 16px rgba(31, 95, 191, 0.22);
-}
-
-.steen-nu.steen-spatie {
-  width: calc(var(--s) * 2.2);
-  font-size: calc(var(--s) * 0.38);
+  transform: scale(1.28);
+  border: 3px solid var(--accent);
+  box-shadow: 0 4px 12px rgba(31, 95, 191, 0.22);
+  position: relative;
+  z-index: 1;
 }
 
 /* Het einde: Fien en Jef steken hun duim op. */
@@ -1546,25 +1419,10 @@ button {
 .podium .knoppen .knop { font-size: clamp(14px, 5.6cqh, 18px); min-height: clamp(30px, 13cqh, 48px); }
 .podium .figuur-heel { height: min(var(--h), 56cqh); }
 .podium .figuur-gezicht { height: min(var(--h), 38cqh); }
-.podium .met-figuren { gap: clamp(10px, 4cqh, 24px); }
 .podium .leerkracht-uitleg { font-size: clamp(11px, 4.3cqh, 16px); }
 .podium .leerkracht-uitleg p { margin: 0.2em 0; }
-.podium .blok-check:has(.leerkracht-uitleg) .figuur { height: min(var(--h), 22cqh); }
-
-.podium .grote-toets { font-size: clamp(40px, 40cqh, 130px); }
-.podium .grote-toets.is-spatie { font-size: clamp(24px, 16cqh, 60px); }
-.podium .lamp { width: clamp(28px, 14cqh, 56px); height: clamp(28px, 14cqh, 56px); }
 
 .podium .sterren .ster { width: clamp(28px, 15cqh, 64px); height: clamp(28px, 15cqh, 64px); }
-.podium .klap { font-size: clamp(18px, 8cqh, 32px); }
-
-/* Licht aan in het huis */
-.podium .huis-dak { height: clamp(16px, 12cqh, 56px); }
-.podium .verdieping { padding: clamp(2px, 1.6cqh, 9px) 0.8rem; }
-.podium .verdieping-naam { font-size: clamp(13px, 6.4cqh, 21px); }
-.podium .raam { height: clamp(18px, 15cqh, 50px); width: clamp(24px, 21cqh, 66px); }
-.podium .spel-rij { gap: clamp(12px, 5cqh, 40px); }
-.podium .lichtaan-zijde { gap: clamp(8px, 4cqh, 16px); }
 
 /* Over de beek */
 .podium .beek-boven .opdracht { font-size: clamp(14px, 5.4cqh, 18px); color: var(--tekst); }
@@ -1586,3 +1444,350 @@ button {
     display: none;
   }
 }
+
+/* ---------- De oefenkaart: vaste zones (src/blokken/oefenscherm.ts) ----------
+   Elk oefenscherm gebruikt dezelfde zones in de witte kaart. De rijen en
+   kolommen hebben een vaste maat: wat in een zone verandert, verschuift niets
+   in een andere zone (docs/stijlgids.md, deel 1 en 6). */
+
+.podium .blok.oefenkaart {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.7fr) minmax(0, 1fr);
+  grid-template-rows: 24cqh minmax(0, 1fr) clamp(16px, 7cqh, 26px);
+  gap: 0;
+  padding: 0;
+  align-items: stretch;
+  justify-content: stretch;
+  overflow: hidden;
+}
+
+.zone-opdracht {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 clamp(16px, 4cqw, 56px);
+  overflow: hidden;
+}
+
+/* De opdracht is het duidelijkste element van de kaart. */
+.opdracht-tekst {
+  max-width: 1050px;
+  font-size: clamp(17px, 8.4cqh, 30px);
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--tekst);
+}
+
+.opdracht-tekst .toets-in-tekst {
+  font-size: 0.86em;
+}
+
+.zone-figuren {
+  grid-column: 1;
+  grid-row: 2;
+  min-height: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4%;
+  padding-left: 8%;
+}
+
+/* Elk figuurtje heeft een vak met een vaste maat: een andere houding (andere
+   prent) verschuift niets. */
+.podium .zone-figuren .figuur {
+  width: 46%;
+  height: 94%;
+  max-height: var(--h);
+  object-fit: contain;
+  object-position: bottom center;
+}
+
+.zone-veld {
+  grid-column: 2;
+  grid-row: 2;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(4px, 2.5cqh, 12px);
+}
+
+/* Rechts, boven de Enter-toets van het toetsenbord: "Druk op Enter om verder te
+   gaan" met de knop Verder, of de knoppen van de afsluiter. */
+.zone-voet {
+  grid-column: 3;
+  grid-row: 2;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8% 0 4%;
+}
+
+.zone-voet .enter-rij,
+.zone-voet .knoppen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(6px, 3.5cqh, 14px);
+  text-align: center;
+}
+
+.zone-voet .knoppen .knop {
+  width: 100%;
+}
+
+/* Meerdere toestanden op dezelfde plek (bv. de toets en de uitleg): gestapeld. */
+.stapel {
+  display: grid;
+  place-items: center;
+  max-height: 100%;
+  min-height: 0;
+}
+
+.stapel > * {
+  grid-area: 1 / 1;
+}
+
+/* In de intro wijst de tekstballon naar Fien en Jef links ervan. */
+.blok-intro .zone-veld .ballon {
+  max-width: 100%;
+}
+
+.podium .leerkracht-uitleg {
+  font-size: clamp(11px, 4.1cqh, 15px);
+  max-height: 100%;
+  overflow: auto;
+}
+
+/* ---------- Voortgang van een oefening (K20) ----------
+   Dun en rustig, langs de onderrand van de witte kaart, met rechts klein de
+   teller. Grijs: geen vingerkleur. Altijd aanwezig, dus hij verspringt nooit. */
+
+.voortgang {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 clamp(14px, 2vw, 26px);
+}
+
+.oefenkaart > .voortgang {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  align-self: center;
+}
+
+.voortgang-balk {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: #ece6db;
+  overflow: hidden;
+}
+
+.voortgang-vulling {
+  height: 100%;
+  width: 0;
+  border-radius: 2px;
+  background: #8a94a6;
+  transition: width 180ms ease;
+}
+
+.voortgang-bolletjes {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.bolletje {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 2px solid #8a94a6;
+}
+
+.bolletje.gedaan {
+  background: #8a94a6;
+}
+
+.bolletje.huidig {
+  border-color: var(--tekst);
+}
+
+.voortgang-teller {
+  min-width: 4.6em;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--zacht);
+  font-variant-numeric: tabular-nums;
+}
+
+.voortgang-teller:empty {
+  display: none;
+}
+
+/* in de kaart met oefenregels en in "Over de beek": onderaan, over de hele breedte */
+.typkaart {
+  position: relative;
+  padding-bottom: clamp(18px, 9cqh, 34px);
+}
+
+.typkaart > .voortgang {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(4px, 2.4cqh, 10px);
+}
+
+.blok-beek > .voortgang {
+  background: #e6f2fb;
+  padding-bottom: clamp(3px, 2cqh, 8px);
+}
+
+/* ---------- De grote letter op haar kaart (zoek de toets) ----------
+   De kaart heeft een vaste maat en elke letter staat op dezelfde basislijn:
+   boven is er plaats voor stokletters, hoofdletters en accenten (b, k, E met
+   accent), onder voor staartletters (g, j, p, q, y). Het woord "spatie" staat
+   kleiner in dezelfde kaart. Zo springt er niets tussen twee kaarten. */
+
+.grote-toets {
+  box-sizing: content-box;
+  width: 2.5em;
+  height: 1.3em;
+  line-height: 1.3em;
+  padding: 0.16em 0.1em 0.12em;
+  font-family: var(--lees);
+  font-size: clamp(34px, 30cqh, 112px);
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  border: 2px solid var(--rand-knop);
+  border-bottom-width: 8px;
+  border-radius: 24px;
+  background: var(--vlak);
+}
+
+.grote-toets.is-spatie span {
+  font-family: var(--kop);
+  font-size: 0.4em;
+  position: relative;
+  top: -0.55em;
+}
+
+/* ---------- De lamp (Duim op de spatiebalk) ---------- */
+
+.lamp-tekening {
+  display: block;
+  height: min(92%, 190px);
+  width: auto;
+  overflow: visible;
+}
+
+.lamp-glas {
+  fill: #3b4256; /* uit */
+  transition: fill 180ms ease;
+}
+
+.lamp-tekening.aan .lamp-glas {
+  fill: #ffee99; /* aan */
+}
+
+.lamp-glans {
+  stroke: #ffffff;
+  opacity: 0.35;
+}
+
+.lamp-tekening.aan .lamp-glans {
+  opacity: 0.9;
+}
+
+.lamp-draad {
+  stroke: #8a94a6;
+}
+
+.lamp-tekening.aan .lamp-draad {
+  stroke: #4a2e1a;
+}
+
+.lamp-stralen {
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.lamp-tekening.aan .lamp-stralen {
+  opacity: 1;
+}
+
+/* het kleine beeldje naast het woord "lamp" in de opdracht */
+.beeld-in-tekst {
+  display: inline-block;
+  vertical-align: -0.28em;
+}
+
+.beeld-in-tekst .lamp-tekening {
+  display: inline-block;
+  height: 1.35em;
+}
+
+/* ---------- Het signaal "Klap!" (Klaar voor de start) ----------
+   Op een vaste plek in het midden; het verschijnt en verdwijnt alleen. */
+
+.klap {
+  font-size: clamp(20px, 13cqh, 46px);
+  font-weight: 800;
+  padding: 0.1em 0.9em;
+  border: 3px solid #4a2e1a;
+  border-radius: 999px;
+  background: #ffee99;
+}
+
+/* ---------- Licht aan in het huis (K21, stijlgids deel 8) ----------
+   De raamkleuren zijn nagemeten tegen de vingerkleuren (palet C): verander ze
+   niet zonder nieuwe meting. */
+
+.huis {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.raam-glas {
+  fill: #3b4256; /* licht uit */
+  transition: fill 180ms ease;
+}
+
+.raam.aan .raam-glas {
+  fill: #ffee99; /* licht aan */
+}
+
+.huis-woord rect {
+  fill: #ffffff;
+}
+
+.huis-woord text {
+  font-family: var(--lees);
+  font-weight: 400;
+  font-size: 17px;
+  fill: #1b2a4a;
+}
+
+/* De verdieping die aan de beurt is: haar woord wordt donker en blijft stil staan. */
+.huis-woord.aan-de-beurt rect {
+  fill: #1b2a4a;
+}
+
+.huis-woord.aan-de-beurt text {
+  fill: #ffffff;
+}
+
+/* ---------- Afsluiter ---------- */
+
+.podium .sterren .ster { width: clamp(28px, 22cqh, 84px); height: clamp(28px, 22cqh, 84px); }
+.sterren-tekst { font-size: clamp(13px, 5.4cqh, 18px); color: var(--zacht); }

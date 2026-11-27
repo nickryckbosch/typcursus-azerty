@@ -11,7 +11,7 @@ import { el } from "../weergave/dom";
 import type { BlokFunctie, BlokInstantie } from "./context";
 import { houding } from "./houding";
 import { typRegels } from "./typregels";
-import { enterHint, metFienEnJef } from "./gedeeld";
+import { oefenscherm } from "./oefenscherm";
 
 export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
   if (blok.soort === "houding") return houding(blok, ctx);
@@ -46,15 +46,9 @@ export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
     start();
   } else {
     // Eerst een aanmoediging, dan de korte oefening.
-    ctx.toonToetsenbord(false);
-    ctx.podium.append(
-      el(
-        "div",
-        { class: "blok blok-intro" },
-        metFienEnJef("aanmoedigend", el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, t("eind.aanmoediging")))),
-        enterHint(ctx, start),
-      ),
-    );
+    const scherm = oefenscherm(ctx, { figuren: "aanmoedigend", klasse: "blok-intro" });
+    scherm.veld.append(el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, t("eind.aanmoediging"))));
+    scherm.toonEnter(start);
     ctx.zeg(t("eind.aanmoediging"));
   }
 

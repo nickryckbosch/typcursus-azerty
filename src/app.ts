@@ -103,7 +103,17 @@ export class App {
     // Een knop of invoerveld met focus: laat de browser zijn werk doen.
     const actief = document.activeElement;
     if (actief instanceof HTMLInputElement || actief instanceof HTMLTextAreaElement || actief instanceof HTMLSelectElement) return;
-    if (actief instanceof HTMLButtonElement && (e.key === "Enter" || e.key === " ")) return;
+    if (actief instanceof HTMLButtonElement && (e.key === "Enter" || e.key === " ")) {
+      // Uitzondering tijdens het typen: een knop in de bovenbalk (bv. "Voorlezen",
+      // aangeklikt met de muis) mag geen spatie of Enter opslokken. Een spatie is
+      // dan een getypt teken; een Enter ook, tenzij het kind bewust met Tab naar
+      // die knop ging.
+      const typscherm = this.schermNaam === "les" || this.schermNaam === "oefenbord";
+      const kopKnop = actief.closest(".kop") !== null;
+      const bewustGekozen = e.key === "Enter" && actief.matches(":focus-visible");
+      if (!typscherm || !kopKnop || bewustGekozen) return;
+      actief.blur();
+    }
 
     if (verraadtVerkeerdeIndeling(e.code, e.key) && this.voortgang.toetsenbord !== "fout") {
       this.voortgang.toetsenbord = "fout";

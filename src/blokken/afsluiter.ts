@@ -7,29 +7,24 @@ import { heeftExtraOefenen } from "../logica/extraoefenen";
 import { isLesOpen, markeerEindeBereikt } from "../logica/voortgang";
 import { el } from "../weergave/dom";
 import { sterIcoon } from "../weergave/figuren";
-import { metFienEnJef } from "./gedeeld";
+import { oefenscherm } from "./oefenscherm";
 import { isBeschikbaar } from ".";
 import type { BlokFunctie } from "./context";
 
 export const afsluiter: BlokFunctie<AfsluiterBlok> = (blok, ctx) => {
   const { app, les } = ctx;
   const resultaat = ctx.sessie.resultaat;
-  // Hier is niets te typen: zonder toetsenbord en handen is er meer plaats.
+  // Hier is niets te typen: het toetsenbord en de handen worden onzichtbaar,
+  // maar houden hun plaats, zodat er niets verspringt.
   ctx.toonToetsenbord(false);
 
   // Extra oefenen (K15): een korte afsluiter. Er telt niets mee voor de voortgang.
   if (ctx.extra) {
     const nogEens = el("button", { class: "knop knop-hoofd", type: "button", onclick: () => app.naarExtra(les) }, t("extra.nogEens"));
     const terug = el("button", { class: "knop", type: "button", onclick: () => app.naarStart() }, t("knop.naarLessen"));
-    ctx.podium.append(
-      el(
-        "div",
-        { class: "blok blok-extra-einde" },
-        metFienEnJef("duim", el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, blok.tekst ?? ""))),
-        el("div", { class: "knoppen" }, terug, nogEens),
-      ),
-    );
-    ctx.zeg(blok.tekst ?? "");
+    const scherm = oefenscherm(ctx, { figuren: "duim", klasse: "blok-extra-einde" });
+    scherm.zetOpdracht(blok.tekst ?? "");
+    scherm.voet.replaceChildren(el("div", { class: "knoppen" }, terug, nogEens));
     terug.focus();
     return {};
   }
@@ -51,34 +46,35 @@ export const afsluiter: BlokFunctie<AfsluiterBlok> = (blok, ctx) => {
     return k;
   };
 
-  const inhoud: Node[] = [];
   // De houding op het einde: duim omhoog, of aanmoedigen als het doel niet gehaald is.
   const uitdrukking = resultaat && !resultaat.gehaald ? "aanmoedigend" : "duim";
+  const scherm = oefenscherm(ctx, { figuren: uitdrukking, klasse: "blok-afsluiter" });
 
   if (resultaat) {
-    const sterren = el(
-      "div",
-      { class: "sterren", role: "img", "aria-label": t("les.sterren", { aantal: resultaat.sterren }) },
-      ...[1, 2, 3].map((i) => sterIcoon(i <= resultaat.sterren, 72)),
+    scherm.veld.append(
+      el(
+        "div",
+        { class: "sterren", role: "img", "aria-label": t("les.sterren", { aantal: resultaat.sterren }) },
+        ...[1, 2, 3].map((i) => sterIcoon(i <= resultaat.sterren, 72)),
+      ),
+      el("p", { class: "sterren-tekst" }, t("les.sterren", { aantal: resultaat.sterren })),
     );
-    inhoud.push(sterren, el("p", { class: "sterren-tekst" }, t("les.sterren", { aantal: resultaat.sterren })));
     if (resultaat.gehaald) {
-      inhoud.push(el("p", { class: "grote-tekst" }, blok.tekst ?? ""));
+      scherm.zetOpdracht(blok.tekst ?? "");
       if (volgendeOpen) knop(t("knop.volgendeLes", { nummer: volgendeLes.id }), () => app.naarLes(volgendeLes));
       if (resultaat.sterren < 3) knop(t("knop.meerSterren"), () => ctx.gaNaar(ctx.indexVan("eindoefening")));
     } else {
-      inhoud.push(el("p", { class: "grote-tekst" }, t("eind.nietGehaald")));
+      scherm.zetOpdracht(t("eind.nietGehaald"));
       knop(t("knop.opnieuw"), () => ctx.gaNaar(ctx.indexVan("eindoefening")));
     }
   } else {
-    inhoud.push(el("p", { class: "grote-tekst" }, blok.tekst ?? ""));
+    scherm.zetOpdracht(blok.tekst ?? "");
     if (volgendeOpen) knop(t("knop.volgendeLes", { nummer: volgendeLes.id }), () => app.naarLes(volgendeLes));
   }
   if (heeftExtraOefenen(les)) knop(t("knop.extra"), () => app.naarExtra(les));
   knop(t("knop.naarBegin"), () => app.naarStart());
 
-  ctx.podium.append(el("div", { class: "blok blok-afsluiter" }, metFienEnJef(uitdrukking, el("div", { class: "ballon" }, ...inhoud)), el("div", { class: "knoppen" }, ...knoppen)));
-  ctx.zeg(resultaat && !resultaat.gehaald ? t("eind.nietGehaald") : blok.tekst ?? "");
+  scherm.voet.replaceChildren(el("div", { class: "knoppen" }, ...knoppen));
   // Met Enter kies je de eerste knop; met Tab ga je naar de andere.
   knoppen[0].focus();
 

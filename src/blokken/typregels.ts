@@ -5,12 +5,12 @@
 // Bij een fout blijft de cursor staan en lichten de juiste toets en vinger op.
 // Er beweegt niets (docs/stijlgids.md, deel 1).
 
-import { t } from "../content";
 import { kleurVanVinger, toetsVoorTeken } from "../logica/indeling";
 import { nieuweOefening, teltAlsTeken, typ, volgendTeken, type TypOefening } from "../logica/typen";
 import { el } from "../weergave/dom";
 import { fienOfJef, vinkje } from "../weergave/figuren";
 import type { BlokContext, BlokInstantie } from "./context";
+import { maakVoortgang } from "./oefenscherm";
 
 export function typRegels(
   ctx: BlokContext,
@@ -24,7 +24,7 @@ export function typRegels(
   let hulpTimer: number | undefined;
   let klaar = false;
 
-  const teller = el("p", { class: "teller" });
+  const voortgang = maakVoortgang();
   const vorigeTekst = el("span", {});
   const vorige = el("p", { class: "regel-klaar", "aria-hidden": "true" }, vinkje(), vorigeTekst);
   const huidige = el("div", { class: "typregel", "aria-hidden": "true" });
@@ -45,11 +45,12 @@ export function typRegels(
       el(
         "section",
         { class: "kaart typkaart" },
-        el("div", { class: "typkaart-kop" }, el("p", { class: "opdracht" }, opdracht), teller),
+        el("div", { class: "typkaart-kop" }, el("p", { class: "opdracht" }, opdracht)),
         vorige,
         huidige,
         volgende,
         voorlezer,
+        voortgang.element,
       ),
     ),
   );
@@ -74,8 +75,9 @@ export function typRegels(
     );
     vorige.classList.toggle("onzichtbaar", r === 0);
     vorigeTekst.textContent = r > 0 ? regels[r - 1] : "\u00A0";
-    volgende.replaceChildren(...regels.slice(r + 1, r + 3).map((regel) => el("div", {}, regel)));
-    teller.textContent = t("reeks.regel", { nummer: r + 1, totaal: regels.length });
+    // Altijd twee regels hoog, ook als er geen volgende regels meer zijn: zo verspringt er niets.
+    volgende.replaceChildren(...[1, 2].map((n) => el("div", {}, regels[r + n] ?? "\u00A0")));
+    voortgang.zetBalk(klaar ? regels.length : r, regels.length);
     voorlezer.textContent = oef.doel;
   }
 
@@ -124,11 +126,11 @@ export function typRegels(
         tekenRegel();
         toonOfWacht();
       } else {
+        // Meteen verder: er is geen wachttijd waarin een toets verloren kan gaan.
         klaar = true;
         clearTimeout(hulpTimer);
-        tekenRegel();
         ctx.toonHulp(null);
-        ctx.later(() => opKlaar(oefeningen), 400);
+        opKlaar(oefeningen);
       }
     },
     opruimen() {
