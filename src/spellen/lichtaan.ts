@@ -12,7 +12,7 @@ import { toetsVoorCode, type Rij } from "../logica/indeling";
 import { lichtAanRondes } from "../logica/reeksen";
 import { el } from "../weergave/dom";
 import { fien, jef } from "../weergave/figuren";
-import { schud } from "../blokken/gedeeld";
+import { enterHint, schud } from "../blokken/gedeeld";
 
 const VERDIEPINGEN: Rij[] = ["zolder", "woonkamer", "kelder"];
 const RAMEN_PER_VERDIEPING = 3;
@@ -93,7 +93,7 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
       ballon.textContent = t("lichtaan.klaar");
       zwaaiers.hidden = false;
       ctx.zeg(t("lichtaan.klaar"));
-      rechts.append(el("p", { class: "hint" }, t("hint.enter")));
+      rechts.append(enterHint(ctx));
     },
   };
 };

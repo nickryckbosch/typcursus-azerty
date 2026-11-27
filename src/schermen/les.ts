@@ -135,6 +135,7 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok = 0
     timers.forEach((id) => clearTimeout(id));
     timers = [];
     ctx.toonHulp(null);
+    toetsenbord.toonEnter(false);
     podium.replaceChildren();
     (document.activeElement as HTMLElement | null)?.blur?.();
     if (i >= les.online.length) {

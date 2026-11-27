@@ -17,7 +17,8 @@
   "voorlezen.aan": "Voorlezen staat aan",
   "voorlezen.uit": "Voorlezen staat uit",
 
-  "hint.enter": "Druk op Enter om verder te gaan.",
+  "hint.enter": "Druk op {toets} om verder te gaan.",
+  "toets.enter": "Enter \u21b5",
   "teller": "{nummer} van {totaal}",
   "teken.spatie": "spatie",
 

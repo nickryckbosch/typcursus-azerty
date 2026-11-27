@@ -495,6 +495,63 @@ button {
   opacity: 0.6;
 }
 
+/* De Enter-toets: twee delen die samen een grote toets vormen. */
+.toets-enter {
+  background: #ecebe8;
+  opacity: 0.85;
+  color: var(--tekst);
+}
+
+.toets-enter-boven {
+  border-bottom-left-radius: 0;
+  border-bottom-width: 0;
+  border-bottom-right-radius: 0;
+  margin-left: auto;
+}
+
+.toets-enter-onder {
+  margin-top: calc(var(--k) * -0.1 - 2px);
+  height: calc(var(--k) * 1.1 + 2px);
+  border-top-width: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.enter-label {
+  font-size: calc(var(--k) * 0.3);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.toets-enter.enter-wacht {
+  opacity: 1;
+  background: var(--geel);
+  border-color: #000;
+  border-width: 4px;
+}
+
+.toets-enter-boven.enter-wacht { border-bottom-width: 0; }
+.toets-enter-onder.enter-wacht { border-top-width: 0; }
+
+/* Een getekende toets in de tekst, bv. "Druk op [Enter] om verder te gaan." */
+.toets-in-tekst {
+  display: inline-block;
+  padding: 0.05em 0.5em;
+  margin: 0 0.15em;
+  border: 3px solid #000;
+  border-bottom-width: 5px;
+  border-radius: 8px;
+  background: var(--geel);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.hint-enter {
+  font-size: 1.25rem;
+  color: var(--tekst);
+  margin: 0;
+}
+
 .toets.geleerd {
   opacity: 1;
   color: var(--tekst);

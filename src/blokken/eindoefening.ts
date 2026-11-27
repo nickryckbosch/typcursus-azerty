@@ -10,7 +10,7 @@ import { el } from "../weergave/dom";
 import type { BlokFunctie, BlokInstantie } from "./context";
 import { houding } from "./houding";
 import { typRegels } from "./typregels";
-import { metFienEnJef } from "./gedeeld";
+import { enterHint, metFienEnJef } from "./gedeeld";
 
 export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
   if (blok.soort === "houding") return houding(blok, ctx);
@@ -49,7 +49,7 @@ export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
         "div",
         { class: "blok blok-intro" },
         metFienEnJef("aanmoedigend", el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, t("eind.aanmoediging")))),
-        el("p", { class: "hint" }, t("hint.enter")),
+        enterHint(ctx),
         el("button", { class: "knop knop-hoofd", type: "button", onclick: () => start() }, t("knop.start")),
       ),
     );

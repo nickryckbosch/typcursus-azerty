@@ -13,14 +13,18 @@ export interface ToetsenbordWeergave {
   flits(code: string, juist: boolean): void;
   /** laat een hele rij kort oplichten */
   lichtRijOp(rij: Rij): void;
+  /** toon of verberg dat het kind op Enter moet drukken */
+  toonEnter(aan: boolean): void;
 }
 
 // Brede toetsen aan de randen (Tab, CapsLock, Shift, ...): alleen om het
-// toetsenbord herkenbaar te maken, ze doen niets.
+// toetsenbord herkenbaar te maken, ze doen niets. Uitzondering: de Enter-toets
+// (zolder en woonkamer rechts, samen een grote toets zoals op een Belgisch
+// toetsenbord) licht op als het kind op Enter moet drukken om verder te gaan.
 const RANDEN: Record<Rij, { voor?: [string, number]; na?: [string, number] }> = {
   dak: { na: ["", 1.9] },
-  zolder: { voor: ["", 1.5], na: ["", 1.4] },
-  woonkamer: { voor: ["", 1.8], na: ["", 1.1] },
+  zolder: { voor: ["", 1.5], na: ["enter-boven", 1.4] },
+  woonkamer: { voor: ["", 1.8], na: ["enter-onder", 1.1] },
   kelder: { voor: ["", 1.3], na: ["", 2.5] },
   spatie: {},
 };
@@ -40,6 +44,7 @@ export function maakToetsenbord(geleerd: string[]): ToetsenbordWeergave {
   const perCode = new Map<string, HTMLElement>();
   const perRij = new Map<Rij, HTMLElement>();
   const geleerdSet = new Set(geleerd);
+  const enterDelen: HTMLElement[] = [];
 
   const rijElementen = RIJEN.map(({ rij, toetsen }) => {
     const rand = RANDEN[rij];
@@ -66,7 +71,18 @@ export function maakToetsenbord(geleerd: string[]): ToetsenbordWeergave {
       perCode.set(toets.code, t);
       rijEl.append(t);
     }
-    if (rand.na) rijEl.append(el("div", { class: "toets toets-rand", style: `--b:${rand.na[1]}` }));
+    if (rand.na?.[0] === "enter-boven") {
+      const boven = el("div", { class: "toets toets-enter toets-enter-boven", style: `--b:${rand.na[1]}` }, el("span", { class: "enter-label" }, "Enter \u21B5"));
+      enterDelen.push(boven);
+      perCode.set("Enter", boven);
+      rijEl.append(boven);
+    } else if (rand.na?.[0] === "enter-onder") {
+      const onder = el("div", { class: "toets toets-enter toets-enter-onder", style: `--b:${rand.na[1]}` });
+      enterDelen.push(onder);
+      rijEl.append(onder);
+    } else if (rand.na) {
+      rijEl.append(el("div", { class: "toets toets-rand", style: `--b:${rand.na[1]}` }));
+    }
     perRij.set(rij, rijEl);
     return rijEl;
   });
@@ -89,6 +105,9 @@ export function maakToetsenbord(geleerd: string[]): ToetsenbordWeergave {
       void t.offsetWidth; // herstart de animatie
       t.classList.add(klas);
       setTimeout(() => t.classList.remove(klas), 350);
+    },
+    toonEnter(aan) {
+      for (const d of enterDelen) d.classList.toggle("enter-wacht", aan);
     },
     lichtRijOp(rij) {
       const r = perRij.get(rij);

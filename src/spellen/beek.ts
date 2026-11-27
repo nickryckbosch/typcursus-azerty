@@ -11,7 +11,7 @@ import { nieuweOefening, teltAlsTeken, typ, volgendTeken, type TypOefening } fro
 import { el } from "../weergave/dom";
 import { fien, jef } from "../weergave/figuren";
 import { tekenTonen } from "../weergave/tekens";
-import { schud } from "../blokken/gedeeld";
+import { enterHint, schud } from "../blokken/gedeeld";
 
 const STENEN = 12;
 const BEKEN = 3;
@@ -104,7 +104,7 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
         klaar = true;
         melding.hidden = false;
         melding.textContent = t("beek.klaar");
-        melding.after(el("p", { class: "hint" }, t("hint.enter")));
+        melding.after(enterHint(ctx));
         ctx.zeg(t("beek.klaar"));
       }
     },

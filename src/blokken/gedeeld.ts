@@ -26,3 +26,13 @@ export function metFienEnJef(uitdrukking: Uitdrukking, ...inhoud: Node[]): HTMLE
     el("div", { class: "naast-figuren" }, ...inhoud),
   );
 }
+
+/**
+ * "Druk op [Enter] om verder te gaan." De toets staat getekend in de tekst,
+ * en de Enter-toets op het schermtoetsenbord licht op tot het volgende blok.
+ */
+export function enterHint(ctx: BlokContext): HTMLElement {
+  ctx.toetsenbord.toonEnter(true);
+  const [voor, na] = t("hint.enter").split("{toets}");
+  return el("p", { class: "hint-enter" }, voor, el("span", { class: "toets-in-tekst" }, t("toets.enter")), na ?? "");
+}
