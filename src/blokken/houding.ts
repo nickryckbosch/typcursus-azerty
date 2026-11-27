@@ -22,7 +22,7 @@ export function houding(_blok: EindoefeningBlok, ctx: BlokContext): BlokInstanti
   // "Voeten plat, rug recht!" staat in de tekstballon van Fien en Jef, de opdracht
   // staat meteen bovenaan. Vroeger wisselde de opdracht na 2 seconden van tekst.
   const scherm = oefenscherm(ctx, { figuren: "blij", klasse: "blok-houding", doel: t("houding.zeg") });
-  const lamp = lampMetWachtzin(t("lamp.wacht"), () => scherm.element);
+  const lamp = lampMetWachtzin(t("lamp.wacht"), () => scherm.element, scherm.enter);
   scherm.veld.append(lamp.element);
   ctx.handen.toon(["duim"]);
 

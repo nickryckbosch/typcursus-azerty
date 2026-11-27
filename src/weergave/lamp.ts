@@ -59,10 +59,13 @@ export interface LampMetWachtzin {
  * De lamp met daaronder een vaste plek voor de zin "Wacht op de lamp.". Die
  * plek is er van bij het begin, zodat er niets verspringt als de zin verschijnt.
  * Gebruikt in "Duim op de spatiebalk" en "Klaar voor de start" (les 0).
+ * startKnop: de knop Start van het oefenscherm (scherm.enter); hij komt onder de zin.
  */
-export function lampMetWachtzin(wachtzin: string, binnen: () => ParentNode): LampMetWachtzin {
+export function lampMetWachtzin(wachtzin: string, binnen: () => ParentNode, startKnop?: HTMLElement): LampMetWachtzin {
   const zin = el("p", { class: "wachtzin zacht onzichtbaar", "aria-live": "polite" }, wachtzin);
-  const element = el("div", { class: "lamp-plek" }, lampTekening(), zin);
+  // K27: de knop Start staat bij de lamp, in de middenkolom: lamp, zin, knop.
+  // Elk heeft zijn vaste plek, dus er verspringt niets als de knop verdwijnt.
+  const element = el("div", { class: startKnop ? "lamp-plek met-start" : "lamp-plek" }, lampTekening(), zin, startKnop);
   return {
     element,
     zetAan(aan) {

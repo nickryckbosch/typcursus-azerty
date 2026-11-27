@@ -251,14 +251,32 @@ button {
   background: var(--accent-donker);
 }
 
+/* Tweede knop (K27): een lichte vulling en geen zichtbare rand, zodat hij niet
+   op een invulvak lijkt. De rand is doorzichtig: zo houdt de knop dezelfde maat. */
 .knop-tweede {
-  border-color: var(--accent);
+  border-color: transparent;
   background: var(--accent-licht);
   color: var(--accent-donker);
 }
 
 .knop-tweede:hover {
   background: #d5e4fa;
+}
+
+/* De knop Verder (K27): de Enter-toets staat in de knop getekend. Enter en de
+   knop doen hetzelfde; er is geen losse zin "Druk op Enter" meer. */
+.knop-verder {
+  gap: 0.6em;
+}
+
+.knop-verder .toets-in-tekst {
+  margin: 0;
+  padding: 0 0.5em;
+  border-color: var(--accent-donker);
+  border-bottom-width: 3px;
+  border-radius: 7px;
+  font-size: 0.82em;
+  line-height: 1.5;
 }
 
 .knop-klein {
@@ -1537,12 +1555,20 @@ button {
   max-width: 1050px;
   font-size: clamp(17px, 8.4cqh, 30px);
   font-weight: 800;
-  line-height: 1.3;
+  line-height: 1.25;
+  /* een opdracht van twee regels breekt in twee ongeveer even lange regels */
+  text-wrap: balance;
   color: var(--tekst);
 }
 
+/* De toets in de opdracht is niet hoger dan de regel: zo past een opdracht van
+   twee regels in haar zone, zonder dat de toets onderaan afgesneden wordt. */
 .opdracht-tekst .toets-in-tekst {
   font-size: 0.86em;
+  line-height: 1.15;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-bottom-width: 3px;
 }
 
 .zone-figuren {
@@ -1772,6 +1798,16 @@ button {
   max-height: 190px;
 }
 
+/* Met de knop Start onder de zin (K27): de lamp maakt plaats, zodat de knop
+   van bij het begin zijn vaste plek heeft. */
+.lamp-plek.met-start .lamp-tekening {
+  height: calc(100% - 2.6em - clamp(30px, 13cqh, 48px));
+}
+
+.lamp-plek .enter-rij {
+  flex: none;
+}
+
 .wachtzin {
   flex: none;
   min-height: 1.4em;
@@ -1906,27 +1942,101 @@ button {
   top: -0.05em;
 }
 
-/* ---------- Intro van les 0: het huis naast de tekstballon ---------- */
-.intro-prent {
-  height: 100%;
+/* ---------- Opbouw "midden" (K27, rust en overzicht) ----------
+   Voor een scherm waar Fien en Jef iets zeggen en het kind alleen verder moet
+   (de intro, het einde van extra oefenen). Fien en Jef, hun tekstballon en de
+   prent staan als een groep in het midden van de kaart, de knoppen er vlak
+   onder. Niets staat aan de randen (docs/stijlgids.md, deel 10). */
+.podium .blok.oefenkaart.oefenkaart-midden {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 5cqh, 22px);
+  padding: clamp(4px, 3cqh, 16px) clamp(16px, 4cqw, 56px) clamp(8px, 5cqh, 22px);
+}
+
+.oefenkaart-midden .zone-opdracht {
+  flex: none;
+  padding: 0;
+}
+
+/* Geen opdracht (de tekst staat in de tekstballon): de zone neemt geen plaats in. */
+.oefenkaart-midden .zone-opdracht:has(.opdracht-tekst:empty) {
+  display: none;
+}
+
+.oefenkaart-midden .zone-groep {
   min-height: 0;
-  width: 100%;
+  max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(10px, 2.5cqw, 28px);
+  gap: clamp(12px, 1.8cqw, 24px);
 }
 
-.intro-prent .huis {
-  flex: 0 1 46%;
+/* Fien en Jef staan dicht bij elkaar en dicht bij hun tekstballon. */
+.oefenkaart-midden .zone-figuren {
+  flex: none;
+  align-items: flex-end;
+  gap: clamp(4px, 0.8cqw, 10px);
+  padding: 0;
+}
+
+.podium .oefenkaart-midden .zone-figuren .figuur {
+  width: auto;
+  height: min(var(--h), 48cqh);
+  max-height: none;
+}
+
+.oefenkaart-midden .zone-veld {
+  flex: 0 1 auto;
   min-width: 0;
-  height: 92%;
+  flex-direction: row;
+  gap: clamp(12px, 2.2cqw, 28px);
+}
+
+.oefenkaart-midden .zone-veld .ballon {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 640px;
+}
+
+/* Het huis waarover Fien en Jef praten: kleiner en rustiger dan de tekst. */
+.oefenkaart-midden .zone-veld .huis {
+  flex: none;
+  height: min(184px, 52cqh);
   width: auto;
 }
 
-.intro-prent .ballon {
-  flex: 1 1 54%;
-  min-width: 0;
+.blok-intro.met-huis .zone-veld .ballon {
+  max-width: 460px;
+}
+
+.oefenkaart-midden .zone-voet {
+  flex: none;
+  padding: 0;
+}
+
+.oefenkaart-midden .zone-voet .knoppen {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(8px, 1.4cqw, 16px);
+}
+
+.oefenkaart-midden .zone-voet .knoppen .knop {
+  width: auto;
+  padding: 0 22px;
+  border-radius: 14px;
+}
+
+.oefenkaart-midden > .voortgang {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4px;
 }
 
 .blok-intro.met-huis .grote-tekst {

@@ -1,6 +1,6 @@
 # Stijlgids
 
-De ontwerpregels voor elk scherm van de typcursus (beslissingen K15 tot K21 en K26). Een nieuw scherm volgt deze regels. De waarden staan op een plaats in de code: bovenaan `src/stijl.css`, als CSS-variabelen. Pas je daar een kleur aan, dan verandert ze overal.
+De ontwerpregels voor elk scherm van de typcursus (beslissingen K15 tot K21, K26, K27 en K28). Een nieuw scherm volgt deze regels. De waarden staan op een plaats in de code: bovenaan `src/stijl.css`, als CSS-variabelen. Pas je daar een kleur aan, dan verandert ze overal.
 
 Bij elke regel staat waarop ze steunt:
 
@@ -78,10 +78,11 @@ Waarop steunt dit? **Eigen keuze.** Andika is door SIL ontworpen voor beginnende
 
 - Kaart: wit, rand van 1 px in `--rand`, afgeronde hoeken van 18 tot 22 px.
 - Hoofdknop: achtergrond `--accent`, witte tekst. Een per scherm.
-- Tweede knop: achtergrond `--accent-licht`, rand `--accent`.
-- Gewone knop: wit met een grijze rand.
+- Tweede knop: achtergrond `--accent-licht`, zonder zichtbare rand, zodat hij niet op een invulvak lijkt (K27, deel 10).
+- Gewone knop (bovenbalk, leerkrachtscherm): wit met een grijze rand.
 - Knoppen zijn minstens 38 px hoog; de hoofdknop minstens 48 px.
-- Focus (toetsenbordbediening): een duidelijke rand van 3 px in `--tekst`.
+- De knop Verder of Start: de hoofdknop met de Enter-toets erin getekend ("Verder" en daarnaast het toetsje "Enter ↵"). Enter en de knop doen hetzelfde (K27, deel 10).
+- Focus (toetsenbordbediening): een ring van 3 px in `--tekst` rond de knop, op 3 px afstand (`outline` met `outline-offset`). De ring verandert de vorm of de maat van de knop niet.
 - Tekstballon: wat Fien en Jef zeggen staat in een witte ballon met afgeronde hoeken, een dunne rand en een staartje dat naar het figuurtje wijst.
 
 Waarop steunt dit? **Eigen keuze.**
@@ -114,7 +115,8 @@ Kleurstrepen per vinger en getekende handen: **andere cursussen** doen dat ook (
 
 - **Startscherm:** titel links, startzin rechts. Links Fien en Jef (zwaaiend, stil) met een tekstballon. Een grote kaart "Verder waar je was", daaronder "Alle lessen" met een tabblad per deel van het toetsenbordhuis en een compacte rij per les.
 - **Typscherm:** bovenbalk met de knop "Lessen", in het midden "Les 2 · Oefenregels 1" met een balkje per blok, rechts voorlezen. Links een stilstaand figuurtje met een korte tip in een tekstballon. In het midden een witte kaart met de oefenregels. Onderaan het toetsenbord met de handen.
-- **Oefenkaart (intro, zoek de toets, de lamp, "Licht aan", "Klaar voor de start", afsluiter):** dezelfde bovenbalk, en een witte kaart met vaste zones: de opdracht groot bovenaan (met de toets getekend in de zin), Fien en Jef links, de prent of het signaal in het midden, "Druk op Enter" met de knop Verder rechts.
+- **Oefenkaart (intro, zoek de toets, de lamp, "Licht aan", "Klaar voor de start", afsluiter):** dezelfde bovenbalk, en een witte kaart met vaste zones: de opdracht groot bovenaan (met de toets getekend in de zin), Fien en Jef links, de prent of het signaal in het midden, de knop Verder (met de Enter-toets erin) rechts. Bij de lamp staat de knop Start onder de lamp.
+- **Praatscherm (K27: de intro, het einde van extra oefenen):** Fien en Jef, hun tekstballon en de prent staan als een groep in het midden van de kaart, de knoppen er vlak onder (`oefenscherm(ctx, { opbouw: "midden" })`). Zie deel 10.
 - **Voortgang (K20):** een dunne, grijze balk langs de onderrand van de witte kaart, met rechts klein de teller. Bij "Over de beek" drie bolletjes voor de beken. Geen vingerkleur.
 - **Spelscherm:** dezelfde bovenbalk, een witte kaart met bovenaan de vaste prent en eronder de vooruitgang, onderaan het toetsenbord met de handen.
 - Alles past op een Chromebook van 1366 x 768 zonder scrollen (zie beslissing 12b).
@@ -182,7 +184,7 @@ Elke tekst die een kind leest, volgt deze regels. Ze gelden ook voor elke nieuwe
 
 ### Eerst lezen, dan starten (K28)
 
-- **Gebeurt er in een oefening iets vanzelf** (een lamp die aangaat, later de vallende letters van Letterregen, alles met een tijd), **dan begint ze pas als het kind op Start drukt.** Tot dan staat de opdracht in beeld en gebeurt er niets. De start is Enter of de knop Start, met de zin "Lees de opdracht. Klaar? Druk op Enter om te starten." (`scherm.toonEnter(start, "start")`).
+- **Gebeurt er in een oefening iets vanzelf** (een lamp die aangaat, later de vallende letters van Letterregen, alles met een tijd), **dan begint ze pas als het kind op Start drukt.** Tot dan staat de opdracht in beeld en gebeurt er niets. De start is Enter of de knop Start, waarin de Enter-toets getekend staat (`scherm.toonEnter(start, "start")`). De knop staat bij het signaal, bijvoorbeeld onder de lamp (K27, deel 10); een losse zin "Druk op Enter om te starten" is er niet meer.
 - Een toets voor de start krijgt wel een reactie (K23): "Druk eerst op Start." Hij telt niet als aanslag en niet als fout.
 - Oefeningen die op het kind wachten (oefenregels, "Zoek de toets", een spel waarin je typt), hebben geen startknop nodig: daar gebeurt niets voor het kind typt. De eindoefening had al een start.
 - **Waarom:** bij "Duim op de spatiebalk" ging de lamp na 0,9 seconde aan, terwijl het kind de opdracht nog moest lezen (Nick, 27 november 2026). Een kind dat traag leest of de voorleesstem afwacht, mist zo het signaal.
@@ -191,3 +193,26 @@ Elke tekst die een kind leest, volgt deze regels. Ze gelden ook voor elke nieuwe
 
 **Waarop steunt dit? Eigen keuze**, na de vaststelling bij drie testers op 27 november 2026: Nick, zijn dochter van 11 en een volwassene zonder uitleg liepen vast op een opdracht. Die laatste vroeg bij "Over de beek": "Hoe ben ik aan het huis geraakt?" Het past bij K20 (woord en beeld kloppen). Uitwerking in projectdocument 21.
 
+## 10. Rust en overzicht (K27)
+
+Elk scherm volgt deze acht regels. Ze gelden ook voor elk nieuw scherm en elk nieuw spel.
+
+1. **Een blikvanger per scherm:** de opdracht, of het ding waarmee het kind bezig is. Al de rest is kleiner of rustiger.
+2. **Wat bij elkaar hoort, staat bij elkaar, in een middenkolom.** Niets staat aan de uiterste randen van de kaart, behalve de bovenbalk.
+3. **Fien en Jef staan samen, dicht bij hun tekstballon,** als een groep.
+4. **Een manier om verder te gaan:** een knop "Verder" (of "Start") waarin de Enter-toets getekend staat. De losse zin "Druk op Enter om verder te gaan" valt weg. Enter blijft werken.
+5. **Knoppen zien eruit als knoppen.** De hoofdknop is vol blauw. Een tweede knop heeft een lichte vulling (`--accent-licht`, `#E4EEFC`) en geen dikke rand, zodat hij niet op een invulvak lijkt. De focusrand voor het toetsenbord is een ring rond de knop (`outline` met `outline-offset`) en verandert de vorm of de maat van de knop niet. De hoofdknop is de knop die Enter kiest.
+6. **Voeg je iets toe aan een scherm, haal dan iets weg,** of zeg waarom het niet kan.
+7. **De vaste zones van K20 blijven:** niets verspringt tijdens een oefening, wat later verschijnt heeft zijn ruimte al (deel 1, beslissing 12c).
+8. **Geen beweging tijdens het typen** (K16, deel 1).
+
+**Waar staat het in de code?**
+
+- De opbouw "midden": `oefenscherm(ctx, { opbouw: "midden" })` in `src/blokken/oefenscherm.ts`, stijl `.oefenkaart-midden` in `src/stijl.css`. Voor schermen waar Fien en Jef iets zeggen en het kind alleen verder moet.
+- De knop Verder of Start: `scherm.toonEnter()`. Een blok mag de knop bij zijn signaal zetten met `scherm.enter` (zo staat Start onder de lamp).
+- Tweede knop: klasse `knop-tweede`.
+
+**Waarop steunt dit?**
+
+- **Onderzoek**, voor het principe dat details die niets met de taak te maken hebben afleiden: Rey (2012) en Sundararajan en Adesope (2020), zie deel 1. Kanttekening: dat onderzoek gaat over leren uit tekst en uitleg, niet over typen.
+- **Eigen keuze**, voor de acht concrete regels, na de vaststelling van Nick en de testers op 27 november 2026 (de schermen oogden druk; zie `docs/beslissingen.md`, punt 12j). Te toetsen in de klastest.

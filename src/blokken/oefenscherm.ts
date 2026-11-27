@@ -3,8 +3,8 @@
 //   +-----------------------------------------------+
 //   |  OPDRACHT (groot, met de toets getekend)      |   zone-opdracht
 //   +-----------+-----------------------+-----------+
-//   | Fien en   |  prent, spel of       | Druk op   |   zone-figuren / zone-veld / zone-voet
-//   | Jef       |  signaal (lamp, huis) | [Enter]   |   (rechts, boven de Enter-toets)
+//   | Fien en   |  prent, spel of       | [Verder   |   zone-figuren / zone-veld / zone-voet
+//   | Jef       |  signaal (lamp, huis) |  Enter]   |   (rechts, boven de Enter-toets)
 //   +-----------+-----------------------+-----------+
 //   |  ______________________________   10 van 12  |   voortgang (onderrand)
 //   +-----------------------------------------------+
@@ -17,6 +17,19 @@
 //   door elementen toe te voegen of weg te halen.
 // - Fien en Jef, de lamp en de prent veranderen nooit van plaats.
 // - De opdracht is het duidelijkste element van de kaart.
+//
+// Opbouw "midden" (K27, rust en overzicht; docs/stijlgids.md, deel 10): voor een
+// scherm waar Fien en Jef iets zeggen en het kind alleen verder moet (de intro,
+// het einde van extra oefenen). Alles staat als een groep in het midden, niets
+// aan de randen van de kaart:
+//
+//   +-----------------------------------------------+
+//   |        Fien en Jef  ( tekstballon )  prent    |   zone-groep
+//   |                 [ Verder  Enter ]             |   zone-voet
+//   +-----------------------------------------------+
+//
+// Een manier om verder te gaan: de knop Verder, met de Enter-toets erin
+// getekend. De losse zin "Druk op Enter om verder te gaan" is weg (K27).
 
 import { t } from "../content";
 import { el } from "../weergave/dom";
@@ -89,12 +102,17 @@ export interface OefenschermOpties {
    * blijft het hele spel staan: het kind kan altijd teruglezen waar het naartoe werkt.
    */
   doel?: string;
+  /**
+   * "midden" (K27): Fien en Jef, hun tekstballon en de prent staan als een groep
+   * in het midden, met de knoppen eronder. Voor schermen zonder typopdracht.
+   */
+  opbouw?: "zones" | "midden";
 }
 
 export interface Oefenscherm {
   element: HTMLElement;
   veld: HTMLElement;
-  /** de zone rechts: hier staat "Druk op Enter", of de knoppen van de afsluiter */
+  /** de zone met de knop Verder, of de knoppen van de afsluiter (rechts; bij opbouw "midden" onder de groep) */
   voet: HTMLElement;
   voortgang: Voortgangsbalk;
   /** zet de opdracht (opmaak: [toets], **vet**) en lees ze voor; beelden: zie tekstMetToetsen */
@@ -102,12 +120,18 @@ export interface Oefenscherm {
   /** een andere houding van Fien en Jef, op dezelfde plaats */
   zetFiguren(uitdrukking: Uitdrukking): void;
   /**
-   * Toon "Druk op [Enter] om verder te gaan" met de knop Verder. Met "start":
-   * "Druk op [Enter] om te starten" met de knop Start (K28: eerst lezen, dan starten).
+   * Toon de knop Verder, met de Enter-toets erin getekend; Enter doet hetzelfde.
+   * Met "start": de knop Start (K28: eerst lezen, dan starten).
    */
   toonEnter(actie?: () => void, soort?: "verder" | "start"): void;
-  /** verberg de Enter-regel weer (zijn plaats blijft) */
+  /** verberg de knop weer (zijn plaats blijft) */
   verbergEnter(): void;
+  /**
+   * De knop Verder of Start (met zijn vaste plek). Hij staat in de voet. Een
+   * blok mag hem bij zijn signaal zetten, bv. onder de lamp (K27: wat bij elkaar
+   * hoort, staat bij elkaar). Doe dat bij de opbouw, nooit tijdens de oefening.
+   */
+  enter: HTMLElement;
 }
 
 export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): Oefenscherm {
@@ -120,24 +144,28 @@ export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): O
     : figurenRij;
   const veld = el("div", { class: "zone-veld" });
   let enterActie = () => ctx.volgende();
-  const hint = el("p", { class: "hint-enter" });
-  const enterKnop = el("button", { class: "knop knop-hoofd", type: "button", tabindex: "-1", onclick: () => enterActie() }, t("knop.verder"));
+  // Een manier om verder te gaan (K27): een knop, met de Enter-toets erin
+  // getekend. Geen losse zin "Druk op Enter" meer. De knop heet Verder of Start.
+  const enterLabel = el("span", {}, t("knop.verder"));
+  const enterKnop = el(
+    "button",
+    { class: "knop knop-hoofd knop-verder", type: "button", tabindex: "-1", onclick: () => enterActie() },
+    enterLabel,
+    el("span", { class: "toets-in-tekst", "aria-hidden": "true" }, t("toets.enter")),
+  );
   function zetEnterTekst(soort: "verder" | "start"): void {
-    const [voor, na] = t(soort === "start" ? "hint.start" : "hint.enter").split("{toets}");
-    hint.replaceChildren(voor, el("span", { class: "toets-in-tekst" }, t("toets.enter")), na ?? "");
-    enterKnop.textContent = t(soort === "start" ? "knop.start" : "knop.verder");
+    enterLabel.textContent = t(soort === "start" ? "knop.start" : "knop.verder");
   }
-  zetEnterTekst("verder");
-  const enterRij = startVerborgen(el("div", { class: "enter-rij" }, hint, enterKnop));
+  const enterRij = startVerborgen(el("div", { class: "enter-rij" }, enterKnop));
   const voet = el("div", { class: "zone-voet" }, enterRij);
   const voortgang = maakVoortgang();
 
+  const midden = opties.opbouw === "midden";
   const element = el(
     "section",
-    { class: `blok oefenkaart ${opties.klasse ?? ""}` },
+    { class: `blok oefenkaart ${midden ? "oefenkaart-midden" : ""} ${opties.klasse ?? ""}` },
     el("div", { class: "zone-opdracht" }, opdracht),
-    figuren,
-    veld,
+    ...(midden ? [el("div", { class: "zone-groep" }, figuren, veld)] : [figuren, veld]),
     voet,
     voortgang.element,
   );
@@ -147,6 +175,7 @@ export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): O
     element,
     veld,
     voet,
+    enter: enterRij,
     voortgang,
     zetOpdracht(tekst, voorlezen = true, beelden = {}) {
       opdracht.replaceChildren(...tekstMetToetsen(tekst, beelden));

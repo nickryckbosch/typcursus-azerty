@@ -285,11 +285,35 @@ Steunt op: eigen keuze van Nick, na het testen. De tekenstijl en de indeling bli
 - De kaart op het oefenbord heeft nu dezelfde opbouw als de kaart in "Zoek de toets": een vaste breedte en hoogte, elke letter op dezelfde basislijn, met plaats onder voor staartletters (g, j, p, q, y) en boven voor hoofdletters en accenten.
 - Het woord "spatie" staat kleiner in een kaart van dezelfde maat. Waarom: de kaart verspringt niet meer tussen twee toetsen.
 
+## 12j. Rust en overzicht (K27)
+
+**Steunt op:** eigen keuze, beslist door Nick op 27 november 2026, na vaststellingen bij het testen. Het principe (afleidende details doen minder leren) steunt op onderzoek: Rey (2012) en Sundararajan en Adesope (2020), met de kanttekening dat dat over leren uit tekst gaat, niet over typen. De acht regels staan in docs/stijlgids.md, deel 10.
+
+**Wat de testers zagen:** de schermen waren druk. Wat bij elkaar hoort, stond ver uit elkaar, er waren twee manieren om verder te gaan (de zin "Druk op Enter" en de knop Verder), en een knop leek geen knop. Nick: "Ook altijd nadenken of onze beelden niet te druk, maar overzichtelijk zijn. Te veel prikkels zijn niet goed." Bij het slot van extra oefenen: "De mannetjes staan heel ver links, de knoppen rechts. Het midden is wit met daarboven tekst."
+
+**Fase 1: wat is veranderd**
+
+- **De knop Verder met de Enter-toets erin** (`scherm.toonEnter()`), in plaats van de zin "Druk op Enter om verder te gaan" met een knop eronder. Waarom: een manier om verder te gaan, en minder tekst. Enter blijft werken, en de Enter-toets op het schermtoetsenbord licht nog altijd op. Dit is een gedeeld onderdeel: het verandert ook op de toetsenbordcheck, het einde van "Licht aan in het huis" en de start van een korte eindoefening. Daar staat de knop voorlopig nog rechts (fase 2).
+- **Opbouw "midden"** (`oefenscherm(ctx, { opbouw: "midden" })`): Fien en Jef, hun tekstballon en de prent als een groep in het midden, de knoppen er vlak onder. Gebruikt in de intro van elke les en op het einde van extra oefenen.
+- **Intro van les 0:** Fien en Jef staan vlak naast hun tekstballon, het huis met de woorden staat er rechts naast en is kleiner dan de tekst. De knop Verder staat onder de groep. De tekst is dezelfde.
+- **Einde van extra oefenen:** "Goed geoefend! ..." staat in een tekstballon naast Fien en Jef (het is wat ze zeggen, geen opdracht), de twee knoppen staan eronder naast elkaar. "Naar de lessen" is de hoofdknop (vol blauw), want dat is de knop die Enter kiest; dat was al zo, maar de blauwe knop was toen de andere. "Nog een keer extra oefenen" is een tweede knop.
+- **Tweede knop:** lichte vulling, geen zichtbare rand (klasse `knop-tweede`). Waarom: een witte knop met een rand en een focusring erom leek op een invulvak. Dit verandert ook de knoppen "Extra oefenen" op het startscherm.
+- **De knop Start bij de lamp** ("Duim op de spatiebalk" en "Klaar voor de start", zie 12k): de knop staat onder de lamp, met de Enter-toets erin, en niet meer rechts aan de rand. De zin "Lees de opdracht. Klaar? Druk op Enter om te starten." is weg: de opdracht staat er vlak boven en de knop zegt wat hij doet. De volgorde is vast: lamp, de plek voor "Wacht op de lamp." of "Druk eerst op Start.", knop. Elk heeft zijn plaats van bij het begin, dus er verspringt niets als de knop na de start verdwijnt. De lamp is daardoor wat kleiner.
+- **De toets in een opdracht** is niet meer hoger dan de regel, en een opdracht van twee regels breekt in twee ongeveer even lange regels. Waarom: bij "Klaar voor de start" werd de toets [spatie] onderaan afgesneden.
+
+**Bewust niet veranderd in fase 1:** "Over de beek" (houdt de zin "Druk op Enter" tot het spelsjabloon van K22), de lesteksten, de afsluiter van een les, "Licht aan in het huis", het startscherm en de vraag "Je was al bezig met deze les". Die volgen in fase 2, als Nick akkoord is met de twee schermen.
+
+**Nagekeken** met schermafbeeldingen voor en na op 1366 x 768 en 1280 x 720: geen schuifbalk, niets afgesneden.
+
+**Tegen:**
+- De knop Verder staat op de praatschermen onder de groep en op de oefenschermen nog rechts. Dat wordt gelijkgetrokken in fase 2.
+- Op het einde van extra oefenen blijft de kaart half leeg, en de plaats van het toetsenbord ook (12c).
+
 ## 12k. Eerst lezen, dan starten (K28)
 
 **Steunt op:** vaststelling van Nick (27 november 2026): bij "Duim op de spatiebalk" ging de lamp al branden voor het kind de opdracht gelezen had. Eigen keuze voor de oplossing. Regel in docs/stijlgids.md, deel 9.
 
-- **"Duim op de spatiebalk" en "Klaar voor de start" beginnen met een startstap.** De opdracht en de lamp (uit) staan in beeld, met de zin "Lees de opdracht. Klaar? Druk op Enter om te starten." en de knop Start. Pas na Start gaat de lamp na een korte tijd aan. Waarom: het kind moet de opdracht kunnen lezen of laten voorlezen voor er iets gebeurt.
+- **"Duim op de spatiebalk" en "Klaar voor de start" beginnen met een startstap.** De opdracht en de lamp (uit) staan in beeld, met de zin "Lees de opdracht. Klaar? Druk op Enter om te starten." en de knop Start (sinds K27 alleen de knop Start met de Enter-toets erin, onder de lamp: zie 12j). Pas na Start gaat de lamp na een korte tijd aan. Waarom: het kind moet de opdracht kunnen lezen of laten voorlezen voor er iets gebeurt.
 - **Een spatie voor de start** toont onder de lamp "Druk eerst op Start." (op de vaste plek van "Wacht op de lamp."). Geen aanslag, geen fout. Waarom: een toets zonder reactie voelt als kapot (K23).
 - **"Klaar voor de start": "Voeten plat, rug recht!" staat nu in de tekstballon van Fien en Jef**, en de opdracht staat meteen bovenaan. Vroeger stond eerst "Voeten plat, rug recht!" als opdracht en wisselde die na 2 seconden naar de echte opdracht: dat versprong (K20) en gaf minder leestijd.
 - **`oefenscherm.toonEnter(actie, "start")`** toont de Enter-regel met "om te starten" en de knop Start; `verbergEnter()` verbergt ze weer. Geldt voor elke toekomstige oefening waarin iets vanzelf gebeurt, zoals Letterregen (K24).

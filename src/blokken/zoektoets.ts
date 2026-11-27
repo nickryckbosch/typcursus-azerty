@@ -35,7 +35,7 @@ export const zoekToets: BlokFunctie<ZoekToetsBlok> = (blok, ctx) => {
   // De spatie is geen letter: in de kaart staat dan een getekende spatiebalk (zelfde kaartmaat).
   const spatiebalk = el("span", { class: "spatiebalk-tekening", role: "img", "aria-label": t("teken.spatie"), hidden: true });
   const kaart = el("div", { class: "grote-toets" }, letter, spatiebalk);
-  const lamp = lampMetWachtzin(t("lamp.wacht"), () => scherm.element);
+  const lamp = lampMetWachtzin(t("lamp.wacht"), () => scherm.element, metLamp ? scherm.enter : undefined);
   scherm.veld.append(metLamp ? lamp.element : kaart);
   // In de opdracht staat naast het woord "lamp" een klein beeldje van dezelfde lamp.
   scherm.zetOpdracht(blok.tekst ?? "", true, metLamp ? { lamp: () => lampTekening(true) } : {});
