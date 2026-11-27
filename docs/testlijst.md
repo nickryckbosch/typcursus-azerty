@@ -51,6 +51,17 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 - [ ] **Nog een keer met veel fouten:** daarna komt een aanmoediging van Fien en Jef, en is de eindoefening korter (1 regel).
 - [ ] **Eindoefening zonder fouten:** 3 sterren. Op het startscherm heeft les 1 een vinkje en sterren, en de knop "Opnieuw".
 
+## Extra oefenen (nieuw)
+
+- [ ] Les 0 heeft geen "Extra oefenen".
+- [ ] Doe les 1 tot het einde, met veel fouten in de eindoefening (geen ster). Op het einde staat de knop "Extra oefenen". Op het startscherm blijft les 2 dicht, maar staat "Extra oefenen bij les 1" in de kaart en "Extra oefenen" in de rij van les 1.
+- [ ] Start extra oefenen: bovenaan staat "Les 1 · Extra oefenen". Je krijgt 4 regels van ongeveer 15 tot 25 tekens, met alleen f, j en de spatie.
+- [ ] Doe het nog eens ("Nog een keer extra oefenen"): zijn het andere regels?
+- [ ] Na de 4 regels: een korte afsluiter van Fien en Jef, zonder sterren.
+- [ ] Ga terug naar het startscherm: de sterren en het slot van les 2 zijn niet veranderd.
+- [ ] Leerkrachtscherm: zijn de aanslagen van extra oefenen bijgeteld bij "Toetsen"?
+- [ ] "Extra oefenen" staat alleen bij een les die je tot het einde gedaan hebt. (Les 2 tot 5 staan nog op "Komt binnenkort".)
+
 ## Algemeen
 
 - [ ] Past alles op het scherm, zonder te scrollen? Zijn de letters groot genoeg?

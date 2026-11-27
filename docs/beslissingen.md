@@ -75,6 +75,7 @@ Beslist met Nick (27 november 2026):
 ## 8. Voortgang en opslag
 
 - **localStorage**, onder de sleutel `typcursus-azerty`, met een versienummer (nu 1). Elke lees- en schrijfactie zit in try/catch: lukt het niet, dan werkt de app gewoon verder, alleen zonder te bewaren.
+- **Velden die later bijkwamen** (zoals `bezigBij`, `eindeBereikt` en de instelling voor de hulp) krijgen een standaardwaarde als ze ontbreken; het versienummer blijft 1.
 - **Kapotte of onbekende gegevens** worden vervangen door een lege voortgang, veld per veld (`zetOm` in `src/logica/opslag.ts`). Komt er ooit een versie 2, dan komt de omzetting daar.
 - **Tegen:** de voortgang hoort bij het browserprofiel. Dat is geen probleem: elk kind heeft een eigen Google-login van de school, dus een eigen profiel.
 
@@ -133,7 +134,7 @@ Beslist met Nick (27 november 2026):
   - Alles in het middelste deel (tekst, Fien en Jef, het huis, de beek, de oefenregels) schaalt mee met de hoogte die overblijft. Daarvoor gebruiken we "container query units" (`cqh`) van CSS: 1cqh is 1% van de hoogte van het middelste deel. Elke maat heeft een onder- en een bovengrens.
   - Waar niets te typen valt (afsluiter, aanmoediging), verdwijnen het toetsenbord en de handen.
   - "Druk op Enter om verder te gaan" en de knop Verder staan op dezelfde regel.
-- **Getest** op 1366 x 768, 1366 x 657, 1280 x 600, 1280 x 560 en 1024 x 600, opnieuw na de nieuwe vormgeving (K19): in geen enkele stap van les 0 en les 1 moet er nog gescrold worden. Uitzondering: de melding "je toetsenbord staat niet goed" met de uitleg voor de leerkracht kan op een laag scherm een paar pixels te hoog zijn; dan scrolt alleen de kaart.
+- **Getest** op 1366 x 768, 1366 x 657, 1280 x 600, 1280 x 560 en 1024 x 600, opnieuw na de nieuwe vormgeving (K19): in geen enkele stap van les 0 en les 1 moet er nog gescrold worden. Dat is nagekeken door beide lessen automatisch te doorlopen in Chrome, ook de melding "je toetsenbord staat niet goed" en extra oefenen. Niet nagekeken op een echte Chromebook.
 - **Tegen:** op een heel klein scherm worden de letters en figuren kleiner. De ondergrenzen zorgen dat ze leesbaar blijven.
 
 ## 13. Privacy en veiligheid
@@ -167,4 +168,21 @@ Beslist met Nick (27 november 2026):
 - **Tabbladen per deel:** de delen van het toetsenbordhuis staan in `src/content/nl-BE/delen.json` (nu alleen "1 · Woonkamer"). Een deel toevoegen is daar een stukje tekst (nummer, titel, lesnummers), geen code. Een test controleert dat elke les in precies een deel zit.
 - **Sterren** staan klein in de lesrij. **Voorlezen** en het **oefenbord** zijn kleine knoppen bovenaan; het oefenbord is nodig voor de klassikale start.
 - **Waarop steunt dit? Eigen keuze**, te toetsen in de klastest.
+
+## 18. Extra oefenen (K15)
+
+- **Keuze:** bij elke les (behalve les 0) kan het kind extra oefenen. Een beurt is 4 nieuw samengestelde oefenregels van 15 tot 25 tekens, en daarna een korte afsluiter van Fien en Jef.
+- **Wanneer gaat het open?** Zodra het kind de les een keer tot het einde gedaan heeft (tot bij de afsluiter), ook als het de 90% niet haalde. De volgende les gaat nog altijd pas open bij 90% op de eindoefening. In de voortgang is dat een nieuw veld per les, `eindeBereikt`; het versienummer blijft 1, en een les die al gelukt was, telt meteen mee.
+- **Telt niet mee:** de score van extra oefenen verandert niets aan sterren, pogingen of het slot van de volgende les. De metingen per toets (fouten en tijd) worden wel bewaard, voor het leerkrachtscherm.
+- **Waar vind je het?** Op het startscherm: de knop "Extra oefenen bij les X" in de kaart "Verder waar je was", en "Extra oefenen" in de rij van de les. Ook op het einde van een les.
+- **De generator** (`src/logica/extraoefenen.ts`), zelf geschreven, zonder code van Keybr of een ander project:
+  - items uit de lijsten van de les: groepjes (les 1 en 2), woorden (les 3 tot 5), zinnen (vanaf les 4; ongeveer de helft van de regels begint dan met een zin);
+  - ongeveer drie kwart uit de huidige les, de rest uit vroegere lessen (in les 1 alles uit les 1);
+  - nooit twee keer hetzelfde item na elkaar, ook niet over twee regels heen;
+  - elke regel moet door de regelcontrole; zo niet, dan wordt ze opnieuw samengesteld. Na 50 pogingen komt een vaste oefenregel van de les, zodat het scherm nooit vastloopt;
+  - het toeval wordt meegegeven aan de functie, zodat de tests altijd hetzelfde doen.
+- **De regelcontrole** (`src/logica/regelcheck.ts`) is het controlescript in de repository: alleen geleerde toetsen, hoogstens vier aanslagen na elkaar met dezelfde vinger, hoogstens zeven letters na elkaar met dezelfde hand. De spatie onderbreekt een reeks (de duim typt ze). De test op de lesinhoud en de generator gebruiken dezelfde functie; alle bestaande groepjes, woorden, zinnen en oefenregels van les 1 tot 5 voldoen eraan.
+- **Hetzelfde scherm:** extra oefenen gebruikt het gewone typscherm in een "extra"-stand. Zo ziet het er hetzelfde uit en is er geen dubbele code.
+- **Waarop steunt dit? Andere cursussen en eigen keuze.** Typing.com en Keybr bieden ook extra oefening. De grenzen (4 regels, 15 tot 25 tekens, drie kwart uit de huidige les, vier keer dezelfde vinger, zeven letters dezelfde hand) zijn een eigen keuze, te toetsen in de klastest.
+- **Tegen:** samengestelde regels zijn minder mooi dan met de hand geschreven regels (bijvoorbeeld een groepje uit een vroegere les tussen woorden).
 

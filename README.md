@@ -6,7 +6,7 @@ Gratis, open source typcursus op **Belgisch AZERTY** voor kinderen vanaf het vie
 - Geen tracking, geen cookies, geen reclame, geen CDN's. De lettertypes zitten in de cursus zelf. De voortgang blijft op het toestel zelf.
 - Elke les heeft een klassikaal deel voor de leerkracht en een online deel voor het kind.
 
-**Stand van zaken:** prototype. Les 0 (kennismaking) en les 1 (f en j) zijn klaar om te testen. Les 2 tot 5 staan al in de lesinhoud en volgen na de eerste klastest.
+**Stand van zaken:** prototype. Les 0 (kennismaking) en les 1 (f en j) zijn klaar om te testen, met extra oefenen bij les 1. Les 2 tot 5 staan al in de lesinhoud en volgen na de eerste klastest.
 
 ## Voor leerkrachten
 
@@ -65,7 +65,7 @@ tests/                 de tests
 Bijdragen zijn welkom, ook van leerkrachten die niet programmeren.
 
 - **Een fout of een idee?** Maak een issue aan op GitHub en beschrijf wat je zag (welke les, welke stap, welk toestel).
-- **Teksten of oefeningen aanpassen?** Die staan in `src/content/nl-BE/`. Je hoeft daarvoor geen code te kennen. Elk item mag alleen letters bevatten die het kind al geleerd heeft; de test `tests/inhoud.test.ts` controleert dat.
+- **Teksten of oefeningen aanpassen?** Die staan in `src/content/nl-BE/`. Je hoeft daarvoor geen code te kennen. Elk item mag alleen letters bevatten die het kind al geleerd heeft, hoogstens vier aanslagen na elkaar met dezelfde vinger en hoogstens zeven letters na elkaar met dezelfde hand; de test `tests/inhoud.test.ts` controleert dat.
 - **Code?** Houd het eenvoudig en leesbaar. Schrijf tests voor nieuwe logica in `src/logica/`, en voer `npm test` uit voor je een pull request maakt.
 - **Een Franstalige versie** komt in `src/content/fr-BE/`, met dezelfde bestanden.
 
