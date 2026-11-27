@@ -51,8 +51,8 @@ export interface LampMetWachtzin {
   element: HTMLElement;
   /** zet de lamp (en het beeldje in de opdracht) aan of uit; de wachtzin verdwijnt als de lamp aangaat */
   zetAan(aan: boolean): void;
-  /** het kind drukte te vroeg: toon "Wacht op de lamp." (telt niet als fout) */
-  teVroeg(): void;
+  /** het kind drukte te vroeg: toon "Wacht op de lamp." of een eigen zin (telt niet als fout) */
+  teVroeg(zin?: string): void;
 }
 
 /**
@@ -69,7 +69,8 @@ export function lampMetWachtzin(wachtzin: string, binnen: () => ParentNode): Lam
       for (const l of binnen().querySelectorAll(".lamp-tekening")) l.classList.toggle("aan", aan);
       if (aan) zin.classList.add("onzichtbaar");
     },
-    teVroeg() {
+    teVroeg(tekst = wachtzin) {
+      zin.textContent = tekst;
       zin.classList.remove("onzichtbaar");
     },
   };

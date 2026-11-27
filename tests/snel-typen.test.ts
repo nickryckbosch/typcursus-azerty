@@ -148,8 +148,10 @@ describe("snel typen: geen enkele aanslag gaat verloren", () => {
     const inst = zoekToets(blok, ctx);
     const zin = ctx.podium.querySelector(".wachtzin")!;
     expect(zin.classList.contains("onzichtbaar")).toBe(true);
+    druk(inst, "Enter"); // eerst lezen, dan starten (K28)
     druk(inst, " "); // de lamp is nog uit
     expect(zin.classList.contains("onzichtbaar")).toBe(false);
+    expect(zin.textContent).toBe("Wacht op de lamp.");
     vi.advanceTimersByTime(1000); // de lamp gaat aan
     expect(zin.classList.contains("onzichtbaar")).toBe(true);
     for (let i = 0; i < blok.aantal; i++) {
@@ -158,6 +160,23 @@ describe("snel typen: geen enkele aanslag gaat verloren", () => {
     }
     expect(aanslagen()).toHaveLength(blok.aantal);
     expect(aanslagen().every((a) => a.juist)).toBe(true);
+  });
+
+  it("eerst lezen, dan starten (K28): zonder Start gaat de lamp nooit aan", () => {
+    const les = LESSEN[0];
+    const blok = vind<ZoekToetsBlok>(les, (b) => b.type === "zoek-toets");
+    const { ctx, aanslagen } = maakContext(les);
+    const inst = zoekToets(blok, ctx);
+    const lamp = () => ctx.podium.querySelector(".lamp-plek .lamp-tekening")!;
+    const zin = ctx.podium.querySelector(".wachtzin")!;
+    vi.advanceTimersByTime(10000); // lang lezen: de lamp blijft uit
+    expect(lamp().classList.contains("aan")).toBe(false);
+    druk(inst, " "); // de spatiebalk voor de start: een reactie, geen aanslag
+    expect(zin.textContent).toBe("Druk eerst op Start.");
+    expect(aanslagen()).toHaveLength(0);
+    druk(inst, "Enter");
+    vi.advanceTimersByTime(1000);
+    expect(lamp().classList.contains("aan")).toBe(true);
   });
 
   it("licht aan: hulp in de eerste drie rondes, daarna alleen na een fout of na even wachten", () => {

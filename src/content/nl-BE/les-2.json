@@ -38,14 +38,14 @@
       {
         "titel": "Welke hand? (stil spel)",
         "duurMinuten": 3,
-        "leerkracht": "Zeg een letter: f, j, d of k. Spelregel: niemand roept, iedereen antwoordt met zijn handen. Eerst in de lucht: de kinderen steken de hand op die de letter typt en laten de juiste vinger wiebelen. Daarna op het toetsenbord: ze drukken de letter. Begin traag, versnel, en eindig met \"Terug naar huis!\".",
+        "leerkracht": "Zeg een letter: f, j, d of k. Spelregel: niemand roept, iedereen antwoordt met zijn handen. Eerst in de lucht: de kinderen steken de hand op die de letter typt en laten de juiste vinger wiebelen. Daarna op het toetsenbord: ze drukken de letter. Begin traag, versnel, en eindig met \"Terug naar je plek!\".",
         "kinderen": "Steken zonder te spreken de juiste hand op en wiebelen met de juiste vinger. Daarna drukken ze de letter op het oefenbord en kijken of de kleur klopt."
       },
       {
         "titel": "Droog typen op ritme",
         "duurMinuten": 3,
-        "leerkracht": "Klap een rustig ritme en zeg reeksjes op de maat: \"d - k - d - k\", \"f - d - j - k\", \"k - d - k - d\". Na elk reeksje: \"Terug naar huis!\" Laat de klas een keer met de ogen dicht typen.",
-        "kinderen": "Typen op de maat mee op het oefenbord. Bij \"Terug naar huis\" voelen ze of de wijsvingers op de bultjes liggen."
+        "leerkracht": "Klap een rustig ritme en zeg reeksjes op de maat: \"d - k - d - k\", \"f - d - j - k\", \"k - d - k - d\". Na elk reeksje: \"Terug naar je plek!\" Laat de klas een keer met de ogen dicht typen.",
+        "kinderen": "Typen op de maat mee op het oefenbord. Bij \"Terug naar je plek\" voelen ze of de wijsvingers op de bultjes liggen."
       },
       {
         "titel": "Wat gaan we doen?",
@@ -96,6 +96,8 @@
       "type": "spel",
       "titel": "Overgooien",
       "spel": "overgooien",
+      "doel": "Fien en Jef gooien een bal over. Elke goede letter is een bal die gevangen wordt. Vang hem dertig keer!",
+      "tekst": "Typ de letter die je ziet.",
       "duurMinuten": 4,
       "tekens": [
         "d",

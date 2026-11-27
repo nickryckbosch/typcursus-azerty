@@ -19,7 +19,9 @@ export function houding(_blok: EindoefeningBlok, ctx: BlokContext): BlokInstanti
   let aan = false;
   let gestart = false;
   let aantal = 0;
-  const scherm = oefenscherm(ctx, { figuren: "blij", klasse: "blok-houding" });
+  // "Voeten plat, rug recht!" staat in de tekstballon van Fien en Jef, de opdracht
+  // staat meteen bovenaan. Vroeger wisselde de opdracht na 2 seconden van tekst.
+  const scherm = oefenscherm(ctx, { figuren: "blij", klasse: "blok-houding", doel: t("houding.zeg") });
   const lamp = lampMetWachtzin(t("lamp.wacht"), () => scherm.element);
   scherm.veld.append(lamp.element);
   ctx.handen.toon(["duim"]);
@@ -30,20 +32,29 @@ export function houding(_blok: EindoefeningBlok, ctx: BlokContext): BlokInstanti
     ctx.toetsenbord.markeer(["Space"]);
   }
 
-  scherm.voortgang.zetBalk(0, AANTAL);
-  scherm.zetOpdracht(t("houding.zeg"));
-  ctx.later(() => {
+  // Eerst lezen, dan starten (K28): de lamp gaat pas aan nadat het kind op Start drukt.
+  function start(): void {
+    if (gestart) return;
     gestart = true;
-    scherm.zetOpdracht(t("houding.opdracht"), true, { lamp: () => lampTekening(true) });
-    lamp.zetAan(false);
-    ctx.later(lampAan, 2500);
-  }, 2000);
+    scherm.verbergEnter();
+    ctx.later(lampAan, 1200);
+  }
+  scherm.voortgang.zetBalk(0, AANTAL);
+  ctx.zeg(t("houding.zeg"));
+  scherm.zetOpdracht(t("houding.opdracht"), true, { lamp: () => lampTekening(true) });
+  lamp.zetAan(false);
+  scherm.toonEnter(start, "start");
 
   return {
     opToets(e) {
+      if (!gestart) {
+        if (e.key === "Enter") start();
+        else if (e.code === "Space") lamp.teVroeg(t("lamp.eerstStart"));
+        return;
+      }
       if (e.code !== "Space") return;
       if (!aan) {
-        if (gestart && aantal < AANTAL) lamp.teVroeg();
+        if (aantal < AANTAL) lamp.teVroeg();
         return;
       }
       ctx.toetsenbord.flits("Space", true);

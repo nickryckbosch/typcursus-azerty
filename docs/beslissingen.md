@@ -101,7 +101,7 @@ De volledige uitleg staat in projectdocument 12 ("Metingen per toets") van het c
 
 - Uit de verkeerde toets leidt de app het soort fout af:
   - **spiegelfout:** dezelfde vinger op dezelfde plaats, maar met de andere hand (bijvoorbeeld j in plaats van f). Tip voor het kind: "andere hand";
-  - **buurfout:** een toets die er fysiek direct naast, boven of onder ligt (bijvoorbeeld g in plaats van f). Tip: "terug naar huis";
+  - **buurfout:** een toets die er fysiek direct naast, boven of onder ligt (bijvoorbeeld g in plaats van f). Tip: "terug naar je plek";
   - **andere fout:** de rest.
 - De paren g-h, t-y en b-n zijn allebei; het leerkrachtscherm zegt dan "spiegelfout en buurfout".
 - Alles wordt afgeleid uit de fysieke ligging van de toetsen (via `event.code`), niet uit een lijst met de hand. De rijen verspringen, dus een toets raakt twee toetsen in de rij erboven en twee in de rij eronder. De plaats van de spatiebalk (onder x tot ;) is een benadering.
@@ -266,6 +266,34 @@ Steunt op: eigen keuze van Nick, na het testen. De tekenstijl en de indeling bli
 - **Waarom:** huis en toetsenbord staan op een andere plek, en niets verbond ze. Dezelfde rand op beide toont dat ze bij elkaar horen. De hulp wordt afgebouwd, zoals bij de hulp in de oefenregels (K17), zodat het kind daarna zelf leert welke rij welke verdieping is.
 - **En de leerkracht?** In het klassikale deel van les 0 roept de leerkracht "Hand op de zolder!" en wijst de rij aan. De app herhaalt dat. Toch is de hulp in de app nodig: de cursus moet ook zonder leerkracht werken (doel in document 08), en tijdens het online deel zitten veel kinderen tegelijk aan hun Chromebook.
 - **Test:** `tests/snel-typen.test.ts` gaat na dat de hulp er is in de rondes 1 tot 3, er niet is in ronde 4, en verschijnt na een fout en na 3 seconden wachten.
+
+## 12h. Opdrachten die zeggen wat je doet en waar je naartoe werkt (K26)
+
+**Steunt op:** eigen keuze, na de vaststelling bij drie testers op 27 november 2026 (Nick, zijn dochter van 11, en een volwassene zonder uitleg). Regels in docs/stijlgids.md, deel 9; uitwerking in projectdocument 21. Beslist door Nick ("werk uit wat nodig is").
+
+- **Een doelzin bij elk spel** (nieuw veld `doel` in de lesdata, verplicht). In "Licht aan in het huis" staat hij in een tekstballon boven Fien en Jef (`oefenscherm`, optie `doel`), en wordt hij voorgelezen bij de start. Waarom: de opdracht ("Druk op een toets van de woonkamer") zei niet waarom je drukt; niemand wist dat je de lichten aandeed.
+- **"Over de beek": de doelzin boven de opdracht, en de opdracht even groot als op de andere oefenschermen.** Waarom: een tester wist niet dat ze onderweg was naar huis, en de opdracht stond in kleine letters (tegen K20). Fien en Jef staan in de prent, dus hier staat de doelzin niet in een tekstballon. Het slot blijft "Droge voeten!" en zegt niet "We zijn thuis": de prent toont dat nog niet. De stenen in het water en Fien en Jef op het einde bij hun huis volgen met het spelsjabloon (K22).
+- **"Terug naar huis" heet nu "terug naar je plek"**, in de lessen, de klassikale stappen, de doelen, de tips en de uitleg op het leerkrachtscherm. Waarom: in les 0 is het huis het hele toetsenbord. Een vinger die op de zolder is, is nog in het huis; "terug naar huis" sprak dat tegen. De regel zelf (na elke toets terug naar de thuistoets, document 08) blijft dezelfde. "Fien en Jef thuis" blijft: dat is de startzin, de wijsvingers op de F en de J.
+- **Nieuwe teksten in les 0 en 1:** de intro's zeggen waar elke rij ligt en wat de les brengt; "Klaar voor de start" zegt "Leg je vingers in de woonkamer, de middelste rij."; de eindoefening zegt waarvoor ze dient ("Typ bijna alles juist, dan gaat les 2 open."). Oud en nieuw naast elkaar, met het waarom: projectdocument 21.
+- **Doelzinnen voor de spelletjes van les 2 tot 5** staan al in de lesdata, met een opdracht ("Typ de letter die je ziet." of "Typ het woord dat je ziet."). Die spelletjes zijn nog niet gebouwd; ze volgen het sjabloon van K22, waarin de letter of het woord in het midden staat.
+- **Test:** `tests/inhoud.test.ts`, "opdrachten en doelzinnen (K26)".
+
+## 12i. De grote toets op het oefenbord: een vaste maat en een vaste basislijn
+
+**Steunt op:** vaststelling van Nick (27 november 2026: de p raakte de onderrand van de kaart) en dezelfde regel als de grote letter in "Zoek de toets" (K20, punt 12c).
+
+- De kaart op het oefenbord heeft nu dezelfde opbouw als de kaart in "Zoek de toets": een vaste breedte en hoogte, elke letter op dezelfde basislijn, met plaats onder voor staartletters (g, j, p, q, y) en boven voor hoofdletters en accenten.
+- Het woord "spatie" staat kleiner in een kaart van dezelfde maat. Waarom: de kaart verspringt niet meer tussen twee toetsen.
+
+## 12k. Eerst lezen, dan starten (K28)
+
+**Steunt op:** vaststelling van Nick (27 november 2026): bij "Duim op de spatiebalk" ging de lamp al branden voor het kind de opdracht gelezen had. Eigen keuze voor de oplossing. Regel in docs/stijlgids.md, deel 9.
+
+- **"Duim op de spatiebalk" en "Klaar voor de start" beginnen met een startstap.** De opdracht en de lamp (uit) staan in beeld, met de zin "Lees de opdracht. Klaar? Druk op Enter om te starten." en de knop Start. Pas na Start gaat de lamp na een korte tijd aan. Waarom: het kind moet de opdracht kunnen lezen of laten voorlezen voor er iets gebeurt.
+- **Een spatie voor de start** toont onder de lamp "Druk eerst op Start." (op de vaste plek van "Wacht op de lamp."). Geen aanslag, geen fout. Waarom: een toets zonder reactie voelt als kapot (K23).
+- **"Klaar voor de start": "Voeten plat, rug recht!" staat nu in de tekstballon van Fien en Jef**, en de opdracht staat meteen bovenaan. Vroeger stond eerst "Voeten plat, rug recht!" als opdracht en wisselde die na 2 seconden naar de echte opdracht: dat versprong (K20) en gaf minder leestijd.
+- **`oefenscherm.toonEnter(actie, "start")`** toont de Enter-regel met "om te starten" en de knop Start; `verbergEnter()` verbergt ze weer. Geldt voor elke toekomstige oefening waarin iets vanzelf gebeurt, zoals Letterregen (K24).
+- **Test:** `tests/snel-typen.test.ts`: zonder Start gaat de lamp nooit aan, ook niet na 10 seconden; een spatie voor de start geeft "Druk eerst op Start." en telt niet.
 
 ## 13. Privacy en veiligheid
 

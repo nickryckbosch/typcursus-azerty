@@ -1,6 +1,6 @@
 # Lessen 0 tot 5: data voor de app
 
-> **Let op: dit document is niet meer de bron.** De lesinhoud staat in `src/content/nl-BE/` (les-0.json tot les-5.json). Daar gebeuren de aanpassingen; dit document kan dus een verouderde kopie zijn. Zo zijn de spelbeschrijvingen (K16: geen beweging) en de tips en begroetingen alleen in de JSON-bestanden aangepast.
+> **Let op: dit document is niet meer de bron.** De lesinhoud staat in `src/content/nl-BE/` (les-0.json tot les-5.json). Daar gebeuren de aanpassingen; dit document kan dus een verouderde kopie zijn. Zo zijn de spelbeschrijvingen (K16: geen beweging), de tips en begroetingen, en de opdrachten en doelzinnen (K26: "terug naar je plek" in plaats van "terug naar huis") alleen in de JSON-bestanden aangepast.
 
 De inhoud van les 0 tot 5 in JSON, om in te lezen door de prototypechat. Voor leerkrachten staat dezelfde inhoud leesbaar in document 10 (in het claude.ai-project). Dit document is gemaakt met een script vanuit dezelfde bron als document 10, dus beide zijn gelijk.
 
@@ -18,6 +18,7 @@ Het formaat volgt het voorbeeld uit de opdracht. Deze velden zijn **erbij gekome
 | `online[].tekst` | intro, zoek-toets, reeks, eindoefening, afsluiter | opdracht die voorgelezen wordt |
 | `zoek-toets.nadruk` | zoek-toets | toetsen die het vaakst moeten komen (ongeveer twee derde) |
 | `spel.woorden` | spel in les 3 tot 5 | woorden die in het spel verschijnen |
+| `spel.doel` | elk spel | de doelzin (K26): waar werk je naartoe, en wat doet een goede toets; staat in de tekstballon. Alleen in de JSON-bestanden ingevuld |
 | `spel.rijen`, `spel.rondes` | spel in les 0 | het spel vraagt een rij, niet een toets |
 | `eindoefening.regelsKort` | les 1 tot 5 | kortere versie na twee mislukte pogingen |
 | `eindoefening.soort` | les 0 | "houding": er wordt niets gemeten |

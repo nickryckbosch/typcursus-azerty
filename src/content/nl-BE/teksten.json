@@ -52,6 +52,7 @@
   "voorlezen.uit": "Voorlezen uit",
 
   "hint.enter": "Druk op {toets} om verder te gaan.",
+  "hint.start": "Lees de opdracht. Klaar? Druk op {toets} om te starten.",
   "toets.enter": "Enter \u21b5",
   "teller": "{nummer} van {totaal}",
   "teken.spatie": "spatie",
@@ -112,8 +113,9 @@
   "eind.nietAlleSterren": "Nog niet alle sterren? Probeer de eindoefening nog eens, wij wachten op je.",
 
   "houding.zeg": "Voeten plat, rug recht!",
-  "houding.opdracht": "Leg je handen in de woonkamer. Gaat de lamp aan? Druk op de spatiebalk.",
+  "houding.opdracht": "Leg je vingers in de woonkamer, de middelste rij. Gaat de lamp aan? Druk [spatie].",
   "lamp.wacht": "Wacht op de lamp.",
+  "lamp.eerstStart": "Druk eerst op Start.",
   "intro.huis": "Het huis van Fien en Jef: de zolder, de woonkamer en de kelder.",
   "houding.klaar": "Klaar voor de start!",
 
@@ -160,7 +162,7 @@
   "leerkracht.fout.spiegel": "spiegelfout",
   "leerkracht.fout.buur": "buurfout",
   "leerkracht.fout.spiegel-en-buur": "spiegelfout en buurfout",
-  "leerkracht.toetsenUitleg": "Aantal: hoe vaak de toets moest getypt worden. Een fout telt een keer per letter in de tekst, ook als het kind meerdere keren verkeerd drukte. Spiegelfout: dezelfde vinger, maar van de andere hand (tip: \"andere hand\"). Buurfout: een toets die er vlak naast, boven of onder ligt (tip: \"terug naar huis\"). Tijd: de middelste tijd van de aanslagen waarbij deze toets en de vorige meteen juist waren, zonder herhalingen van dezelfde toets en zonder pauzes van meer dan 4 seconden; die pauzes staan apart. De tijd zegt iets over de toets, niet over het kind: vergelijk een toets met de andere toetsen van hetzelfde kind. Het kind ziet deze cijfers nooit.",
+  "leerkracht.toetsenUitleg": "Aantal: hoe vaak de toets moest getypt worden. Een fout telt een keer per letter in de tekst, ook als het kind meerdere keren verkeerd drukte. Spiegelfout: dezelfde vinger, maar van de andere hand (tip: \"andere hand\"). Buurfout: een toets die er vlak naast, boven of onder ligt (tip: \"terug naar je plek\"). Tijd: de middelste tijd van de aanslagen waarbij deze toets en de vorige meteen juist waren, zonder herhalingen van dezelfde toets en zonder pauzes van meer dan 4 seconden; die pauzes staan apart. De tijd zegt iets over de toets, niet over het kind: vergelijk een toets met de andere toetsen van hetzelfde kind. Het kind ziet deze cijfers nooit.",
   "leerkracht.fichesTitel": "Lesfiches (klassikaal deel)",
   "leerkracht.jij": "Jij:",
   "leerkracht.kinderen": "Kinderen:",

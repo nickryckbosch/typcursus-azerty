@@ -21,7 +21,7 @@
   ],
   "doelen": [
     "Ik typ g en h: mijn wijsvinger schuift even opzij en komt terug op het bultje.",
-    "Ik voel aan het bultje dat mijn vinger weer thuis is.",
+    "Ik voel aan het bultje dat mijn vinger weer op zijn plek is.",
     "Ik typ korte zinnen met tien letters."
   ],
   "klassikaal": {
@@ -37,7 +37,7 @@
       {
         "titel": "Op bezoek in het midden",
         "duurMinuten": 3,
-        "leerkracht": "\"Tussen het huis van Fien en het huis van Jef wonen nog twee buren: de G en de H. Fien schuift een stapje naar rechts naar de G, Jef een stapje naar links naar de H. Daarna gaan ze meteen terug naar huis. Hoe weet je dat je weer thuis bent? Je voelt het bultje!\" Laat traag typen: \"f - g - f\", \"j - h - j\".",
+        "leerkracht": "\"Tussen Fien en Jef wonen nog twee buren: de G en de H. Fien schuift een stapje naar rechts naar de G, Jef een stapje naar links naar de H. Daarna gaan ze meteen terug naar hun plek. Hoe weet je dat je weer op je plek bent? Je voelt het bultje!\" Laat traag typen: \"f - g - f\", \"j - h - j\".",
         "kinderen": "Schuiven met de wijsvinger opzij en terug, en voelen bij het terugkomen het bultje. De andere vingers blijven liggen."
       },
       {
@@ -65,7 +65,7 @@
       "type": "intro",
       "titel": "Op bezoek bij de buren",
       "duurMinuten": 1,
-      "tekst": "Wij gaan op bezoek bij de buren in het midden: de G en de H. Even opzij schuiven, en terug naar je bultje. Dan voel je dat je weer thuis bent. Vandaag typ je nog meer zinnen!"
+      "tekst": "Wij gaan op bezoek bij de buren in het midden: de G en de H. Even opzij schuiven, en terug naar je bultje. Dan voel je dat je weer op je plek bent. Vandaag typ je nog meer zinnen!"
     },
     {
       "type": "zoek-toets",
@@ -103,6 +103,8 @@
       "type": "spel",
       "titel": "De egel gaat naar huis",
       "spel": "egel",
+      "doel": "De egel zoekt zijn huisje in de tuin. Elk goed woord legt een tegel op zijn pad. Bij twaalf tegels is hij thuis.",
+      "tekst": "Typ het woord dat je ziet.",
       "duurMinuten": 3,
       "tekens": [],
       "woorden": [
@@ -133,14 +135,14 @@
         "leeg geld deeg gids",
         "hij hield hesje"
       ],
-      "tip": "Voel je de bultjes nog? Daar is thuis."
+      "tip": "Voel je de bultjes nog? Daar wonen Fien en Jef."
     },
     {
       "type": "eindoefening",
       "titel": "Eindoefening",
       "duurMinuten": 3,
       "doelNauwkeurigheid": 0.9,
-      "tekst": "De eindoefening. Rustig en juist, en na elke toets terug naar huis.",
+      "tekst": "De eindoefening. Rustig en juist, en na elke toets terug naar je plek.",
       "regels": [
         "hij heg hek gids",
         "hij is heel lief",

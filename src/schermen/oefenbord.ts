@@ -32,7 +32,8 @@ export function oefenbordScherm(app: App, wortel: HTMLElement): Scherm {
       const toets = toetsVoorCode(e.code);
       if (!toets || e.repeat) return;
       const getoond = e.key.length === 1 ? e.key : toets.basis;
-      groot.textContent = tekenTonen(getoond);
+      // In een span, zodat "spatie" kleiner kan in een kaart van dezelfde maat.
+      groot.replaceChildren(el("span", {}, tekenTonen(getoond)));
       groot.className = `oefenbord-toets kleur-${kleurVanVinger(toets.vinger)} ${toets.code === "Space" ? "is-spatie" : ""}`;
       vinger.textContent = t(`vinger.${toets.vinger}` as TekstSleutel);
       toetsenbord.markeer([toets.code]);
