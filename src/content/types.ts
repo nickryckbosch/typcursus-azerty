@@ -34,6 +34,8 @@ export interface ZoekToetsBlok extends BlokBasis {
 export interface ReeksBlok extends BlokBasis {
   type: "reeks";
   regels: string[];
+  /** korte tip van Fien of Jef, in de tekstballon naast de oefenregels */
+  tip?: string;
 }
 
 export interface SpelBlok extends BlokBasis {
@@ -52,6 +54,8 @@ export interface EindoefeningBlok extends BlokBasis {
   regelsKort?: string[];
   doelNauwkeurigheid: number | null;
   soort?: "houding";
+  /** korte tip van Fien of Jef, in de tekstballon naast de oefenregels */
+  tip?: string;
   beschrijving?: string;
 }
 
@@ -71,6 +75,8 @@ export type Blok =
 export interface Les {
   id: number;
   titel: string;
+  /** wat Fien en Jef op het startscherm zeggen als deze les aan de beurt is */
+  begroeting?: string;
   nieuweToetsen: string[];
   geleerdeToetsen: string[];
   doelen: string[];
@@ -80,4 +86,12 @@ export interface Les {
   woorden: string[];
   zinnen: string[];
   tipLeerkracht: string;
+}
+
+/** Een deel van het toetsenbordhuis: een tabblad op het startscherm. */
+export interface Deel {
+  nummer: number;
+  titel: string;
+  /** de nummers (id) van de lessen in dit deel, in volgorde */
+  lessen: number[];
 }

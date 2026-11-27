@@ -1,6 +1,7 @@
 {
   "id": 2,
   "titel": "Fien en Jef krijgen buren",
+  "begroeting": "Hoi! Vandaag krijgen wij buren: de d en de k.",
   "nieuweToetsen": [
     "d",
     "k"
@@ -88,7 +89,8 @@
         "dd kk dk kd dk kd",
         "fd jk df kj fd jk",
         "dfd kjk dfd kjk"
-      ]
+      ],
+      "tip": "Fien en Jef blijven thuis. Alleen je middelvingers bewegen."
     },
     {
       "type": "spel",
@@ -101,7 +103,7 @@
         "f",
         "j"
       ],
-      "beschrijving": "Fien staat links op het scherm, Jef rechts. Ze gooien een bal over en weer. Op de bal staat een letter. Is de bal bij Fien, dan staat er een letter van de linkerhand (d of f); is de bal bij Jef, dan een letter van de rechterhand (k of j). Een juiste toets: de bal vliegt naar de overkant. Een foute toets: de bal blijft zweven en de juiste vinger licht op; de bal valt nooit. Na 10 worpen schuift het spel een stap op: de letters wisselen sneller van vinger (eerst alleen d en k, daarna alle vier). Na 30 worpen: \"De bal is niet een keer gevallen!\" Geen tijd, geen punten."
+      "beschrijving": "Bovenaan staat een vaste prent: Fien links en Jef rechts, met een bal. De prent verandert niet tijdens het spel. Onder de prent ligt een rij van 10 ballen. Op elke bal staat een letter: om de beurt een letter van de linkerhand (d of f, de kant van Fien) en een letter van de rechterhand (k of j, de kant van Jef). De bal die aan de beurt is, is groter en heeft een blauwe rand. Een juiste toets: de bal wordt grijs met een vinkje en de volgende bal is aan de beurt. Een foute toets: er beweegt niets, alleen de juiste toets en de juiste vinger lichten op. Drie rijen van 10 ballen: eerst alleen d en k, daarna alle vier de letters. Fien en Jef staan stil; pas op het einde steken ze hun duim op: \"De bal is niet een keer gevallen!\" Geen tijd, geen punten."
     },
     {
       "type": "reeks",
@@ -112,7 +114,8 @@
         "fdk jkd dfj kjf",
         "dk fj kd jf",
         "fjdk kdjf dkfj"
-      ]
+      ],
+      "tip": "Vier toetsen, vier vingers. Elke vinger heeft zijn eigen toets."
     },
     {
       "type": "eindoefening",
@@ -126,7 +129,8 @@
       ],
       "regelsKort": [
         "dk kd dfd kjk"
-      ]
+      ],
+      "tip": "Neem je tijd. Wij wachten op je."
     },
     {
       "type": "afsluiter",

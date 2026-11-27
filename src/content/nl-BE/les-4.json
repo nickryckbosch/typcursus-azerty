@@ -1,6 +1,7 @@
 {
   "id": 4,
   "titel": "De ringvingers worden wakker",
+  "begroeting": "Hoi! Vandaag worden je ringvingers wakker: de s en de l.",
   "nieuweToetsen": [
     "s",
     "l"
@@ -93,7 +94,8 @@
         "sd lk sd lk sf lj",
         "sds lkl sds lkl",
         "is les ijs elf"
-      ]
+      ],
+      "tip": "Nu doen je ringvingers mee. Rustig, ze zijn nog wat slaperig."
     },
     {
       "type": "spel",
@@ -117,7 +119,7 @@
         "lees",
         "is"
       ],
-      "beschrijving": "Jef zit bovenaan een besneeuwde helling op zijn slee. Langs de helling staan 10 vlaggetjes met elk een woord. Het kind typt het woord op het eerstvolgende vlaggetje; bij elke juiste letter glijdt de slee een stukje verder. Een foute letter: de slee staat even stil en de juiste vinger licht op; de slee kantelt nooit. Na 10 vlaggetjes is Jef beneden en staat Fien te wachten met twee ijsjes. Woorden willekeurig uit de lijst, elk woord hoogstens twee keer. Geen tijd, geen punten."
+      "beschrijving": "Bovenaan staat een vaste prent: Jef op zijn slee bovenaan een besneeuwde helling, Fien beneden. De prent verandert niet tijdens het spel. Onder de prent staat een rij van 10 vlaggetjes. Op het vlaggetje dat aan de beurt is, staat een woord; dat vlaggetje is groter en heeft een blauwe rand. Het kind typt het woord, letter per letter; de getypte letters worden grijs. Is het woord af, dan wordt het vlaggetje grijs met een vinkje en is het volgende aan de beurt. Een foute letter: er beweegt niets, alleen de juiste toets en de juiste vinger lichten op. Woorden willekeurig uit de lijst, elk woord hoogstens twee keer. Fien en Jef staan stil; pas na 10 vlaggetjes steken ze hun duim op. Geen tijd, geen punten."
     },
     {
       "type": "reeks",
@@ -128,7 +130,8 @@
         "les lees lied lief",
         "ijs fles slee ski",
         "kleed keel deel elk"
-      ]
+      ],
+      "tip": "Hou je wijsvingers op de bultjes."
     },
     {
       "type": "eindoefening",
@@ -145,7 +148,8 @@
       "regelsKort": [
         "ijs fles slee",
         "jef is lief"
-      ]
+      ],
+      "tip": "Lees de zin eerst. Typ hem dan rustig."
     },
     {
       "type": "afsluiter",

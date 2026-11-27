@@ -1,5 +1,7 @@
 # Lessen 0 tot 5: data voor de app
 
+> **Let op: dit document is niet meer de bron.** De lesinhoud staat in `src/content/nl-BE/` (les-0.json tot les-5.json). Daar gebeuren de aanpassingen; dit document kan dus een verouderde kopie zijn. Zo zijn de spelbeschrijvingen (K16: geen beweging) en de tips en begroetingen alleen in de JSON-bestanden aangepast.
+
 De inhoud van les 0 tot 5 in JSON, om in te lezen door de prototypechat. Voor leerkrachten staat dezelfde inhoud leesbaar in document 10 (in het claude.ai-project). Dit document is gemaakt met een script vanuit dezelfde bron als document 10, dus beide zijn gelijk.
 
 **Controle:** 262 items gecontroleerd, 0 fouten. Elk item bevat alleen geleerde toetsen plus de spatie.
