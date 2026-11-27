@@ -12,8 +12,9 @@ function figuur(wie: "fien" | "jef", uitdrukking: Uitdrukking, hoogte: number): 
   const img = document.createElement("img");
   img.src = BEELDEN[`../beelden/${wie}-${uitdrukking}.png`];
   img.alt = wie === "fien" ? "Fien" : "Jef";
-  img.className = `figuur figuur-${wie}`;
-  img.style.height = `${hoogte}px`;
+  img.className = `figuur figuur-${wie} ${uitdrukking === "zwaai" ? "figuur-heel" : "figuur-gezicht"}`;
+  // De hoogte is een maximum: in een lesscherm wordt de figuur kleiner als er weinig plaats is.
+  img.style.setProperty("--h", `${hoogte}px`);
   img.draggable = false;
   return img;
 }

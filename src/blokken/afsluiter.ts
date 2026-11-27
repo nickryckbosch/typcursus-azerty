@@ -13,6 +13,8 @@ import type { BlokFunctie } from "./context";
 export const afsluiter: BlokFunctie<AfsluiterBlok> = (blok, ctx) => {
   const { app, les } = ctx;
   const resultaat = ctx.sessie.resultaat;
+  // Hier is niets te typen: zonder toetsenbord en handen is er meer plaats.
+  ctx.toonToetsenbord(false);
   const volgorde = app.lessen.map((l) => l.id);
   const volgendeLes = app.lessen.find((l) => l.id > les.id);
   const volgendeOpen =

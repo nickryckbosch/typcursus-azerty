@@ -21,6 +21,8 @@ export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
 
   function start(): void {
     ctx.podium.replaceChildren();
+    ctx.toetsenbord.toonEnter(false);
+    ctx.toonToetsenbord(true);
     actief = typRegels(ctx, regels, blok.tekst ?? "", (oefeningen) => {
       const aanslagen = oefeningen.flatMap((o) => o.aanslagen);
       const nauwk = nauwkeurigheid(aanslagen);
@@ -44,13 +46,13 @@ export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
     start();
   } else {
     // Eerst een aanmoediging, dan de korte oefening.
+    ctx.toonToetsenbord(false);
     ctx.podium.append(
       el(
         "div",
         { class: "blok blok-intro" },
         metFienEnJef("aanmoedigend", el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, t("eind.aanmoediging")))),
-        enterHint(ctx),
-        el("button", { class: "knop knop-hoofd", type: "button", onclick: () => start() }, t("knop.start")),
+        enterHint(ctx, start),
       ),
     );
     ctx.zeg(t("eind.aanmoediging"));

@@ -296,6 +296,9 @@ button {
 .podium {
   flex: 1;
   min-height: 0;
+  /* Alles in het podium schaalt mee met de hoogte van het podium (eenheid cqh,
+     zie onderaan "Schalen met de hoogte"). Zo past een blok op elk scherm. */
+  container-type: size;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -310,6 +313,11 @@ button {
   text-align: center;
   font-size: 1.2rem;
   font-weight: 600;
+}
+
+.zonder-toetsenbord .typzone,
+.zonder-toetsenbord .hulpregel {
+  display: none;
 }
 
 .typzone {
@@ -1015,3 +1023,75 @@ button {
     outline-offset: 2px;
   }
 }
+
+/* ---------- Fien en Jef ---------- */
+
+.figuur {
+  height: var(--h);
+  width: auto;
+}
+
+/* ---------- Schalen met de hoogte ----------
+   1cqh = 1% van de hoogte van het podium (het vlak tussen de kop en het
+   toetsenbord). Elke maat heeft een onder- en bovengrens met clamp(). */
+
+.podium .blok { gap: clamp(4px, 2.2cqh, 12px); }
+.podium h2 { font-size: clamp(15px, 8cqh, 28px); margin: 0; }
+.podium .grote-tekst { font-size: clamp(15px, 8.5cqh, 28px); }
+.podium .opdracht,
+.podium .hint-enter { font-size: clamp(14px, 7cqh, 22px); }
+.podium .teller { font-size: clamp(13px, 5cqh, 18px); }
+.podium .ballon { padding: clamp(4px, 2cqh, 12px) 1.1rem; }
+.podium .knop-hoofd { font-size: clamp(15px, 7cqh, 22px); padding: 0.35em 1.2em; }
+.podium .figuur-heel { height: min(var(--h), 62cqh); }
+.podium .figuur-gezicht { height: min(var(--h), 44cqh); }
+.podium .met-figuren { gap: clamp(8px, 3cqh, 20px); }
+
+.podium .grote-toets { font-size: clamp(40px, 44cqh, 140px); }
+.podium .grote-toets.is-spatie { font-size: clamp(24px, 17cqh, 64px); }
+.podium .lamp { width: clamp(28px, 15cqh, 56px); height: clamp(28px, 15cqh, 56px); }
+
+.podium .typregel { font-size: clamp(26px, 24cqh, 72px); }
+.podium .volgende-regels { font-size: clamp(14px, 8cqh, 30px); min-height: 0; }
+
+.podium .sterren .ster { width: clamp(30px, 17cqh, 72px); height: clamp(30px, 17cqh, 72px); }
+.podium .klap { font-size: clamp(18px, 8cqh, 32px); }
+
+/* Licht aan in het huis */
+.podium .huis { width: auto; }
+.podium .huis-dak { height: clamp(16px, 13cqh, 60px); }
+.podium .verdieping { padding: clamp(2px, 1.6cqh, 9px) 0.8rem; }
+.podium .verdieping-naam { font-size: clamp(13px, 7cqh, 22px); }
+.podium .raam { height: clamp(18px, 16cqh, 52px); width: clamp(24px, 22cqh, 68px); }
+.podium .spel-rij { gap: clamp(12px, 4cqh, 32px); }
+
+/* Over de beek */
+.podium .beek { height: clamp(90px, 64cqh, 200px); padding-top: clamp(30px, 24cqh, 75px); }
+.podium .oever { margin-top: calc(-1 * clamp(30px, 24cqh, 75px)); }
+.podium .steen {
+  width: clamp(34px, 22cqh, 72px);
+  height: clamp(28px, 19cqh, 60px);
+  font-size: clamp(16px, 10cqh, 32px);
+  flex: 0 1 auto;
+}
+.podium .steen-plat { width: clamp(54px, 34cqh, 110px); height: clamp(22px, 14cqh, 44px); font-size: clamp(12px, 6cqh, 18px); }
+.podium .huisje { width: clamp(28px, 18cqh, 60px); height: clamp(28px, 18cqh, 60px); }
+.podium .springers .figuur { height: min(var(--h), 23cqh); }
+
+/* Oefenbord */
+.podium .oefenbord-toets { font-size: clamp(60px, 48cqh, 200px); }
+.podium .oefenbord-toets.is-spatie { font-size: clamp(30px, 22cqh, 90px); }
+.podium .oefenbord-vinger { font-size: clamp(16px, 8cqh, 26px); margin: 0.3em 0 0; }
+
+/* "Druk op Enter om verder te gaan" met de knop Verder op dezelfde regel */
+.enter-rij {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Startscherm: ook op een laag scherm alles zichtbaar */
+.start-kop .figuur { height: min(var(--h), 18vh); }
+.tegel { min-height: clamp(84px, 19vh, 140px); }

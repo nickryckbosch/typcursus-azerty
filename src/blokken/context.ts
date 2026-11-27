@@ -31,6 +31,8 @@ export interface BlokContext {
   indexVan(type: Blok["type"]): number;
   /** voeg aanslagen toe aan de statistieken per toets en bewaar */
   bewaarAanslagen(aanslagen: Aanslag[]): void;
+  /** toon of verberg het schermtoetsenbord en de handen (bv. verbergen bij de afsluiter) */
+  toonToetsenbord(aan: boolean): void;
   /** setTimeout die vanzelf stopt als het blok wisselt */
   later(fn: () => void, ms: number): void;
   /** gegevens die blokken binnen deze les doorgeven (eindoefening naar afsluiter) */

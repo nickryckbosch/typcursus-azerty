@@ -5,10 +5,6 @@ import { el } from "../weergave/dom";
 import { fien, jef, type Uitdrukking } from "../weergave/figuren";
 import type { BlokContext } from "./context";
 
-export function verderKnop(ctx: BlokContext, tekst = t("knop.verder")): HTMLButtonElement {
-  return el("button", { class: "knop knop-hoofd", type: "button", onclick: () => ctx.volgende() }, tekst);
-}
-
 /** Laat een element kort schudden (of flitsen bij "minder beweging", via CSS). */
 export function schud(element: Element): void {
   element.classList.remove("schud");
@@ -31,8 +27,13 @@ export function metFienEnJef(uitdrukking: Uitdrukking, ...inhoud: Node[]): HTMLE
  * "Druk op [Enter] om verder te gaan." De toets staat getekend in de tekst,
  * en de Enter-toets op het schermtoetsenbord licht op tot het volgende blok.
  */
-export function enterHint(ctx: BlokContext): HTMLElement {
+export function enterHint(ctx: BlokContext, actie: () => void = () => ctx.volgende()): HTMLElement {
   ctx.toetsenbord.toonEnter(true);
   const [voor, na] = t("hint.enter").split("{toets}");
-  return el("p", { class: "hint-enter" }, voor, el("span", { class: "toets-in-tekst" }, t("toets.enter")), na ?? "");
+  return el(
+    "div",
+    { class: "enter-rij" },
+    el("p", { class: "hint-enter" }, voor, el("span", { class: "toets-in-tekst" }, t("toets.enter")), na ?? ""),
+    el("button", { class: "knop knop-hoofd", type: "button", onclick: actie }, t("knop.verder")),
+  );
 }

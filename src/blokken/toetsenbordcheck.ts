@@ -7,7 +7,7 @@ import type { ToetsenbordcheckBlok } from "../content/types";
 import { stapA, stapZes, vraagIndelingOp, type Indeling } from "../logica/toetsenbordcheck";
 import { el } from "../weergave/dom";
 import type { BlokFunctie } from "./context";
-import { enterHint, metFienEnJef, schud, verderKnop } from "./gedeeld";
+import { enterHint, metFienEnJef, schud } from "./gedeeld";
 
 type Stap = "bezig" | "drukA" | "druk6" | "klaar";
 
@@ -27,7 +27,7 @@ export const toetsenbordcheck: BlokFunctie<ToetsenbordcheckBlok> = (blok, ctx) =
     ctx.app.bewaar();
     ctx.toetsenbord.markeer([]);
     if (ok) {
-      toon(metFienEnJef("blij", el("p", { class: "grote-tekst goed" }, t("check.ok"))), enterHint(ctx), verderKnop(ctx));
+      toon(metFienEnJef("blij", el("p", { class: "grote-tekst goed" }, t("check.ok"))), enterHint(ctx));
       ctx.zeg(t("check.ok"));
     } else {
       toon(
@@ -40,7 +40,6 @@ export const toetsenbordcheck: BlokFunctie<ToetsenbordcheckBlok> = (blok, ctx) =
           el("p", {}, t("leerkracht.toetsenbordInstellen")),
         ),
         enterHint(ctx),
-        verderKnop(ctx),
       );
       ctx.zeg(`${t("check.fout")} ${t("check.verderMag")}`);
     }

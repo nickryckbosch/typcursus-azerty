@@ -41,19 +41,17 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok = 0
     toetsenbordMelding.hidden = app.voortgang.toetsenbord !== "fout" || huidigType() === "toetsenbordcheck";
   };
 
-  wortel.append(
-    el(
-      "div",
-      { class: "scherm scherm-les" },
-      kop(app, t("les.titel", { nummer: les.id, titel: les.titel }), stapjes, leesNogEens, voorleesKnop(app, () => {
-        werkLeesKnopBij();
-        spreek(laatsteTekst);
-      })),
-      toetsenbordMelding,
-      podium,
-      hulpregel,
-      el("footer", { class: "typzone" }, handen.links, toetsenbord.element, handen.rechts),
-    ),
+  const scherm = el("div", { class: "scherm scherm-les" });
+  wortel.append(scherm);
+  scherm.append(
+    kop(app, t("les.titel", { nummer: les.id, titel: les.titel }), stapjes, leesNogEens, voorleesKnop(app, () => {
+      werkLeesKnopBij();
+      spreek(laatsteTekst);
+    })),
+    toetsenbordMelding,
+    podium,
+    hulpregel,
+    el("footer", { class: "typzone" }, handen.links, toetsenbord.element, handen.rechts),
   );
 
   let index = startBlok;
@@ -109,6 +107,9 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok = 0
       voegAanslagenToe(app.voortgang.toetsen, aanslagen);
       app.bewaar();
     },
+    toonToetsenbord(aan) {
+      scherm.classList.toggle("zonder-toetsenbord", !aan);
+    },
     later(fn, ms) {
       timers.push(window.setTimeout(fn, ms));
     },
@@ -136,6 +137,7 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok = 0
     timers = [];
     ctx.toonHulp(null);
     toetsenbord.toonEnter(false);
+    ctx.toonToetsenbord(true);
     podium.replaceChildren();
     (document.activeElement as HTMLElement | null)?.blur?.();
     if (i >= les.online.length) {

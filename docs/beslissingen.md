@@ -90,6 +90,17 @@ Beslist met Nick (27 november 2026):
   - nadenkend: toetsenbord staat niet goed.
 - **Een uitdrukking toevoegen:** zet een zone in het script, voer het uit (`python3 scripts/knip-figuren.py`) en voeg de naam toe aan `Uitdrukking` in `src/weergave/figuren.ts`.
 
+## 12b. Indeling van het lesscherm: altijd alles zichtbaar
+
+- **Probleem bij de eerste test:** op de Chromebook van de klas was er minder hoogte dan verwacht (schaalinstelling, bladwijzerbalk, zoom). Het bovenste deel paste niet meer, je moest scrollen om de knop Verder te vinden, en bij "Licht aan in het huis" viel de zolder weg.
+- **Oplossing:**
+  - Het toetsenbord en de handen krijgen een vast deel van de schermhoogte.
+  - Alles in het middelste deel (tekst, Fien en Jef, het huis, de beek, de oefenregels) schaalt mee met de hoogte die overblijft. Daarvoor gebruiken we "container query units" (`cqh`) van CSS: 1cqh is 1% van de hoogte van het middelste deel. Elke maat heeft een onder- en een bovengrens.
+  - Waar niets te typen valt (afsluiter, aanmoediging), verdwijnen het toetsenbord en de handen.
+  - "Druk op Enter om verder te gaan" en de knop Verder staan op dezelfde regel.
+- **Getest** op 1366 x 768, 1366 x 657, 1280 x 600, 1280 x 560, 1024 x 600 en 1280 x 500: in geen enkele stap van les 0 en les 1 moet er nog gescrold worden.
+- **Tegen:** op een heel klein scherm worden de letters en figuren kleiner. De ondergrenzen zorgen dat ze leesbaar blijven.
+
 ## 13. Privacy en veiligheid
 
 - Geen externe bronnen: geen lettertypes, geen CDN, geen analytics. Het systeemlettertype van het toestel wordt gebruikt.
