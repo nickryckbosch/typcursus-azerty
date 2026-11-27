@@ -137,5 +137,5 @@ export function kleurVanVinger(vinger: Vinger): Kleur {
 
 export function handVanVinger(vinger: Vinger): "links" | "rechts" | "beide" {
   if (vinger === "duim") return "beide";
-  return vinger.startsWith("links") ? "links" : "rechts";
+  return vinger.startsWith("linker") ? "links" : "rechts";
 }

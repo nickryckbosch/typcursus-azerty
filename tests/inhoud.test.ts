@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { DELEN, LESSEN } from "../src/content";
+import { controleerRegel } from "../src/logica/regelcheck";
 
 // Dezelfde controle als in docs/11-lessen-data.md: elk item bevat alleen
 // geleerde toetsen plus de spatie.
@@ -26,6 +27,18 @@ describe("lesinhoud", () => {
       }
     }
     expect(aantal).toBe(262);
+  });
+
+  it("voldoet aan de regelcontrole: hoogstens 4 keer dezelfde vinger en 7 letters dezelfde hand na elkaar", () => {
+    for (const les of LESSEN) {
+      const regels = [...les.groepjes, ...les.woorden, ...les.zinnen];
+      for (const blok of les.online) {
+        if ("regels" in blok) regels.push(...blok.regels);
+        if ("regelsKort" in blok && blok.regelsKort) regels.push(...blok.regelsKort);
+        if ("woorden" in blok && blok.woorden) regels.push(...blok.woorden);
+      }
+      for (const regel of regels) expect(controleerRegel(regel, les.geleerdeToetsen), `les ${les.id}: "${regel}"`).toEqual({ ok: true });
+    }
   });
 
   it("zet elke les in precies een deel van het toetsenbordhuis", () => {
