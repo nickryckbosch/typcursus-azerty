@@ -11,7 +11,7 @@ import { nieuweOefening, teltAlsTeken, typ, volgendTeken } from "../logica/typen
 import { el } from "../weergave/dom";
 import { tekenTonen } from "../weergave/tekens";
 import type { BlokFunctie } from "./context";
-import { schud } from "./gedeeld";
+import { nieuweKaart, schud } from "./gedeeld";
 import { oefenscherm, startVerborgen, toon } from "./oefenscherm";
 
 export const zoekToets: BlokFunctie<ZoekToetsBlok> = (blok, ctx) => {
@@ -56,9 +56,9 @@ export const zoekToets: BlokFunctie<ZoekToetsBlok> = (blok, ctx) => {
         return;
       }
       if (klaar) {
+        // Meteen verder: een aanslag mag nooit verloren gaan in een wachttijd.
         ctx.bewaarAanslagen(oef.aanslagen);
-        ctx.toonHulp(null);
-        ctx.later(() => ctx.volgende(), 400);
+        ctx.volgende();
         return;
       }
       if (metLamp) {
@@ -67,6 +67,7 @@ export const zoekToets: BlokFunctie<ZoekToetsBlok> = (blok, ctx) => {
         ctx.later(zetLampAan, 700 + Math.random() * 800);
       } else {
         toonHuidig();
+        nieuweKaart(kaart);
       }
     },
   };

@@ -1287,3 +1287,14 @@ button {
 .podium .typregel { padding: 0.04em 0.35em; line-height: 1.3; }
 .podium .teken { border-bottom-width: 0.08em; }
 
+
+/* Een nieuwe kaart of regel: een korte, rustige "pop", ook als de letter dezelfde
+   is als de vorige. Alleen visueel; de invoer wordt nooit tegengehouden. */
+.nieuw {
+  animation: nieuw 160ms ease-out;
+}
+
+@keyframes nieuw {
+  from { opacity: 0.35; transform: scale(0.94); }
+  to { opacity: 1; transform: none; }
+}

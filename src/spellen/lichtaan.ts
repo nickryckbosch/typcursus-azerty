@@ -79,11 +79,8 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
       ramen.get(gevraagd)![aantalAan(gevraagd)]?.classList.add("aan");
       ronde++;
       if (ronde < rondes.length) {
-        wacht = true;
-        ctx.later(() => {
-          wacht = false;
-          startRonde();
-        }, 500);
+        // Meteen de volgende ronde: de volgende toets telt al.
+        startRonde();
         return;
       }
       klaar = true;

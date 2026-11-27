@@ -8,7 +8,7 @@ import { t } from "../content";
 import { nieuweOefening, teltAlsTeken, typ, volgendTeken, type TypOefening } from "../logica/typen";
 import { el } from "../weergave/dom";
 import type { BlokContext, BlokInstantie } from "./context";
-import { schud } from "./gedeeld";
+import { nieuweKaart, schud } from "./gedeeld";
 import { oefenscherm } from "./oefenscherm";
 
 const HULP_NA_MS = 3000;
@@ -85,14 +85,16 @@ export function typRegels(
         huidigTeken()?.classList.add("cursor");
         return;
       }
-      tekenRegel();
+      // Meteen de volgende regel (of het einde): de eerste toets van de nieuwe regel
+      // telt al, dus moet het kind die regel ook meteen zien.
       if (r + 1 < regels.length) {
         r++;
-        ctx.later(tekenRegel, 250);
+        tekenRegel();
+        nieuweKaart(huidige);
       } else {
         klaar = true;
         clearTimeout(hulpTimer);
-        ctx.later(() => opKlaar(oefeningen), 400);
+        opKlaar(oefeningen);
       }
     },
     opruimen() {

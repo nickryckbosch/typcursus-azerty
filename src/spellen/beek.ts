@@ -11,7 +11,7 @@ import { nieuweOefening, teltAlsTeken, typ, volgendTeken, type TypOefening } fro
 import { el } from "../weergave/dom";
 import { fien, jef } from "../weergave/figuren";
 import { tekenTonen } from "../weergave/tekens";
-import { schud } from "../blokken/gedeeld";
+import { nieuweKaart, schud } from "../blokken/gedeeld";
 import { oefenscherm } from "../blokken/oefenscherm";
 
 const STENEN = 12;
@@ -24,7 +24,6 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
   let oef: TypOefening = nieuweOefening("");
   let stenen: HTMLElement[] = [];
   let klaar = false;
-  let wacht = false;
   let hulpTimer: number | undefined;
 
   const rij = el("div", { class: "stenen" });
@@ -78,7 +77,7 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
         if (e.key === "Enter") ctx.volgende();
         return;
       }
-      if (wacht || !teltAlsTeken(e)) return;
+      if (!teltAlsTeken(e)) return;
       const { juist, klaar: overgestoken } = typ(oef, e.key, performance.now());
       ctx.toetsenbord.flits(e.code, juist);
       if (!juist) {
@@ -95,12 +94,10 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
       clearTimeout(hulpTimer);
       ctx.bewaarAanslagen(oef.aanslagen);
       nummer++;
-      wacht = true;
       if (nummer < BEKEN) {
-        ctx.later(() => {
-          wacht = false;
-          nieuweBeek();
-        }, 900);
+        // Meteen een nieuwe beek: de volgende toets telt al voor de eerste steen.
+        nieuweBeek();
+        nieuweKaart(rij);
       } else {
         klaar = true;
         scherm.zetOpdracht(t("beek.klaar"));
