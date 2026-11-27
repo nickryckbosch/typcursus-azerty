@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isLesOpen, markeerAfgewerkt, moetKortZijn, nieuweVoortgang, registreerEindoefening } from "../src/logica/voortgang";
+import { isLesOpen, markeerAfgewerkt, moetKortZijn, nieuweVoortgang, registreerEindoefening, verderBij, zetBezigBij } from "../src/logica/voortgang";
 
 const VOLGORDE = [0, 1, 2];
 
@@ -51,5 +51,18 @@ describe("resultaten bewaren", () => {
     expect(l.pogingen).toBe(2);
     expect(l.snelheden).toEqual([4, 6]);
     expect(l.afgewerkt).toBe(true);
+  });
+});
+
+describe("verdergaan na een onderbreking", () => {
+  it("onthoudt het blok, behalve het eerste blok en de afsluiter", () => {
+    const v = nieuweVoortgang();
+    expect(verderBij(v, 1)).toBeNull();
+    zetBezigBij(v, 1, 3, 7);
+    expect(verderBij(v, 1)).toBe(3);
+    zetBezigBij(v, 1, 6, 7); // afsluiter: les is rond
+    expect(verderBij(v, 1)).toBeNull();
+    zetBezigBij(v, 1, 0, 7);
+    expect(verderBij(v, 1)).toBeNull();
   });
 });

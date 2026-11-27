@@ -22,7 +22,7 @@ describe("opslag", () => {
   it("bewaart en leest dezelfde voortgang", () => {
     const o = geheugen();
     const v = nieuweVoortgang();
-    v.lessen["1"] = { afgewerkt: true, pogingen: 2, mislukt: 0, besteNauwkeurigheid: 0.95, sterren: 2, snelheden: [6.5] };
+    v.lessen["1"] = { afgewerkt: true, pogingen: 2, mislukt: 0, besteNauwkeurigheid: 0.95, sterren: 2, snelheden: [6.5], bezigBij: 3 };
     v.toetsen.f = { aanslagen: 10, fouten: 1, totaleTijdMs: 4000, getimed: 9 };
     v.instellingen.voorlezen = true;
     v.toetsenbord = "ok";
@@ -58,6 +58,11 @@ describe("opslag", () => {
     expect(v.lessen["0"].pogingen).toBe(0);
     expect(v.toetsen.f).toBeUndefined();
     expect(v.toetsenbord).toBe("onbekend");
+  });
+
+  it("leest oude gegevens zonder bezigBij", () => {
+    const v = zetOm({ versie: VERSIE, lessen: { "1": { afgewerkt: true } } });
+    expect(v.lessen["1"].bezigBij).toBeNull();
   });
 
   it("wist de voortgang", () => {

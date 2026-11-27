@@ -20,6 +20,8 @@ export interface LesVoortgang {
   sterren: number;
   /** woorden per minuut van de laatste pogingen (alleen voor de leerkracht) */
   snelheden: number[];
+  /** bij welk blok het kind gestopt is (om later verder te gaan); null: niet bezig */
+  bezigBij: number | null;
 }
 
 export type ToetsenbordStatus = "ok" | "fout" | "onbekend";
@@ -46,7 +48,7 @@ export function nieuweVoortgang(): Voortgang {
 }
 
 export function legeLesVoortgang(): LesVoortgang {
-  return { afgewerkt: false, pogingen: 0, mislukt: 0, besteNauwkeurigheid: null, sterren: 0, snelheden: [] };
+  return { afgewerkt: false, pogingen: 0, mislukt: 0, besteNauwkeurigheid: null, sterren: 0, snelheden: [], bezigBij: null };
 }
 
 export function lesVoortgang(v: Voortgang, lesId: number): LesVoortgang {
@@ -93,4 +95,17 @@ export function registreerEindoefening(
     lv.mislukt++;
   }
   return { gehaald, sterren: st };
+}
+
+/**
+ * Onthoud bij welk blok het kind is, zodat het na een onderbreking kan verdergaan.
+ * Het eerste blok of de afsluiter: niets te onthouden (null).
+ */
+export function zetBezigBij(v: Voortgang, lesId: number, blok: number, aantalBlokken: number): void {
+  lesVoortgang(v, lesId).bezigBij = blok > 0 && blok < aantalBlokken - 1 ? blok : null;
+}
+
+/** Bij welk blok kan het kind verdergaan? null: opnieuw beginnen. */
+export function verderBij(v: Voortgang, lesId: number): number | null {
+  return v.lessen[String(lesId)]?.bezigBij ?? null;
 }

@@ -5,6 +5,8 @@ import type { App, Scherm } from "../app";
 import { t, type TekstSleutel } from "../content";
 import type { Les } from "../content/types";
 import { blokFunctie } from "../blokken";
+import { metFienEnJef } from "../blokken/gedeeld";
+import { verderBij, zetBezigBij } from "../logica/voortgang";
 import type { BlokContext, BlokInstantie } from "../blokken/context";
 import { toetsVoorTeken } from "../logica/indeling";
 import { voegAanslagenToe } from "../logica/statistieken";
@@ -16,7 +18,7 @@ import { spreek } from "../weergave/spraak";
 import { tekenNaam } from "../weergave/tekens";
 import { maakToetsenbord } from "../weergave/toetsenbord";
 
-export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok = 0): Scherm {
+export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok?: number): Scherm {
   const toetsenbord = maakToetsenbord(les.geleerdeToetsen);
   const handen = maakHanden(t("hand.links"), t("hand.rechts"));
   const podium = el("main", { class: "podium", "aria-live": "polite" });
@@ -54,7 +56,7 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok = 0
     el("footer", { class: "typzone" }, handen.links, toetsenbord.element, handen.rechts),
   );
 
-  let index = startBlok;
+  let index = startBlok ?? 0;
   let instantie: BlokInstantie | null = null;
   let timers: number[] = [];
   const sessie: BlokContext["sessie"] = {};
@@ -145,6 +147,8 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok = 0
       return;
     }
     index = i;
+    zetBezigBij(app.voortgang, les.id, i, les.online.length);
+    app.bewaar();
     werkStapjesBij();
     werkToetsenbordMeldingBij();
     const blok = les.online[i];
@@ -152,7 +156,38 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, startBlok = 0
     instantie = functie ? functie(blok, ctx) : null;
   }
 
-  toonBlok(startBlok);
+  // Was het kind al bezig met deze les? Dan eerst vragen: verdergaan of opnieuw beginnen.
+  const bezig = startBlok === undefined ? verderBij(app.voortgang, les.id) : null;
+  if (bezig !== null && bezig < les.online.length) {
+    toonVerderVraag(bezig);
+  } else {
+    toonBlok(startBlok ?? 0);
+  }
+
+  function toonVerderVraag(blok: number): void {
+    index = blok;
+    werkStapjesBij();
+    ctx.toonToetsenbord(false);
+    const titel = les.online[blok].titel;
+    const tekst = t("verder.vraag", { nummer: blok + 1, titel });
+    const opnieuw = el("button", { class: "knop", type: "button", onclick: () => toonBlok(0) }, t("verder.opnieuw"));
+    const verder = el(
+      "button",
+      { class: "knop knop-hoofd", type: "button", onclick: () => toonBlok(blok) },
+      t("verder.knop", { nummer: blok + 1, titel }),
+    );
+    podium.append(
+      el(
+        "div",
+        { class: "blok blok-verder" },
+        metFienEnJef("blij", el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, tekst))),
+        el("div", { class: "knoppen" }, verder, opnieuw),
+      ),
+    );
+    ctx.zeg(tekst);
+    // Enter kiest "verdergaan" (de knop heeft de focus); met Tab kies je "opnieuw beginnen".
+    verder.focus();
+  }
 
   return {
     opToets(e) {

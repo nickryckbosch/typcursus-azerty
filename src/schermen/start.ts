@@ -20,9 +20,11 @@ export function startScherm(app: App, wortel: HTMLElement): Scherm {
       ? t("les.binnenkort")
       : !open
         ? t("les.slot")
-        : lv.afgewerkt
-          ? t("les.af")
-          : t("les.open");
+        : lv.bezigBij !== null
+          ? t("les.bezig", { nummer: lv.bezigBij + 1, totaal: les.online.length })
+          : lv.afgewerkt
+            ? t("les.af")
+            : t("les.open");
 
     return el(
       "li",

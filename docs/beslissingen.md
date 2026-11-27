@@ -66,6 +66,14 @@ Beslist met Nick (27 november 2026):
 - Na twee mislukte pogingen op rij komt de korte versie met een aanmoediging. Na een geslaagde poging begint de teller opnieuw.
 - Een les waarvan nog niet alle blokken of spelletjes gebouwd zijn, staat op "Komt binnenkort". Dat gebeurt automatisch: zodra het spel van les 2 bestaat, gaat les 2 open.
 
+## 9b. Verdergaan na een onderbreking
+
+- **Waarom:** in de klas moet een les soms vroeger stoppen.
+- **Hoe:** de app onthoudt per les bij welke stap het kind is (`bezigBij`). Opent het kind de les later opnieuw, dan vraagt de app "Verder bij stap 4: Over de beek?" (Enter) of "Opnieuw beginnen". Op het startscherm staat "Bezig: stap 4 van 7".
+- **Per stap, niet per toets:** stopt een kind midden in een stap, dan begint het die stap opnieuw. Dat is eenvoudiger en duidelijker voor kinderen, en een stap duurt maar een paar minuten.
+- Bij de afsluiter is de les rond en wordt er niets meer onthouden.
+- Oudere opgeslagen gegevens zonder dit veld werken gewoon verder (versienummer blijft 1).
+
 ## 10. Leerkrachtscherm
 
 - **Verborgen** achter Ctrl + Shift + L, zodat kinderen er niet per ongeluk terechtkomen. In de waarschuwing over het toetsenbord staat wel een knop "Uitleg voor de leerkracht".

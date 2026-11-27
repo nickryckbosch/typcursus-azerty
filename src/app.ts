@@ -53,7 +53,8 @@ export class App {
     this.toon("start", (w) => startScherm(this, w));
   }
 
-  naarLes(les: Les, blok = 0): void {
+  /** Open een les. Zonder blok: verdergaan waar het kind gestopt is (de les vraagt het eerst). */
+  naarLes(les: Les, blok?: number): void {
     this.toon("les", (w) => lesScherm(this, les, w, blok));
   }
 

@@ -77,6 +77,7 @@ export function zetOm(ruw: unknown): Voortgang {
         besteNauwkeurigheid: typeof l.besteNauwkeurigheid === "number" ? l.besteNauwkeurigheid : null,
         sterren: getal(l.sterren, 0),
         snelheden: Array.isArray(l.snelheden) ? l.snelheden.filter((s) => typeof s === "number") : leeg.snelheden,
+        bezigBij: typeof l.bezigBij === "number" && l.bezigBij > 0 ? l.bezigBij : null,
       };
     }
   }
