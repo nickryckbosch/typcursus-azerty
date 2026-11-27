@@ -61,7 +61,7 @@ export function startScherm(app: App, wortel: HTMLElement): Scherm {
       el(
         "header",
         { class: "start-kop" },
-        el("div", { class: "figuren" }, fien(90), jef(90)),
+        el("div", { class: "figuren" }, fien("zwaai", 130), jef("zwaai", 130)),
         el("div", {}, el("h1", {}, t("app.titel")), el("p", { class: "startzin" }, t("startzin"))),
         el("div", { class: "start-knoppen" }, voorleesKnop(app), el("button", { class: "knop", type: "button", onclick: () => app.naarOefenbord() }, t("knop.oefenbord"))),
       ),

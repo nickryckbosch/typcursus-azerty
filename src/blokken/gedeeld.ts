@@ -2,7 +2,7 @@
 
 import { t } from "../content";
 import { el } from "../weergave/dom";
-import { fien, jef } from "../weergave/figuren";
+import { fien, jef, type Uitdrukking } from "../weergave/figuren";
 import type { BlokContext } from "./context";
 
 export function verderKnop(ctx: BlokContext, tekst = t("knop.verder")): HTMLButtonElement {
@@ -18,6 +18,11 @@ export function schud(element: Element): void {
 }
 
 /** Fien en Jef links, de inhoud (bv. een tekstballon) rechts ernaast. */
-export function metFienEnJef(...inhoud: Node[]): HTMLElement {
-  return el("div", { class: "met-figuren" }, el("div", { class: "figuren zwaai" }, fien(), jef()), el("div", { class: "naast-figuren" }, ...inhoud));
+export function metFienEnJef(uitdrukking: Uitdrukking, ...inhoud: Node[]): HTMLElement {
+  return el(
+    "div",
+    { class: "met-figuren" },
+    el("div", { class: "figuren zwaai" }, fien(uitdrukking), jef(uitdrukking)),
+    el("div", { class: "naast-figuren" }, ...inhoud),
+  );
 }

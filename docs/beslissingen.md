@@ -78,7 +78,16 @@ Beslist met Nick (27 november 2026):
 
 ## 12. Fien en Jef
 
-- Voorlopig eenvoudige vormen in SVG (`src/weergave/figuren.ts`). Fien en Jef hebben een ander uiterlijk. Voor de echte prenten vervang je alleen die twee functies.
+- **Bron:** het goedgekeurde modelblad `docs/beelden/fien-en-jef-modelblad.png` (gemaakt met ChatGPT, vrij te gebruiken in dit project).
+- **Uitknippen:** `scripts/knip-figuren.py` knipt de zwaaiende Fien en Jef en vier gezichtjes (blij, trots, nadenkend, aanmoedigend) uit, maakt de witte achtergrond doorzichtig en bewaart ze in `src/beelden/`. Alleen het wit dat aan de rand raakt wordt doorzichtig, zodat het wit van ogen en tanden blijft.
+- **Bestandsgrootte:** de prenten zijn verkleind tot 256 kleuren: samen 164 kB in plaats van 760 kB, zonder zichtbaar verschil. Belangrijk als een hele klas tegelijk laadt.
+- **Waar welke uitdrukking:**
+  - zwaaien: startscherm, intro van elke les, einde van "Licht aan";
+  - blij: toetsenbord klopt, houdingsoefening, springers in "Over de beek", afsluiter met 1 of 2 sterren;
+  - trots: afsluiter met 3 sterren;
+  - aanmoedigend: korte eindoefening na twee mislukte pogingen, afsluiter als het doel niet gehaald is;
+  - nadenkend: toetsenbord staat niet goed.
+- **Een uitdrukking toevoegen:** zet een zone in het script, voer het uit (`python3 scripts/knip-figuren.py`) en voeg de naam toe aan `Uitdrukking` in `src/weergave/figuren.ts`.
 
 ## 13. Privacy en veiligheid
 

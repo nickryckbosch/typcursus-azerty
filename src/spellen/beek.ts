@@ -28,7 +28,7 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
 
   const teller = el("p", { class: "teller" });
   const rij = el("div", { class: "stenen" });
-  const springers = el("div", { class: "springers" }, fien(54), jef(54));
+  const springers = el("div", { class: "springers" }, fien("blij", 58), jef("blij", 58));
   const water = el(
     "div",
     { class: "beek" },

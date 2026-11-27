@@ -40,10 +40,9 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
     huis.append(v);
   }
   const ballon = el("p", { class: "ballon grote-tekst" });
-  const zwaaiers = el("div", { class: "figuren zwaai", hidden: true }, fien(80), jef(80));
-  ctx.podium.append(
-    el("div", { class: "blok blok-lichtaan" }, el("h2", {}, blok.titel), el("div", { class: "spel-rij" }, huis, el("div", {}, ballon, zwaaiers))),
-  );
+  const zwaaiers = el("div", { class: "figuren zwaai", hidden: true }, fien("zwaai", 150), jef("zwaai", 150));
+  const rechts = el("div", { class: "naast-figuren" }, el("div", { class: "met-figuren" }, zwaaiers, ballon));
+  ctx.podium.append(el("div", { class: "blok blok-lichtaan" }, el("h2", {}, blok.titel), el("div", { class: "spel-rij" }, huis, rechts)));
 
   function startRonde(): void {
     const rij = rondes[ronde];
@@ -94,7 +93,7 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
       ballon.textContent = t("lichtaan.klaar");
       zwaaiers.hidden = false;
       ctx.zeg(t("lichtaan.klaar"));
-      ctx.podium.querySelector(".blok")?.append(el("p", { class: "hint" }, t("hint.enter")));
+      rechts.append(el("p", { class: "hint" }, t("hint.enter")));
     },
   };
 };

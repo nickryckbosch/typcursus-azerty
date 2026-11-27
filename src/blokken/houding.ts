@@ -18,7 +18,7 @@ export function houding(blok: EindoefeningBlok, ctx: BlokContext): BlokInstantie
   const tekst = el("p", { class: "grote-tekst" }, t("houding.zeg"));
   const teller = el("p", { class: "teller" }, t("houding.teller", { aantal, totaal: AANTAL }));
   ctx.podium.append(
-    el("div", { class: "blok blok-houding" }, el("h2", {}, blok.titel), el("div", { class: "figuren" }, fien(), jef(), klap), tekst, teller),
+    el("div", { class: "blok blok-houding" }, el("h2", {}, blok.titel), el("div", { class: "figuren" }, fien("blij"), jef("blij"), klap), tekst, teller),
   );
   ctx.zeg(`${t("houding.zeg")} ${t("houding.uitleg")}`);
   ctx.handen.toon(["duim"]);

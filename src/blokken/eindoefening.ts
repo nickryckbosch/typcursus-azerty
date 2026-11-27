@@ -48,7 +48,7 @@ export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
       el(
         "div",
         { class: "blok blok-intro" },
-        metFienEnJef(el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, t("eind.aanmoediging")))),
+        metFienEnJef("aanmoedigend", el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, t("eind.aanmoediging")))),
         el("p", { class: "hint" }, t("hint.enter")),
         el("button", { class: "knop knop-hoofd", type: "button", onclick: () => start() }, t("knop.start")),
       ),

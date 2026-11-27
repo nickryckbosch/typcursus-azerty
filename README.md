@@ -66,6 +66,10 @@ Bijdragen zijn welkom, ook van leerkrachten die niet programmeren.
 - **Code?** Houd het eenvoudig en leesbaar. Schrijf tests voor nieuwe logica in `src/logica/`, en voer `npm test` uit voor je een pull request maakt.
 - **Een Franstalige versie** komt in `src/content/fr-BE/`, met dezelfde bestanden.
 
+## Prenten
+
+Fien en Jef komen uit het modelblad in `docs/beelden/` (gemaakt met ChatGPT, vrij te gebruiken in dit project). De afzonderlijke prenten in `src/beelden/` worden gemaakt met `scripts/knip-figuren.py` (Python 3 met Pillow).
+
 ## Licentie
 
 [AGPL-3.0](LICENSE). Je mag de cursus gratis gebruiken, aanpassen en verspreiden. Wie een aangepaste versie online zet, moet de broncode daarvan ook delen.

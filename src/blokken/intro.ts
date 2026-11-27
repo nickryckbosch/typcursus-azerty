@@ -16,7 +16,7 @@ export const intro: BlokFunctie<IntroBlok> = (blok, ctx) => {
     el(
       "div",
       { class: "blok blok-intro" },
-      metFienEnJef(el("div", { class: "ballon" }, el("h2", {}, blok.titel), el("p", { class: "grote-tekst" }, blok.tekst ?? ""))),
+      metFienEnJef("zwaai", el("div", { class: "ballon" }, el("h2", {}, blok.titel), el("p", { class: "grote-tekst" }, blok.tekst ?? ""))),
       el("p", { class: "hint" }, t("hint.enter")),
       verderKnop(ctx),
     ),
