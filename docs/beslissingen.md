@@ -285,6 +285,16 @@ Steunt op: eigen keuze van Nick, na het testen. De tekenstijl en de indeling bli
 - De kaart op het oefenbord heeft nu dezelfde opbouw als de kaart in "Zoek de toets": een vaste breedte en hoogte, elke letter op dezelfde basislijn, met plaats onder voor staartletters (g, j, p, q, y) en boven voor hoofdletters en accenten.
 - Het woord "spatie" staat kleiner in een kaart van dezelfde maat. Waarom: de kaart verspringt niet meer tussen twee toetsen.
 
+## 12k. Eerst lezen, dan starten (K28)
+
+**Steunt op:** vaststelling van Nick (27 november 2026): bij "Duim op de spatiebalk" ging de lamp al branden voor het kind de opdracht gelezen had. Eigen keuze voor de oplossing. Regel in docs/stijlgids.md, deel 9.
+
+- **"Duim op de spatiebalk" en "Klaar voor de start" beginnen met een startstap.** De opdracht en de lamp (uit) staan in beeld, met de zin "Lees de opdracht. Klaar? Druk op Enter om te starten." en de knop Start. Pas na Start gaat de lamp na een korte tijd aan. Waarom: het kind moet de opdracht kunnen lezen of laten voorlezen voor er iets gebeurt.
+- **Een spatie voor de start** toont onder de lamp "Druk eerst op Start." (op de vaste plek van "Wacht op de lamp."). Geen aanslag, geen fout. Waarom: een toets zonder reactie voelt als kapot (K23).
+- **"Klaar voor de start": "Voeten plat, rug recht!" staat nu in de tekstballon van Fien en Jef**, en de opdracht staat meteen bovenaan. Vroeger stond eerst "Voeten plat, rug recht!" als opdracht en wisselde die na 2 seconden naar de echte opdracht: dat versprong (K20) en gaf minder leestijd.
+- **`oefenscherm.toonEnter(actie, "start")`** toont de Enter-regel met "om te starten" en de knop Start; `verbergEnter()` verbergt ze weer. Geldt voor elke toekomstige oefening waarin iets vanzelf gebeurt, zoals Letterregen (K24).
+- **Test:** `tests/snel-typen.test.ts`: zonder Start gaat de lamp nooit aan, ook niet na 10 seconden; een spatie voor de start geeft "Druk eerst op Start." en telt niet.
+
 ## 13. Privacy en veiligheid
 
 - Geen externe bronnen: geen CDN, geen analytics, geen Google Fonts.

@@ -52,6 +52,7 @@
   "voorlezen.uit": "Voorlezen uit",
 
   "hint.enter": "Druk op {toets} om verder te gaan.",
+  "hint.start": "Lees de opdracht. Klaar? Druk op {toets} om te starten.",
   "toets.enter": "Enter \u21b5",
   "teller": "{nummer} van {totaal}",
   "teken.spatie": "spatie",
@@ -114,6 +115,7 @@
   "houding.zeg": "Voeten plat, rug recht!",
   "houding.opdracht": "Leg je vingers in de woonkamer, de middelste rij. Gaat de lamp aan? Druk op de spatiebalk.",
   "lamp.wacht": "Wacht op de lamp.",
+  "lamp.eerstStart": "Druk eerst op Start.",
   "intro.huis": "Het huis van Fien en Jef: de zolder, de woonkamer en de kelder.",
   "houding.klaar": "Klaar voor de start!",
 

@@ -101,8 +101,13 @@ export interface Oefenscherm {
   zetOpdracht(tekst: string, voorlezen?: boolean, beelden?: Record<string, () => Node>): void;
   /** een andere houding van Fien en Jef, op dezelfde plaats */
   zetFiguren(uitdrukking: Uitdrukking): void;
-  /** toon "Druk op [Enter] om verder te gaan" met de knop Verder */
-  toonEnter(actie?: () => void): void;
+  /**
+   * Toon "Druk op [Enter] om verder te gaan" met de knop Verder. Met "start":
+   * "Druk op [Enter] om te starten" met de knop Start (K28: eerst lezen, dan starten).
+   */
+  toonEnter(actie?: () => void, soort?: "verder" | "start"): void;
+  /** verberg de Enter-regel weer (zijn plaats blijft) */
+  verbergEnter(): void;
 }
 
 export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): Oefenscherm {
@@ -115,15 +120,15 @@ export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): O
     : figurenRij;
   const veld = el("div", { class: "zone-veld" });
   let enterActie = () => ctx.volgende();
-  const [voor, na] = t("hint.enter").split("{toets}");
-  const enterRij = startVerborgen(
-    el(
-      "div",
-      { class: "enter-rij" },
-      el("p", { class: "hint-enter" }, voor, el("span", { class: "toets-in-tekst" }, t("toets.enter")), na ?? ""),
-      el("button", { class: "knop knop-hoofd", type: "button", tabindex: "-1", onclick: () => enterActie() }, t("knop.verder")),
-    ),
-  );
+  const hint = el("p", { class: "hint-enter" });
+  const enterKnop = el("button", { class: "knop knop-hoofd", type: "button", tabindex: "-1", onclick: () => enterActie() }, t("knop.verder"));
+  function zetEnterTekst(soort: "verder" | "start"): void {
+    const [voor, na] = t(soort === "start" ? "hint.start" : "hint.enter").split("{toets}");
+    hint.replaceChildren(voor, el("span", { class: "toets-in-tekst" }, t("toets.enter")), na ?? "");
+    enterKnop.textContent = t(soort === "start" ? "knop.start" : "knop.verder");
+  }
+  zetEnterTekst("verder");
+  const enterRij = startVerborgen(el("div", { class: "enter-rij" }, hint, enterKnop));
   const voet = el("div", { class: "zone-voet" }, enterRij);
   const voortgang = maakVoortgang();
 
@@ -150,11 +155,17 @@ export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): O
     zetFiguren(uitdrukking) {
       figurenRij.replaceChildren(fien(uitdrukking), jef(uitdrukking));
     },
-    toonEnter(actie) {
+    toonEnter(actie, soort = "verder") {
       if (actie) enterActie = actie;
+      zetEnterTekst(soort);
       ctx.toetsenbord.toonEnter(true);
       toon(enterRij);
-      enterRij.querySelector("button")?.removeAttribute("tabindex");
+      enterKnop.removeAttribute("tabindex");
+    },
+    verbergEnter() {
+      ctx.toetsenbord.toonEnter(false);
+      toon(enterRij, false);
+      enterKnop.setAttribute("tabindex", "-1");
     },
   };
   if (opties.figuren) scherm.zetFiguren(opties.figuren);

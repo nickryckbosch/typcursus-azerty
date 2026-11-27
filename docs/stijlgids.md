@@ -180,6 +180,13 @@ Elke tekst die een kind leest, volgt deze regels. Ze gelden ook voor elke nieuwe
 - **De laatste zin van een intro zegt wat de les brengt** ("Vandaag leer je de f en de j."), geen vraag zonder antwoord.
 - **Woorden die een kind van 9 kent**, korte zinnen, Vlaams Nederlands, zonder klemtoonaccenten.
 
+### Eerst lezen, dan starten (K28)
+
+- **Gebeurt er in een oefening iets vanzelf** (een lamp die aangaat, later de vallende letters van Letterregen, alles met een tijd), **dan begint ze pas als het kind op Start drukt.** Tot dan staat de opdracht in beeld en gebeurt er niets. De start is Enter of de knop Start, met de zin "Lees de opdracht. Klaar? Druk op Enter om te starten." (`scherm.toonEnter(start, "start")`).
+- Een toets voor de start krijgt wel een reactie (K23): "Druk eerst op Start." Hij telt niet als aanslag en niet als fout.
+- Oefeningen die op het kind wachten (oefenregels, "Zoek de toets", een spel waarin je typt), hebben geen startknop nodig: daar gebeurt niets voor het kind typt. De eindoefening had al een start.
+- **Waarom:** bij "Duim op de spatiebalk" ging de lamp na 0,9 seconde aan, terwijl het kind de opdracht nog moest lezen (Nick, 27 november 2026). Een kind dat traag leest of de voorleesstem afwacht, mist zo het signaal.
+
 **Controle:** `tests/inhoud.test.ts` faalt als een oefening geen opdracht heeft, als een spel geen doelzin heeft, als een opdracht of doelzin langer is dan drie zinnen, of als ergens "terug naar huis" staat. De testlijst vraagt bij elk spel: "Kan iemand zonder uitleg zeggen wat hij moet doen, en waar hij naartoe werkt?"
 
 **Waarop steunt dit? Eigen keuze**, na de vaststelling bij drie testers op 27 november 2026: Nick, zijn dochter van 11 en een volwassene zonder uitleg liepen vast op een opdracht. Die laatste vroeg bij "Over de beek": "Hoe ben ik aan het huis geraakt?" Het past bij K20 (woord en beeld kloppen). Uitwerking in projectdocument 21.

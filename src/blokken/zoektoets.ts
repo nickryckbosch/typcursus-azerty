@@ -57,11 +57,26 @@ export const zoekToets: BlokFunctie<ZoekToetsBlok> = (blok, ctx) => {
     toonHuidig();
   }
 
-  if (metLamp) ctx.later(zetLampAan, 900);
+  // Eerst lezen, dan starten (K28): de lamp gaat pas aan nadat het kind op
+  // Start drukt (Enter of de knop). Zo kan het de opdracht eerst rustig lezen.
+  let gestart = !metLamp;
+  function start(): void {
+    if (gestart) return;
+    gestart = true;
+    scherm.verbergEnter();
+    ctx.later(zetLampAan, 900);
+  }
+  if (metLamp) scherm.toonEnter(start, "start");
   toonHuidig();
 
   return {
     opToets(e) {
+      if (!gestart) {
+        if (e.key === "Enter") start();
+        // De spatiebalk voor de start: wel een reactie, maar de lamp komt pas na Start.
+        else if (teltAlsTeken(e)) lamp.teVroeg(t("lamp.eerstStart"));
+        return;
+      }
       if (!teltAlsTeken(e)) return;
       if (!lampAan) {
         // Te vroeg: geen fout, maar wel een reactie, anders voelt de toets kapot.
