@@ -13,6 +13,8 @@ De volledige bronnenlijst staat in projectdocument 13 (onderzoeksagenda) en 14 (
 ## 1. Rust
 
 - Tijdens het typen beweegt er niets, behalve de toets en de vinger die oplichten.
+- Niets verspringt: elk oefenscherm heeft vaste zones, en wat later verschijnt, staat er van bij het begin en neemt zijn ruimte al in (beslissing 12c).
+- Verschijnen en aangaan (de Enter-regel, "Klap!", de lamp, een raam, een nieuwe letter op de kaart) gebeurt met een korte, rustige overgang van 180 ms, en meteen als het toestel om minder beweging vraagt. Dat is de enige beweging.
 - Geen animaties: niets schudt, wiebelt, knippert, springt of schuift. Een fout zie je doordat de cursor blijft staan en de juiste toets en vinger even sterker oplichten.
 - Fien en Jef staan stil. Ze veranderen alleen van houding bij de start (zwaaien) en op het einde (duim omhoog of aanmoedigen), nooit bij elke toets of fout.
 - Een spel heeft een vaste prent bovenaan. De vooruitgang staat eronder (bijvoorbeeld een rij stenen), niet in de prent.
@@ -112,6 +114,8 @@ Kleurstrepen per vinger en getekende handen: **andere cursussen** doen dat ook (
 
 - **Startscherm:** titel links, startzin rechts. Links Fien en Jef (zwaaiend, stil) met een tekstballon. Een grote kaart "Verder waar je was", daaronder "Alle lessen" met een tabblad per deel van het toetsenbordhuis en een compacte rij per les.
 - **Typscherm:** bovenbalk met de knop "Lessen", in het midden "Les 2 · Oefenregels 1" met een balkje per blok, rechts voorlezen. Links een stilstaand figuurtje met een korte tip in een tekstballon. In het midden een witte kaart met de oefenregels. Onderaan het toetsenbord met de handen.
+- **Oefenkaart (intro, zoek de toets, de lamp, "Licht aan", "Klaar voor de start", afsluiter):** dezelfde bovenbalk, en een witte kaart met vaste zones: de opdracht groot bovenaan (met de toets getekend in de zin), Fien en Jef links, de prent of het signaal in het midden, "Druk op Enter" met de knop Verder rechts.
+- **Voortgang (K20):** een dunne, grijze balk langs de onderrand van de witte kaart, met rechts klein de teller. Bij "Over de beek" drie bolletjes voor de beken. Geen vingerkleur.
 - **Spelscherm:** dezelfde bovenbalk, een witte kaart met bovenaan de vaste prent en eronder de vooruitgang, onderaan het toetsenbord met de handen.
 - Alles past op een Chromebook van 1366 x 768 zonder scrollen (zie beslissing 12b).
 
@@ -122,3 +126,36 @@ Waarop steunt dit? **Eigen keuze** (startscherm per deel, een kaart "Verder waar
 - Fien en Jef komen uit het modelblad (`docs/beelden/`). De losse prenten staan in `src/beelden/`.
 - Een spelprent blijft volledig in beeld: liever een kleinere, gecentreerde prent met afgeronde hoeken dan een bijgesneden prent.
 - "Over de beek" gebruikt de beekprent op maat (Fien en Jef links, het huisje rechts, een brede beek zonder stenen). De stenen tekent de app zelf, onder de prent.
+
+## 8. Getekende voorwerpen: het huis en de lamp
+
+Voorwerpen die de app zelf tekent, hebben dezelfde tekenstijl als de prenten van Fien en Jef: een bruine omtrek (`#4A2E1A`, 3 dik in de tekening van het huis), afgeronde hoeken en vlakke kleuren.
+
+### Het huis van "Licht aan in het huis" (K21)
+
+- Vier even hoge lagen van 66: dak, zolder, woonkamer en kelder (onder de grondlijn). Het dak is de cijferrij, een vierde rij boven de zolder; het blijft leeg in les 0 tot 5.
+- Negen even grote ramen van 38 x 38 met een kruis, geen vensterbank. De rijen zijn gelijk, omdat de rijen op het toetsenbord ook gelijk zijn.
+- De woorden staan in een eigen kolom links, in afgeronde vakjes van 150 x 40, in Andika (24). Nooit over de tekening. De vakjes zijn groter dan in de eerste referentie, voor de leesbaarheid op een kleine Chromebook.
+- Het vakje van de verdieping die aan de beurt is, wordt donker (`#1B2A4A` met witte tekst) en blijft stil staan. Er knippert niets.
+- Fien en Jef staan naast het huis, niet in een raam.
+- De referentietekening staat in de code: `src/spellen/lichtaan.ts`.
+
+Waarop steunt dit? **Eigen keuze** (K21), als gevolg van het rijenbeeld in de projectdocumenten 08, 10 en 18.
+
+**Raamkleuren: licht aan `#FFEE99`, licht uit `#3B4256`. Waarop steunt dit? Onderzoek (methode).** De kleuren zijn nagemeten tegen de vingerkleuren van palet C, met het model van Machado, Oliveira en Fernandes (2009) en het verschil in CIELAB:
+
+| | normaal | deuteranopie | protanopie |
+|---|---|---|---|
+| Licht aan: kleinste verschil met een vingerkleur | 25 | 23 | 26 |
+| Licht uit: kleinste verschil met een vingerkleur | 33 | 33 | 33 |
+
+Het vroegere geel `#FFD34D` haalde maar 13 tegenover het oranje van de middelvinger. Verander de raamkleuren dus niet zonder nieuwe meting.
+
+### De lamp van "Duim op de spatiebalk"
+
+- Een gloeilamp met dezelfde omtrek en dezelfde kleuren als de ramen: uit `#3B4256`, aan `#FFEE99`.
+- Als ze brandt, staan er stralen rond: zo zie je het ook zonder op de kleur te letten.
+- Ze staat van bij het begin in beeld, op een vaste plek. Een klein beeldje van dezelfde lamp staat in de opdracht naast het woord "lamp".
+- De tekening staat in `src/weergave/lamp.ts`.
+
+Waarop steunt dit? **Eigen keuze**, te toetsen door een kind de oefening zonder uitleg te laten doen.

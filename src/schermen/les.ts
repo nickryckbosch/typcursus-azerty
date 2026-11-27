@@ -6,7 +6,7 @@ import type { App, Scherm } from "../app";
 import { t, type TekstSleutel } from "../content";
 import type { Blok, Les } from "../content/types";
 import { blokFunctie } from "../blokken";
-import { metFienEnJef } from "../blokken/gedeeld";
+import { oefenscherm } from "../blokken/oefenscherm";
 import { maakExtraRegels } from "../logica/extraoefenen";
 import { verderBij, zetBezigBij } from "../logica/voortgang";
 import type { BlokContext, BlokInstantie } from "../blokken/context";
@@ -17,6 +17,7 @@ import { el } from "../weergave/dom";
 import { maakHanden } from "../weergave/handen";
 import { kop, voorleesKnop } from "../weergave/kop";
 import { spreek } from "../weergave/spraak";
+import { zonderOpmaak } from "../weergave/tekst";
 import { maakToetsenbord } from "../weergave/toetsenbord";
 
 export interface LesOpties {
@@ -140,8 +141,8 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, opties: LesOp
       return index;
     },
     zeg(tekst) {
-      laatsteTekst = tekst;
-      spreek(tekst);
+      laatsteTekst = zonderOpmaak(tekst);
+      spreek(laatsteTekst);
     },
     volgende() {
       toonBlok(index + 1);
@@ -231,15 +232,9 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, opties: LesOp
       { class: "knop knop-hoofd", type: "button", onclick: () => toonBlok(blok) },
       t("verder.knop", { nummer: blok + 1, titel: blokTitel }),
     );
-    podium.append(
-      el(
-        "div",
-        { class: "blok blok-verder" },
-        metFienEnJef("zwaai", el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, tekst))),
-        el("div", { class: "knoppen" }, verder, opnieuw),
-      ),
-    );
-    ctx.zeg(tekst);
+    const vraag = oefenscherm(ctx, { figuren: "zwaai", klasse: "blok-verder" });
+    vraag.zetOpdracht(tekst);
+    vraag.voet.replaceChildren(el("div", { class: "knoppen" }, verder, opnieuw));
     // Enter kiest "verdergaan" (de knop heeft de focus); met Tab kies je "opnieuw beginnen".
     verder.focus();
   }

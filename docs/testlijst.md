@@ -11,6 +11,11 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 - [ ] Is de achtergrond havermoutkleurig, met witte kaarten en afgeronde hoeken?
 - [ ] Zijn de letters goed leesbaar (lettertype Andika in de oefenregels en op de toetsen)?
 - [ ] **Rust:** beweegt er tijdens het typen niets, behalve de toets en de vinger die oplichten? Geen schuddende letters, geen knipperende vlakken, geen zwaaiende of springende figuurtjes?
+- [ ] **Niets verspringt:** blijven de lamp, Fien en Jef, het huis en de opdracht op hun plaats terwijl je bezig bent, ook als er iets bij verschijnt?
+- [ ] **De opdracht:** is de opdracht bovenaan in elke stap het duidelijkste wat je ziet, met de toets getekend in de zin?
+- [ ] **Voortgang:** staat er op elk oefenscherm onderaan de witte kaart een dunne grijze balk met rechts een teller (bij "Over de beek" drie bolletjes)?
+- [ ] **Snel typen:** typ zo snel als je kan, ook net als er een nieuwe letter, regel of beek verschijnt. Telt elke toets?
+- [ ] **Startscherm:** staan Fien en Jef met hun tekstballon volledig in beeld, zonder scrollen, ook in een laag venster?
 - [ ] **Kleuren:** kan je de vier vingerkleuren en de duim goed uit elkaar houden? Vraag het zeker aan een kind of collega die kleurenblind is.
 
 ## Startscherm
@@ -33,16 +38,16 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 
 - [ ] Bovenaan staat "Les 0 · ..." met een balkje per blok (6 balkjes).
 - [ ] **Toetsenbordcheck:** zegt de app dat je toetsenbord klopt? Zet de Chromebook daarna eens op een andere invoermethode (bijvoorbeeld Engels) en doe les 0 opnieuw: verschijnt de melding "Vraag even hulp aan je juf of meester", met uitleg voor de leerkracht? Zet het daarna terug op Belgisch.
-- [ ] **Duim op de spatiebalk:** gaat het lampje aan, en kan je pas drukken als het brandt?
-- [ ] **Licht aan in het huis:** licht de juiste verdieping op (zonder te knipperen)? Licht bij een verkeerde rij de juiste rij op het toetsenbord op? Branden na 9 rondes alle ramen?
-- [ ] **Klaar voor de start:** verschijnt "Klap!" en telt de spatiebalk telkens mee (3 keer)?
+- [ ] **Duim op de spatiebalk:** staat de lamp van bij het begin in beeld? Gaat ze duidelijk aan, en kan je pas drukken als ze brandt? Begrijpt een kind zonder uitleg wat het moet doen?
+- [ ] **Licht aan in het huis:** wordt het woord van de juiste verdieping donker (zonder te knipperen)? Zijn de woorden links van het huis goed leesbaar? Licht bij een verkeerde rij de juiste rij op het toetsenbord op? Branden na 9 rondes alle ramen?
+- [ ] **Klaar voor de start:** is meteen duidelijk dat je op de spatiebalk moet drukken? Verschijnt "Klap!" zonder dat er iets verspringt, en telt de spatiebalk telkens mee (3 keer)?
 - [ ] Op het einde: steken Fien en Jef hun duim op, en kan je met de knop meteen naar les 1?
 
 ## Les 1
 
 - [ ] **Intro:** lichten de f en de j en beide wijsvingers op?
 - [ ] **Zoek Fien, zoek Jef:** licht bij elke letter de juiste toets en de juiste vinger op?
-- [ ] **Oefenregels:** links staat een stilstaand figuurtje met een korte tip in een tekstballon. In de witte kaart: de opdracht, "Regel 1 van 4", de huidige regel groot, de volgende regels eronder. Het volgende teken is gemarkeerd in de kleur van de vinger.
+- [ ] **Oefenregels:** links staat een stilstaand figuurtje met een korte tip in een tekstballon. In de witte kaart: de opdracht, de huidige regel groot, de volgende regels eronder. Het volgende teken is gemarkeerd in de kleur van de vinger.
 - [ ] Is de toets die moet komen al zichtbaar voor je typt (hulp altijd zichtbaar)?
 - [ ] Typ expres een fout. Blijft de cursor staan, en lichten de juiste toets en vinger even sterker op, zonder dat er iets schudt?
 - [ ] Na een regel: staat de afgewerkte regel grijs met een vinkje boven de nieuwe regel?

@@ -97,8 +97,8 @@
   "melding.toetsenbord": "Je toetsenbord staat niet goed ingesteld. Vraag even hulp aan je juf of meester.",
 
   "check.bezig": "Even kijken of je toetsenbord klopt...",
-  "check.drukA": "Zoek de toets met de letter A en druk erop.",
-  "check.druk6": "Druk nu op de toets met het cijfer 6.",
+  "check.drukA": "Zoek de toets met de letter [A] en druk erop.",
+  "check.druk6": "Druk nu op de toets met het cijfer [6].",
   "check.ok": "Je toetsenbord klopt!",
   "check.fout": "Vraag even hulp aan je juf of meester.",
   "check.verderMag": "Je mag gewoon verder doen.",
@@ -106,23 +106,18 @@
   "check.uitlegFrans": "Dit toestel staat op Frans AZERTY in plaats van Belgisch AZERTY. De letters staan op dezelfde plaats, maar sommige tekens (zoals de punt en de cijfers) niet.",
   "check.uitlegAnders": "Dit toestel staat niet op Belgisch AZERTY (bijvoorbeeld op QWERTY of op een andere taal). Dan geven de toetsen andere letters dan wat erop staat.",
 
-  "reeks.regel": "Regel {nummer} van {totaal}",
 
   "eind.aanmoediging": "Fien en Jef: Het lukt bijna! We maken de eindoefening wat korter. Rustig en juist, jij kan dat!",
   "eind.nietGehaald": "Nog geen ster. Dat geeft niet: probeer de eindoefening nog eens. Rustig en juist, wij wachten op je.",
 
   "houding.zeg": "Voeten plat, rug recht!",
-  "houding.uitleg": "Leg je handen in de woonkamer. Druk op de spatiebalk als Jef in zijn handen klapt.",
+  "houding.opdracht": "Druk op [spatie] als Jef in zijn handen klapt.",
   "houding.klap": "Klap!",
-  "houding.druk": "Jef klapt: druk op de spatiebalk!",
-  "houding.wacht": "Goed zo. Wacht op de volgende klap...",
   "houding.klaar": "Klaar voor de start!",
-  "houding.teller": "{aantal} van {totaal}",
 
-  "lichtaan.opdracht": "Druk op een toets van de {rij}.",
-  "lichtaan.klaar": "Alle lichten branden! Fien en Jef zwaaien uit het raam.",
+  "lichtaan.opdracht": "Druk op een toets van de **{rij}**.",
+  "lichtaan.klaar": "Alle lichten branden! Goed gedaan!",
 
-  "beek.teller": "Beek {nummer} van {totaal}",
   "beek.klaar": "Droge voeten!",
   "beek.prent": "Fien en Jef staan bij de beek. Hun huis staat aan de overkant.",
 

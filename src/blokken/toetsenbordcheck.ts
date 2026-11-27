@@ -7,18 +7,31 @@ import type { ToetsenbordcheckBlok } from "../content/types";
 import { stapA, stapZes, vraagIndelingOp, type Indeling } from "../logica/toetsenbordcheck";
 import { el } from "../weergave/dom";
 import type { BlokFunctie } from "./context";
-import { enterHint, metFienEnJef } from "./gedeeld";
+import { oefenscherm, startVerborgen, toon } from "./oefenscherm";
 
 type Stap = "bezig" | "drukA" | "druk6" | "klaar";
 
 export const toetsenbordcheck: BlokFunctie<ToetsenbordcheckBlok> = (_blok, ctx) => {
   let stap: Stap = "bezig";
-  const vak = el("div", { class: "blok blok-check" });
-  ctx.podium.append(vak);
+  const scherm = oefenscherm(ctx, { figuren: "nadenkend", klasse: "blok-check" });
 
-  function toon(...inhoud: Node[]): void {
-    vak.replaceChildren(...inhoud);
-  }
+  // De kaart met de toets en de uitleg staan er van bij het begin, op dezelfde
+  // plek; alleen hun zichtbaarheid wisselt.
+  const kaart = startVerborgen(el("div", { class: "grote-toets" }, el("span", {}, "A")));
+  const uitlegFrans = el("p", {}, t("check.uitlegFrans"));
+  const uitlegAnders = el("p", {}, t("check.uitlegAnders"));
+  const uitleg = startVerborgen(
+    el(
+      "details",
+      { class: "leerkracht-uitleg", open: true },
+      el("summary", {}, t("check.voorLeerkracht")),
+      uitlegFrans,
+      uitlegAnders,
+      el("p", {}, t("leerkracht.toetsenbordInstellen")),
+    ),
+  );
+  scherm.veld.append(el("div", { class: "stapel" }, kaart, uitleg));
+  scherm.zetOpdracht(t("check.bezig"), false);
 
   function klaar(indeling: Indeling): void {
     stap = "klaar";
@@ -26,45 +39,31 @@ export const toetsenbordcheck: BlokFunctie<ToetsenbordcheckBlok> = (_blok, ctx) 
     ctx.app.voortgang.toetsenbord = ok ? "ok" : "fout";
     ctx.app.bewaar();
     ctx.toetsenbord.markeer([]);
+    toon(kaart, false);
+    scherm.zetFiguren(ok ? "blij" : "nadenkend");
     if (ok) {
-      toon(metFienEnJef("blij", el("div", { class: "ballon" }, el("p", { class: "grote-tekst goed" }, t("check.ok")))), enterHint(ctx));
-      ctx.zeg(t("check.ok"));
+      scherm.zetOpdracht(t("check.ok"));
     } else {
-      toon(
-        metFienEnJef("nadenkend", el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, t("check.fout")), el("p", {}, t("check.verderMag")))),
-        el(
-          "details",
-          { class: "leerkracht-uitleg", open: true },
-          el("summary", {}, t("check.voorLeerkracht")),
-          el("p", {}, t(indeling === "frans" ? "check.uitlegFrans" : "check.uitlegAnders")),
-          el("p", {}, t("leerkracht.toetsenbordInstellen")),
-        ),
-        enterHint(ctx),
-      );
-      ctx.zeg(`${t("check.fout")} ${t("check.verderMag")}`);
+      uitlegFrans.hidden = indeling !== "frans";
+      uitlegAnders.hidden = indeling === "frans";
+      toon(uitleg);
+      scherm.zetOpdracht(`${t("check.fout")} ${t("check.verderMag")}`);
     }
+    scherm.toonEnter();
   }
 
-  function vraagA(): void {
-    stap = "drukA";
-    toon(el("p", { class: "grote-tekst" }, t("check.drukA")), el("div", { class: "grote-toets" }, "A"));
-    ctx.toetsenbord.markeer(["KeyQ"]);
-    ctx.zeg(t("check.drukA"));
+  function vraag(tekst: string, teken: string, codes: string[], volgendeStap: Stap): void {
+    stap = volgendeStap;
+    kaart.firstElementChild!.textContent = teken;
+    toon(kaart);
+    scherm.zetOpdracht(tekst);
+    ctx.toetsenbord.markeer(codes);
   }
 
-  function vraag6(): void {
-    stap = "druk6";
-    toon(el("p", { class: "grote-tekst" }, t("check.druk6")), el("div", { class: "grote-toets" }, "6"));
-    // Het schermtoetsenbord heeft geen cijferrij: de 6 staat groot in het blok zelf.
-    ctx.toetsenbord.markeer([]);
-    ctx.zeg(t("check.druk6"));
-  }
-
-  toon(el("p", { class: "grote-tekst" }, t("check.bezig")));
   void vraagIndelingOp().then((indeling) => {
     if (stap !== "bezig") return;
     if (indeling) klaar(indeling);
-    else vraagA();
+    else vraag(t("check.drukA"), "A", ["KeyQ"], "drukA");
   });
 
   return {
@@ -76,7 +75,8 @@ export const toetsenbordcheck: BlokFunctie<ToetsenbordcheckBlok> = (_blok, ctx) 
       if (stap === "drukA") {
         if (e.code === "KeyQ" || e.code === "KeyA") {
           ctx.toetsenbord.flits(e.code, true);
-          if (e.code === "KeyQ" && stapA(e.key) === "ok") vraag6();
+          // Het schermtoetsenbord heeft geen cijferrij: de 6 staat groot op de kaart.
+          if (e.code === "KeyQ" && stapA(e.key) === "ok") vraag(t("check.druk6"), "6", [], "druk6");
           else klaar("qwerty");
         }
         return;

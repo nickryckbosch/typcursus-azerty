@@ -109,7 +109,7 @@ Extra afspraken uit document 10 die de app raken:
       "duurMinuten": 0.5,
       "toetsen": [" "],
       "aantal": 5,
-      "tekst": "Leg je duimen op de spatiebalk. Druk erop als het lampje van het huis aangaat."
+      "tekst": "Leg je duimen op de spatiebalk. Gaat de lamp aan? Druk!"
     },
     {
       "type": "spel",
@@ -119,7 +119,7 @@ Extra afspraken uit document 10 die de app raken:
       "rijen": ["zolder", "woonkamer", "kelder"],
       "rondes": 9,
       "tekens": [],
-      "beschrijving": "Op het scherm staat het huis met drie verdiepingen, alle ramen donker. Een verdieping knippert en Fien zegt: \"Druk op een toets van de zolder.\" Elke toets van die rij is goed (herkend via de toetscode, dus los van de indeling): het raam gaat aan en de toets licht op het schermtoetsenbord op in de kleur van de vinger. Een toets van een andere rij: de juiste rij licht even op, er gaat niets verloren. Alleen de eerste toets per ronde telt, zodat rammen niet helpt. Ronde 1 tot 3 in vaste volgorde (woonkamer, zolder, kelder), daarna willekeurig. Na 9 rondes branden alle ramen en zwaaien Fien en Jef uit het raam. Geen tijd, geen punten."
+      "beschrijving": "Op het scherm staat het huis met drie verdiepingen, alle ramen donker. Links van het huis staan de woorden zolder, woonkamer en kelder, elk in een vakje. Het vakje van de verdieping die aan de beurt is, wordt donker en blijft stil staan (er knippert niets). De opdracht zegt: \"Druk op een toets van de zolder.\" Elke toets van die rij is goed (herkend via de toetscode, dus los van de indeling): het raam gaat aan en de toets licht op het schermtoetsenbord op in de kleur van de vinger. Een toets van een andere rij: de juiste rij licht even op, er gaat niets verloren. Alleen de eerste toets per ronde telt, zodat rammen niet helpt. Ronde 1 tot 3 in vaste volgorde (woonkamer, zolder, kelder), daarna willekeurig. Na 9 rondes branden alle ramen. Fien en Jef staan stil naast het huis; pas op het einde steken ze hun duim op. Geen tijd, geen punten."
     },
     {
       "type": "eindoefening",

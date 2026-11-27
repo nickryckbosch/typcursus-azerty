@@ -17,7 +17,7 @@ import { nieuweOefening, teltAlsTeken, typ, volgendTeken, type TypOefening } fro
 import { el } from "../weergave/dom";
 import { fien, jef, vinkje } from "../weergave/figuren";
 import { tekenTonen } from "../weergave/tekens";
-import { enterHint } from "../blokken/gedeeld";
+import { maakVoortgang, startVerborgen, toon } from "../blokken/oefenscherm";
 import beekPrent from "../beelden/beek.webp";
 
 const STENEN = 12;
@@ -29,22 +29,42 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
   let oef: TypOefening = nieuweOefening("");
   let tekens: string[] = [];
   let klaar = false;
-  let wacht = false;
   let hulpTimer: number | undefined;
   /** de afgewerkte beken: samen een poging voor de metingen per toets */
   const gedaan: TypOefening[] = [];
 
   const opdracht = blok.tekst ?? blok.titel;
   const rij = el("ol", { class: "stenen" });
-  const teller = el("p", { class: "teller" });
-  const einde = el("div", { class: "beek-einde", hidden: true });
+  const voortgang = maakVoortgang();
+  // Het einde staat er van bij het begin (onzichtbaar): Fien en Jef met hun duim
+  // omhoog, "Droge voeten!" en de Enter-regel. Het verschijnt alleen.
+  const [voor, na] = t("hint.enter").split("{toets}");
+  const einde = startVerborgen(
+    el(
+      "div",
+      { class: "beek-einde" },
+      el("div", { class: "figuren" }, fien("duim", 96), jef("duim", 96)),
+      el(
+        "div",
+        { class: "beek-einde-tekst" },
+        el("p", { class: "ballon grote-tekst" }, t("beek.klaar")),
+        el(
+          "div",
+          { class: "enter-rij" },
+          el("p", { class: "hint-enter" }, voor, el("span", { class: "toets-in-tekst" }, t("toets.enter")), na ?? ""),
+          el("button", { class: "knop knop-hoofd", type: "button", tabindex: "-1", onclick: () => klaar && ctx.volgende() }, t("knop.verder")),
+        ),
+      ),
+    ),
+  );
   const prent = el("img", { class: "beek-prent", src: beekPrent, alt: t("beek.prent"), draggable: "false" });
   ctx.podium.append(
     el(
       "section",
       { class: "kaart blok-beek" },
       el("div", { class: "beek-boven" }, el("p", { class: "opdracht" }, opdracht), prent, einde),
-      el("div", { class: "beek-onder" }, rij, teller),
+      el("div", { class: "beek-onder" }, rij),
+      voortgang.element,
     ),
   );
   ctx.zeg(opdracht);
@@ -61,10 +81,8 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
         );
       }),
     );
-    teller.textContent = `${t("beek.teller", { nummer: Math.min(nummer + 1, BEKEN), totaal: BEKEN })} · ${t("teller", {
-      nummer: Math.min(oef.positie + 1, tekens.length),
-      totaal: tekens.length,
-    })}`;
+    // De stenen tonen zelf hoe ver je bent; onderaan staan alleen drie bolletjes voor de beken.
+    voortgang.zetBolletjes(nummer, BEKEN);
   }
 
   /** Hulp altijd zichtbaar (standaard), of pas na een tijdje wachten (instelling). */
@@ -93,7 +111,7 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
         if (e.key === "Enter") ctx.volgende();
         return;
       }
-      if (wacht || !teltAlsTeken(e)) return;
+      if (!teltAlsTeken(e)) return;
       const { juist, klaar: overgestoken } = typ(oef, e.key, performance.now());
       ctx.toetsenbord.flits(e.code, juist);
       if (!juist) {
@@ -112,20 +130,16 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
       gedaan.push(oef);
       nummer++;
       if (nummer < BEKEN) {
-        wacht = true;
-        ctx.later(() => {
-          wacht = false;
-          nieuweBeek();
-        }, 900);
+        // Meteen een nieuwe beek: de volgende toets telt al voor de eerste steen.
+        nieuweBeek();
       } else {
         // Het einde: Fien en Jef steken hun duim op.
         klaar = true;
         ctx.bewaarPoging(gedaan);
-        einde.hidden = false;
-        einde.append(
-          el("div", { class: "figuren" }, fien("duim", 96), jef("duim", 96)),
-          el("div", { class: "beek-einde-tekst" }, el("p", { class: "ballon grote-tekst" }, t("beek.klaar")), enterHint(ctx)),
-        );
+        voortgang.zetBolletjes(BEKEN, BEKEN);
+        ctx.toetsenbord.toonEnter(true);
+        toon(einde);
+        einde.querySelector("button")?.removeAttribute("tabindex");
         ctx.zeg(t("beek.klaar"));
       }
     },

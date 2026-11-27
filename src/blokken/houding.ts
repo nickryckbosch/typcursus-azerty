@@ -1,37 +1,38 @@
 // Les 0, eindoefening "Klaar voor de start": Fien en Jef zeggen "Voeten plat,
 // rug recht!". Het kind drukt drie keer de spatiebalk in, telkens als Jef in
 // zijn handen klapt. Er wordt niets gemeten.
+//
+// De opdracht staat groot bovenaan, met de spatiebalk getekend in de zin. Het
+// signaal ("Klap!") staat op een vaste plek in het midden: het verschijnt en
+// verdwijnt alleen, er verschuift niets.
 
 import { t } from "../content";
 import type { EindoefeningBlok } from "../content/types";
 import { markeerAfgewerkt } from "../logica/voortgang";
 import { el } from "../weergave/dom";
-import { fien, jef } from "../weergave/figuren";
 import type { BlokContext, BlokInstantie } from "./context";
+import { oefenscherm, startVerborgen, toon } from "./oefenscherm";
 
 const AANTAL = 3;
 
 export function houding(_blok: EindoefeningBlok, ctx: BlokContext): BlokInstantie {
   let geklapt = false;
   let aantal = 0;
-  const klap = el("div", { class: "klap", "aria-hidden": "true" }, t("houding.klap"));
-  const tekst = el("p", { class: "grote-tekst" }, t("houding.zeg"));
-  const teller = el("p", { class: "teller" }, t("houding.teller", { aantal, totaal: AANTAL }));
-  ctx.podium.append(
-    el("div", { class: "blok blok-houding" }, el("div", { class: "figuren" }, fien("blij"), jef("blij"), klap), tekst, teller),
-  );
-  ctx.zeg(`${t("houding.zeg")} ${t("houding.uitleg")}`);
+  const scherm = oefenscherm(ctx, { figuren: "blij", klasse: "blok-houding" });
+  const klap = startVerborgen(el("div", { class: "klap", "aria-hidden": "true" }, t("houding.klap")));
+  scherm.veld.append(klap);
   ctx.handen.toon(["duim"]);
 
   function klapNu(): void {
     geklapt = true;
-    klap.classList.add("aan");
-    tekst.textContent = t("houding.druk");
+    toon(klap);
     ctx.toetsenbord.markeer(["Space"]);
   }
 
+  scherm.voortgang.zetBalk(0, AANTAL);
+  scherm.zetOpdracht(t("houding.zeg"));
   ctx.later(() => {
-    tekst.textContent = t("houding.uitleg");
+    scherm.zetOpdracht(t("houding.opdracht"));
     ctx.later(klapNu, 2500);
   }, 2000);
 
@@ -40,17 +41,16 @@ export function houding(_blok: EindoefeningBlok, ctx: BlokContext): BlokInstanti
       if (e.code !== "Space" || !geklapt) return;
       ctx.toetsenbord.flits("Space", true);
       geklapt = false;
-      klap.classList.remove("aan");
+      toon(klap, false);
       ctx.toetsenbord.markeer([]);
       aantal++;
-      teller.textContent = t("houding.teller", { aantal, totaal: AANTAL });
+      scherm.voortgang.zetBalk(aantal, AANTAL);
       if (aantal < AANTAL) {
-        tekst.textContent = t("houding.wacht");
         ctx.later(klapNu, 1200 + Math.random() * 1000);
       } else {
         markeerAfgewerkt(ctx.app.voortgang, ctx.les.id);
         ctx.app.bewaar();
-        tekst.textContent = t("houding.klaar");
+        scherm.zetOpdracht(t("houding.klaar"));
         ctx.later(() => ctx.volgende(), 1200);
       }
     },

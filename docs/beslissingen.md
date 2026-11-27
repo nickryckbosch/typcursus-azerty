@@ -177,10 +177,64 @@ De volledige uitleg staat in projectdocument 12 ("Metingen per toets") van het c
 - **Oplossing:**
   - Het toetsenbord en de handen krijgen een vast deel van de schermhoogte.
   - Alles in het middelste deel (tekst, Fien en Jef, het huis, de beek, de oefenregels) schaalt mee met de hoogte die overblijft. Daarvoor gebruiken we "container query units" (`cqh`) van CSS: 1cqh is 1% van de hoogte van het middelste deel. Elke maat heeft een onder- en een bovengrens.
-  - Waar niets te typen valt (afsluiter, aanmoediging), verdwijnen het toetsenbord en de handen.
-  - "Druk op Enter om verder te gaan" en de knop Verder staan op dezelfde regel.
+  - Waar niets te typen valt (afsluiter, vraag om verder te gaan), worden het toetsenbord en de handen onzichtbaar. Ze houden wel hun plaats (zie 12c).
+  - "Druk op Enter om verder te gaan" en de knop Verder staan rechts in de kaart, boven de Enter-toets (zie 12c).
 - **Getest** op 1366 x 768, 1366 x 657, 1280 x 600, 1280 x 560 en 1024 x 600, opnieuw na de nieuwe vormgeving (K19): in geen enkele stap van les 0 en les 1 moet er nog gescrold worden. Dat is nagekeken door beide lessen automatisch te doorlopen in Chrome, ook de melding "je toetsenbord staat niet goed" en extra oefenen. Niet nagekeken op een echte Chromebook.
 - **Tegen:** op een heel klein scherm worden de letters en figuren kleiner. De ondergrenzen zorgen dat ze leesbaar blijven.
+
+## 12c. Rustige schermen: vaste zones, niets verspringt
+
+**Steunt op:** eigen keuze, en vaststellingen van Nick bij het testen (27 november 2026). Sluit aan bij K16 in projectdocument 14.
+
+**Wat Nick zag:**
+- In les 0, "Duim op de spatiebalk", verscheen de kaart "spatie" pas als de lamp aanging, en de lamp sprong dan naar boven.
+- In "Klaar voor de start" was het scherm te druk. De opdracht viel weg in het geheel: zelfs als volwassene had Nick niet door dat hij op de spatiebalk moest drukken.
+- Op het eindscherm van "Licht aan in het huis" kwam een schuifbalk, en "Druk op Enter" en de knop Verder vielen half weg.
+
+**Waarom dit belangrijk is:** een kind dat leert typen, moet zijn aandacht bij de opdracht en de toetsen houden. Een element dat verspringt, trekt de blik weg. En een opdracht die niet opvalt, kan het kind niet uitvoeren.
+
+**De regel, voor elk oefenscherm, ook voor toekomstige oefeningen en spelletjes:**
+1. **Vaste zones in de witte kaart.** De opdracht staat bovenaan, Fien en Jef links, de prent of het signaal in het midden, "Druk op Enter" rechts (boven de Enter-toets van het toetsenbord), en de voortgang langs de onderrand. Onder de kaart staan de handen, het toetsenbord en de hulpregel. De code staat in `src/blokken/oefenscherm.ts`: een nieuw blok of spel roept `oefenscherm()` op en zet zijn inhoud in `veld`.
+2. **Wat later verschijnt, staat er van bij het begin.** Het neemt zijn ruimte al in. Tonen en verbergen gaat via zichtbaarheid (`startVerborgen()`, `toon()`), nooit door elementen toe te voegen of weg te halen. Dat geldt ook voor het toetsenbord: waar niets te typen valt, wordt het onzichtbaar, maar het houdt zijn plaats.
+3. **Fien en Jef, de lamp en de prent veranderen nooit van plaats**, ook niet als de opdracht langer of korter wordt. Elk figuurtje heeft een vak met een vaste maat: een andere houding verschijnt op dezelfde plek.
+4. **Verschijnen gaat met een korte, rustige overgang** van 180 ms. Vraagt het toestel om minder beweging (`prefers-reduced-motion`), dan gebeurt het meteen. Dit is de enige beweging naast de toets en de vinger die oplichten (stijlgids, deel 1).
+5. **De opdracht is het duidelijkste element van de kaart:** groot en vet, altijd op dezelfde plek. De toets die het kind moet indrukken, staat getekend in de zin. In de teksten schrijf je dat als `[spatie]` of `[A]`, en vet als `**zolder**`.
+6. **Een signaal op een vaste plek.** De lamp of "Klap!" staat in het midden, dicht bij de opdracht. Het verschijnt en verdwijnt alleen, en concurreert niet met de opdracht.
+7. **De oefenregels en "Over de beek" houden hun eigen indeling van K19** (tip links, kaart met regels; prent boven, stenen onder). Ook daar staat alles er van bij het begin: de volgende regels nemen altijd twee regels in, het einde van de beek verschijnt alleen, en de steen die aan de beurt is wordt groter zonder de andere stenen te verschuiven.
+
+**Hoe we het controleren:** een testscript (Playwright) doorloopt les 0 en les 1 op zes schermformaten, van 1920 x 950 tot 1280 x 500. Per stap meet het of er gescrold moet worden en of de zones, Fien en Jef, de lamp, het huis, de prent van de beek, de stenen of het toetsenbord van plaats of grootte veranderen.
+
+**Tegen:**
+- Een vaste zone laat soms lege ruimte: bij de afsluiter blijft de plaats van het toetsenbord leeg. Dat is bewust: liever een rustige lege plek dan iets dat verspringt.
+- "Druk op Enter" staat rechts in plaats van midden onderaan. Zo blijft er meer hoogte voor de prent, en staat de aanwijzing boven de toets waar het over gaat.
+
+## 12d. Een aanslag gaat nooit verloren
+
+**Steunt op:** eigen keuze, na een vaststelling van Nick: als hij snel typte op het moment dat een nieuwe letter verscheen, telde zijn toets niet.
+
+**Wat we vonden** (in de code, en bevestigd met een test):
+- "Over de beek" negeerde na elke beek 0,9 seconde alle toetsen.
+- "Licht aan in het huis" negeerde na een juiste toets 0,5 seconde alle toetsen.
+- "Zoek de toets" en de oefenregels wachtten op het einde 0,4 seconde voor het volgende blok kwam; wat het kind in die tijd typte, ging verloren.
+- Een knop in de bovenbalk met de focus (bijvoorbeeld "Voorlezen", na een muisklik) slokte een spatie of Enter op.
+- De regel tegen een ingedrukt gehouden toets was niet de oorzaak: die filtert alleen herhalingen van dezelfde ingedrukte toets.
+
+**De regel:** de volgende letter, regel, beek of ronde is geldig vanaf het moment dat de vorige juist getypt is. Overgangen zijn alleen visueel en blokkeren geen invoer.
+
+**Bewuste uitzonderingen:**
+- In "Licht aan" telt na een **foute** toets 0,9 seconde niets, zodat rammen niet helpt (afspraak uit document 11).
+- In "Duim op de spatiebalk" en "Klaar voor de start" telt de spatiebalk alleen als het signaal (lamp, "Klap!") er is: dat is de oefening zelf.
+
+**Test:** `tests/snel-typen.test.ts` stuurt juiste toetsen telkens 30 ms na elkaar, in "zoek de toets", de oefenregels (ook over de grens tussen twee regels), "Over de beek" (ook meteen na een beek) en "Licht aan", en kijkt na dat elke aanslag telt.
+
+**Twee keer dezelfde letter na elkaar:** in "zoek de toets" verschijnt de letter bij elke nieuwe kaart kort opnieuw (180 ms, alleen doorzichtigheid, geen beweging). Zo zie je ook bij twee keer dezelfde letter dat de vorige toets telde. Steunt op: eigen keuze, door Nick goedgekeurd.
+
+## 12e. De grote letter, de lamp, de voortgang en het huis
+
+- **De grote letter op haar kaart (zoek de toets).** De kaart heeft een vaste maat en elke letter staat op dezelfde basislijn, met ruimte boven voor stokletters, hoofdletters en accenten en onder voor staartletters (g, j, p, q, y). Het woord "spatie" staat kleiner in dezelfde kaart. Nagekeken met een schermafbeelding van alle 26 kleine letters, de hoofdletters, de leestekens en de accentletters. Steunt op: vaststelling van Nick (de j stond te laag en raakte de rand).
+- **De lamp van "Duim op de spatiebalk" (les 0).** Een getekende gloeilamp die van bij het begin (uit) in beeld staat en zichtbaar aangaat: uit donker `#3B4256`, aan lichtgeel `#FFEE99` met stralen errond, omtrek `#4A2E1A` zoals het huis. De stralen zorgen dat je het ook zonder kleur ziet. In de opdracht staat een klein beeldje van dezelfde lamp naast het woord "lamp". De opdracht is nu: "Leg je duimen op de spatiebalk. Gaat de lamp aan? Druk!" De kaart "spatie" die er vroeger bij verscheen, is weg. Waarom: de oude zin verwees naar een huis dat niet in beeld stond, en Nicks dochter van 11 vroeg "welk lampje?". Een doel, een voorwerp, een signaal. Steunt op: eigen keuze, te toetsen door een kind de oefening zonder uitleg te laten doen.
+- **De voortgang van een oefening (K20).** Op elk oefenscherm op dezelfde plek: een dunne, grijze balk langs de onderrand van de witte kaart, met rechts klein de teller ("10 van 12"). Geen vingerkleur. Bij "Over de beek" tonen de stenen zelf hoe ver je bent; daar staan alleen drie bolletjes voor de beken. Waarom: de opdracht en de prent zijn waar het kind moet kijken; de voortgang bekijkt het maar af en toe en hoort dus aan de rand. Steunt op: eigen keuze (K20 in projectdocument 14).
+- **Het huis van "Licht aan in het huis" (K21).** Een vectortekening in de code, volgens de referentie van Nick. Vier even hoge lagen van 66: het dak, de zolder, de woonkamer en de kelder (onder de grondlijn). Het dak is in de cursus de cijferrij, een vierde rij boven de zolder (projectdocumenten 08, 10 en 18): de zolder zit dus niet in het dak. In les 0 tot 5 blijft het dak leeg; de plaats voor een vierde rij ramen en het woord "dak" is al voorzien in de code. Negen gelijke ramen, omdat de rijen op het toetsenbord ook gelijk zijn. De woorden staan in een eigen kolom links, nooit over de tekening. De vakjes zijn groter dan in de referentie (150 x 40 in plaats van 100 x 28, letters van 24 in plaats van 17), omdat de woorden op een kleine Chromebook anders maar 11 tot 13 pixels groot waren; door Nick goedgekeurd. Er knippert niets (K16): het vakje van het woord dat aan de beurt is, wordt donker en blijft stil staan. Fien en Jef staan naast het huis, niet in een raam; de slotzin is daarom "Alle lichten branden! Goed gedaan!" (vroeger: "Fien en Jef zwaaien uit het raam"). Steunt op: eigen keuze. De raamkleuren (aan `#FFEE99`, uit `#3B4256`) steunen op onderzoek (methode): zie de stijlgids, deel 8.
 
 ## 13. Privacy en veiligheid
 
@@ -214,6 +268,7 @@ De volledige uitleg staat in projectdocument 12 ("Metingen per toets") van het c
 - **Tabbladen per deel:** de delen van het toetsenbordhuis staan in `src/content/nl-BE/delen.json` (nu alleen "1 · Woonkamer"). Een deel toevoegen is daar een stukje tekst (nummer, titel, lesnummers), geen code. Een test controleert dat elke les in precies een deel zit.
 - **Sterren** staan klein in de lesrij. **Voorlezen** en het **oefenbord** zijn kleine knoppen bovenaan; het oefenbord is nodig voor de klassikale start.
 - **Waarop steunt dit? Eigen keuze**, te toetsen in de klastest.
+- **Altijd volledig in beeld.** Op Nicks laptop (Windows, met taakbalk) werden de benen van Fien en Jef afgesneden. Het startscherm is nu precies zo hoog als het venster. Fien en Jef hebben links een vaste zone die meeschaalt met de hoogte: de tekstballon bovenaan, de figuurtjes eronder, nooit afgesneden. Alleen de lijst "Alle lessen" mag scrollen als ze langer wordt. Nagekeken van 1366 x 768 tot 1280 x 440.
 
 ## 18. Extra oefenen (K15)
 
