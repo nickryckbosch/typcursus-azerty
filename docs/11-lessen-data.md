@@ -1,5 +1,7 @@
 # Lessen 0 tot 5: data voor de app
 
+> **Let op: dit document is niet meer de bron.** De lesinhoud staat in `src/content/nl-BE/` (les-0.json tot les-5.json). Daar gebeuren de aanpassingen; dit document kan dus een verouderde kopie zijn. Zo zijn de spelbeschrijvingen (K16: geen beweging) en de tips en begroetingen alleen in de JSON-bestanden aangepast.
+
 De inhoud van les 0 tot 5 in JSON, om in te lezen door de prototypechat. Voor leerkrachten staat dezelfde inhoud leesbaar in document 10 (in het claude.ai-project). Dit document is gemaakt met een script vanuit dezelfde bron als document 10, dus beide zijn gelijk.
 
 **Controle:** 262 items gecontroleerd, 0 fouten. Elk item bevat alleen geleerde toetsen plus de spatie.
@@ -107,7 +109,7 @@ Extra afspraken uit document 10 die de app raken:
       "duurMinuten": 0.5,
       "toetsen": [" "],
       "aantal": 5,
-      "tekst": "Leg je duimen op de spatiebalk. Gaat de lamp aan? Druk!"
+      "tekst": "Leg je duimen op de spatiebalk. Druk erop als het lampje van het huis aangaat."
     },
     {
       "type": "spel",
@@ -117,7 +119,7 @@ Extra afspraken uit document 10 die de app raken:
       "rijen": ["zolder", "woonkamer", "kelder"],
       "rondes": 9,
       "tekens": [],
-      "beschrijving": "Op het scherm staat het huis met drie verdiepingen, alle ramen donker. Links van het huis staan de woorden zolder, woonkamer en kelder. Het woord van de verdieping die aan de beurt is, wordt donker en blijft stil staan (niets knippert), en Fien zegt: \"Druk op een toets van de zolder.\" Elke toets van die rij is goed (herkend via de toetscode, dus los van de indeling): het raam gaat aan en de toets licht op het schermtoetsenbord op in de kleur van de vinger. Een toets van een andere rij: de juiste rij licht even op, er gaat niets verloren. Alleen de eerste toets per ronde telt, zodat rammen niet helpt. Ronde 1 tot 3 in vaste volgorde (woonkamer, zolder, kelder), daarna willekeurig. Na 9 rondes branden alle ramen en zwaaien Fien en Jef uit het raam. Geen tijd, geen punten."
+      "beschrijving": "Op het scherm staat het huis met drie verdiepingen, alle ramen donker. Een verdieping knippert en Fien zegt: \"Druk op een toets van de zolder.\" Elke toets van die rij is goed (herkend via de toetscode, dus los van de indeling): het raam gaat aan en de toets licht op het schermtoetsenbord op in de kleur van de vinger. Een toets van een andere rij: de juiste rij licht even op, er gaat niets verloren. Alleen de eerste toets per ronde telt, zodat rammen niet helpt. Ronde 1 tot 3 in vaste volgorde (woonkamer, zolder, kelder), daarna willekeurig. Na 9 rondes branden alle ramen en zwaaien Fien en Jef uit het raam. Geen tijd, geen punten."
     },
     {
       "type": "eindoefening",

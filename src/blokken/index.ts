@@ -8,7 +8,6 @@ import { afsluiter } from "./afsluiter";
 import { eindoefening } from "./eindoefening";
 import { intro } from "./intro";
 import { reeks } from "./reeks";
-import { spelInOpbouw } from "./inopbouw";
 import { toetsenbordcheck } from "./toetsenbordcheck";
 import { zoekToets } from "./zoektoets";
 
@@ -22,10 +21,7 @@ const BLOKKEN: Partial<Record<Blok["type"], BlokFunctie<never>>> = {
 };
 
 export function blokFunctie(blok: Blok): BlokFunctie | undefined {
-  if (blok.type === "spel") {
-    const spel = SPELLEN[blok.spel] ?? (import.meta.env.DEV ? spelInOpbouw : undefined);
-    return spel as BlokFunctie | undefined;
-  }
+  if (blok.type === "spel") return SPELLEN[blok.spel] as BlokFunctie | undefined;
   return BLOKKEN[blok.type] as BlokFunctie | undefined;
 }
 

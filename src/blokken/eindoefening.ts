@@ -1,15 +1,17 @@
-// Eindoefening: bepaalt of de volgende les opengaat (minstens 90% juist).
+// Eindoefening: bepaalt of de volgende les opengaat (minstens 90% van de
+// posities meteen juist; ook voor de korte versie).
 // Na twee mislukte pogingen op rij komt de korte versie, met een aanmoediging
 // van Fien en Jef. In les 0 is het een houdingsoefening zonder meting.
 
 import { t } from "../content";
 import type { EindoefeningBlok } from "../content/types";
-import { nauwkeurigheid, woordenPerMinuut } from "../logica/typen";
+import { woordenPerMinuut } from "../logica/typen";
 import { DOEL_NAUWKEURIGHEID, moetKortZijn, registreerEindoefening } from "../logica/voortgang";
+import { el } from "../weergave/dom";
 import type { BlokFunctie, BlokInstantie } from "./context";
 import { houding } from "./houding";
 import { typRegels } from "./typregels";
-import { oefenscherm } from "./oefenscherm";
+import { enterHint, metFienEnJef } from "./gedeeld";
 
 export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
   if (blok.soort === "houding") return houding(blok, ctx);
@@ -22,12 +24,11 @@ export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
     ctx.podium.replaceChildren();
     ctx.toetsenbord.toonEnter(false);
     ctx.toonToetsenbord(true);
-    actief = typRegels(ctx, blok.titel, regels, blok.tekst ?? "", (oefeningen) => {
-      const aanslagen = oefeningen.flatMap((o) => o.aanslagen);
-      const nauwk = nauwkeurigheid(aanslagen);
+    actief = typRegels(ctx, regels, blok.tekst ?? "", (oefeningen) => {
+      // Nauwkeurigheid = posities meteen juist / posities (een fout telt een keer per positie).
+      const nauwk = ctx.bewaarPoging(oefeningen);
       const tekens = oefeningen.reduce((som, o) => som + o.doel.length, 0);
       const duur = oefeningen.reduce((som, o) => som + ((o.eindTijd ?? 0) - (o.startTijd ?? 0)), 0);
-      ctx.bewaarAanslagen(aanslagen);
       const { gehaald, sterren } = registreerEindoefening(
         ctx.app.voortgang,
         ctx.les.id,
@@ -38,16 +39,23 @@ export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
       ctx.app.bewaar();
       ctx.sessie.resultaat = { nauwkeurigheid: nauwk, gehaald, sterren, kort };
       ctx.volgende();
-    });
+    }, blok.tip);
   }
 
   if (!kort) {
     start();
   } else {
-    // Eerst een aanmoediging van Fien en Jef, dan de korte oefening.
-    const scherm = oefenscherm(ctx, { kop: blok.titel, figuren: "aanmoedigend" });
-    scherm.zetOpdracht(t("eind.aanmoediging"));
-    scherm.toonEnter(start);
+    // Eerst een aanmoediging, dan de korte oefening.
+    ctx.toonToetsenbord(false);
+    ctx.podium.append(
+      el(
+        "div",
+        { class: "blok blok-intro" },
+        metFienEnJef("aanmoedigend", el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, t("eind.aanmoediging")))),
+        enterHint(ctx, start),
+      ),
+    );
+    ctx.zeg(t("eind.aanmoediging"));
   }
 
   return {

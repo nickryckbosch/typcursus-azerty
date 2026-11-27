@@ -1,6 +1,7 @@
 {
   "id": 3,
   "titel": "Even naar de zolder",
+  "begroeting": "Hoi! Vandaag gaan we even naar de zolder, naar de e en de i.",
   "nieuweToetsen": [
     "e",
     "i"
@@ -91,7 +92,8 @@
         "de ik de ik ei ie",
         "ei ie ij ei ie ij",
         "die dik fee kei"
-      ]
+      ],
+      "tip": "Je middelvinger gaat naar de zolder en komt meteen terug."
     },
     {
       "type": "spel",
@@ -116,7 +118,7 @@
         "keek",
         "deed"
       ],
-      "beschrijving": "Jef bouwt een dijk langs de beek. Bovenaan het scherm hangt een steen met een woord erop. Het kind typt het woord, letter per letter; elke juiste letter maakt de steen een beetje groter. Is het woord af, dan rolt de steen naar zijn plaats in de dijk. Een foute letter: de steen schudt even en de juiste vinger licht op. Na 10 stenen (woorden willekeurig uit de lijst, elk woord hoogstens twee keer) is de dijk klaar en zwaaien Fien en Jef bovenop. Geen tijd, geen punten."
+      "beschrijving": "Bovenaan staat een vaste prent: Fien en Jef bij de dijk langs de beek. De prent verandert niet tijdens het spel. Onder de prent ligt een rij van 10 stenen. Op de steen die aan de beurt is, staat een woord; die steen is groter en heeft een blauwe rand. Het kind typt het woord, letter per letter; de getypte letters worden grijs. Is het woord af, dan staat de steen gewoon op zijn plaats, grijs met een vinkje, en is de volgende steen aan de beurt. Een foute letter: er beweegt niets, alleen de juiste toets en de juiste vinger lichten op. Na 10 stenen (woorden willekeurig uit de lijst, elk woord hoogstens twee keer) is de dijk klaar. Fien en Jef staan stil; pas op het einde steken ze hun duim op. Geen tijd, geen punten."
     },
     {
       "type": "reeks",
@@ -127,7 +129,8 @@
         "ik je jij die",
         "kei eik dek dijk",
         "kijk fee jef"
-      ]
+      ],
+      "tip": "Lees eerst het woord. Typ het dan letter per letter."
     },
     {
       "type": "eindoefening",
@@ -143,7 +146,8 @@
       "regelsKort": [
         "ei ik je die",
         "kijk dijk idee"
-      ]
+      ],
+      "tip": "Na de zolder altijd terug naar huis."
     },
     {
       "type": "afsluiter",

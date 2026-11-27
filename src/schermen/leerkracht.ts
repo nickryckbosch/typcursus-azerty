@@ -2,13 +2,14 @@
 // voortgang per les, probleemtoetsen, lesfiches en voortgang wissen.
 
 import type { App, Scherm } from "../app";
-import { t } from "../content";
-import { foutAandeel, gemiddeldeTijd } from "../logica/statistieken";
+import { t, type TekstSleutel } from "../content";
+import { soortFout } from "../logica/foutsoort";
+import { foutAandeel, meestVerkeerd, overzichtPerToets } from "../logica/metingen";
 import { wisVoortgang } from "../logica/opslag";
 import { nieuweVoortgang } from "../logica/voortgang";
 import { el } from "../weergave/dom";
 import { kop } from "../weergave/kop";
-import { tekenNaam } from "../weergave/tekens";
+import { tekenTonen } from "../weergave/tekens";
 
 function procent(x: number | null): string {
   return x === null ? "-" : `${Math.round(x * 100)}%`;
@@ -40,18 +41,27 @@ export function leerkrachtScherm(app: App, wortel: HTMLElement): Scherm {
     );
   });
 
-  const toetsRijen = Object.entries(v.toetsen)
-    .sort(([, a], [, b]) => foutAandeel(b) - foutAandeel(a))
+  // Metingen per toets (projectdocument 12). Alleen voor de leerkracht: het kind ziet dit nooit.
+  const toetsRijen = Object.entries(overzichtPerToets(v))
+    .sort(([, a], [, b]) => foutAandeel(b) - foutAandeel(a) || b.aantal - a.aantal)
     .map(([teken, s]) => {
-      const tijd = gemiddeldeTijd(s);
+      const vaakst = meestVerkeerd(s.verkeerd);
+      let verkeerd = "-";
+      if (vaakst) {
+        const soort = soortFout(teken, vaakst.toets);
+        verkeerd = t("leerkracht.verkeerd", { toets: tekenTonen(vaakst.toets), aantal: vaakst.aantal });
+        if (soort !== "ander") verkeerd += ` (${t(`leerkracht.fout.${soort}` as TekstSleutel)})`;
+      }
       return el(
         "tr",
         {},
-        el("td", {}, tekenNaam(teken)),
-        el("td", {}, String(s.aanslagen)),
+        el("td", {}, tekenTonen(teken)),
+        el("td", {}, String(s.aantal)),
         el("td", {}, String(s.fouten)),
         el("td", {}, procent(foutAandeel(s))),
-        el("td", {}, tijd === null ? "-" : `${Math.round(tijd)} ms`),
+        el("td", {}, verkeerd),
+        el("td", {}, s.tijdMediaanMs === null ? "-" : `${s.tijdMediaanMs} ms`),
+        el("td", {}, String(s.langePauzes)),
       );
     });
 
@@ -96,6 +106,21 @@ export function leerkrachtScherm(app: App, wortel: HTMLElement): Scherm {
     t(v.allesOpen ? "leerkracht.allesDicht" : "leerkracht.allesOpen"),
   );
 
+  // Hulp op het schermtoetsenbord: altijd zichtbaar (standaard, K17) of pas na een fout.
+  const hulpKnop = el(
+    "button",
+    {
+      class: "knop",
+      type: "button",
+      onclick: () => {
+        v.instellingen.hulpPasNaFout = !v.instellingen.hulpPasNaFout;
+        app.bewaar();
+        app.naarLeerkracht();
+      },
+    },
+    t(v.instellingen.hulpPasNaFout ? "leerkracht.hulpAltijdKnop" : "leerkracht.hulpNaFoutKnop"),
+  );
+
   const bevestig = el("input", { type: "text", id: "wis-bevestig", autocomplete: "off", class: "invoer" });
   const wisMelding = el("p", { "aria-live": "polite" });
   const wisKnop = el(
@@ -134,8 +159,19 @@ export function leerkrachtScherm(app: App, wortel: HTMLElement): Scherm {
         ), el("p", { class: "klein" }, t("leerkracht.snelheidUitleg"))),
         el("section", {}, el("h2", {}, t("leerkracht.toetsenTitel")), toetsRijen.length === 0
           ? el("p", {}, t("leerkracht.geenToetsen"))
-          : tabel([t("leerkracht.kolToets"), t("leerkracht.kolAanslagen"), t("leerkracht.kolFouten"), t("leerkracht.kolFoutPct"), t("leerkracht.kolTijd")], toetsRijen)),
+          : tabel(
+              [t("leerkracht.kolToets"), t("leerkracht.kolAanslagen"), t("leerkracht.kolFouten"), t("leerkracht.kolFoutPct"), t("leerkracht.kolVerkeerd"), t("leerkracht.kolTijd"), t("leerkracht.kolPauzes")],
+              toetsRijen,
+            ),
+          el("p", { class: "klein" }, t("leerkracht.toetsenUitleg"))),
         el("section", {}, el("h2", {}, t("leerkracht.fichesTitel")), ...fiches),
+        el(
+          "section",
+          {},
+          el("h2", {}, t("leerkracht.hulpTitel")),
+          el("p", {}, t(v.instellingen.hulpPasNaFout ? "leerkracht.hulpNaFout" : "leerkracht.hulpAltijd")),
+          hulpKnop,
+        ),
         el("section", {}, el("h2", {}, t("leerkracht.testTitel")), el("p", {}, t("leerkracht.testUitleg")), allesOpenKnop),
         el(
           "section",

@@ -1,10 +1,13 @@
 // Fien en Jef, uitgeknipt uit het modelblad (docs/beelden/fien-en-jef-modelblad.png)
 // met scripts/knip-figuren.py. Een nieuwe uitdrukking toevoegen: zet een zone in
 // dat script, voer het uit, en voeg de naam toe aan Uitdrukking.
+//
+// Fien en Jef staan altijd stil (docs/stijlgids.md, deel 1). Ze veranderen
+// alleen van houding bij de start (zwaai) en op het einde (duim of aanmoedigend).
 
 import { svg } from "./dom";
 
-export type Uitdrukking = "zwaai" | "blij" | "trots" | "nadenkend" | "aanmoedigend";
+export type Uitdrukking = "zwaai" | "duim" | "blij" | "trots" | "nadenkend" | "aanmoedigend";
 
 const BEELDEN = import.meta.glob("../beelden/*.png", { eager: true, import: "default" }) as Record<string, string>;
 
@@ -30,6 +33,30 @@ export function fien(uitdrukking: Uitdrukking = "zwaai", hoogte = standaardHoogt
 
 export function jef(uitdrukking: Uitdrukking = "zwaai", hoogte = standaardHoogte(uitdrukking)): HTMLImageElement {
   return figuur("jef", uitdrukking, hoogte);
+}
+
+/** Een van de twee, om af te wisselen (bv. per blok): even = Jef, oneven = Fien. */
+export function fienOfJef(nummer: number, uitdrukking: Uitdrukking, hoogte?: number): HTMLImageElement {
+  return nummer % 2 === 0 ? jef(uitdrukking, hoogte) : fien(uitdrukking, hoogte);
+}
+
+/** Een vinkje ("klaar"). */
+export function vinkje(grootte = 20): SVGSVGElement {
+  return svg(
+    "svg",
+    { class: "vinkje", viewBox: "0 0 24 24", width: grootte, height: grootte, "aria-hidden": "true" },
+    svg("path", { d: "M5 12l5 5L20 7" }),
+  );
+}
+
+/** Een slotje ("op slot"). */
+export function slotje(grootte = 18): SVGSVGElement {
+  return svg(
+    "svg",
+    { class: "slot-icoon", viewBox: "0 0 24 24", width: grootte, height: grootte, "aria-hidden": "true" },
+    svg("rect", { x: 5, y: 11, width: 14, height: 10, rx: 2 }),
+    svg("path", { d: "M8 11V7a4 4 0 0 1 8 0v4" }),
+  );
 }
 
 export function sterIcoon(gevuld: boolean, grootte = 56): SVGSVGElement {

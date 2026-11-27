@@ -1,6 +1,7 @@
 {
   "id": 5,
   "titel": "Fien en Jef gaan op bezoek",
+  "begroeting": "Hoi! Vandaag gaan we op bezoek bij de g en de h.",
   "nieuweToetsen": [
     "g",
     "h"
@@ -95,7 +96,8 @@
         "fg jh gf hj fg jh",
         "gh hg ghg hgh gh hg",
         "hij heg hek geel"
-      ]
+      ],
+      "tip": "Je wijsvinger gaat opzij en komt terug naar het bultje."
     },
     {
       "type": "spel",
@@ -119,7 +121,7 @@
         "lig",
         "geef"
       ],
-      "beschrijving": "Een egel staat aan het begin van een tuinpad. Zijn huisje zit onder de heg aan de andere kant van de tuin. Het pad bestaat uit 12 tegels met elk een woord. Het kind typt het woord op de volgende tegel; bij elke juiste letter zet de egel een stapje. Een foute letter: de egel blijft staan en snuffelt even, de juiste vinger licht op. Na 12 tegels kruipt de egel in zijn huisje en zeggen Fien en Jef: \"Slaapwel, egel!\" Woorden willekeurig uit de lijst, elk woord hoogstens twee keer. Geen tijd, geen punten."
+      "beschrijving": "Bovenaan staat een vaste prent: Fien en Jef bij een egel in de tuin, met zijn huisje onder de heg. De prent verandert niet tijdens het spel. Onder de prent ligt een pad van 12 tegels. Op de tegel die aan de beurt is, staat een woord; die tegel is groter en heeft een blauwe rand. Het kind typt het woord, letter per letter; de getypte letters worden grijs. Is het woord af, dan wordt de tegel grijs met een vinkje en is de volgende aan de beurt. Een foute letter: er beweegt niets, alleen de juiste toets en de juiste vinger lichten op. Woorden willekeurig uit de lijst, elk woord hoogstens twee keer. Fien en Jef staan stil; pas na 12 tegels steken ze hun duim op en zeggen ze: \"Slaapwel, egel!\" Geen tijd, geen punten."
     },
     {
       "type": "reeks",
@@ -130,7 +132,8 @@
         "heel held hiel hik",
         "leeg geld deeg gids",
         "hij hield hesje"
-      ]
+      ],
+      "tip": "Voel je de bultjes nog? Daar is thuis."
     },
     {
       "type": "eindoefening",
@@ -147,7 +150,8 @@
       "regelsKort": [
         "geel leeg egel",
         "jef is de held"
-      ]
+      ],
+      "tip": "Je kent al tien letters. Toon wat je kan!"
     },
     {
       "type": "afsluiter",
