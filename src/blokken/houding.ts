@@ -1,5 +1,5 @@
 // Les 0, eindoefening "Klaar voor de start": Fien en Jef zeggen "Voeten plat,
-// rug recht!". Daarna drukt het kind drie keer de spatiebalk in, telkens als de
+// rug recht, schouders los!". Daarna drukt het kind drie keer de spatiebalk in, telkens als de
 // lamp aangaat. Er wordt niets gemeten.
 //
 // Dezelfde lamp als in "Duim op de spatiebalk": een enkel signaal voor "druk
@@ -19,7 +19,7 @@ export function houding(_blok: EindoefeningBlok, ctx: BlokContext): BlokInstanti
   let aan = false;
   let gestart = false;
   let aantal = 0;
-  // "Voeten plat, rug recht!" staat in de tekstballon van Fien en Jef, de opdracht
+  // "Voeten plat, rug recht, schouders los!" staat in de tekstballon van Fien en Jef, de opdracht
   // staat meteen bovenaan. Vroeger wisselde de opdracht na 2 seconden van tekst.
   const scherm = oefenscherm(ctx, { figuren: "blij", klasse: "blok-houding", doel: t("houding.zeg") });
   const lamp = lampMetWachtzin(t("lamp.wacht"), () => scherm.element, scherm.enter);

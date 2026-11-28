@@ -357,6 +357,16 @@ Nick testte op 28 november op een groot scherm, deels met een kind. Dit zijn de 
 - **"Over de beek", slotzin: "Het is je gelukt! We zijn thuis."** in plaats van "Droge voeten! We zijn thuis." Waarom: keuze van Nick; de zin zegt rechtstreeks dat het kind het gedaan heeft.
 - **De intro van les 0 in alinea's.** Een witregel in een introtekst (`\n\n` in de lesdata) wordt een nieuwe alinea in de tekstballon, met een halve regel wit ertussen. Waarom: de tekst was een blok van vijf zinnen; in drie alinea's (wie we zijn, de rijen, wat je vandaag leert) leest hij rustiger.
 
+## 12n. Nieuwe startzin (28 november 2026)
+
+- **Keuze:** de startzin is "Voeten plat, rug recht, schouders los, vingers thuis!". Les 0 leert "Voeten plat, rug recht, schouders los."; vanaf les 1 komt "vingers thuis!" erbij. Beslist door Nick.
+- **Waarom:** de oude zin ("Voeten plat, rug recht, Fien en Jef thuis!") sprak niet aan, en "Fien en Jef thuis" klonk raar bij het hardop zeggen: twee stukjes over je lichaam, en dan plots twee figuurtjes zonder werkwoord. De nieuwe zin heeft vier keer hetzelfde patroon (een lichaamsdeel en hoe het moet) en loopt van onder naar boven door het lichaam. De volledige redenering, met de varianten die we niet kozen, staat in projectdocument 08 (7.4).
+- **Wat veranderde:** `startzin` en `houding.zeg` in teksten.json; in les 0 het doel, de klassikale stap, de beschrijving van "Klaar voor de start" en de tip; in les 1 de stap "De hele startzin" en de tip ("Vingers thuis" voor de startpositie); in les 2 de stap "Startzin en opwarmen"; de stijlgids (wat "thuis" betekent) en de testlijst.
+- **Wat bleef:** "Dan zijn Fien en Jef thuis" (intro van les 1) en "Fien en Jef blijven thuis" (les 2 tot 4). Die zinnen leggen uit wat "thuis" is: de wijsvingers op de bultjes.
+- **Nog niet aangepast:** de afdrukbare houdingskaart op het ontwerpcanvas, waar de startzin bovenaan staat (op de prent zelf staat geen tekst), en de bewegingspauze, die nog niet in de lesdata zit (13c in de takenlijst). docs/08 en docs/11 in deze map zijn oude kopies; de projectdocumenten zijn de actuele versie.
+- **Waarop steunt dit? Eigen keuze**, na het hardop proberen door Nick. Nog te toetsen bij een kind van 9 of 10 jaar en in de klastest.
+
+
 ## 13. Privacy en veiligheid
 
 - Geen externe bronnen: geen CDN, geen analytics, geen Google Fonts.

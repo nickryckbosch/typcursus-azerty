@@ -20,7 +20,7 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 
 ## Startscherm
 
-- [ ] Bovenaan staat de titel, rechts de startzin "Voeten plat, rug recht, Fien en Jef thuis!".
+- [ ] Bovenaan staat de titel, rechts de startzin "Voeten plat, rug recht, schouders los, vingers thuis!".
 - [ ] Links staan Fien en Jef, stil en zwaaiend, met een tekstballon (met een staartje naar de figuurtjes).
 - [ ] De kaart "Verder waar je was" toont les 0, met de knop "Start de les". Enter start de les meteen.
 - [ ] Onder "Alle lessen" staat het tabblad "1 · Woonkamer". Les 0 is "nu aan de beurt" (blauwe stip), les 1 staat op slot ("Na les 0"), les 2 tot 5 staan op "Komt binnenkort".
