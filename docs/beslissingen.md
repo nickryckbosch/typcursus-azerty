@@ -432,9 +432,24 @@ Beslist door Nick; de volledige redenering staat in projectdocument 25 (N1 tot N
 - **Slogan "Klaar? Tokkelen maar!":** sluit de startzin af. Op het startscherm staat hij op een tweede regel onder de startzin (tekst `slogan`). Op het eerste scherm van elke les (blok 0, niet bij extra oefenen) heet de knop "Tokkelen maar!" (tekst `knop.tokkelen`, soort `"les"` in `toonEnter`). Alle andere knoppen blijven Verder of Start. Waarom: de startzin somde vier dingen op zonder slot; de slogan is vraag en antwoord (de leerkracht zegt "Klaar?", de klas antwoordt) en rijmt op de naam. Alleen bij het begin van een les: anders verliest de zin zijn kracht, en een woord betekent altijd hetzelfde (K26).
 - **Lesdata:** de klassikale start van les 1 en les 2 noemt de vraag en het antwoord. Les 0 leert de startzin nog zonder "vingers thuis" en zonder slogan; de knop op het eerste scherm heet daar wel al "Tokkelen maar!".
 - **Bovenbalk op een smal scherm:** de knoppen staan nu altijd rechts (`grid-column: 3`), ook als de startzin wegvalt onder 1180 px. Vroeger schoven ze dan naar het midden.
-- **Niet veranderd:** de schermindeling (K20), de grote Fien en Jef op het startscherm (zij komen uit het blad met zes houdingen; het logo gebruikt de slankere figuren van de personagekaart, zie 12o).
+- **Niet veranderd:** de schermindeling (K20). De grote Fien en Jef op het startscherm kwamen toen nog uit het blad met zes houdingen; sinds 12r komen ze uit de nieuwe reeks.
 - **Tegen:** het logo is een rasterprent en wordt in de bovenbalk klein getoond; de figuren in het logo en de grote figuren eronder zijn niet uit dezelfde reeks prenten.
 - **Waarop steunt dit? Eigen keuze** (het oordeel van Nick). Te toetsen in de klastest: antwoordt de klas vanzelf op "Klaar?", en denkt niemand bij het logo aan kinderopvang?
+
+
+## 12r. Fien en Jef uit twaalf losse prenten (28 november 2026)
+
+- **Keuze:** de figuren in de app komen nu uit twaalf losse prenten (`docs/beelden/figuren/`, per kind zes houdingen), door Nick aangeleverd als de nieuwe reeks. Ze vervangen de prenten die uit het blad met zes houdingen geknipt waren (12o). De houdingen en hun namen zijn dezelfde; de indeling van de schermen is niet veranderd.
+- **Waarom:** het logo van Tokkelaar toont de slankere, oudere Fien en Jef (12q). Met deze reeks staan er op het startscherm geen twee soorten figuren meer. De losse prenten zijn ook veel groter (1024 x 1536 per figuur, tegenover ongeveer 150 x 330 op het blad), dus scherper.
+- **Hoe (`scripts/maak-figuren.py`, vervangt `scripts/knip-figuren.py`):**
+  - de bronprenten zijn al doorzichtig; het script snijdt ze alleen bij tot op de figuur;
+  - elke houding krijgt dezelfde lichaamslengte en dezelfde voetlijn als de andere houdingen van hetzelfde kind, zodat er niets verspringt als een houding wisselt (K20);
+  - Fien is iets kleiner dan Jef, in dezelfde verhouding als in de vorige reeks (350 op 360). De bronprenten zijn apart gemaakt en leggen die verhouding niet vast;
+  - "zwaai" is de hele figuur; de vijf andere houdingen zijn op de helft afgesneden (ter hoogte van de zak van de trui), zoals voordien;
+  - de prenten zijn dubbel zo groot als voordien (720 en 600 pixels hoog in plaats van 360 en 300). Waarom: sinds het scherm meeschaalt als een dia (12p) werden de kleine prenten op een groot venster of op het bord wazig. Samen wegen de twaalf prenten ongeveer 330 kB (voordien ongeveer 170 kB).
+- **"Over de beek":** de strook rekende met de breedte van de oude zwaaiprenten. Die staat nu als twee constanten bovenaan (`FIEN_BREEDTE`, `JEF_BREEDTE` in `src/spellen/beek-strook.ts`); pas ze aan als de prenten veranderen.
+- **Tegen:** de bronprenten zijn twaalf aparte tekeningen, dus kleine verschillen tussen houdingen (lijndikte, tint) zijn mogelijk. De pagina laadt ongeveer 160 kB meer.
+- **Waarop steunt dit? Eigen keuze** (het oordeel van Nick), te toetsen in de klastest: spreekt de stijl kinderen aan?
 
 
 ## 13. Privacy en veiligheid

@@ -131,7 +131,7 @@ Waarop steunt dit? **Eigen keuze** (startscherm per deel, een kaart "Verder waar
 ## 7. Prenten
 
 - **Tekenstijl: klare lijn (stripstijl).** Dunne, even dikke zwarte omtrek, vlakke kleuren zonder verloop, zachte kleuren, een creme achtergrond. Ogen met wit, een iris met een lichtpuntje en wenkbrauwen, zodat de figuren levendig kijken.
-- Fien en Jef komen uit het modelblad (`docs/beelden/fien-en-jef-modelblad.png`): twee rijen van vijf houdingen. De losse prenten staan in `src/beelden/` en worden geknipt met `scripts/knip-figuren.py`.
+- Fien en Jef komen uit twaalf losse prenten in `docs/beelden/figuren/`: per kind zes houdingen (zwaai, duim, blij, trots, aanmoedigend, nadenkend), elk een hele figuur op een doorzichtige achtergrond. De prenten voor de app staan in `src/beelden/` en worden gemaakt met `scripts/maak-figuren.py`. De oudere bladen (`fien-en-jef-modelblad.png`, `fien-en-jef-zes-houdingen.png`) blijven als geschiedenis in `docs/beelden/`.
 - De andere prenten in dezelfde stijl (welkomprent van het dorp, houdingskaart, de spelprenten voor beek, overgooien, dijk, slee en egel) staan in `docs/beelden/prenten/`. Ze worden nu niet in de app gebruikt: in een spel tekent de app de strook zelf (deel 11).
 - Een spelprent blijft volledig in beeld: liever een kleinere, gecentreerde prent met afgeronde hoeken dan een bijgesneden prent.
 - "Over de beek" gebruikt de beekprent niet meer. De app tekent de strook zelf, met dezelfde onderdelen als de prent (de beek, het huis met de puntgevel, de knotwilgen, de haag). De strook is in lagen gebouwd, zodat de achtergrond later een prent kan worden (deel 11).

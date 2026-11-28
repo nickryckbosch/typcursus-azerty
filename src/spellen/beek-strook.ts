@@ -126,13 +126,18 @@ function steen(x: number, y: number, toestand: "gelegd" | "nu" | "later"): SVGEl
   );
 }
 
+// Breedte gedeeld door hoogte van de zwaaiprenten (scripts/maak-figuren.py):
+// pas ze aan als de prenten veranderen.
+const FIEN_BREEDTE = 271 / 720;
+const JEF_BREEDTE = 291 / 720;
+
 /**
  * Het midden tussen Fien en Jef, als deel van de breedte van de strook: daar
  * wijst het staartje van de tekstballon naar (sjabloon.ts).
  */
 function middenVan([xFien, xJef]: number[]): number {
   const links = xFien;
-  const rechts = xJef + FIGUUR_HOOGTE * (140 / 360);
+  const rechts = xJef + FIGUUR_HOOGTE * JEF_BREEDTE;
   return (links + rechts) / 2 / BREEDTE;
 }
 export const BEEK_FIGUREN = { start: middenVan(PLAATS_START), einde: middenVan(PLAATS_THUIS) };
@@ -157,8 +162,8 @@ export function beekStrook(aantal: number, perRij: number): BeekStrook {
       // een schaduw onder de voeten, zoals op de prenten
       svg("ellipse", { cx: xFien + 26, cy: FIGUUR_VOETEN - 2, rx: 27, ry: 4.5, class: "beek-schaduw" }),
       svg("ellipse", { cx: xJef + 24, cy: FIGUUR_VOETEN - 2, rx: 26, ry: 4.5, class: "beek-schaduw" }),
-      svg("image", { href: fienZwaai, x: xFien, y, height: FIGUUR_HOOGTE, width: FIGUUR_HOOGTE * (151 / 360) }),
-      svg("image", { href: jefZwaai, x: xJef, y, height: FIGUUR_HOOGTE, width: FIGUUR_HOOGTE * (140 / 360) }),
+      svg("image", { href: fienZwaai, x: xFien, y, height: FIGUUR_HOOGTE, width: FIGUUR_HOOGTE * FIEN_BREEDTE }),
+      svg("image", { href: jefZwaai, x: xJef, y, height: FIGUUR_HOOGTE, width: FIGUUR_HOOGTE * JEF_BREEDTE }),
     );
   }
 
