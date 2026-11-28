@@ -68,7 +68,10 @@ Waarop steunt dit? **Eigen keuze** (een rustige, warme achtergrond met donkere t
 ## 3. Lettertypes
 
 - **Andika**: alles wat kinderen lezen en typen (oefenregels, letters op toetsen en stenen).
-- **Nunito**: koppen, knoppen en korte tekst van de app.
+- **Andika, gewone dikte (400)**: lopende tekst, dus alles in een tekstballon en de zinnen van een intro.
+- **Andika, vet (700)**: de opdracht bovenaan, "Vandaag leer je ...", en korte meldingen zoals "Wacht op de lamp.". Nooit dikker dan 700.
+- **Nunito**: koppen, knoppen, de bovenbalk en korte labels van de app.
+- Waarom: bijna alle tekst stond in Nunito 700 en de opdracht in 800. Nick vond dat "heel vet en druk" (28 november 2026). Vet is voor wat moet opvallen, niet voor alles.
 - De lettertypes zitten in de repository (`src/lettertypes/`), alleen de Latijnse tekens. Geen Google Fonts, geen CDN. Beide vallen onder de SIL Open Font License; de licentieteksten staan in dezelfde map.
 - De huidige oefenregel is ongeveer 48 px groot.
 
