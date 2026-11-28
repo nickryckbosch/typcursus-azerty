@@ -67,6 +67,33 @@ describe("lesinhoud", () => {
     }
   });
 
+  // Een intro heeft een tekst (in een tekstballon), of de velden van de intro
+  // in stukken: tekstBoven, fien, jef en tekstOnder (docs/stijlgids.md, deel 10).
+  it("heeft in elke les een intro met een tekst of met volledige stukken", () => {
+    for (const les of LESSEN) {
+      const intros = les.online.filter((b) => b.type === "intro");
+      expect(intros.length, `les ${les.id}`).toBeGreaterThan(0);
+      for (const blok of intros) {
+        const waar = `les ${les.id}: ${blok.titel}`;
+        const stukken = [blok.tekstBoven, blok.fien, blok.jef, blok.tekstOnder];
+        if (stukken.every((x) => x === undefined)) {
+          expect(blok.tekst?.trim(), `${waar}: geen tekst`).toBeTruthy();
+          continue;
+        }
+        // in stukken: Fien en Jef zeggen elk iets, en er is geen tweede tekst ernaast
+        expect(blok.fien?.trim(), `${waar}: fien ontbreekt`).toBeTruthy();
+        expect(blok.jef?.trim(), `${waar}: jef ontbreekt`).toBeTruthy();
+        expect(blok.tekst, `${waar}: tekst en stukken samen`).toBeUndefined();
+        expect(Array.isArray(blok.tekstBoven) && blok.tekstBoven.length, `${waar}: tekstBoven`).toBeTruthy();
+        expect(blok.tekstBoven!.length, `${waar}: hoogstens twee regels bovenaan`).toBeLessThanOrEqual(2);
+        for (const zin of blok.tekstBoven!) expect(zin.trim(), `${waar}: lege regel in tekstBoven`).toBeTruthy();
+        expect(blok.tekstOnder?.trim(), `${waar}: tekstOnder`).toBeTruthy();
+        // een tekstballon naast een figuur is smal: een korte zin
+        for (const zin of [blok.fien!, blok.jef!]) expect(zin.length, `${waar}: "${zin}" is te lang voor een tekstballon`).toBeLessThanOrEqual(60);
+      }
+    }
+  });
+
   it("heeft een eindoefening met doel 90% in les 1 tot 5", () => {
     for (const les of LESSEN.filter((l) => l.id > 0)) {
       const eind = les.online.find((b) => b.type === "eindoefening");

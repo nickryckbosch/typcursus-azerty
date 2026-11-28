@@ -20,8 +20,8 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 
 ## Startscherm
 
-- [ ] Bovenaan staat de titel, rechts de startzin "Voeten plat, rug recht, schouders los, vingers thuis!".
-- [ ] Links staan Fien en Jef, stil en zwaaiend, met een tekstballon (met een staartje naar de figuurtjes).
+- [ ] Bovenaan staat links het huisje met de naam Tokkeldorp, in het midden de startzin "Voeten plat, rug recht, schouders los, vingers thuis!", rechts de knoppen. Oogt de bovenbalk aantrekkelijk en rustig?
+- [ ] Links staan Fien en Jef, stil en zwaaiend, met hun tekstballon er vlak boven (met een staartje naar de figuurtjes), ook op een groot scherm.
 - [ ] De kaart "Verder waar je was" toont les 0, met de knop "Start de les". Enter start de les meteen.
 - [ ] Onder "Alle lessen" staat het tabblad "1 · Woonkamer". Les 0 is "nu aan de beurt" (blauwe stip), les 1 staat op slot ("Na les 0"), les 2 tot 5 staan op "Komt binnenkort".
 - [ ] Zet voorlezen aan met de kleine knop bovenaan. Hoor je een Vlaamse of Nederlandse stem in de les? Klinkt ze goed genoeg voor de klas?
@@ -42,23 +42,26 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 - [ ] **Licht aan in het huis:** wordt het woord van de juiste verdieping donker (zonder te knipperen)? Zijn de woorden links van het huis goed leesbaar? Licht bij een verkeerde rij de juiste rij op het toetsenbord op? Branden na 9 rondes alle ramen?
 - [ ] **Eerst lezen, dan starten:** blijft bij "Duim op de spatiebalk" en "Klaar voor de start" de lamp uit tot je op Start (of Enter) drukt? Heeft een kind genoeg tijd om de opdracht te lezen? Zegt een spatie voor de start "Druk eerst op Start."?
 - [ ] **Licht aan, doelzin:** staat boven Fien en Jef "Het wordt donker. Doe jij de lichten aan? Elke goede toets laat een raam branden."? Kan iemand zonder uitleg zeggen wat hij moet doen, en waar hij naartoe werkt?
-- [ ] **Over de beek, doelzin en opdracht:** staat de opdracht bovenaan, even groot als op de andere schermen, en de doelzin links in een tekstballon boven Fien en Jef? Kan iemand zonder uitleg zeggen wat hij moet doen, en waar hij naartoe werkt?
+- [ ] **Over de beek, doelzin en opdracht:** staat de opdracht bovenaan, even groot als op de andere schermen, en de doelzin in een tekstballon direct boven Fien en Jef in de strook, met het staartje naar hen? Kan iemand zonder uitleg zeggen wat hij moet doen, en waar hij naartoe werkt?
 - [ ] **Oefenbord:** staat elke letter netjes in de kaart, ook de p, g en j, zonder de onderrand te raken? Houdt de kaart dezelfde maat bij "spatie"?
 - [ ] **Licht aan, hulp:** licht in de eerste drie rondes de juiste rij op het toetsenbord op, met dezelfde rand rond het woord in het huis? Zegt de opdracht "de middelste rij"? Verschijnt de hulp later alleen na een fout of na even wachten?
 - [ ] **Klaar voor de start:** is meteen duidelijk dat je op de spatiebalk moet drukken als de lamp aangaat? Telt de spatiebalk telkens mee (3 keer)?
 - [ ] **Te vroeg drukken** bij beide lampoefeningen: verschijnt "Wacht op de lamp." onder de lamp, zonder dat er iets verspringt? Verdwijnt de zin als de lamp aangaat?
-- [ ] **Intro van les 0:** staat het huis naast de tekst, met alle ramen uit?
-- [ ] Op het einde: steken Fien en Jef hun duim op, en kan je met de knop meteen naar les 1?
+- [ ] **Intro van les 0:** staat het huis naast de tekst, met alle ramen uit? Staan de woorden zolder, woonkamer en kelder in de toets links van elke rij op het schermtoetsenbord, en zijn ze leesbaar? Zijn ze weg in de volgende stap?
+- [ ] **Toetsenbordcheck, indeling:** staat Fien met de duim omhoog groot in het midden, met "In orde! ..." in een tekstballon boven haar en de knop Verder eronder?
+- [ ] **Licht aan, groep:** staan Fien en Jef met hun tekstballon vlak naast het huis? Is de blauwe rand rond het woord (bv. "woonkamer") overal volledig te zien? Stopt de blauwe rand op het toetsenbord voor de Entertoets?
+- [ ] **Licht aan, einde:** staat "Alle lichten branden! Goed gedaan!" in de tekstballon van Fien en Jef, en vindt het kind de knop Verder bovenaan (op de plaats van de opdracht)?
+- [ ] Op het einde: staan Fien en Jef groot in het midden met hun duim omhoog, hun zin in een tekstballon erboven en de knoppen even breed eronder? Kan je met de knop meteen naar les 1?
 
 ## Les 1
 
-- [ ] **Intro:** lichten de f en de j en beide wijsvingers op?
+- [ ] **Intro:** lichten de f en de j en beide wijsvingers op? Staan er bovenaan twee zinnen, in het midden Fien en Jef met elk een eigen tekstballon, en "Vandaag leer je de f en de j." boven de knop Verder?
 - [ ] **Zoek Fien, zoek Jef:** licht bij elke letter de juiste toets en de juiste vinger op?
 - [ ] **Oefenregels:** links staat een stilstaand figuurtje met een korte tip in een tekstballon. In de witte kaart: de opdracht, de huidige regel groot, de volgende regels eronder. Het volgende teken is gemarkeerd in de kleur van de vinger.
 - [ ] Is de toets die moet komen al zichtbaar voor je typt (hulp altijd zichtbaar)?
 - [ ] Typ expres een fout. Blijft de cursor staan, en lichten de juiste toets en vinger even sterker op, zonder dat er iets schudt?
 - [ ] Na een regel: staat de afgewerkte regel grijs met een vinkje boven de nieuwe regel?
-- [ ] **Over de beek (spelsjabloon):** staat de regel groot in het midden, zoals bij de oefenregels? Ligt er bij elke goede toets een stapsteen bij in de beek onderaan, en heeft de plaats van de volgende steen een donkere rand? Krijgt de letter bij een foute toets een stippelrand, zonder dat er iets schudt? Blijft alles op zijn plaats? Staan Fien en Jef na drie rijen stenen bij hun huis, met "Het is je gelukt! We zijn thuis." en de knop Verder?
+- [ ] **Over de beek (spelsjabloon):** staat de regel groot in het midden, zoals bij de oefenregels? Ligt er bij elke goede toets een stapsteen bij in de beek onderaan, en heeft de plaats van de volgende steen een donkere rand? Krijgt de letter bij een foute toets een stippelrand, zonder dat er iets schudt? Blijft alles op zijn plaats? Staan Fien en Jef na drie rijen stenen bij hun huis, met "Het is je gelukt! We zijn thuis." in een tekstballon boven hen, en de knop Verder in het midden?
 - [ ] **Over de beek, saai of leuk:** wat zegt het kind over het spel? Ziet het een verschil met de oefenregels?
 - [ ] **Eindoefening, met veel fouten:** 0 sterren, Fien en Jef moedigen aan, en de knop "Probeer de eindoefening opnieuw".
 - [ ] **Nog een keer met veel fouten:** daarna komt een aanmoediging van Fien en Jef, en is de eindoefening korter (1 regel).
@@ -70,10 +73,18 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 - [ ] Doe les 1 tot het einde, met veel fouten in de eindoefening (geen ster). Op het einde staat de knop "Extra oefenen". Op het startscherm blijft les 2 dicht, maar staat "Extra oefenen bij les 1" in de kaart en "Extra oefenen" in de rij van les 1.
 - [ ] Start extra oefenen: bovenaan staat "Les 1 · Extra oefenen". Je krijgt 4 regels van ongeveer 15 tot 25 tekens, met alleen f, j en de spatie.
 - [ ] Doe het nog eens ("Nog een keer extra oefenen"): zijn het andere regels?
-- [ ] Na de 4 regels: een korte afsluiter van Fien en Jef, zonder sterren.
+- [ ] Na de 4 regels: een korte afsluiter van Fien en Jef, zonder sterren: groot in het midden, met twee even brede knoppen.
 - [ ] Ga terug naar het startscherm: de sterren en het slot van les 2 zijn niet veranderd.
 - [ ] Leerkrachtscherm: is het aantal bij "Toetsen" gestegen na extra oefenen?
 - [ ] "Extra oefenen" staat alleen bij een les die je tot het einde gedaan hebt. (Les 2 tot 5 staan nog op "Komt binnenkort".)
+
+## Schalen als een dia (nieuw)
+
+- [ ] **Chromebook:** ziet alles eruit zoals voor het schalen (niets groter of kleiner dan verwacht), ook met de adresbalk en de tabbladen in beeld?
+- [ ] **Chromebook, volledig scherm (de toets met het vierkantje):** vult de app het scherm, zonder schuifbalk?
+- [ ] **Groot scherm (thuis of digibord):** is alles hetzelfde als op de Chromebook, alleen groter? Blijft er links en rechts (of boven en onder) alleen achtergrondkleur over?
+- [ ] Werken de muis, Enter en het typen op het grote scherm zoals op de Chromebook? Kan je het scherm voor de leerkracht (Ctrl + Shift + L) nog scrollen?
+- [ ] Maak het venster kleiner en groter: past het scherm zich meteen aan?
 
 ## Algemeen
 

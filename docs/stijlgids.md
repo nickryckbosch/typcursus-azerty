@@ -113,13 +113,15 @@ Kleurstrepen per vinger en getekende handen: **andere cursussen** doen dat ook (
 
 ## 6. Opbouw van de schermen
 
-- **Startscherm:** titel links, startzin rechts. Links Fien en Jef (zwaaiend, stil) met een tekstballon. Een grote kaart "Verder waar je was", daaronder "Alle lessen" met een tabblad per deel van het toetsenbordhuis en een compacte rij per les.
+- **Startscherm:** bovenbalk met links het merk (het huisje met de toetsen f en j, en de naam Tokkeldorp), in het midden de startzin, rechts de knoppen. Links Fien en Jef (zwaaiend, stil) met hun tekstballon er vlak boven. Een grote kaart "Verder waar je was", daaronder "Alle lessen" met een tabblad per deel van het toetsenbordhuis en een compacte rij per les.
 - **Typscherm:** bovenbalk met de knop "Lessen", in het midden "Les 2 · Oefenregels 1" met een balkje per blok, rechts voorlezen. Links een stilstaand figuurtje met een korte tip in een tekstballon. In het midden een witte kaart met de oefenregels. Onderaan het toetsenbord met de handen.
-- **Oefenkaart (intro, zoek de toets, de lamp, "Licht aan", "Klaar voor de start", afsluiter):** dezelfde bovenbalk, en een witte kaart met vaste zones: de opdracht groot bovenaan (met de toets getekend in de zin), Fien en Jef links, de prent of het signaal in het midden, de knop Verder (met de Enter-toets erin) rechts. Bij de lamp staat de knop Start onder de lamp.
-- **Praatscherm (K27: de intro, het einde van extra oefenen):** Fien en Jef, hun tekstballon en de prent staan als een groep in het midden van de kaart, de knoppen er vlak onder (`oefenscherm(ctx, { opbouw: "midden" })`). Zie deel 10.
+- **Oefenkaart (zoek de toets, de lamp, "Licht aan", "Klaar voor de start"):** dezelfde bovenbalk, en een witte kaart met vaste zones: de opdracht groot bovenaan (met de toets getekend in de zin), de prent of het signaal in het midden, Fien en Jef er vlak links naast met hun tekstballon. Bij de lamp staat de knop Start onder de lamp; bij "Licht aan" komt de knop Verder op het einde op de plaats van de opdracht.
+- **Praatscherm (K27: de intro):** Fien en Jef, hun tekstballon en de prent staan als een groep in het midden van de kaart, de knop er vlak onder (`oefenscherm(ctx, { opbouw: "midden" })`). Zie deel 10.
+- **Slotscherm (K27 fase 2: het einde van een les, het einde van extra oefenen, de vraag om verder te gaan):** Fien en Jef groot in het midden, hun zin in een tekstballon erboven, de knoppen even breed eronder (`slotscherm()`). Het toetsenbord is weg en de kaart vult het scherm.
+- **Toetsenbordcheck:** dezelfde bouwsteen als een slotscherm (`slotscherm()`), met het toetsenbord erbij: Fien in het midden, wat ze zegt in een tekstballon erboven, de toets of de uitleg ernaast, de knop Verder eronder.
 - **Voortgang (K20):** een dunne, grijze balk langs de onderrand van de witte kaart, met rechts klein de teller. Geen vingerkleur. Een spel heeft geen balk: daar toont de strook zelf hoe ver je bent (deel 11).
 - **Spelscherm:** dezelfde bovenbalk, een witte kaart met bovenaan de vaste prent en eronder de vooruitgang, onderaan het toetsenbord met de handen.
-- Alles past op een Chromebook van 1366 x 768 zonder scrollen (zie beslissing 12b).
+- Alles past op een Chromebook van 1366 x 768 zonder scrollen (zie beslissing 12b). Is het venster groter, dan schaalt het hele scherm mee als een dia (deel 10, "Schalen als een dia").
 
 Waarop steunt dit? **Eigen keuze** (startscherm per deel, een kaart "Verder waar je was"). Extra oefenen bij een les: **andere cursussen** bieden ook extra oefening (Typing.com, Keybr).
 
@@ -175,10 +177,10 @@ Elke tekst die een kind leest, volgt deze regels. Ze gelden ook voor elke nieuwe
 - **Wat de tekst belooft, moet je zien gebeuren.** Zegt het slot "We zijn thuis", dan toont de prent Fien en Jef bij hun huis. Kan het beeld dat (nog) niet, dan past de tekst zich aan.
 - **Een woord betekent altijd hetzelfde:**
   - **het huis** is het hele toetsenbord;
-  - **de zolder, de woonkamer en de kelder** zijn de bovenste, middelste en onderste rij;
+  - **de woonkamer** is de rij met de bultjes (waar de F en de J liggen), **de zolder** de rij erboven, **de kelder** de rij eronder. De cijferrij is het dak. Schrijf niet "de bovenste, middelste of onderste rij": een toetsenbord heeft meer rijen (cijfers, F-toetsen), dus "bovenste" is niet duidelijk. De bultjes voel je zonder te kijken (test 28 november: een kind vroeg "Wat is de bovenste rij?");
   - **je plek**: elke vinger heeft een eigen plek in de woonkamer. Na elke toets gaat de vinger "terug naar zijn plek". Schrijf nooit "terug naar huis": wie op de zolder is, is nog altijd in het huis;
   - **thuis** alleen in de startzin ("vingers thuis") en waar Fien en Jef uitleggen wat dat is ("Dan zijn Fien en Jef thuis", "Fien en Jef blijven thuis"): de wijsvingers op de F en de J, de andere vingers ernaast. In een verhaal (het dorp, de egel) betekent huis gewoon een huis.
-- **Een rij krijgt de eerste keren in een les haar plaats erbij:** "de woonkamer, de middelste rij".
+- **Een rij krijgt de eerste keren in een les haar plaats erbij:** "de woonkamer, de rij met de bultjes".
 - **De laatste zin van een intro zegt wat de les brengt** ("Vandaag leer je de f en de j."), geen vraag zonder antwoord.
 - **Woorden die een kind van 9 kent**, korte zinnen, Vlaams Nederlands, zonder klemtoonaccenten.
 
@@ -203,12 +205,46 @@ Elk scherm volgt deze acht regels. Ze gelden ook voor elk nieuw scherm en elk ni
 4. **Een manier om verder te gaan:** een knop "Verder" (of "Start") waarin de Enter-toets getekend staat. De losse zin "Druk op Enter om verder te gaan" valt weg. Enter blijft werken.
 5. **Knoppen zien eruit als knoppen.** De hoofdknop is vol blauw. Een tweede knop heeft een lichte vulling (`--accent-licht`, `#E4EEFC`) en geen dikke rand, zodat hij niet op een invulvak lijkt. De focusrand voor het toetsenbord is een ring rond de knop (`outline` met `outline-offset`) en verandert de vorm of de maat van de knop niet. De hoofdknop is de knop die Enter kiest.
 6. **Voeg je iets toe aan een scherm, haal dan iets weg,** of zeg waarom het niet kan.
-7. **De vaste zones van K20 blijven:** niets verspringt tijdens een oefening, wat later verschijnt heeft zijn ruimte al (deel 1, beslissing 12c).
+7. **De vaste zones van K20 blijven:** niets verspringt tijdens een oefening, wat later verschijnt heeft zijn ruimte al (deel 1, beslissing 12c). Een slotscherm is een nieuw scherm: daar mag de indeling anders zijn (geen toetsenbord).
 8. **Geen beweging tijdens het typen** (K16, deel 1).
+
+**Fase 2 (28 november 2026; `docs/beslissingen.md`, 12p): wat de regels per soort scherm betekenen**
+
+- **Een slotscherm** (einde van een les, einde van extra oefenen, "wil je verdergaan?"): Fien en Jef groot in het midden, hun zin in een tekstballon erboven, de knoppen even breed eronder. Er valt niets te typen, dus het toetsenbord is weg en de kaart vult het scherm.
+- **Een scherm met een prent** ("Licht aan in het huis", "Klaar voor de start"): Fien en Jef staan met hun tekstballon vlak naast de prent. Geen lege zone rechts voor de knop Verder: hij komt op de plaats van de opdracht, die op het einde verdwijnt.
+- **Een spel in het spelsjabloon:** de tekstballon staat direct boven Fien en Jef in de strook (deel 11).
+- **Een uitkomst** (de toetsenbordcheck): Fien groot met de duim omhoog, vlak onder haar tekstballon en vlak boven de knop Verder. Dezelfde bouwsteen als een slotscherm.
+- **Wat Fien en Jef zeggen, staat in hun tekstballon**, niet als opdracht bovenaan: ook de slotzin van een spel en de zin op een slotscherm. De opdracht bovenaan is alleen voor wat het kind moet doen.
+- **De tekstballon staat vlak bij wie spreekt**, met het staartje naar hem of haar. Spreken Fien en Jef elk apart (intro van les 1), dan krijgt elk een eigen tekstballon.
+- **Alle knoppen van een slotscherm zijn even breed** (`.knoppen.even-breed`).
+
+**Schalen als een dia (12p)**
+
+- Het ontwerp is 1366 x 768. Op een groter venster schaalt het hele scherm in dezelfde verhouding mee tot het venster gevuld is; wat overblijft, heeft de achtergrondkleur. Nooit kleiner dan 1: op een Chromebook met adresbalk past de indeling zich aan de hoogte aan, zoals vroeger (12b).
+- **Regel voor de stijl:** gebruik nooit `vh` of `vw`, maar `var(--vh)` en `var(--vw)`. Maten binnen een les blijven in `cqh` en `cqw`.
+- Code: `src/logica/schaal.ts` (de regel), `src/weergave/schaal.ts` (zet de schaal), `src/stijl.css` onderaan.
+
+**Bouwstenen voor een nieuwe les**
+
+Een nieuwe les is lesdata (`src/content/nl-BE/les-N.json`) en, voor een nieuw spel, een strook. Bouw niets als uitzondering voor een les: gebruik deze bouwstenen. Geen enkele bouwsteen test op het nummer van een les.
+
+| Wat je wil | Bouwsteen | Hoe |
+| --- | --- | --- |
+| Een intro met een tekst | intro-blok met `tekst` | Een witregel (`\n\n`) in de tekst wordt een nieuwe alinea. |
+| Een intro in stukken: zinnen bovenaan, Fien en Jef elk met een eigen tekstballon, een zin boven Verder | intro-blok met `tekstBoven` (een of twee zinnen), `fien`, `jef`, `tekstOnder` | Zonder deze velden valt de intro terug op `tekst`. De twee samen mag niet (`tests/inhoud.test.ts`). |
+| Het huis naast de introtekst | `"prent": "huis"` in het intro-blok | |
+| De namen van de rijen in de randtoetsen | `"rijnamen": true` in het intro-blok | Code: `toetsenbord.toonRijnamen(true)`; de intro zet het weer uit. |
+| Fien en Jef zeggen iets, het kind kiest of gaat verder (einde van een les, een vraag, een uitkomst) | `slotscherm(ctx, { figuren, zin, knoppen })` | Opties: `wie` (Fien, Jef of beide), `boven` (bv. sterren), `naast` (bv. een toets of uitleg), `toetsenbord: true` om het toetsenbord te houden, `enter: true` op een knop voor de knop Verder. |
+| Fien en Jef naast hun tekstballon, met de knop Verder eronder | `oefenscherm(ctx, { opbouw: "midden" })` | Voor een praatscherm midden in een les. |
+| Een oefening met een prent of signaal | `oefenscherm(ctx, { doel, figuren })` | `doel` is de tekstballon boven Fien en Jef; `scherm.zetDoel()` zet er op het einde de slotzin in; `enterPlaats: "opdracht"` zet de knop Verder op de plaats van de opdracht. |
+| Een spel | `spelscherm(ctx, { opdracht, doel, strook, figuren })` (deel 11) | `figuren: { start, einde }` zegt waar Fien en Jef in de strook staan; de tekstballon volgt. |
+| Het einde van een les | afsluiter-blok met `tekst` | Gebruikt `slotscherm()`; de knoppen volgen uit de voortgang. |
 
 **Waar staat het in de code?**
 
 - De opbouw "midden": `oefenscherm(ctx, { opbouw: "midden" })` in `src/blokken/oefenscherm.ts`, stijl `.oefenkaart-midden` in `src/stijl.css`. Voor schermen waar Fien en Jef iets zeggen en het kind alleen verder moet.
+- De gedeelde bouwsteen `slotscherm()` (opbouw "toren"): in hetzelfde bestand.
+- Een intro in stukken: `src/blokken/intro.ts`.
 - De knop Verder of Start: `scherm.toonEnter()`. Een blok mag de knop bij zijn signaal zetten met `scherm.enter` (zo staat Start onder de lamp).
 - Tweede knop: klasse `knop-tweede`.
 
@@ -223,11 +259,11 @@ Elk spel in een les gebruikt dezelfde indeling (`src/spellen/sjabloon.ts`). Een 
 
 1. **De opdracht bovenaan**, even groot als op de andere oefenschermen: "Typ wat je ziet."
 2. **Wat het kind typt, staat in het midden**, groot en altijd op dezelfde plek, in dezelfde vorm als bij de oefenregels: getypte letters grijs, de volgende letter in de lichte vingerkleur met een streep in de volle kleur. Nooit op een steen, een bal of een vlaggetje.
-3. **De doelzin (deel 9) staat links in een tekstballon**, het hele spel. Het staartje wijst naar Fien en Jef in de strook.
+3. **De doelzin (deel 9) staat in een tekstballon direct boven Fien en Jef in de strook**, het hele spel, met het staartje naar hen, in dezelfde lettergrootte als de andere tekstballonnen. Het spel zegt waar Fien en Jef staan (`figuren: { start, einde }`); de stijl rekent uit waar het staartje komt.
 4. **De strook onderaan** is de prent van het spel en toont de vooruitgang: bij "Over de beek" ligt er per goede toets een stapsteen bij. Er is geen teller en geen balk; de strook zegt het zelf. Wie iets toevoegt, haalt iets weg (deel 10).
 5. **Wat aan de beurt is in de strook, krijgt een donkere rand** (`#1b2a4a`), nooit blauw: blauw is de kleur van de wijsvinger.
 6. **Bij een fout** krijgt de letter een stippelrand, en lichten de juiste toets en vinger op. Er schudt niets.
-7. **Er beweegt niets tijdens het typen.** Alleen op het einde verandert de strook (Fien en Jef staan bij hun huis), komt de slotzin op de plaats van de opdracht en de knop Verder op de plaats van de regel.
+7. **Er beweegt niets tijdens het typen.** Alleen op het einde verandert de strook (Fien en Jef staan bij hun huis), komt de slotzin in een tekstballon boven Fien en Jef (waar ze dan staan) en de knop Verder op de plaats van de regel. De opdracht verdwijnt; haar plaats blijft.
 
 **De strook** heeft een vaste verhouding: 1270 op 150, zo breed als de kaart en hoogstens 38% van de hoogte van het podium. Ze is in drie lagen gebouwd (`src/spellen/beek-strook.ts`): de achtergrond, de stenen, en Fien en Jef. De app tekent de achtergrond zelf, in de klare lijn (deel 7 en 8). Wie later een prent uit een beeldgenerator wil gebruiken, vervangt alleen de achtergrond en past de plaats van de stenen en de figuren aan; het spel zelf verandert niet.
 

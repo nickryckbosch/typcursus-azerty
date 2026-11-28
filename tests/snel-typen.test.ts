@@ -126,9 +126,12 @@ describe("snel typen: geen enkele aanslag gaat verloren", () => {
     }
     expect(aanslagen()).toHaveLength(36);
     expect(aanslagen().every((a) => a.juist)).toBe(true);
-    // het slot: alle stenen liggen er, de slotzin staat op de plaats van de opdracht, de knop Verder verschijnt
+    // het slot: alle stenen liggen er, de slotzin staat in een tekstballon boven Fien en Jef
+    // (de opdracht verdwijnt, haar plaats blijft), de knop Verder verschijnt
     expect(ctx.podium.querySelectorAll(".beek-steen")).toHaveLength(36);
-    expect(ctx.podium.querySelector(".opdracht-tekst")!.textContent).toBe("Het is je gelukt! We zijn thuis.");
+    expect(ctx.podium.querySelector(".spel-slotzin")!.textContent).toBe("Het is je gelukt! We zijn thuis.");
+    expect(ctx.podium.querySelector(".spel-slotzin")!.classList.contains("onzichtbaar")).toBe(false);
+    expect(ctx.podium.querySelector(".opdracht-tekst")!.classList.contains("onzichtbaar")).toBe(true);
     expect(ctx.podium.querySelector(".spel-slot")!.classList.contains("onzichtbaar")).toBe(false);
     druk(inst, "Enter");
     expect(aantalVolgende()).toBe(1);
@@ -212,7 +215,7 @@ describe("snel typen: geen enkele aanslag gaat verloren", () => {
     const opdracht = () => ctx.podium.querySelector(".opdracht-tekst")!.textContent!;
     const gevraagd = () => Object.keys(toetsVoorRij).find((r) => opdracht().includes(r))!;
     // ronde 1 tot 3: woonkamer, zolder, kelder, telkens met hulp en met de plaats van de rij
-    for (const [rij, plaats] of [["woonkamer", "middelste"], ["zolder", "bovenste"], ["kelder", "onderste"]]) {
+    for (const [rij, plaats] of [["woonkamer", "met de bultjes"], ["zolder", "boven de bultjes"], ["kelder", "onder de bultjes"]]) {
       expect(gevraagd()).toBe(rij);
       expect(laatsteRij()).toBe(rij);
       expect(opdracht()).toContain(plaats);

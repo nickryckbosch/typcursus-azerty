@@ -14,7 +14,7 @@ import type { BlokFunctie } from "../blokken/context";
 import type { SpelBlok } from "../content/types";
 import { beekStenen } from "../logica/reeksen";
 import { nieuweOefening, teltAlsTeken, typ, volgendTeken, type TypOefening } from "../logica/typen";
-import { beekStrook } from "./beek-strook";
+import { BEEK_FIGUREN, beekStrook } from "./beek-strook";
 import { spelscherm } from "./sjabloon";
 
 const STENEN = 12;
@@ -34,6 +34,7 @@ export const beek: BlokFunctie<SpelBlok> = (blok, ctx) => {
     opdracht: blok.tekst ?? blok.titel,
     doel: blok.doel,
     strook: strook.element,
+    figuren: BEEK_FIGUREN,
     klasse: "spel-beek",
   });
 

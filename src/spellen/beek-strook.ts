@@ -126,6 +126,17 @@ function steen(x: number, y: number, toestand: "gelegd" | "nu" | "later"): SVGEl
   );
 }
 
+/**
+ * Het midden tussen Fien en Jef, als deel van de breedte van de strook: daar
+ * wijst het staartje van de tekstballon naar (sjabloon.ts).
+ */
+function middenVan([xFien, xJef]: number[]): number {
+  const links = xFien;
+  const rechts = xJef + FIGUUR_HOOGTE * (140 / 360);
+  return (links + rechts) / 2 / BREEDTE;
+}
+export const BEEK_FIGUREN = { start: middenVan(PLAATS_START), einde: middenVan(PLAATS_THUIS) };
+
 export function beekStrook(aantal: number, perRij: number): BeekStrook {
   const stenen = svg("g", {});
   const figuren = svg("g", {});

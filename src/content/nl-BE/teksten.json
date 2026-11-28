@@ -1,6 +1,6 @@
 {
-  "app.titel": "Typcursus",
-  "app.ondertitel": "Leer typen met tien vingers, samen met Fien en Jef",
+  "app.titel": "Tokkeldorp",
+  "app.ondertitel": "Leer tokkelen met tien vingers, samen met Fien en Jef",
   "startzin": "Voeten plat, rug recht, schouders los, vingers thuis!",
 
   "start.verder": "Verder waar je was",
@@ -112,7 +112,7 @@
   "eind.nietAlleSterren": "Nog niet alle sterren? Probeer de eindoefening nog eens, wij wachten op je.",
 
   "houding.zeg": "Voeten plat, rug recht, schouders los!",
-  "houding.opdracht": "Leg je vingers in de woonkamer, de middelste rij, en druk eerst op Start. Gaat de lamp aan? Druk [spatie].",
+  "houding.opdracht": "Leg je vingers in de woonkamer, de rij met de bultjes, en druk eerst op Start. Gaat de lamp aan? Druk [spatie].",
   "lamp.wacht": "Wacht op de lamp.",
   "lamp.eerstStart": "Druk eerst op Start.",
   "intro.huis": "Het huis van Fien en Jef: de zolder, de woonkamer en de kelder.",
@@ -120,9 +120,9 @@
 
   "lichtaan.opdracht": "Druk op een toets van de **{rij}**.",
   "lichtaan.opdrachtMetPlaats": "Druk op een toets van de **{rij}**: {plaats}.",
-  "lichtaan.bovenste": "de bovenste rij",
-  "lichtaan.middelste": "de middelste rij",
-  "lichtaan.onderste": "de onderste rij",
+  "lichtaan.bovenste": "de rij boven de bultjes",
+  "lichtaan.middelste": "de rij met de bultjes",
+  "lichtaan.onderste": "de rij onder de bultjes",
   "lichtaan.klaar": "Alle lichten branden! Goed gedaan!",
 
   "beek.klaar": "Het is je gelukt! We zijn thuis.",

@@ -67,8 +67,15 @@
   --lees: "Andika", system-ui, sans-serif; /* wat kinderen lezen en typen */
   --kop: "Nunito", system-ui, "Segoe UI", Roboto, Arial, sans-serif; /* koppen en knoppen */
 
+  /* De hoogte en de breedte van het venster, per honderdste: gebruik deze twee
+     in plaats van vh en vw. Schaalt het scherm als een dia (zie onderaan), dan
+     zijn ze de honderdste van de ontwerpmaat. */
+  --vh: 1vh;
+  --vw: 1vw;
+  --schaal: 1;
+
   /* grootte van een toets op het schermtoetsenbord */
-  --k: clamp(28px, min(3.5vw, 6.2vh), 56px);
+  --k: clamp(28px, min(calc(3.5 * var(--vw)), calc(6.2 * var(--vh))), 56px);
 
   font-family: var(--kop);
   font-weight: 700;
@@ -189,6 +196,8 @@ button {
   border-radius: 18px;
   padding: 0.7rem 1.1rem;
   text-align: left;
+  /* geen los woordje op de laatste regel */
+  text-wrap: pretty;
 }
 
 .ballon::after {
@@ -235,6 +244,13 @@ button {
 
 .knop:hover {
   background: #f8f5f0;
+}
+
+/* De focusrand voor wie met het toetsenbord werkt: een dunne ring op een paar
+   pixels afstand, zodat hij niet op een tweede kader lijkt (test 28 november). */
+.knop:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
 }
 
 .knop-hoofd {
@@ -323,7 +339,7 @@ button {
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-  max-width: 90vw;
+  max-width: calc(90 * var(--vw));
 }
 
 /* ---------- bovenbalk ---------- */
@@ -392,30 +408,74 @@ button {
    "Verder waar je was" staan altijd volledig in beeld. Alleen de lijst
    "Alle lessen" mag scrollen als ze langer wordt. */
 .scherm-start {
-  height: 100vh;
+  height: calc(100 * var(--vh));
   overflow: hidden;
   max-width: 1366px;
   margin: 0 auto;
-  padding: clamp(10px, 3vh, 24px) clamp(16px, 3.5vw, 48px) clamp(10px, 3.5vh, 28px);
+  padding: clamp(10px, calc(3 * var(--vh)), 24px) clamp(16px, calc(3.5 * var(--vw)), 48px) clamp(10px, calc(3.5 * var(--vh)), 28px);
   display: flex;
   flex-direction: column;
-  gap: clamp(8px, 2.3vh, 18px);
+  gap: clamp(8px, calc(2.3 * var(--vh)), 18px);
 }
 
+/* De bovenbalk van het startscherm: links het merk (huisje en naam), in het
+   midden de startzin, rechts de knoppen. Rustig: niets beweegt. */
 .start-kop {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+}
+
+.start-merk {
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-.start-merk {
-  display: flex;
-  gap: 6px;
+.merkteken {
+  height: clamp(46px, calc(8 * var(--vh)), 60px);
+  width: auto;
+  flex: none;
+}
+
+.merk-dak {
+  fill: #d8693b;
+  stroke: #1f1f1f;
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+}
+
+.merk-schouw {
+  fill: #c9824f;
+  stroke: #1f1f1f;
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+}
+
+.merk-toets-rand {
+  fill: var(--blauw);
+  stroke: #1f1f1f;
+  stroke-width: 1.6;
+}
+
+.merk-toets {
+  fill: #ffffff;
+  stroke: #1f1f1f;
+  stroke-width: 1.6;
+}
+
+.merk-letter {
+  font-family: var(--lees);
+  font-size: 15px;
+  font-weight: 700;
+  fill: var(--tekst);
 }
 
 .start-titel h1 {
-  font-size: clamp(22px, 3.9vh, 30px);
-  letter-spacing: -0.01em;
+  font-size: clamp(26px, calc(4.6 * var(--vh)), 36px);
+  letter-spacing: -0.015em;
+  line-height: 1.05;
 }
 
 .start-titel p {
@@ -424,41 +484,44 @@ button {
 }
 
 .start-knoppen {
-  margin-left: auto;
   display: flex;
   gap: 8px;
 }
 
+/* De startzin: wat de kinderen samen zeggen voor ze beginnen. */
 .startzin {
+  justify-self: center;
   background: var(--vlak);
   border: 1px solid var(--rand);
   border-radius: 999px;
-  padding: 10px 20px;
+  padding: 9px 22px;
   font-size: 17px;
+  text-align: center;
+  text-wrap: balance;
 }
 
 .start-inhoud {
   flex: 1;
   min-height: 0;
   display: flex;
-  gap: clamp(14px, 2.4vw, 32px);
+  gap: clamp(14px, calc(2.4 * var(--vw)), 32px);
 }
 
 /* Een vaste zone links, zo hoog als de ruimte onder de bovenbalk: de
    tekstballon bovenaan, Fien en Jef eronder. De figuurtjes krimpen mee met
    de hoogte van het venster en worden nooit afgesneden. */
 .start-figuren {
-  width: clamp(170px, 18.5vw, 250px);
+  width: clamp(170px, calc(19.5 * var(--vw)), 266px);
   flex: none;
   min-height: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: clamp(8px, 2vh, 16px);
+  gap: clamp(8px, calc(2 * var(--vh)), 16px);
 }
 
 .start-figuren .ballon {
-  font-size: clamp(15px, 2.3vh, 18px);
+  font-size: clamp(15px, calc(2.3 * var(--vh)), 18px);
   padding: 14px 16px;
 }
 
@@ -467,10 +530,12 @@ button {
   gap: 2px;
 }
 
+/* De figuren zijn nooit hoger dan hun vak: zo staat de tekstballon altijd
+   vlak boven Fien en Jef, ook op een groot scherm (test van 28 november). */
 .start-figuren .figuren {
   flex: 0 1 auto;
   min-height: 0;
-  height: min(40vh, 15vw);
+  height: min(calc(44 * var(--vh)), calc(21 * var(--vw)), 320px);
   align-items: flex-end;
 }
 
@@ -488,14 +553,14 @@ button {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: clamp(8px, 2vh, 16px);
+  gap: clamp(8px, calc(2 * var(--vh)), 16px);
 }
 
 /* kaart "Verder waar je was" */
 .verder-kaart {
   border: 3px solid var(--accent);
   box-shadow: 0 8px 24px rgba(31, 95, 191, 0.12);
-  padding: clamp(10px, 2.6vh, 20px) 26px;
+  padding: clamp(10px, calc(2.6 * var(--vh)), 20px) 26px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -505,7 +570,7 @@ button {
 .verder-links {
   display: flex;
   flex-direction: column;
-  gap: clamp(4px, 1vh, 8px);
+  gap: clamp(4px, calc(1 * var(--vh)), 8px);
   min-width: 0;
 }
 
@@ -518,7 +583,7 @@ button {
 }
 
 .verder-titel {
-  font-size: clamp(20px, 3.4vh, 26px);
+  font-size: clamp(20px, calc(3.4 * var(--vh)), 26px);
 }
 
 .verder-toetsen {
@@ -536,7 +601,7 @@ button {
 .verder-knoppen {
   display: flex;
   flex-direction: column;
-  gap: clamp(5px, 1.3vh, 10px);
+  gap: clamp(5px, calc(1.3 * var(--vh)), 10px);
   width: 250px;
   flex: none;
 }
@@ -546,12 +611,12 @@ button {
 }
 
 .knop-start {
-  min-height: clamp(42px, 7vh, 54px);
+  min-height: clamp(42px, calc(7 * var(--vh)), 54px);
   font-size: 19px;
 }
 
 .verder-knoppen .knop-tweede {
-  min-height: clamp(36px, 5.7vh, 44px);
+  min-height: clamp(36px, calc(5.7 * var(--vh)), 44px);
   border-radius: 12px;
   font-size: 16px;
 }
@@ -591,22 +656,14 @@ button {
   padding: 0 10px;
 }
 
-.chip-merk {
-  width: 40px;
-  height: 40px;
-  border-radius: 9px;
-  border-bottom-width: 4px;
-  font-size: 22px;
-}
-
 /* "Alle lessen" */
 .lessen-kaart {
   flex: 1;
   min-height: 0;
-  padding: clamp(8px, 2vh, 16px) 20px;
+  padding: clamp(8px, calc(2 * var(--vh)), 16px) 20px;
   display: flex;
   flex-direction: column;
-  gap: clamp(6px, 1.5vh, 12px);
+  gap: clamp(6px, calc(1.5 * var(--vh)), 12px);
   overflow: auto;
 }
 
@@ -667,7 +724,7 @@ button {
   grid-template-columns: 26px 52px minmax(0, 1fr) auto 62px auto;
   align-items: center;
   gap: 14px;
-  min-height: clamp(38px, 5.9vh, 46px);
+  min-height: clamp(38px, calc(5.9 * var(--vh)), 46px);
   padding: 0 10px;
   border-radius: 12px;
 }
@@ -746,11 +803,11 @@ button {
 /* ---------- lesscherm ---------- */
 
 .scherm-les {
-  height: 100vh;
+  height: calc(100 * var(--vh));
   display: flex;
   flex-direction: column;
-  gap: clamp(6px, 1.6vh, 14px);
-  padding: clamp(8px, 2vh, 18px) clamp(14px, 3.5vw, 48px) clamp(6px, 1.6vh, 14px);
+  gap: clamp(6px, calc(1.6 * var(--vh)), 14px);
+  padding: clamp(8px, calc(2 * var(--vh)), 18px) clamp(14px, calc(3.5 * var(--vw)), 48px) clamp(6px, calc(1.6 * var(--vh)), 14px);
   overflow: hidden;
 }
 
@@ -771,7 +828,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(4px, 1vh, 10px);
+  gap: clamp(4px, calc(1 * var(--vh)), 10px);
 }
 
 .typzone-rij {
@@ -788,7 +845,7 @@ button {
   justify-content: center;
   gap: 10px;
   min-height: 1.5em;
-  font-size: clamp(15px, 2.4vh, 18px);
+  font-size: clamp(15px, calc(2.4 * var(--vh)), 18px);
 }
 
 .hulp-stip {
@@ -803,10 +860,12 @@ button {
   visibility: hidden;
 }
 
-/* Geen toetsenbord nodig (afsluiter, vraag om verder te gaan): onzichtbaar,
-   maar het houdt zijn plaats, zodat er niets verspringt. */
+/* Geen toetsenbord nodig (een slotscherm: de afsluiter, de vraag om verder te
+   gaan): het toetsenbord is weg en de kaart vult het scherm, zodat Fien en Jef
+   groot in het midden staan (K27 fase 2; docs/beslissingen.md, 12p). Een
+   slotscherm is een nieuw scherm: er verspringt niets tijdens een oefening. */
 .zonder-toetsenbord .typzone {
-  visibility: hidden;
+  display: none;
 }
 
 /* Een blok is een witte kaart die het podium vult. */
@@ -873,11 +932,11 @@ button {
   height: 100%;
   display: flex;
   align-items: stretch;
-  gap: clamp(12px, 2vw, 28px);
+  gap: clamp(12px, calc(2 * var(--vw)), 28px);
 }
 
 .tip-zijde {
-  width: clamp(150px, 17vw, 230px);
+  width: clamp(150px, calc(17 * var(--vw)), 230px);
   flex: none;
   display: flex;
   flex-direction: column;
@@ -894,7 +953,7 @@ button {
 .typkaart {
   flex: 1;
   min-width: 0;
-  padding: clamp(6px, 5cqh, 26px) clamp(16px, 3vw, 40px);
+  padding: clamp(6px, 5cqh, 26px) clamp(16px, calc(3 * var(--vw)), 40px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1107,11 +1166,28 @@ button {
 /* De rij die aan de beurt is (hulp bij "Licht aan in het huis"): dezelfde rand
    als het woordvakje in het huis, zodat het kind ziet dat ze bij elkaar horen.
    Accentblauw: geen vingerkleur, en geen geel (geel betekent "licht aan"). */
-.tb-rij.rij-hulp,
-.tb-rij.rij-op {
-  outline: 4px solid var(--accent);
-  outline-offset: 3px;
+.tb-rij {
+  position: relative;
+  isolation: isolate;
+}
+
+.tb-rij.rij-hulp::before,
+.tb-rij.rij-op::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -6px;
+  border: 3px solid var(--accent);
+  border-radius: calc(var(--k) * 0.25);
   background: var(--accent-licht);
+  pointer-events: none;
+}
+
+/* De Enter-toets hoort bij twee rijen: de rand stopt ervoor, in de ruimte
+   tussen de laatste lettertoets en de Enter-toets (test 28 november). */
+.tb-rij.met-enter.rij-hulp::before,
+.tb-rij.met-enter.rij-op::before {
+  right: calc(var(--k) * var(--na) / 48 + var(--tussen) - 5px);
 }
 
 /* Een getekende toets in de tekst, bv. "Druk op [Enter] om verder te gaan." */
@@ -1168,6 +1244,12 @@ button {
 /* De vinger die moet typen: volle kleur en een dikkere, donkere omtrek. */
 .vinger-vlak.actief {
   fill: var(--vol);
+}
+
+/* Moet er een vinger typen, dan krijgen de andere vingers een nog lichtere
+   tint van hun eigen kleur: niet doorschijnend, en meteen, zonder knipperen. */
+.hand.met-actief .vinger-vlak:not(.actief) {
+  fill: color-mix(in srgb, var(--licht) 55%, #ffffff);
 }
 
 .hand-omtrek .actief {
@@ -1248,27 +1330,57 @@ button {
   overflow: hidden;
 }
 
-/* De doelzin (K26): links, in een tekstballon. Het staartje wijst naar onder,
-   naar Fien en Jef in de strook. */
-.spel-ballon {
-  grid-column: 1;
-  grid-row: 2;
-  min-height: 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 0 0 clamp(6px, 3cqh, 14px) clamp(14px, 3.4cqw, 44px);
+/* De doelzin (K26): in een tekstballon direct boven Fien en Jef in de strook,
+   met het staartje naar hen (K27 fase 2). De plaats van Fien en Jef volgt uit
+   de maat van de strook:
+   --kaart: de breedte van de kaart; --strook-h: de hoogte van de strook
+   (hoogstens 38% van het podium); --tekening-b en --tekening-x: de breedte van
+   de tekening in de strook en waar ze begint (ze krimpt mee en blijft in het
+   midden). --figuur-start en --figuur-einde komen uit het spel (sjabloon.ts). */
+.podium .blok.spelkaart {
+  --kaart: min(100cqw, 1270px);
+  --strook-h: min(calc(var(--kaart) * 150 / 1270), 38cqh);
+  --tekening-b: calc(var(--strook-h) * 1270 / 150);
+  --tekening-x: calc((var(--kaart) - var(--tekening-b)) / 2);
+  --ballon-links: clamp(12px, 1.9cqw, 24px);
 }
 
+.spel-ballon {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  min-height: 0;
+  position: relative;
+  pointer-events: none;
+}
+
+/* Dezelfde lettergrootte als de andere tekstballonnen met een doelzin. */
 .podium .spel-doel {
+  position: absolute;
+  left: var(--ballon-links);
+  bottom: clamp(5px, 2cqh, 9px);
   margin: 0;
-  max-width: 300px;
-  font-size: clamp(12px, 3.9cqh, 16.5px);
-  line-height: 1.36;
+  max-width: min(330px, 27cqw);
+  font-size: clamp(13px, 4.4cqh, 17px);
+  line-height: 1.35;
 }
 
 .spel-doel.staart-onder::after {
-  left: clamp(40px, 22%, 70px);
+  left: calc(var(--tekening-x) + var(--tekening-b) * var(--figuur-start) - var(--ballon-links) - 7px);
+  transform: rotate(-45deg);
+}
+
+/* De slotzin: boven Fien en Jef waar ze op het einde staan, iets groter. */
+.podium .spel-slotzin {
+  left: calc(var(--tekening-x) + var(--tekening-b) * var(--figuur-einde));
+  transform: translateX(-50%);
+  max-width: 400px;
+  width: max-content;
+  font-size: clamp(15px, 5.6cqh, 21px);
+}
+
+.spel-slotzin.staart-onder::after {
+  left: 50%;
+  transform: translateX(-50%) rotate(-45deg);
 }
 
 /* Wat het kind typt: groot, in het midden, altijd op dezelfde plek. */
@@ -1360,7 +1472,7 @@ button {
   line-height: 1.3em;
   padding: 0.02em 0.1em 0.3em;
   font-family: var(--lees);
-  font-size: clamp(80px, 22vh, 200px);
+  font-size: clamp(80px, calc(22 * var(--vh)), 200px);
   font-weight: 700;
   text-align: center;
   white-space: nowrap;
@@ -1383,7 +1495,7 @@ button {
 /* ---------- leerkracht ---------- */
 
 .scherm-leerkracht {
-  padding: 1rem clamp(14px, 3.5vw, 48px);
+  padding: 1rem clamp(14px, calc(3.5 * var(--vw)), 48px);
   font-weight: 400;
   font-family: var(--lees);
 }
@@ -1466,7 +1578,7 @@ button {
 
 .podium .blok {
   gap: clamp(4px, 2.6cqh, 14px);
-  padding: clamp(4px, 3cqh, 20px) clamp(12px, 3vw, 40px);
+  padding: clamp(4px, 3cqh, 20px) clamp(12px, calc(3 * var(--vw)), 40px);
 }
 .podium .grote-tekst { font-size: clamp(15px, 7.4cqh, 26px); }
 .podium .blok > .opdracht,
@@ -1521,6 +1633,12 @@ button {
     display: none;
   }
 
+  .startzin {
+    display: none;
+  }
+}
+
+@media (max-width: 1180px) {
   .startzin {
     display: none;
   }
@@ -1661,7 +1779,7 @@ button {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 0 clamp(14px, 2vw, 26px);
+  padding: 0 clamp(14px, calc(2 * var(--vw)), 26px);
 }
 
 .oefenkaart > .voortgang {
@@ -2005,7 +2123,7 @@ button {
 /* Het huis waarover Fien en Jef praten: kleiner en rustiger dan de tekst. */
 .oefenkaart-midden .zone-veld .huis {
   flex: none;
-  height: min(184px, 52cqh);
+  height: min(230px, 58cqh);
   width: auto;
 }
 
@@ -2040,4 +2158,308 @@ button {
 
 .blok-intro.met-huis .grote-tekst {
   font-size: clamp(14px, 6.4cqh, 22px);
+}
+
+/* ---------- Opbouw "toren": een slotscherm (K27 fase 2) ----------
+   Fien en Jef groot in het midden, hun zin in een tekstballon erboven, de
+   knoppen even breed eronder (src/blokken/oefenscherm.ts, slotscherm()). */
+.oefenkaart-toren .zone-groep {
+  flex-direction: column;
+  gap: clamp(8px, 2.6cqh, 18px);
+}
+
+.oefenkaart-toren .zone-veld {
+  flex-direction: column;
+  gap: clamp(4px, 1.6cqh, 12px);
+}
+
+.oefenkaart-toren .zone-veld .ballon {
+  max-width: 700px;
+  text-align: center;
+}
+
+.podium .oefenkaart-toren .ballon {
+  padding: clamp(6px, 2cqh, 14px) 1.4rem;
+}
+
+.podium .oefenkaart-toren .grote-tekst {
+  font-size: clamp(16px, 4.2cqh, 26px);
+  /* geen los woordje op de laatste regel */
+  text-wrap: pretty;
+}
+
+.oefenkaart-toren .zone-figuren {
+  gap: clamp(2px, 0.4cqw, 6px);
+}
+
+.podium .oefenkaart-toren .zone-figuren .figuur {
+  height: min(var(--h), 38cqh);
+}
+
+.podium .oefenkaart-toren .sterren .ster {
+  width: clamp(28px, 10cqh, 64px);
+  height: clamp(28px, 10cqh, 64px);
+}
+
+.podium .oefenkaart-toren .sterren-tekst {
+  font-size: clamp(13px, 2.8cqh, 18px);
+  margin-bottom: clamp(2px, 1cqh, 8px);
+}
+
+/* Alle knoppen van een slotscherm zijn even breed: zo breed als de breedste. */
+.knoppen.even-breed {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  max-width: 100%;
+  gap: clamp(8px, 1.4cqw, 16px);
+}
+
+.oefenkaart-midden .zone-voet .knoppen.even-breed .knop {
+  width: 100%;
+  min-height: clamp(34px, 8cqh, 52px);
+  padding: 0 26px;
+  font-size: clamp(14px, 3.2cqh, 18px);
+}
+
+/* De figuren zijn afgesneden ter hoogte van hun trui: een dunne lijn eronder
+   maakt er een rand van waar ze achter staan. */
+.oefenkaart-toren .zone-figuren {
+  padding: 0 clamp(16px, 2.4cqw, 34px);
+  border-bottom: 2px solid var(--rand-knop);
+}
+
+/* ---------- Iets naast de figuren op een slotscherm (optie "naast") ----------
+   Bv. de toets om te drukken of de uitleg voor de leerkracht bij de
+   toetsenbordcheck: op een rij met de figuren, onder de tekstballon. */
+.slot-rij {
+  min-height: 0;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 2.2cqw, 30px);
+}
+
+.slot-rij .zone-figuren {
+  flex: none;
+}
+
+.slot-naast {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.slot-naast .leerkracht-uitleg {
+  max-width: 700px;
+}
+
+.podium .slot-naast .grote-toets {
+  font-size: clamp(30px, 22cqh, 96px);
+}
+
+/* Met het toetsenbord in beeld is de kaart lager: alles iets compacter. */
+.podium .blok-check .grote-tekst {
+  font-size: clamp(16px, 6.4cqh, 26px);
+}
+
+.podium .blok-check .zone-figuren .figuur {
+  height: min(var(--h), 44cqh);
+}
+
+.podium .blok-check.met-naast .zone-figuren .figuur {
+  height: min(var(--h), 36cqh);
+}
+
+.oefenkaart-midden .zone-voet .knoppen.even-breed:empty {
+  display: none;
+}
+
+.oefenkaart-midden.blok-check .zone-voet .knoppen.even-breed .knop {
+  min-height: clamp(30px, 13cqh, 48px);
+  font-size: clamp(14px, 5.6cqh, 18px);
+}
+
+/* ---------- De namen van de rijen in de randtoetsen (intro van les 0) ----------
+   Zolder, woonkamer en kelder staan in de lege toets links van hun rij. De
+   toets wordt wit met een donker woord, zoals een woordvakje naast het huis.
+   Er knippert niets (K16). */
+.rij-naam {
+  display: none;
+  font-family: var(--lees);
+  font-size: calc(var(--k) * 0.3);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.met-rijnamen .toets-rijnaam {
+  background: var(--vlak);
+  border-color: var(--tekst);
+  border-bottom-color: var(--tekst);
+  color: var(--tekst);
+}
+
+.met-rijnamen .rij-naam {
+  display: block;
+}
+
+/* ---------- Tekstballon met het staartje rechts ---------- */
+.ballon.staart-rechts::after {
+  left: auto;
+  right: -8px;
+  transform: translateY(-50%) rotate(-135deg);
+}
+
+/* ---------- Intro in stukken (les 1; K27 fase 2) ----------
+   Van boven naar onder: de losse zinnen, Fien en Jef groot met elk een eigen
+   tekstballon, de zin over vandaag, de knop Verder. */
+.oefenkaart-midden .zone-figuren:empty {
+  display: none;
+}
+
+.blok-intro.in-stukken .zone-veld {
+  flex-direction: column;
+  gap: clamp(4px, 2.6cqh, 14px);
+}
+
+.intro-boven p,
+.intro-onder {
+  font-size: clamp(15px, 5.5cqh, 23px);
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.intro-duo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 1.4cqw, 20px);
+}
+
+.podium .intro-duo .ballon {
+  width: clamp(170px, 19cqw, 250px);
+  margin: 0 0 8cqh;
+  padding: clamp(6px, 2.4cqh, 12px) 16px;
+  font-size: clamp(14px, 4.8cqh, 20px);
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+.intro-duo .figuren {
+  gap: clamp(2px, 0.5cqw, 8px);
+}
+
+.podium .intro-duo .figuur {
+  height: min(var(--h), 45cqh);
+}
+
+/* ---------- Fien en Jef dicht bij het huis of de lamp (K27 fase 2) ----------
+   "Licht aan in het huis": Fien en Jef staan met hun tekstballon vlak links
+   naast het huis, en samen staan ze als een groep in het midden van de kaart.
+   De knop Verder komt op het einde op de plaats van de opdracht, zodat er
+   rechts geen lege zone nodig is.
+   "Klaar voor de start": de lamp blijft in het midden (zoals bij "Duim op de
+   spatiebalk"), Fien en Jef staan er vlak links naast.
+   De maten liggen vast: er verspringt niets (K20). */
+.podium .blok.oefenkaart.blok-lichtaan {
+  grid-template-columns: minmax(0, 1fr) auto auto minmax(0, 1fr);
+}
+
+.blok-lichtaan .zone-figuren {
+  grid-column: 2;
+}
+
+.blok-lichtaan .zone-veld {
+  grid-column: 3;
+}
+
+.blok-lichtaan .zone-voet {
+  display: none;
+}
+
+.podium .blok.oefenkaart.blok-houding {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+
+/* De knop Verder op de plaats van de opdracht: ze staan gestapeld. */
+.zone-opdracht.met-enter {
+  display: grid;
+  place-items: center;
+}
+
+.zone-opdracht.met-enter > * {
+  grid-area: 1 / 1;
+}
+
+/* Het huis is zo hoog als zijn zone; de breedte volgt uit de tekening (538 op 316). */
+.blok-lichtaan .zone-veld .huis {
+  height: calc(74cqh - clamp(16px, 7cqh, 26px));
+  width: auto;
+  aspect-ratio: 538 / 316;
+}
+
+.blok-houding .zone-veld {
+  width: clamp(190px, 20cqw, 260px);
+}
+
+.blok-lichtaan .zone-figuren.met-doel,
+.blok-houding .zone-figuren.met-doel {
+  align-items: flex-end;
+  padding: 0 clamp(8px, 1.4cqw, 20px) 0 0;
+}
+
+.blok-lichtaan .zone-figuren.met-doel {
+  width: clamp(200px, 24cqw, 310px);
+}
+
+.blok-lichtaan .zone-figuren.met-doel > *,
+.blok-houding .zone-figuren.met-doel > * {
+  width: min(100%, 290px);
+}
+
+.blok-lichtaan .zone-figuren.met-doel .doel-ballon,
+.blok-houding .zone-figuren.met-doel .doel-ballon {
+  display: flex;
+  align-items: center;
+}
+
+.podium .blok-lichtaan .zone-figuren.met-doel .figuur,
+.podium .blok-houding .zone-figuren.met-doel .figuur {
+  object-position: top;
+}
+
+/* De slotzin in de tekstballon van de doelzin (einde van "Licht aan"): iets groter. */
+.zone-figuren.met-doel .doel-ballon.is-slot {
+  font-size: clamp(15px, 5.6cqh, 21px);
+}
+
+/* ---------- Schalen als een dia (docs/beslissingen.md, 12p) ----------
+   Het ontwerp is 1366 x 768 (een Chromebook). Is het venster groter, dan zet
+   src/weergave/schaal.ts de klasse "als-dia" en de schaal --schaal (altijd
+   groter dan 1). De app krijgt dan de vaste ontwerpmaat en wordt in haar
+   geheel vergroot en in het midden gezet; wat overblijft, heeft de kleur van
+   de achtergrond. In een kleiner venster (schaal 1) verandert er niets.
+   Gebruik in deze stijl nooit vh of vw, maar var(--vh) en var(--vw). */
+html.als-dia {
+  --vh: 7.68px;
+  --vw: 13.66px;
+  overflow: hidden;
+}
+
+html.als-dia body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+html.als-dia #app {
+  position: absolute;
+  left: calc((100vw - 1366px * var(--schaal)) / 2);
+  top: calc((100vh - 768px * var(--schaal)) / 2);
+  width: 1366px;
+  height: 768px;
+  transform: scale(var(--schaal));
+  transform-origin: 0 0;
+  /* een lang scherm (voor de leerkracht) scrolt binnen de dia */
+  overflow: hidden auto;
 }

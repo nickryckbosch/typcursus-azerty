@@ -382,6 +382,45 @@ Nick testte op 28 november op een groot scherm, deels met een kind. Dit zijn de 
 - **Waarop steunt dit? Eigen keuze** (oordeel van Nick), te toetsen in de klastest: spreekt de stijl kinderen aan?
 
 
+## 12p. Rust en overzicht, fase 2, en schalen als dia (28 november 2026)
+
+**Steunt op:** eigen keuze, na de test van Nick op 28 november (groot scherm, deels met een kind). Opdracht: `docs/opdrachten/2026-11-28-vormgeving-na-test.md`. Regels: `docs/stijlgids.md`, deel 10. Nick vroeg om alles nu al te bouwen, zodat hij het op 30 november in een keer op een Chromebook kan testen; er is dus geen mockup vooraf gemaakt.
+
+**Wat Nick zag:** te veel witruimte, en wat bij elkaar hoort stond ver uit elkaar: Fien en Jef helemaal links, de knop helemaal rechts, het midden leeg.
+
+**Per scherm: wat en waarom**
+
+- **Slotschermen** (einde van een les, einde van extra oefenen, "Je was al bezig met deze les"): Fien en Jef groot in het midden, hun zin in een tekstballon erboven, de knoppen even breed eronder (`slotscherm()`). Waarom: de zin is wat Fien en Jef zeggen, dus hij hoort bij hen; even brede knoppen lezen als een rij keuzes. Een dunne lijn onder de figuren, omdat ze ter hoogte van hun trui afgesneden zijn (er is nog geen prent van hen samen).
+- **Het toetsenbord is weg op een slotscherm**, en de kaart vult het scherm. Dit verandert 12c, waar de plaats van het toetsenbord leeg bleef. Waarom: de onderste helft van het scherm was leeg, en Fien en Jef konden niet groot staan. Een slotscherm is een nieuw scherm: er verspringt niets tijdens een oefening. Goedgekeurd door Nick op 28 november 2026.
+- **Toetsenbordcheck:** dezelfde bouwsteen als een slotscherm (`slotscherm()`), met het toetsenbord erbij. Fien staat in het midden, wat ze zegt staat in een tekstballon erboven, de knop Verder eronder. Bij "In orde!" steekt ze groot de duim op. Moet het kind zelf een toets zoeken, dan staat die toets groot naast Fien. Niet in orde: de uitleg voor de leerkracht staat naast Fien.
+- **Intro van les 1:** bovenaan twee losse zinnen, Fien en Jef groot in het midden met elk een eigen tekstballon ernaast (het staartje wijst naar wie spreekt), "Vandaag leer je de f en de j." boven de knop Verder. De lestekst staat daarvoor in stukken in de lesdata (`tekstBoven`, `fien`, `jef`, `tekstOnder`). Dit is een algemene introvorm: elke les mag ze gebruiken; zonder die velden valt de intro terug op een tekst in een tekstballon. Waarom: de tekst was een blok van zes zinnen; nu zie je wie wat zegt. De tekstballonnen staan naast de figuren en niet erboven: zo blijft er hoogte voor grote figuren, ook op een Chromebook.
+- **Intro van les 0:** de woorden zolder, woonkamer en kelder staan in de lege randtoets links van elke rij op het schermtoetsenbord (Tab, de hoofdlettertoets, Shift), alleen in deze intro. De lesdata zet het aan (`"rijnamen": true` in het intro-blok); de code test nergens op het nummer van een les. Waarom: een kind vroeg "Wat is de bovenste rij?"; nu staat het woord naast de rij zelf. Er knippert niets (K16). Fien en Jef en het huis zijn iets groter; het geheel blijft een groep in het midden.
+- **"Licht aan in het huis":** Fien en Jef staan met hun tekstballon vlak links naast het huis, en samen staan ze in het midden van de kaart. De knop Verder komt op het einde op de plaats van de opdracht; zo is er rechts geen lege zone meer nodig. De slotzin ("Alle lichten branden! Goed gedaan!") staat in de tekstballon van Fien en Jef. De tekening begint links iets vroeger (viewBox), zodat de blauwe hulprand rond het woordvakje nergens afgekapt wordt.
+- **"Klaar voor de start":** Fien en Jef staan vlak naast de lamp. De lamp blijft in het midden, zoals bij "Duim op de spatiebalk".
+- **"Over de beek":** de doelzin staat direct boven Fien en Jef in de strook, met het staartje naar hen, even groot als de andere tekstballonnen. De plaats van het staartje volgt uit de maat van de strook, ook als die krimpt. Op het einde staat de slotzin op dezelfde manier boven Fien en Jef bij hun huis; de knop Verder blijft op de plaats van de regel.
+- **Startscherm:** de bovenbalk heeft drie blokken: links het merk (een huisje met de toetsen f en j, en de naam Tokkeldorp), in het midden de startzin, rechts de knoppen. Fien en Jef zijn groter en hun tekstballon staat er altijd vlak boven (het vak van de figuren is nooit hoger dan de figuren zelf).
+- **Korte eindoefening (aanmoediging):** gebruikt nu ook de opbouw "midden", zoals de intro.
+
+**Bouwstenen, geen uitzonderingen (vraag van Nick):** niets is gebouwd als losse uitzondering voor les 0 of les 1, zodat een volgende les vooral lesdata is. De bouwstenen en hoe je ze gebruikt, staan in `docs/stijlgids.md`, deel 10 ("Bouwstenen voor een nieuwe les"): de intro met een tekst of in stukken, de rijnamen, `slotscherm()` (einde van een les, einde van extra oefenen, de vraag om verder te gaan en de toetsenbordcheck), de opbouw "midden", de oefenkaart met een doelzin, en het spelsjabloon. `tests/inhoud.test.ts` controleert de velden van de intro.
+
+**Schalen als een dia**
+
+- **Keuze van Nick (28 november):** het ontwerp blijft 1366 x 768. Op een groter venster schaalt het hele scherm in dezelfde verhouding mee tot het venster gevuld is (schaal = de kleinste van breedte / 1366 en hoogte / 768); wat overblijft, heeft de achtergrondkleur.
+- **Waarom:** thuis ziet een kind hetzelfde als op school, alleen groter; er verspringt niets (K20); we testen op een maat.
+- **Nooit kleiner dan 1.** Op een Chromebook is het venster lager dan 768 (adresbalk, tabbladen). Daar blijft alles zoals het was: de indeling past zich aan de hoogte aan (12b). Ook een venster dat alleen breder of alleen hoger is dan het ontwerp, krijgt schaal 1.
+- **Techniek:** de app krijgt de vaste ontwerpmaat en wordt met een CSS-transform vergroot en in het midden gezet (`src/weergave/schaal.ts`, `src/stijl.css` onderaan). Waarom een transform en geen `zoom`: de indeling wordt altijd op 1366 x 768 berekend, dus een regel breekt op een groot scherm op exact dezelfde plaats. Klikken, focus en het toetsenbord merken niets van een transform.
+- **Gevolg voor de stijl:** `vh` en `vw` zijn vervangen door `var(--vh)` en `var(--vw)`; bij het schalen zijn dat vaste maten van het ontwerp. Het scherm voor de leerkracht scrolt dan binnen de dia.
+- **Test:** `tests/schaal.test.ts` (de regel). Met Chrome nagekeken op 1366 x 768, 1366 x 650, 1280 x 600, 1920 x 1080 en 2560 x 1300: geen schuifbalk, niets afgekapt; op 1366 x 768 zijn de schermen pixel voor pixel gelijk aan voor het schalen; op een groot scherm werken een muisklik, Enter, de spatiebalk en het scrollen van het leerkrachtscherm.
+
+**Tegen:**
+- Op het einde van een spel is de plaats van de opdracht leeg (bij "Over de beek") of staat daar de knop Verder (bij "Licht aan"). De knop Verder staat dus niet op elk scherm op dezelfde plek.
+- De slotzin van een spel staat kleiner (in een tekstballon) dan vroeger (als opdracht).
+- Een slotscherm heeft geen toetsenbord: de overgang van de eindoefening naar het slot is een groter verschil dan vroeger.
+- Op een heel groot scherm worden de prenten van Fien en Jef vergroot; ze zijn 300 tot 360 beeldpunten hoog en kunnen daar iets zachter ogen.
+- Niet getest op een echte Chromebook.
+
+**Wat ons van mening zou doen veranderen:** mist een kind op de Chromebook de knop Verder bovenaan bij "Licht aan", of zoekt het de slotzin van een spel, dan gaat de slotzin terug naar de plaats van de opdracht. Vindt Nick het slotscherm zonder toetsenbord te anders, dan komt de lege plaats terug (een regel in de stijl).
+
 ## 13. Privacy en veiligheid
 
 - Geen externe bronnen: geen CDN, geen analytics, geen Google Fonts.
