@@ -98,6 +98,8 @@ Waarop steunt dit? **Eigen keuze.**
 - De toets die moet komen: lichte vingerkleur als achtergrond en een ring in de volle vingerkleur.
 - Bultjes op f en j.
 - Randtoetsen (Tab, zoektoets, Shift links en rechts, Enter in twee delen) zijn vaag en zonder opschrift. Uitzondering: moet het kind op Enter drukken om verder te gaan, dan licht de Enter-toets op, met opschrift.
+- **Alleen in "Toetsenjacht" (les 0)** zijn Shift (links en rechts), Enter en Backspace echte toetsen: wit, met hun naam erop en de streep van de pink (paars). De Backspace-toets ligt in de cijferrij; alleen in deze stap staat die ene toets erbij, rechts boven Enter. De kaart is in deze stap dus iets lager. Er komt geen cijferrij bij (`toonNaamtoetsen`).
+- **Een toets die het kind indrukt (les 0):** ze licht een halve seconde op in de volle kleur van de vinger, met een wit opschrift, en dooft dan (`lichtOp`). In "Voel de bultjes" blijven de twee toetsen branden tot ze allebei gevonden zijn. In les 1 tot 5 is dat anders: daar krijgt een juiste toets 0,2 seconde de lichte vingerkleur (`flits`). Zie beslissingen 12u.
 - Links en rechts een getekende hand: vier afgeronde vingers, een handpalm die naar onder smaller wordt en een duim die schuin naar de spatiebalk wijst. Eerst alle vormen met alleen een omtrek, daarna dezelfde vormen gevuld erbovenop, zodat er geen lijnen door de hand lopen.
 - De vinger die moet typen krijgt de volle vingerkleur en een dikkere omtrek, de andere de lichte kleur.
 - Onder het toetsenbord staat een zin: "Typ de k met je rechtermiddelvinger" of "Druk de spatiebalk in met je duim".
@@ -163,6 +165,8 @@ Waarop steunt dit? **Eigen keuze** (K21), als gevolg van het rijenbeeld in de pr
 Het vroegere geel `#FFD34D` haalde maar 13 tegenover het oranje van de middelvinger. Verander de raamkleuren dus niet zonder nieuwe meting.
 
 ### De lamp van "Duim op de spatiebalk"
+
+> Sinds de ombouw van les 0 (beslissingen 12u) gebruikt geen les de lamp nog. De bouwsteen blijft bestaan (`src/weergave/lamp.ts`, `zoek-toets` met alleen de spatiebalk), met zijn tests.
 
 - Een gloeilamp met dezelfde omtrek en dezelfde kleuren als de ramen: uit `#3B4256`, aan `#FFEE99`.
 - Als ze brandt, staan er stralen rond: zo zie je het ook zonder op de kleur te letten.
@@ -272,3 +276,18 @@ Elk spel in een les gebruikt dezelfde indeling (`src/spellen/sjabloon.ts`). Een 
 **De strook** heeft een vaste verhouding: 1270 op 150, zo breed als de kaart en hoogstens 38% van de hoogte van het podium. Ze is in drie lagen gebouwd (`src/spellen/beek-strook.ts`): de achtergrond, de stenen, en Fien en Jef. De app tekent de achtergrond zelf, in de klare lijn (deel 7 en 8). Wie later een prent uit een beeldgenerator wil gebruiken, vervangt alleen de achtergrond en past de plaats van de stenen en de figuren aan; het spel zelf verandert niet.
 
 **Waarop steunt dit? Eigen keuze**, als toepassing van deel 1 (rust), deel 6 (vaste zones), deel 9 (opdrachten) en deel 10 (overzicht). Nick zag een mockup en koos op 27 november 2026: de app tekent de strook, de letters staan in het midden, Fien en Jef zwaaien op het einde. Te toetsen in de klastest: vinden kinderen de spelletjes saai, of zien ze geen verschil met de oefenregels? Dan krijgt elk spel een korte beloning op het einde of een kleine verandering in de strook, nooit in de tekst.
+
+## 12. Les 0: de oriëntatieles in het klein
+
+Goed zitten, Toetsenjacht, Voel de bultjes en Links, rechts, duim gebruiken dezelfde opbouw als "Licht aan in het huis" (deel 10): de opdracht bovenaan, Fien en Jef met hun tekstballon vlak links naast het voorwerp waar het om gaat, samen als een groep in het midden van de kaart. Op het einde komt de knop Verder op de plaats van de opdracht.
+
+- **De tekstballon van Fien en Jef** is altijd drie regels hoog en heeft zijn plaats van bij het begin. In Goed zitten staat er de startzin in, in Toetsenjacht de zin over de toets. In Voel de bultjes en Links, rechts, duim is hij onzichtbaar tot de slotzin.
+- **Een melding van de app** ("Nog niet. Kijk op het toetsenbord.", "Gevonden! ...", "Andere hand!") staat op een vaste regel onder het voorwerp, in dezelfde stijl als "Wacht op de lamp." (`maakMelding`). De regel is er van bij het begin; er verspringt niets.
+- **Goed zitten:** drie kaartjes naast elkaar (wit, rand `--rand-knop`, titel in Nunito, uitleg in Andika), de knop Verder eronder.
+- **Toetsenjacht:** de toets groot getekend in een vak met een vaste maat (tekenvlak 360 op 150), wit met een donkere omtrek en onderaan de streep in de vingerkleur, zoals een toets van het schermtoetsenbord. Het teken op de toets is getekend, geen letterteken: zo is het op elk toestel hetzelfde. Enter heeft de vorm van een omgekeerde L, zoals op een Belgische Chromebook. De naam staat eronder (Nunito, vet).
+- **Voel de bultjes:** twee toetsen met een bultje, zonder letter. Ingedrukt: blauw (de wijsvinger) met een wit bultje.
+- **Links, rechts, duim:** een kaart met het woord (Nunito, vet), met de streep in de kleur van de vinger: blauw voor de wijsvingers, grijs voor de duim.
+- **Klaar:** in Toetsenjacht en Links, rechts, duim komt op de plaats van het voorwerp een vinkje. In Voel de bultjes blijven de bultjes blauw.
+- Er beweegt niets (deel 1). Twee keer na elkaar hetzelfde woord in Links, rechts, duim: de teller onderaan ("7 van 12") en de toets die oplicht tonen dat de tik geteld is.
+
+Waarop steunt dit? **Eigen keuze**, in de lijn van de bestaande schermen; de volgorde, de teksten en het gedrag komen uit de proefversie van Nick (beslissingen 12u).

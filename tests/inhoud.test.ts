@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { DELEN, LESSEN, t } from "../src/content";
+import type { Blok } from "../src/content/types";
 import tekstenNl from "../src/content/nl-BE/teksten.json";
 import { controleerRegel } from "../src/logica/regelcheck";
 
@@ -27,7 +28,7 @@ describe("lesinhoud", () => {
         for (const teken of item) expect(geleerd.has(teken), `les ${les.id}: "${item}"`).toBe(true);
       }
     }
-    expect(aantal).toBe(262);
+    expect(aantal).toBe(261);
   });
 
   it("voldoet aan de regelcontrole: hoogstens 4 keer dezelfde vinger en 7 letters dezelfde hand na elkaar", () => {
@@ -101,6 +102,59 @@ describe("lesinhoud", () => {
     }
   });
 
+  // Les 0 is de oriëntatieles in het klein (docs/beslissingen.md, 12u): dezelfde
+  // stappen, in dezelfde volgorde.
+  describe("les 0: de oriëntatieles in het klein", () => {
+    const les0 = LESSEN[0];
+    const blok = <T extends Blok["type"]>(type: T) => les0.online.find((b) => b.type === type) as Extract<Blok, { type: T }>;
+
+    it("heeft acht stappen in de volgorde van de oriëntatieles, samen ongeveer 7 minuten", () => {
+      expect(les0.online.map((b) => b.type)).toEqual(["intro", "houding", "toetsenbordcheck", "spel", "toetsenjacht", "bultjes", "tik", "afsluiter"]);
+      const duur = les0.online.reduce((som, b) => som + b.duurMinuten, 0);
+      expect(duur).toBeGreaterThanOrEqual(6.5);
+      expect(duur).toBeLessThanOrEqual(7.5);
+    });
+
+    it("meet niets: geen eindoefening, geen lamp", () => {
+      expect(les0.online.some((b) => b.type === "eindoefening" || b.type === "zoek-toets")).toBe(false);
+    });
+
+    it("Goed zitten: drie kaartjes", () => {
+      expect(blok("houding").kaartjes).toHaveLength(3);
+    });
+
+    it("Licht aan: 6 rondes", () => {
+      expect(blok("spel").rondes).toBe(6);
+    });
+
+    it("Toetsenjacht: vier toetsen met naam en zin, daarna dezelfde vier door elkaar", () => {
+      const jacht = blok("toetsenjacht");
+      expect(jacht.naamtoetsen.map((x) => x.toets)).toEqual(["spatie", "enter", "backspace", "shift"]);
+      for (const x of jacht.naamtoetsen) {
+        expect(x.naam.trim()).toBeTruthy();
+        expect(x.zin.trim()).toBeTruthy();
+      }
+      expect([...jacht.herhaling].sort()).toEqual(["backspace", "enter", "shift", "spatie"]);
+    });
+
+    it("Toetsenjacht: de laatste gevraagde toets is nooit Enter (anders slaat die Enter het slot over)", () => {
+      expect(blok("toetsenjacht").herhaling.at(-1)).not.toBe("enter");
+    });
+
+    it("Links, rechts, duim: twaalf keer, elke vinger vier keer", () => {
+      const volgorde = blok("tik").volgorde;
+      expect(volgorde).toHaveLength(12);
+      for (const kant of ["links", "rechts", "duim"]) expect(volgorde.filter((k) => k === kant)).toHaveLength(4);
+    });
+
+    it("noemt de letters f en j nog niet: dat doet les 1", () => {
+      for (const b of [blok("bultjes"), blok("tik"), blok("afsluiter")]) {
+        expect(JSON.stringify(b)).not.toMatch(/\b(de|een|letter) [fj]\b/i);
+        expect(JSON.stringify(b)).not.toMatch(/\[[fj]\]/i);
+      }
+    });
+  });
+
   // K26 (projectdocument 14, docs/stijlgids.md deel "Opdrachten en teksten"):
   // elke oefening zegt wat je doet, elk spel zegt waar je naartoe werkt.
   describe("opdrachten en doelzinnen (K26)", () => {
@@ -109,12 +163,11 @@ describe("lesinhoud", () => {
     it("elke oefening en elk spel heeft een korte opdracht", () => {
       for (const les of LESSEN) {
         for (const blok of les.online) {
-          if (!["zoek-toets", "reeks", "spel", "eindoefening"].includes(blok.type)) continue;
-          // Twee blokken halen hun opdracht uit teksten.json: het spel "Licht aan"
-          // (de opdracht verandert per ronde) en "Klaar voor de start".
+          if (!["zoek-toets", "reeks", "spel", "eindoefening", "houding", "toetsenjacht", "bultjes", "tik"].includes(blok.type)) continue;
+          // Een blok haalt zijn opdracht uit teksten.json: het spel "Licht aan"
+          // (de opdracht verandert per ronde).
           let opdracht = blok.tekst;
           if (blok.type === "spel" && blok.spel === "licht-aan") opdracht = t("lichtaan.opdracht", { rij: "woonkamer" });
-          if (blok.type === "eindoefening" && blok.soort === "houding") opdracht = t("houding.opdracht");
           expect(opdracht, `les ${les.id}: ${blok.titel} heeft geen opdracht`).toBeTruthy();
           expect(zinnen(opdracht!).length, `les ${les.id}: ${blok.titel}: hoogstens drie korte zinnen`).toBeLessThanOrEqual(3);
         }
@@ -127,6 +180,16 @@ describe("lesinhoud", () => {
           if (blok.type !== "spel") continue;
           expect(blok.doel?.trim(), `les ${les.id}: ${blok.titel} heeft geen doelzin`).toBeTruthy();
           expect(zinnen(blok.doel).length, `les ${les.id}: ${blok.titel}: doelzin te lang`).toBeLessThanOrEqual(3);
+        }
+      }
+    });
+
+    it("elke stap van de oriëntatieles (les 0) heeft een slotzin: wat kan je nu", () => {
+      for (const les of LESSEN) {
+        for (const blok of les.online) {
+          if (blok.type !== "toetsenjacht" && blok.type !== "bultjes" && blok.type !== "tik") continue;
+          expect(blok.slot.trim(), `les ${les.id}: ${blok.titel} heeft geen slotzin`).toBeTruthy();
+          expect(zinnen(blok.slot).length, `les ${les.id}: ${blok.titel}: slotzin te lang`).toBeLessThanOrEqual(3);
         }
       }
     });

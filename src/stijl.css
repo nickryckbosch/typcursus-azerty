@@ -2381,13 +2381,11 @@ button {
   height: min(var(--h), 45cqh);
 }
 
-/* ---------- Fien en Jef dicht bij het huis of de lamp (K27 fase 2) ----------
+/* ---------- Fien en Jef dicht bij het huis (K27 fase 2) ----------
    "Licht aan in het huis": Fien en Jef staan met hun tekstballon vlak links
    naast het huis, en samen staan ze als een groep in het midden van de kaart.
    De knop Verder komt op het einde op de plaats van de opdracht, zodat er
    rechts geen lege zone nodig is.
-   "Klaar voor de start": de lamp blijft in het midden (zoals bij "Duim op de
-   spatiebalk"), Fien en Jef staan er vlak links naast.
    De maten liggen vast: er verspringt niets (K20). */
 .podium .blok.oefenkaart.blok-lichtaan {
   grid-template-columns: minmax(0, 1fr) auto auto minmax(0, 1fr);
@@ -2405,9 +2403,6 @@ button {
   display: none;
 }
 
-.podium .blok.oefenkaart.blok-houding {
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-}
 
 /* De knop Verder op de plaats van de opdracht: ze staan gestapeld. */
 .zone-opdracht.met-enter {
@@ -2426,12 +2421,8 @@ button {
   aspect-ratio: 538 / 316;
 }
 
-.blok-houding .zone-veld {
-  width: clamp(190px, 20cqw, 260px);
-}
 
-.blok-lichtaan .zone-figuren.met-doel,
-.blok-houding .zone-figuren.met-doel {
+.blok-lichtaan .zone-figuren.met-doel {
   align-items: flex-end;
   padding: 0 clamp(8px, 1.4cqw, 20px) 0 0;
 }
@@ -2440,19 +2431,16 @@ button {
   width: clamp(200px, 24cqw, 310px);
 }
 
-.blok-lichtaan .zone-figuren.met-doel > *,
-.blok-houding .zone-figuren.met-doel > * {
+.blok-lichtaan .zone-figuren.met-doel > * {
   width: min(100%, 290px);
 }
 
-.blok-lichtaan .zone-figuren.met-doel .doel-ballon,
-.blok-houding .zone-figuren.met-doel .doel-ballon {
+.blok-lichtaan .zone-figuren.met-doel .doel-ballon {
   display: flex;
   align-items: center;
 }
 
-.podium .blok-lichtaan .zone-figuren.met-doel .figuur,
-.podium .blok-houding .zone-figuren.met-doel .figuur {
+.podium .blok-lichtaan .zone-figuren.met-doel .figuur {
   object-position: top;
 }
 
@@ -2489,4 +2477,319 @@ html.als-dia #app {
   transform-origin: 0 0;
   /* een lang scherm (voor de leerkracht) scrolt binnen de dia */
   overflow: hidden auto;
+}
+
+/* ---------- Les 0, de oriëntatieles in het klein (docs/beslissingen.md, 12u) ----------
+   Goed zitten, Toetsenjacht, Voel de bultjes en Links, rechts, duim gebruiken
+   dezelfde opbouw als "Licht aan in het huis": Fien en Jef met hun tekstballon
+   vlak links naast het voorwerp waar het om gaat, samen als een groep in het
+   midden van de kaart. De knop Verder komt op het einde op de plaats van de
+   opdracht. Alle maten liggen vast: er verspringt niets (K20). */
+.podium .blok.oefenkaart.blok-groep {
+  grid-template-columns: minmax(0, 1fr) auto auto minmax(0, 1fr);
+}
+
+.blok-groep .zone-figuren {
+  grid-column: 2;
+}
+
+.blok-groep .zone-veld {
+  grid-column: 3;
+  width: clamp(320px, 42cqw, 540px);
+}
+
+.blok-groep .zone-voet {
+  display: none;
+}
+
+.blok-groep .zone-figuren.met-doel {
+  align-items: flex-end;
+  width: clamp(200px, 24cqw, 310px);
+  padding: 0 clamp(8px, 1.4cqw, 20px) 0 0;
+}
+
+.blok-groep .zone-figuren.met-doel > * {
+  width: min(100%, 290px);
+}
+
+/* De tekstballon is altijd drie regels hoog: een langere of kortere zin
+   verschuift Fien en Jef niet. */
+.blok-groep .zone-figuren.met-doel .doel-ballon {
+  display: flex;
+  align-items: center;
+  flex: none;
+  box-sizing: border-box;
+  min-height: calc(3 * 1.35em + 2 * clamp(4px, 2.6cqh, 14px) + 2px);
+}
+
+.blok-groep .zone-figuren.met-doel .doel-ballon.is-slot {
+  min-height: 0;
+}
+
+.podium .blok-groep .zone-figuren.met-doel .figuur {
+  object-position: top;
+}
+
+/* De melding van de app ("Nog niet. Kijk op het toetsenbord."): vaste plek onder het voorwerp. */
+.blok-groep .wachtzin,
+.jacht-naam {
+  width: 100%;
+}
+
+.blok-groep .wachtzin {
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Goed zitten: drie rustige kaartjes naast elkaar, de knop Verder eronder. */
+.blok-zitten .zone-veld {
+  width: clamp(420px, 52cqw, 640px);
+  gap: clamp(6px, 4cqh, 18px);
+}
+
+.zit-kaartjes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(8px, 1.4cqw, 18px);
+  width: 100%;
+}
+
+.zit-kaartje {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2em;
+  min-height: clamp(54px, 26cqh, 96px);
+  padding: 0.3em 0.6em;
+  border: 2px solid var(--rand-knop);
+  border-radius: 14px;
+  background: var(--vlak);
+  text-align: center;
+  line-height: 1.25;
+}
+
+.zit-kaartje b {
+  font-family: var(--kop);
+  font-size: clamp(15px, 6.6cqh, 23px);
+  font-weight: 800;
+  color: var(--tekst);
+}
+
+.zit-kaartje span {
+  font-family: var(--lees);
+  font-size: clamp(13px, 5cqh, 18px);
+  color: var(--zacht);
+}
+
+/* Toetsenjacht: de toets groot getekend, in een vak met een vaste maat. */
+.jacht-vak {
+  flex: none;
+  height: clamp(60px, 34cqh, 132px);
+  aspect-ratio: 360 / 150;
+}
+
+.jacht-toets {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.jacht-streep {
+  fill: var(--vol);
+}
+
+.jacht-vorm {
+  fill: var(--vlak);
+  stroke: var(--tekst);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.jacht-teken {
+  fill: none;
+  stroke: var(--tekst);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.jacht-naam {
+  margin: 0;
+  text-align: center;
+  font-family: var(--kop);
+  font-size: clamp(18px, 9cqh, 32px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--tekst);
+}
+
+.jacht-vak {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jacht-vak .vinkje,
+.tik-kaart .vinkje {
+  height: 70%;
+  width: auto;
+}
+
+.tik-kaart.tik-klaar {
+  border-color: var(--rand-knop);
+  border-bottom-color: var(--rand-knop);
+}
+
+.tik-kaart span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Voel de bultjes: twee toetsen met een bultje, zonder letter. Ingedrukt: blauw
+   (de kleur van de wijsvinger), met een wit bultje. */
+.bult-kaartjes {
+  display: flex;
+  gap: clamp(14px, 3cqw, 40px);
+}
+
+.bult-kaart {
+  position: relative;
+  width: clamp(54px, 30cqh, 112px);
+  aspect-ratio: 1;
+  border: 3px solid var(--tekst);
+  border-bottom-width: clamp(6px, 3cqh, 11px);
+  border-bottom-color: var(--vol);
+  border-radius: 18%;
+  background: var(--vlak);
+  color: var(--tekst);
+}
+
+.bult-kaart::after {
+  content: "";
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  bottom: 16%;
+  height: 9%;
+  border-radius: 99px;
+  background: currentColor;
+}
+
+.bult-kaart.aan {
+  background: var(--vol);
+  border-color: var(--tekst);
+  border-bottom-color: var(--tekst);
+  color: #fff;
+}
+
+/* Links, rechts, duim: een kaart met een woord. */
+.tik-kaart {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(190px, 24cqw, 320px);
+  height: clamp(60px, 32cqh, 124px);
+  border: 3px solid var(--tekst);
+  border-bottom-width: clamp(6px, 3cqh, 11px);
+  border-bottom-color: var(--vol);
+  border-radius: 18px;
+  background: var(--vlak);
+  font-family: var(--kop);
+  font-size: clamp(26px, 16cqh, 58px);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--tekst);
+}
+
+/* ---------- Het schermtoetsenbord in les 0 ----------
+   Een toets die het kind indrukt, licht een halve seconde op in de volle kleur
+   van de vinger (toetsenbord.lichtOp). */
+.toets.gedrukt,
+.toets.geleerd.gedrukt,
+.toets.volgende.gedrukt {
+  background: var(--vol);
+  border-color: var(--vol);
+  color: #fff;
+}
+
+/* Toetsenjacht: Shift, Enter en Backspace zijn echte toetsen met hun naam erop.
+   De Backspace-toets ligt in de cijferrij; alleen in deze stap staat ze erbij. */
+.toets-naam {
+  display: none;
+  font-family: var(--kop);
+  font-size: calc(var(--k) * 0.25);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.tb-rij-backspace {
+  display: none;
+}
+
+.met-naamtoetsen .tb-rij-backspace {
+  display: flex;
+}
+
+.met-naamtoetsen .toets-naam,
+.met-naamtoetsen .enter-label {
+  display: block;
+}
+
+.met-naamtoetsen .toets-met-naam,
+.met-naamtoetsen .toets-enter {
+  --vol: var(--paars);
+  --licht: var(--paars-licht);
+  background: var(--vlak);
+  border-color: var(--rand-knop);
+  color: var(--tekst);
+}
+
+.met-naamtoetsen .toets-met-naam,
+.met-naamtoetsen .toets-enter-onder {
+  border-bottom-color: var(--vol);
+}
+
+.met-naamtoetsen .toets-enter-boven::after {
+  border-bottom-color: var(--rand-knop);
+}
+
+.met-naamtoetsen .toets.volgende {
+  background: var(--licht);
+  border-color: var(--vol);
+}
+
+.met-naamtoetsen .toets.gedrukt {
+  background: var(--vol);
+  border-color: var(--vol);
+  color: #fff;
+}
+
+/* De Enter-toets bestaat uit twee delen: de ring loopt rond de hele toets,
+   niet door de naad tussen de delen. */
+.toets-enter-onder.volgende {
+  z-index: 2;
+  clip-path: inset(0 -8px -8px -8px);
+}
+
+.toets-enter-boven.volgende::after,
+.toets-enter-boven.gedrukt::after {
+  border-bottom-color: var(--vol);
+}
+
+/* Op het einde van Toetsenjacht is Enter weer "Verder": de Enter-toets licht op zoals altijd. */
+.met-naamtoetsen .toets-enter.enter-wacht {
+  background: var(--accent-licht);
+  border-color: var(--accent);
+  color: var(--accent-donker);
+}
+
+.met-naamtoetsen .toets-enter-onder.enter-wacht,
+.met-naamtoetsen .toets-enter-boven.enter-wacht::after {
+  border-bottom-color: var(--accent);
 }

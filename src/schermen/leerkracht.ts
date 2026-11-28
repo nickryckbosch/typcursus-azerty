@@ -73,11 +73,12 @@ export function leerkrachtScherm(app: App, wortel: HTMLElement): Scherm {
     el(
       "details",
       { class: "lesfiche" },
-      el("summary", {}, `${t("les.nummer", { nummer: les.id })}: ${les.titel} (${les.klassikaal.duurMinuten} min)`),
+      // Les 0 heeft geen eigen klassikale start (de oriëntatieles komt ervoor in de plaats): geen duur, geen lijst.
+      el("summary", {}, `${t("les.nummer", { nummer: les.id })}: ${les.titel}${les.klassikaal.stappen.length > 0 ? ` (${les.klassikaal.duurMinuten} min)` : ""}`),
       el("p", {}, les.klassikaal.materiaal),
       el(
         "ol",
-        {},
+        { ...(les.klassikaal.stappen.length === 0 ? { hidden: true } : {}) },
         ...les.klassikaal.stappen.map((s) =>
           el(
             "li",

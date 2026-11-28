@@ -5,7 +5,7 @@
 import { t } from "../content";
 import type { AfsluiterBlok } from "../content/types";
 import { heeftExtraOefenen } from "../logica/extraoefenen";
-import { isLesOpen, markeerEindeBereikt } from "../logica/voortgang";
+import { isLesOpen, markeerAfgewerkt, markeerEindeBereikt } from "../logica/voortgang";
 import { el } from "../weergave/dom";
 import { sterIcoon } from "../weergave/figuren";
 import { slotscherm } from "./oefenscherm";
@@ -14,7 +14,6 @@ import type { BlokFunctie } from "./context";
 
 export const afsluiter: BlokFunctie<AfsluiterBlok> = (blok, ctx) => {
   const { app, les } = ctx;
-  const resultaat = ctx.sessie.resultaat;
   // Extra oefenen (K15): een korte afsluiter. Er telt niets mee voor de voortgang.
   // "Naar de lessen" is de hoofdknop: dat is de knop die Enter kiest.
   if (ctx.extra) {
@@ -29,6 +28,17 @@ export const afsluiter: BlokFunctie<AfsluiterBlok> = (blok, ctx) => {
     });
     return {};
   }
+
+  // Een les zonder meting (les 0, de oriëntatieles): ze is af zodra het kind het
+  // einde bereikt, en de volgende les gaat open. Iedereen krijgt drie sterren,
+  // als aanmoediging (vraag van een kind, 28 november 2026: "waarom krijg ik
+  // geen sterren?").
+  const heeftMeting = les.online.some((b) => b.type === "eindoefening" && b.doelNauwkeurigheid !== null);
+  if (!heeftMeting) {
+    markeerAfgewerkt(app.voortgang, les.id);
+    ctx.sessie.resultaat ??= { nauwkeurigheid: 1, gehaald: true, sterren: 3, kort: false };
+  }
+  const resultaat = ctx.sessie.resultaat;
 
   // Het kind is tot het einde van de les geraakt: vanaf nu is "Extra oefenen" open,
   // ook als de 90% niet gehaald is.

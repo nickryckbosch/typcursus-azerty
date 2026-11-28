@@ -1,7 +1,7 @@
 // Eindoefening: bepaalt of de volgende les opengaat (minstens 90% van de
 // posities meteen juist; ook voor de korte versie).
 // Na twee mislukte pogingen op rij komt de korte versie, met een aanmoediging
-// van Fien en Jef. In les 0 is het een houdingsoefening zonder meting.
+// van Fien en Jef.
 
 import { t } from "../content";
 import type { EindoefeningBlok } from "../content/types";
@@ -9,13 +9,10 @@ import { woordenPerMinuut } from "../logica/typen";
 import { DOEL_NAUWKEURIGHEID, moetKortZijn, registreerEindoefening } from "../logica/voortgang";
 import { el } from "../weergave/dom";
 import type { BlokFunctie, BlokInstantie } from "./context";
-import { houding } from "./houding";
 import { typRegels } from "./typregels";
 import { oefenscherm } from "./oefenscherm";
 
 export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
-  if (blok.soort === "houding") return houding(blok, ctx);
-
   const kort = moetKortZijn(ctx.app.voortgang, ctx.les.id) && (blok.regelsKort?.length ?? 0) > 0;
   const regels = kort ? blok.regelsKort! : blok.regels;
   let actief: BlokInstantie | null = null;

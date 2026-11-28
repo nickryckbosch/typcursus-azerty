@@ -29,7 +29,7 @@ function maakContext(les: Les) {
     app: { voortgang: nieuweVoortgang(), bewaar() {}, lessen: LESSEN } as unknown as BlokContext["app"],
     les,
     podium,
-    toetsenbord: { element: document.createElement("div"), markeer() {}, flits() {}, lichtRijOp() {}, toonEnter() {}, benadruk() {}, toonRij: (r: string | null) => void rijen.push(r) } as unknown as BlokContext["toetsenbord"],
+    toetsenbord: { element: document.createElement("div"), markeer() {}, flits() {}, lichtOp() {}, doof() {}, lichtRijOp() {}, toonEnter() {}, benadruk() {}, toonRij: (r: string | null) => void rijen.push(r) } as unknown as BlokContext["toetsenbord"],
     handen: { toon() {}, benadruk() {} } as unknown as BlokContext["handen"],
     toonHulp() {},
     toonFout() {},
@@ -51,6 +51,18 @@ function maakContext(les: Les) {
   };
   return { ctx, aanslagen: () => regels.flatMap((r) => r.aanslagen), aantalVolgende: () => volgende, laatsteRij: () => rijen[rijen.length - 1] ?? null };
 }
+
+// De oefening met de lamp (zoek-toets met alleen de spatiebalk). Sinds de
+// ombouw van les 0 tot de oriëntatieles in het klein gebruikt geen les ze nog;
+// de bouwsteen blijft bestaan, dus de tests ook.
+const LAMP_BLOK: ZoekToetsBlok = {
+  type: "zoek-toets",
+  titel: "Duim op de spatiebalk",
+  duurMinuten: 0.5,
+  toetsen: [" "],
+  aantal: 5,
+  tekst: "Leg je duimen op de spatiebalk en druk eerst op ((Start)). Gaat de lamp aan? Druk [spatie].",
+};
 
 function druk(blok: BlokInstantie, teken: string): void {
   const code = toetsVoorTeken(teken)?.toets.code ?? "";
@@ -151,13 +163,14 @@ describe("snel typen: geen enkele aanslag gaat verloren", () => {
     expect(ctx.podium.querySelector(".spel-regel .fout")).toBeNull();
   });
 
-  it("licht aan in het huis: negen juiste rijen 30 ms na elkaar", () => {
+  it("licht aan in het huis: zes juiste rijen 30 ms na elkaar, daarna branden alle ramen", () => {
     const les = LESSEN[0];
     const blok = vind<SpelBlok>(les, (b) => b.type === "spel" && b.spel === "licht-aan");
     const { ctx } = maakContext(les);
     const inst = lichtAan(blok, ctx);
     const toetsVoorRij: Record<string, string> = { zolder: "e", woonkamer: "f", kelder: "c" };
-    for (let i = 0; i < 9; i++) {
+    expect(blok.rondes).toBe(6);
+    for (let i = 0; i < 6; i++) {
       const opdracht = ctx.podium.querySelector(".opdracht-tekst")!.textContent!;
       const rij = Object.keys(toetsVoorRij).find((r) => opdracht.includes(r))!;
       druk(inst, toetsVoorRij[rij]);
@@ -168,7 +181,7 @@ describe("snel typen: geen enkele aanslag gaat verloren", () => {
 
   it("te vroeg drukken bij de lamp: geen fout, wel de zin \"Wacht op de lamp.\"", () => {
     const les = LESSEN[0];
-    const blok = vind<ZoekToetsBlok>(les, (b) => b.type === "zoek-toets");
+    const blok = LAMP_BLOK;
     const { ctx, aanslagen } = maakContext(les);
     const inst = zoekToets(blok, ctx);
     const zin = ctx.podium.querySelector(".wachtzin")!;
@@ -189,7 +202,7 @@ describe("snel typen: geen enkele aanslag gaat verloren", () => {
 
   it("eerst lezen, dan starten (K28): zonder Start gaat de lamp nooit aan", () => {
     const les = LESSEN[0];
-    const blok = vind<ZoekToetsBlok>(les, (b) => b.type === "zoek-toets");
+    const blok = LAMP_BLOK;
     const { ctx, aanslagen } = maakContext(les);
     const inst = zoekToets(blok, ctx);
     const lamp = () => ctx.podium.querySelector(".lamp-plek .lamp-tekening")!;
