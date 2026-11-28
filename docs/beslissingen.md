@@ -367,6 +367,21 @@ Nick testte op 28 november op een groot scherm, deels met een kind. Dit zijn de 
 - **Waarop steunt dit? Eigen keuze**, na het hardop proberen door Nick. Nog te toetsen bij een kind van 9 of 10 jaar en in de klastest.
 
 
+## 12o. Nieuwe Fien en Jef: het blad met zes houdingen (28 november 2026)
+
+- **Keuze:** de figuren in de app komen nu uit `docs/beelden/fien-en-jef-zes-houdingen.png`: de eerste stripstijl van ChatGPT, slanker en ouder. Alleen de prenten in `src/beelden` zijn vervangen; de indeling van de schermen is niet veranderd.
+- **Waarom nu:** Nick wil de nieuwe figuren al zien bij de test op een Chromebook (30 november). De rest van de opdracht `docs/opdrachten/2026-11-28-vormgeving-na-test.md` (rijen benoemen, rust en overzicht, schalen) blijft voor na die test. Punt 1 van die opdracht is hiermee gedaan.
+- **Waarom deze figuren:** Nick vond deze stijl mooier en beter passen bij kinderen van 9 tot 12 jaar (projectdocument 22).
+- **Hoe (`scripts/knip-figuren.py`):**
+  - het script zoekt de twaalf figuren zelf op het blad, aan de lege kolommen ertussen;
+  - de roomwitte achtergrond wordt doorzichtig, ook tussen paardenstaart en nek; het koele wit van schoenen, ogen en tanden blijft; het lichte randje rond de zwarte lijn gaat weg, zodat er geen wit randje staat op het gras van de strook;
+  - elke houding krijgt dezelfde lichaamslengte en dezelfde voetlijn, en Fien en Jef houden hun verhouding van het blad (Jef is iets groter). Zo verspringt er niets als een houding wisselt (K20);
+  - "zwaai" is de hele figuur; de vijf andere houdingen zijn afgesneden op de helft van de prent (ter hoogte van de zak van de trui), zoals de vorige figuren, omdat de zones naast de oefening daarvoor gemaakt zijn;
+  - "trots" is nu een eigen houding en geen kopie van "duim" meer.
+- **Wat opvalt:** de nieuwe figuren hebben een kleiner hoofd, dus de gezichten naast de oefening zijn kleiner dan vroeger. Groter tonen vraagt een andere indeling; dat hoort bij de opdracht voor na de Chromebook-test (Fien en Jef groot in het midden).
+- **Waarop steunt dit? Eigen keuze** (oordeel van Nick), te toetsen in de klastest: spreekt de stijl kinderen aan?
+
+
 ## 13. Privacy en veiligheid
 
 - Geen externe bronnen: geen CDN, geen analytics, geen Google Fonts.
