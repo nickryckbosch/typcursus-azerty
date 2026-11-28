@@ -2053,7 +2053,6 @@ button {
   fill: #1b2a4a;
 }
 
-/* De verdieping die aan de beurt is: haar woord wordt donker en blijft stil staan. */
 /* De rand van de hulp rond het woord: dezelfde rand als de rij op het toetsenbord. */
 .huis-woord .woord-hulp-rand {
   fill: none;
@@ -2066,12 +2065,20 @@ button {
   visibility: visible;
 }
 
+/* De verdieping die aan de beurt is: haar woord krijgt de gele kleur van een
+   raam dat brandt ("hier gaat het licht aan"), met een donkere omtrek zodat het
+   vakje ook zonder kleur opvalt. De hulprand eromheen blijft blauw, zoals de
+   balk rond de rij op het toetsenbord: zo horen woord en rij bij elkaar
+   (Nick, 28 november 2026). */
 .huis-woord.aan-de-beurt rect:not(.woord-hulp-rand) {
-  fill: #1b2a4a;
+  fill: #ffee99;
+  stroke: #1b2a4a;
+  stroke-width: 2.5;
 }
 
 .huis-woord.aan-de-beurt text {
-  fill: #ffffff;
+  fill: #1b2a4a;
+  font-weight: 700;
 }
 
 /* ---------- Afsluiter ---------- */
