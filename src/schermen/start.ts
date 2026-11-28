@@ -15,7 +15,7 @@ import { el, svg } from "../weergave/dom";
 import { fien, jef, slotje, sterIcoon, vinkje } from "../weergave/figuren";
 import { voorleesKnop } from "../weergave/kop";
 import { tekenTonen } from "../weergave/tekens";
-import logoUrl from "../beelden/logo-tokkelaar.webp";
+import logoUrl from "../beelden/logo-fien-en-jef.webp";
 
 type Toestand = "klaar" | "nu" | "slot" | "binnenkort";
 
@@ -202,7 +202,7 @@ export function startScherm(app: App, wortel: HTMLElement): Scherm {
       el(
         "header",
         { class: "start-kop" },
-        // Links het merk (het logo van Tokkelaar, met eronder het deel: Tokkeldorp),
+        // Links het merk (het logo van Fien en Jef, met eronder het deel: Tokkeldorp),
         // in het midden de startzin met de slogan, rechts de twee knoppen: drie
         // rustige blokken. Het logo is een prent (projectdocument 25, N2); de naam
         // staat als alt-tekst in de kop, voor schermlezers.
