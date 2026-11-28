@@ -212,7 +212,7 @@ describe("snel typen: geen enkele aanslag gaat verloren", () => {
     const opdracht = () => ctx.podium.querySelector(".opdracht-tekst")!.textContent!;
     const gevraagd = () => Object.keys(toetsVoorRij).find((r) => opdracht().includes(r))!;
     // ronde 1 tot 3: woonkamer, zolder, kelder, telkens met hulp en met de plaats van de rij
-    for (const [rij, plaats] of [["woonkamer", "middelste"], ["zolder", "bovenste"], ["kelder", "onderste"]]) {
+    for (const [rij, plaats] of [["woonkamer", "met de bultjes"], ["zolder", "boven de bultjes"], ["kelder", "onder de bultjes"]]) {
       expect(gevraagd()).toBe(rij);
       expect(laatsteRij()).toBe(rij);
       expect(opdracht()).toContain(plaats);

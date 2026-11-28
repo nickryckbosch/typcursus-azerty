@@ -43,16 +43,17 @@ export const afsluiter: BlokFunctie<AfsluiterBlok> = (blok, ctx) => {
   const volgendeOpen =
     volgendeLes !== undefined && isBeschikbaar(volgendeLes) && isLesOpen(app.voortgang, volgendeLes.id, volgorde);
 
-  const knoppen: HTMLButtonElement[] = [];
-  const knop = (tekst: string, actie: () => void) => {
-    const k = el("button", { class: knoppen.length === 0 ? "knop knop-hoofd" : "knop", type: "button", onclick: actie }, tekst);
-    knoppen.push(k);
-    return k;
-  };
+  // De knoppen: eerst verzameld, dan geordend. De eerste is de hoofdknop (vol
+  // blauw, die kiest Enter), de andere zijn lichte tweede knoppen (K27).
+  // Is de les gelukt, dan is "Extra oefenen" de hoofdknop: wie sneller klaar
+  // is, oefent extra tot het kwartier om is (Nick, 28 november 2026).
+  const keuzes: { tekst: string; actie: () => void; extra?: boolean }[] = [];
+  const knop = (tekst: string, actie: () => void, extra = false) => keuzes.push({ tekst, actie, extra });
 
   // De houding op het einde: duim omhoog, of aanmoedigen als het doel niet gehaald is.
   const uitdrukking = resultaat && !resultaat.gehaald ? "aanmoedigend" : "duim";
   const scherm = oefenscherm(ctx, { figuren: uitdrukking, klasse: "blok-afsluiter" });
+  const nietGehaald = resultaat !== null && resultaat !== undefined && !resultaat.gehaald;
 
   if (resultaat) {
     scherm.veld.append(
@@ -77,8 +78,14 @@ export const afsluiter: BlokFunctie<AfsluiterBlok> = (blok, ctx) => {
     scherm.zetOpdracht(blok.tekst ?? "");
     if (volgendeOpen) knop(t("knop.volgendeLes", { nummer: volgendeLes.id }), () => app.naarLes(volgendeLes));
   }
-  if (heeftExtraOefenen(les)) knop(t("knop.extra"), () => app.naarExtra(les));
+  if (heeftExtraOefenen(les)) knop(t("knop.extra"), () => app.naarExtra(les), true);
   knop(t("knop.naarBegin"), () => app.naarStart());
+
+  // Niet gehaald: "Opnieuw" blijft vooraan. Anders gaat "Extra oefenen" vooraan.
+  if (!nietGehaald) keuzes.sort((a, b) => Number(b.extra === true) - Number(a.extra === true));
+  const knoppen = keuzes.map((k, i) =>
+    el("button", { class: i === 0 ? "knop knop-hoofd" : "knop knop-tweede", type: "button", onclick: k.actie }, k.tekst),
+  );
 
   scherm.voet.replaceChildren(el("div", { class: "knoppen" }, ...knoppen));
   // Met Enter kies je de eerste knop; met Tab ga je naar de andere.

@@ -73,7 +73,9 @@ export function maakToetsenbord(geleerd: string[]): ToetsenbordWeergave {
 
   const rijElementen = RIJ_OPMAAK.map(({ rij, voor, na, enter }) => {
     const toetsen = RIJEN.find((r) => r.rij === rij)?.toetsen ?? [];
-    const rijEl = el("div", { class: `tb-rij tb-rij-${rij}` });
+    // Rijen met een stuk van de Enter-toets: de hulprand (toonRij) stopt voor
+    // de Enter-toets, want die hoort bij twee rijen (--na is haar breedte).
+    const rijEl = el("div", enter ? { class: `tb-rij tb-rij-${rij} met-enter`, style: `--na:${na}` } : { class: `tb-rij tb-rij-${rij}` });
     rijEl.append(el("div", { class: "toets toets-rand", style: `--w:${voor}` }));
     for (const toets of toetsen) rijEl.append(toetsElement(toets, TOETS));
     if (enter) {

@@ -79,6 +79,9 @@ export function maakHanden(opschriftLinks: string, opschriftRechts: string): Han
     toon(vingers) {
       actief = vingers;
       zet("actief", (v) => vingers.includes(v));
+      // Moet er een vinger typen, dan worden de andere vingers nog lichter
+      // (test 28 november): licht tegenover donker, ook bij kleurenblindheid.
+      for (const hand of [l.hand, r.hand]) hand.classList.toggle("met-actief", vingers.length > 0);
       zet("nadruk", () => false);
     },
     benadruk() {

@@ -13,7 +13,7 @@ export type Vinger =
   | "rechterpink"
   | "duim";
 
-/** dak = cijferrij, zolder = bovenste rij, woonkamer = thuisrij, kelder = onderste rij */
+/** dak = cijferrij, zolder = rij boven de bultjes, woonkamer = thuisrij (met de bultjes op F en J), kelder = rij onder de bultjes */
 export type Rij = "dak" | "zolder" | "woonkamer" | "kelder" | "spatie";
 
 export type Kleur = "blauw" | "oranje" | "groen" | "paars" | "grijs";

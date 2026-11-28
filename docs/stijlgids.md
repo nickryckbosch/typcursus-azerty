@@ -175,10 +175,10 @@ Elke tekst die een kind leest, volgt deze regels. Ze gelden ook voor elke nieuwe
 - **Wat de tekst belooft, moet je zien gebeuren.** Zegt het slot "We zijn thuis", dan toont de prent Fien en Jef bij hun huis. Kan het beeld dat (nog) niet, dan past de tekst zich aan.
 - **Een woord betekent altijd hetzelfde:**
   - **het huis** is het hele toetsenbord;
-  - **de zolder, de woonkamer en de kelder** zijn de bovenste, middelste en onderste rij;
+  - **de woonkamer** is de rij met de bultjes (waar de F en de J liggen), **de zolder** de rij erboven, **de kelder** de rij eronder. De cijferrij is het dak. Schrijf niet "de bovenste, middelste of onderste rij": een toetsenbord heeft meer rijen (cijfers, F-toetsen), dus "bovenste" is niet duidelijk. De bultjes voel je zonder te kijken (test 28 november: een kind vroeg "Wat is de bovenste rij?");
   - **je plek**: elke vinger heeft een eigen plek in de woonkamer. Na elke toets gaat de vinger "terug naar zijn plek". Schrijf nooit "terug naar huis": wie op de zolder is, is nog altijd in het huis;
   - **thuis** alleen in de startzin ("vingers thuis") en waar Fien en Jef uitleggen wat dat is ("Dan zijn Fien en Jef thuis", "Fien en Jef blijven thuis"): de wijsvingers op de F en de J, de andere vingers ernaast. In een verhaal (het dorp, de egel) betekent huis gewoon een huis.
-- **Een rij krijgt de eerste keren in een les haar plaats erbij:** "de woonkamer, de middelste rij".
+- **Een rij krijgt de eerste keren in een les haar plaats erbij:** "de woonkamer, de rij met de bultjes".
 - **De laatste zin van een intro zegt wat de les brengt** ("Vandaag leer je de f en de j."), geen vraag zonder antwoord.
 - **Woorden die een kind van 9 kent**, korte zinnen, Vlaams Nederlands, zonder klemtoonaccenten.
 

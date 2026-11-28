@@ -237,6 +237,13 @@ button {
   background: #f8f5f0;
 }
 
+/* De focusrand voor wie met het toetsenbord werkt: een dunne ring op een paar
+   pixels afstand, zodat hij niet op een tweede kader lijkt (test 28 november). */
+.knop:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
 .knop-hoofd {
   min-height: 48px;
   padding: 0 22px;
@@ -1107,11 +1114,28 @@ button {
 /* De rij die aan de beurt is (hulp bij "Licht aan in het huis"): dezelfde rand
    als het woordvakje in het huis, zodat het kind ziet dat ze bij elkaar horen.
    Accentblauw: geen vingerkleur, en geen geel (geel betekent "licht aan"). */
-.tb-rij.rij-hulp,
-.tb-rij.rij-op {
-  outline: 4px solid var(--accent);
-  outline-offset: 3px;
+.tb-rij {
+  position: relative;
+  isolation: isolate;
+}
+
+.tb-rij.rij-hulp::before,
+.tb-rij.rij-op::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -6px;
+  border: 3px solid var(--accent);
+  border-radius: calc(var(--k) * 0.25);
   background: var(--accent-licht);
+  pointer-events: none;
+}
+
+/* De Enter-toets hoort bij twee rijen: de rand stopt ervoor, in de ruimte
+   tussen de laatste lettertoets en de Enter-toets (test 28 november). */
+.tb-rij.met-enter.rij-hulp::before,
+.tb-rij.met-enter.rij-op::before {
+  right: calc(var(--k) * var(--na) / 48 + var(--tussen) - 5px);
 }
 
 /* Een getekende toets in de tekst, bv. "Druk op [Enter] om verder te gaan." */
@@ -1168,6 +1192,12 @@ button {
 /* De vinger die moet typen: volle kleur en een dikkere, donkere omtrek. */
 .vinger-vlak.actief {
   fill: var(--vol);
+}
+
+/* Moet er een vinger typen, dan krijgen de andere vingers een nog lichtere
+   tint van hun eigen kleur: niet doorschijnend, en meteen, zonder knipperen. */
+.hand.met-actief .vinger-vlak:not(.actief) {
+  fill: color-mix(in srgb, var(--licht) 55%, #ffffff);
 }
 
 .hand-omtrek .actief {

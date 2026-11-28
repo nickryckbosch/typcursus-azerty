@@ -146,7 +146,7 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
     ctx.toetsenbord.toonRij(rij);
     for (const [r, w] of woorden) w.classList.toggle("met-hulp", r === rij);
     if (aan) {
-      // De opdracht zegt dan ook waar de rij ligt: "de middelste rij".
+      // De opdracht zegt dan ook waar de rij ligt: "de rij met de bultjes".
       const naam = t(`rij.${rondes[ronde]}` as TekstSleutel);
       scherm.zetOpdracht(t("lichtaan.opdrachtMetPlaats", { rij: naam, plaats: t(PLAATS[rondes[ronde]] as TekstSleutel) }), false);
     }
