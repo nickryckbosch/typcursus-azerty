@@ -421,14 +421,36 @@ Nick testte op 28 november op een groot scherm, deels met een kind. Dit zijn de 
 
 **Wat ons van mening zou doen veranderen:** mist een kind op de Chromebook de knop Verder bovenaan bij "Licht aan", of zoekt het de slotzin van een spel, dan gaat de slotzin terug naar de plaats van de opdracht. Vindt Nick het slotscherm zonder toetsenbord te anders, dan komt de lege plaats terug (een regel in de stijl).
 
-## 12q. Scherpe figuren: losse tekeningen in plaats van een blad (28 november 2026)
+## 12q. Naam Tokkelaar, logo, icoon en slogan (28 november 2026)
 
-- **Keuze:** Fien en Jef komen nu uit twaalf losse tekeningen van ChatGPT (`docs/beelden/figuren/`, 1024 x 1536, doorzichtige achtergrond), in plaats van uitgeknipt uit een blad met twaalf figuren. De app gebruikt WebP met alle kleuren en zachte randen, twee keer zo groot als vroeger (hele figuur 720 pixels hoog, bovenlijf 600).
-- **Waarom:** Nick vond de figuren niet scherp en hakkelig uitgesneden (test op 27 inch). Drie oorzaken: elke figuur was op het blad maar ongeveer 250 pixels breed; het script knipte de achtergrond weg met een harde rand; en de prenten waren bewaard met 256 kleuren. Met het schalen als een dia (12p) worden de figuren op een groot scherm tot bijna twee keer vergroot.
-- **Hoe:** `scripts/knip-figuren.py` haalt bijna doorzichtige spikkels rond de figuur weg, gebruikt een schaal per kind voor alle houdingen (zodat Fien in elke houding even groot is en Jef iets groter blijft), zet de voeten op dezelfde lijn, en snijdt de bovenlijven op de helft af zoals vroeger. `src/beelden/maten.json` bewaart de maten, zodat de strook van "Over de beek" geen verhouding meer moet raden.
-- **Anders dan het blad:** bij "aanmoedigend" steken Fien en Jef hun open handen naar voren in plaats van een vuist met streepjes (zonder versiering, deel 1 van de stijlgids). Nick kan de vuist nog vragen.
-- **Grootte:** de twaalf prenten zijn samen ongeveer 540 kB (WebP, kwaliteit 92).
-- **Waarop steunt dit? Eigen keuze**, na de vaststelling van Nick.
+Beslist door Nick; de volledige redenering staat in projectdocument 25 (N1 tot N5).
+
+- **Naam:** de methode heet **Tokkelaar**. Tokkeldorp is het deel voor het vierde leerjaar. In de app: `app.titel` is "Tokkelaar", de ondertitel begint met "Tokkeldorp", en de titel van het tabblad is "Tokkelaar · typcursus op Belgisch AZERTY". Waarom: een naam en een logo voor alles (dorp, stad, diploma), en de naam zegt wat het kind wordt.
+- **Logo in de bovenbalk van het startscherm:** de prent `src/beelden/logo-tokkelaar.webp` (640 px breed, doorzichtige achtergrond) vervangt het getekende huisje met de toetsen f en j en de naam in tekst. Het logo toont het woord tokkelaar met Fien en Jef in een huisje op de twee k-toetsen. De naam staat als alt-tekst in de `h1`, voor schermlezers. De functie `merkteken()` en haar stijlen zijn verwijderd.
+- **Icoon:** `src/beelden/icoon-tokkelaar.png` (192 px) is het icoon van het tabblad, in plaats van het blauwe vakje met "FJ".
+- **Bronbestanden:** de prenten op volle grootte staan in `docs/beelden/logo/` (uit ChatGPT, chat "Logovoorstellen Tokkeldorp"). Het zijn prenten, geen vectoren; voor drukwerk is een nagetekende versie nodig.
+- **Slogan "Klaar? Tokkelen maar!":** sluit de startzin af. Op het startscherm staat hij op een tweede regel onder de startzin (tekst `slogan`). Op het eerste scherm van elke les (blok 0, niet bij extra oefenen) heet de knop "Tokkelen maar!" (tekst `knop.tokkelen`, soort `"les"` in `toonEnter`). Alle andere knoppen blijven Verder of Start. Waarom: de startzin somde vier dingen op zonder slot; de slogan is vraag en antwoord (de leerkracht zegt "Klaar?", de klas antwoordt) en rijmt op de naam. Alleen bij het begin van een les: anders verliest de zin zijn kracht, en een woord betekent altijd hetzelfde (K26).
+- **Lesdata:** de klassikale start van les 1 en les 2 noemt de vraag en het antwoord. Les 0 leert de startzin nog zonder "vingers thuis" en zonder slogan; de knop op het eerste scherm heet daar wel al "Tokkelen maar!".
+- **Bovenbalk op een smal scherm:** de knoppen staan nu altijd rechts (`grid-column: 3`), ook als de startzin wegvalt onder 1180 px. Vroeger schoven ze dan naar het midden.
+- **Niet veranderd:** de schermindeling (K20). De grote Fien en Jef op het startscherm kwamen toen nog uit het blad met zes houdingen; sinds 12r komen ze uit de nieuwe reeks.
+- **Tegen:** het logo is een rasterprent en wordt in de bovenbalk klein getoond; de figuren in het logo en de grote figuren eronder zijn niet uit dezelfde reeks prenten.
+- **Waarop steunt dit? Eigen keuze** (het oordeel van Nick). Te toetsen in de klastest: antwoordt de klas vanzelf op "Klaar?", en denkt niemand bij het logo aan kinderopvang?
+
+
+## 12r. Fien en Jef uit twaalf losse prenten (28 november 2026)
+
+- **Keuze:** de figuren in de app komen nu uit twaalf losse prenten (`docs/beelden/figuren/`, per kind zes houdingen), door Nick aangeleverd als de nieuwe reeks. Ze vervangen de prenten die uit het blad met zes houdingen geknipt waren (12o). De houdingen en hun namen zijn dezelfde; de indeling van de schermen is niet veranderd.
+- **Waarom:** het logo van Tokkelaar toont de slankere, oudere Fien en Jef (12q). Met deze reeks staan er op het startscherm geen twee soorten figuren meer. De losse prenten zijn ook veel groter (1024 x 1536 per figuur, tegenover ongeveer 150 x 330 op het blad), dus scherper.
+- **Hoe (`scripts/maak-figuren.py`, vervangt `scripts/knip-figuren.py`):**
+  - de bronprenten zijn al doorzichtig; het script snijdt ze alleen bij tot op de figuur;
+  - elke houding krijgt dezelfde lichaamslengte en dezelfde voetlijn als de andere houdingen van hetzelfde kind, zodat er niets verspringt als een houding wisselt (K20);
+  - Fien is iets kleiner dan Jef, in dezelfde verhouding als in de vorige reeks (350 op 360). De bronprenten zijn apart gemaakt en leggen die verhouding niet vast;
+  - "zwaai" is de hele figuur; de vijf andere houdingen zijn op de helft afgesneden (ter hoogte van de zak van de trui), zoals voordien;
+  - de prenten zijn dubbel zo groot als voordien (720 en 600 pixels hoog in plaats van 360 en 300). Waarom: sinds het scherm meeschaalt als een dia (12p) werden de kleine prenten op een groot venster of op het bord wazig. Samen wegen de twaalf prenten ongeveer 330 kB (voordien ongeveer 170 kB).
+- **"Over de beek":** de strook rekende met de breedte van de oude zwaaiprenten. Die staat nu als twee constanten bovenaan (`FIEN_BREEDTE`, `JEF_BREEDTE` in `src/spellen/beek-strook.ts`); pas ze aan als de prenten veranderen.
+- **Tegen:** de bronprenten zijn twaalf aparte tekeningen, dus kleine verschillen tussen houdingen (lijndikte, tint) zijn mogelijk. De pagina laadt ongeveer 160 kB meer.
+- **Waarop steunt dit? Eigen keuze** (het oordeel van Nick), te toetsen in de klastest: spreekt de stijl kinderen aan?
+
 
 ## 13. Privacy en veiligheid
 

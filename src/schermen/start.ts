@@ -1,4 +1,4 @@
-// Startscherm (K18): bovenaan de titel en de startzin, links Fien en Jef met
+// Startscherm (K18): bovenaan het logo en de startzin met de slogan, links Fien en Jef met
 // een tekstballon, rechts de kaart "Verder waar je was" en daaronder "Alle
 // lessen", met een tabblad per deel van het toetsenbordhuis en een compacte
 // rij per les. De delen komen uit src/content/nl-BE/delen.json: een deel
@@ -15,6 +15,7 @@ import { el, svg } from "../weergave/dom";
 import { fien, jef, slotje, sterIcoon, vinkje } from "../weergave/figuren";
 import { voorleesKnop } from "../weergave/kop";
 import { tekenTonen } from "../weergave/tekens";
+import logoUrl from "../beelden/logo-tokkelaar.webp";
 
 type Toestand = "klaar" | "nu" | "slot" | "binnenkort";
 
@@ -25,26 +26,6 @@ function toetsChip(teken: string, klasse = ""): HTMLElement {
     "span",
     { class: `chip ${vinger ? `kleur-${kleurVanVinger(vinger)}` : ""} ${teken === " " ? "chip-spatie" : ""} ${klasse}` },
     tekenTonen(teken),
-  );
-}
-
-/**
- * Het merkteken van Tokkeldorp: een huisje met onder het dak de toetsen f en j
- * (waar Fien en Jef wonen), in de klare lijn van het huis uit les 0.
- */
-function merkteken(): SVGSVGElement {
-  const toets = (x: number, letter: string) => [
-    svg("rect", { x, y: 27, width: 21, height: 22, rx: 5, class: "merk-toets-rand" }),
-    svg("rect", { x, y: 25, width: 21, height: 20.5, rx: 5, class: "merk-toets" }),
-    svg("text", { x: x + 10.5, y: 35.5, "text-anchor": "middle", "dominant-baseline": "central", class: "merk-letter" }, letter),
-  ];
-  return svg(
-    "svg",
-    { class: "merkteken", viewBox: "0 0 62 52", "aria-hidden": "true" },
-    svg("rect", { x: 43, y: 5, width: 7, height: 12, class: "merk-schouw" }),
-    svg("polygon", { points: "3,23 31,3 59,23", class: "merk-dak" }),
-    ...toets(8, "f"),
-    ...toets(33, "j"),
   );
 }
 
@@ -221,10 +202,16 @@ export function startScherm(app: App, wortel: HTMLElement): Scherm {
       el(
         "header",
         { class: "start-kop" },
-        // Links het merk (het huisje met de toetsen f en j, de naam), in het midden
-        // de startzin, rechts de twee knoppen: drie rustige blokken.
-        el("div", { class: "start-merk" }, merkteken(), el("div", { class: "start-titel" }, el("h1", {}, t("app.titel")), el("p", {}, t("app.ondertitel")))),
-        el("p", { class: "startzin" }, t("startzin")),
+        // Links het merk (het logo van Tokkelaar, met eronder het deel: Tokkeldorp),
+        // in het midden de startzin met de slogan, rechts de twee knoppen: drie
+        // rustige blokken. Het logo is een prent (projectdocument 25, N2); de naam
+        // staat als alt-tekst in de kop, voor schermlezers.
+        el(
+          "div",
+          { class: "start-merk" },
+          el("div", { class: "start-titel" }, el("h1", {}, el("img", { class: "logo", src: logoUrl, alt: t("app.titel") })), el("p", {}, t("app.ondertitel"))),
+        ),
+        el("p", { class: "startzin" }, t("startzin"), " ", el("strong", { class: "slogan" }, t("slogan"))),
         el(
           "div",
           { class: "start-knoppen" },

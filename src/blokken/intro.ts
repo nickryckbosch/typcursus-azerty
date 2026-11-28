@@ -24,6 +24,11 @@ export const intro: BlokFunctie<IntroBlok> = (blok, ctx) => {
   ctx.toetsenbord.markeer(toetsen.map((x) => x.code));
   ctx.handen.toon(toetsen.map((x) => x.vinger));
 
+  // Het eerste scherm van een les: op de knop staat "Tokkelen maar!", het
+  // antwoord op "Klaar?" uit de startzin (projectdocument 25, N5). Overal
+  // elders blijft de knop Verder of Start heten.
+  const soort = ctx.blokNummer() === 0 && !ctx.extra ? "les" : "verder";
+
   const inStukken = blok.fien !== undefined && blok.jef !== undefined;
   const metHuis = blok.prent === "huis";
   let voorlezen = blok.tekst ?? "";
@@ -45,7 +50,7 @@ export const intro: BlokFunctie<IntroBlok> = (blok, ctx) => {
       ),
       ...(blok.tekstOnder ? [el("p", { class: "intro-onder" }, blok.tekstOnder)] : []),
     );
-    scherm.toonEnter();
+    scherm.toonEnter(undefined, soort);
     voorlezen = [...boven, blok.fien, blok.jef, blok.tekstOnder].filter(Boolean).join(" ");
   } else {
     // Fien en Jef met hun tekstballon vlak ernaast, als een groep in het midden (K27).
@@ -67,7 +72,7 @@ export const intro: BlokFunctie<IntroBlok> = (blok, ctx) => {
     } else {
       scherm.veld.append(ballon);
     }
-    scherm.toonEnter();
+    scherm.toonEnter(undefined, soort);
   }
   // De woorden zolder, woonkamer en kelder in de lege randtoets links van elke
   // rij op het schermtoetsenbord: zo ziet het kind welke rij welke verdieping
