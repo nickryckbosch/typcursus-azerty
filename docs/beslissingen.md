@@ -481,6 +481,48 @@ Fable speelde les 0 en 1 door op 1366 x 768 als een kind dat alles leest, een ki
 - **Waarop steunt dit? Eigen vaststelling** (de test hierboven, nagespeeld voor en na de wijziging) **en eigen keuze** (twee fouten in de korte versie, drie sterren voor les 0), te toetsen in de klastest.
 - **Wat ons van mening zou doen veranderen:** vinden kinderen vier keer dezelfde beek saai, dan krijgen de spellen eerst hun eigen strook. Typen kinderen bewust een spatie om een knop te kiezen en lukt dat niet, dan herbekijken we de regel voor de slotschermen.
 
+## 12u. Les 0 is de oriëntatieles in het klein (28 november 2026)
+
+Opdracht van Nick. Les 0 herhaalde alleen het huis en de spatiebalk. De oriëntatieles zonder scherm (handleiding, fiche oriëntatieles) leert meer: goed zitten, het huis, vier toetsen bij naam, de bultjes voelen en droog tikken. Nu volgt les 0 in de app die les: dezelfde stappen, in dezelfde volgorde, met dezelfde woorden. Een klas die de oriëntatieles kreeg, herkent alles. Een kind thuis zonder leerkracht krijgt dezelfde les, want elke stap legt zichzelf uit.
+
+De volgorde, de teksten en het gedrag komen uit de proefversie van Nick. Het uitzicht is dat van de app (stijlgids, deel 12).
+
+**De acht stappen (samen ongeveer 7 minuten):**
+
+1. **Welkom:** het huis en de namen van de rijen.
+2. **Goed zitten:** staat nu vooraan, zoals in de oriëntatieles: eerst de houding, dan de toetsen. Zonder lamp: het kind gaat goed zitten en drukt op Verder. De app kan de houding niet zien, dus ze kijkt hier niets na.
+3. **Je toetsenbord nakijken:** ongewijzigd.
+4. **Licht aan in het huis:** 6 rondes in plaats van 9. Eerst woonkamer, zolder en kelder met de rijhulp, daarna de drie door elkaar zonder hulp. Op het einde branden alle negen ramen.
+5. **Toetsenjacht** (nieuw): de spatiebalk, Enter, Backspace en Shift bij naam. Acht keer: eerst de vier met hulp op het schermtoetsenbord, daarna door elkaar, met hulp pas na een verkeerde toets.
+6. **Voel de bultjes** (nieuw): ogen dicht, de twee bultjes zoeken met de wijsvingers en indrukken. Drie keer.
+7. **Links, rechts, duim** (nieuw): droog tikken met de linkerwijsvinger, de rechterwijsvinger en de duim. Twaalf keer. Vervangt "Duim op de spatiebalk" en "Klaar voor de start".
+8. **Goed gedaan:** het slotscherm.
+
+**Keuzes, met voor en tegen:**
+
+- **Elke stap is een beweging die de app kan nakijken, geen overhoring.** Voor: het kind doet wat het in de klas ook deed, en de app ziet of het lukt. Tegen: de app ziet alleen welke toets ingedrukt is, niet met welke vinger. Een kind kan de bultjes dus ook vinden door te kijken. Dat aanvaarden we: de opdracht zegt "Sluit je ogen", en de leerkracht ziet de rest.
+- **Er wordt niets gemeten.** Een verkeerde toets is geen fout die telt: de app zegt kort wat er scheelt en wacht op de juiste toets. Les 1 gaat open zodra les 0 af is. Iedereen krijgt drie sterren (zie 12t); dat gebeurt nu in het slotscherm, omdat de oefening met de lamp weg is.
+- **De app werkt hier met toetscodes** (de plaats van de toets), niet met het teken. De bultjes liggen op `KeyF` en `KeyJ`, de duim tikt op `Space`. Zo werkt de stap ook op een toetsenbord dat verkeerd ingesteld staat, en hoeft de app geen letter te noemen.
+- **De letters f en j worden in les 0 niet genoemd.** Les 1 vertelt wie er op de bultjes woont. Daarom tonen stap 6 en 7 geen hulpregel onder het toetsenbord ("Typ de f met je ..."). Op het schermtoetsenbord staan de letters wel op de toetsen, zoals op het echte toetsenbord.
+- **Enter is in Toetsenjacht geen "Verder".** Enter is daar een van de vier toetsen. Pas op het einde komt de knop Verder. De laatste gevraagde toets is nooit Enter: anders zou een Enter die nog bij de oefening hoorde het slot overslaan. Een test bewaakt dat.
+- **Linker en rechter Shift zijn allebei goed**, en de Enter van het cijferblok telt als Enter.
+- **Het schermtoetsenbord toont in Toetsenjacht de namen van Shift, Enter en Backspace.** De Backspace-toets ligt in de cijferrij, die het schermtoetsenbord niet heeft. Alleen in deze stap staat die ene toets erbij, rechts boven Enter. Voor: het kind vindt de toets op het scherm op dezelfde plaats als op de Chromebook. Tegen: de kaart is in deze stap een rij lager dan in de andere stappen. Binnen de stap verspringt er niets.
+- **De vier toetsen zijn getekend, niet getypt.** De pijl van Enter, Backspace en Shift is een tekening en geen letterteken: zo ziet ze er op elk toestel hetzelfde uit. Enter heeft de vorm van een omgekeerde L, zoals op een Belgische Chromebook.
+- **Een toets die het kind indrukt, licht een halve seconde op in de volle kleur van de vinger, en dooft dan.** Alleen de juiste toets licht op: bij een verkeerde toets wijst het schermtoetsenbord de gevraagde toets aan, en dan valt alleen die op. In "Voel de bultjes" blijven de twee toetsen branden tot ze allebei gevonden zijn. Dit geldt voor stap 4 tot 7.
+- **Les 1 doet dat anders, en is niet veranderd:** daar krijgt een juiste toets 0,2 seconde de lichte vingerkleur (`flits`). Voorstel voor later: overal de regel van les 0. Dat is een keuze van Nick.
+- **Een aanslag gaat nooit verloren** (12d). Een ingehouden toets telt een keer. In "Voel de bultjes" staat tussen twee beurten 2,2 seconden "Gevonden! Handen in je schoot, en zoek ze opnieuw."; drukt het kind in die tijd al een toets in, dan begint de volgende beurt meteen en telt die toets mee.
+- **In "Licht aan" blijft de hulp ook na 3 seconden wachten komen**, naast de hulp na een verkeerde toets. Zo was het (12g), en de opdracht zei "zoals nu". Een kind dat twijfelt en niets durft te drukken, krijgt zo toch hulp. Makkelijk weg te halen als Nick alleen hulp na een fout wil.
+- **Twee keer na elkaar hetzelfde woord in "Links, rechts, duim"** (de volgorde heeft twee keer "Rechts" na elkaar). We laten de kaart niet knipperen (K16). De teller onderaan ("7 van 12") en de toets die oplicht tonen dat de tik geteld is. Dit is een punt voor de klastest (zie 12t: bij "Zoek de toets" merkten kinderen een herhaling niet op).
+- **De lamp verdwijnt uit les 0.** De bouwsteen blijft in de code (`src/weergave/lamp.ts`, `zoek-toets` met alleen de spatiebalk), met zijn tests. Geen enkele les gebruikt hem nu nog.
+- **Geen eigen klassikale start meer voor les 0.** De klassikale start van 10 minuten is vervangen door de oriëntatieles. De lesfiche op het leerkrachtscherm zegt dat en verwijst naar de handleiding.
+
+**Hoe het gebouwd is:** vier nieuwe bloktypes in de lesdata (`houding`, `toetsenjacht`, `bultjes`, `tik`), elk met een eigen bestand in `src/blokken/`. Alle teksten staan in `les-0.json`. Het schermtoetsenbord kreeg `lichtOp`, `doof` en `toonNaamtoetsen`. De tests staan in `tests/les0.test.ts` en `tests/inhoud.test.ts`.
+
+**Wat dit verandert voor les 1 (nog niet aangepast, wacht op Nick):** de kinderen kennen de bultjes al en hebben ze al drie keer blind gevonden. De intro van les 1 vraagt nu "Voel je de bultjes?" en de klassikale start laat de bultjes ontdekken. Dat kan korter: niet meer ontdekken, wel herhalen ("Zoek de bultjes, zoals in les 0") en dan het nieuwe: wie woont er? Fien op de f, Jef op de j.
+
+- **Waarop steunt dit?** De regel "een beweging die je kan nakijken, geen overhoring" komt uit de opdracht van Nick, die verwijst naar Snyder e.a. (2014). De rest is **eigen keuze**, in de lijn van de eerdere beslissingen (12c, 12d, K26, K27), en te toetsen in de klastest.
+- **Wat ons van mening zou doen veranderen:** duurt les 0 in de klas veel langer dan 7 minuten, dan gaan er rondes af. Drukken kinderen in "Voel de bultjes" gewoon met open ogen, dan is de stap een herhaling van de klas en geen oefening: dan bekijken we of ze korter kan. Merken kinderen bij twee keer "Rechts" niet dat hun tik telde, dan passen we de volgorde aan.
+
 ## 13. Privacy en veiligheid
 
 - Geen externe bronnen: geen CDN, geen analytics, geen Google Fonts.

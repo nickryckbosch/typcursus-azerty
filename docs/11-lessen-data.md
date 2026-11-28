@@ -4,7 +4,7 @@
 
 De inhoud van les 0 tot 5 in JSON, om in te lezen door de prototypechat. Voor leerkrachten staat dezelfde inhoud leesbaar in document 10 (in het claude.ai-project). Dit document is gemaakt met een script vanuit dezelfde bron als document 10, dus beide zijn gelijk.
 
-**Controle:** 262 items gecontroleerd, 0 fouten. Elk item bevat alleen geleerde toetsen plus de spatie.
+**Controle:** 261 items gecontroleerd, 0 fouten. Elk item bevat alleen geleerde toetsen plus de spatie.
 
 ## Formaat
 
@@ -21,14 +21,18 @@ Het formaat volgt het voorbeeld uit de opdracht. Deze velden zijn **erbij gekome
 | `spel.doel` | elk spel | de doelzin (K26): waar werk je naartoe, en wat doet een goede toets; staat in de tekstballon. Alleen in de JSON-bestanden ingevuld |
 | `spel.rijen`, `spel.rondes` | spel in les 0 | het spel vraagt een rij, niet een toets |
 | `eindoefening.regelsKort` | les 1 tot 5 | kortere versie na twee mislukte pogingen |
-| `eindoefening.soort` | les 0 | "houding": er wordt niets gemeten |
+| type `houding` | les 0 | Goed zitten: `tekst` (opdracht), `zegt` (tekstballon), `kaartjes[]` met `titel` en `tekst`. Er wordt niets nagekeken |
+| type `toetsenjacht` | les 0 | vier toetsen bij naam: `naamtoetsen[]` met `toets` (spatie, enter, backspace, shift), `naam` en `zin`; `herhaling[]` (de tweede ronde, nooit eindigend op enter); `fout`, `slot` |
+| type `bultjes` | les 0 | de twee bultjes voelen: `aantal` (keren), `gevonden`, `fout`, `slot` |
+| type `tik` | les 0 | links, rechts, duim: `volgorde[]`, `opKaart` (het woord per vinger), `foutHand`, `foutVinger`, `slot` |
 | `groepjes` | les 1 en 2 | lettergroepjes zonder betekenis, voor herstel-oefeningen; nooit als woord tonen |
 | type `toetsenbordcheck` | les 0 | controle van de toetsenbordindeling, met `blokkeert: false` |
 
 Afspraken:
 
 - De spatie staat als `" "` in `nieuweToetsen` (les 0) en in `geleerdeToetsen`.
-- `doelNauwkeurigheid` is 0.9 in les 1 tot 5 en `null` in les 0.
+- `doelNauwkeurigheid` is 0.9 in les 1 tot 5. Les 0 heeft geen eindoefening: er wordt niets gemeten, en ze is af zodra het kind het slotscherm bereikt.
+- Les 0 is de oriëntatieles in het klein (beslissingen 12u). Ze heeft geen eigen klassikale start: `klassikaal.stappen` is leeg en `klassikaal.materiaal` verwijst naar de oriëntatieles.
 - Type `reeks` heet voor het kind "oefenregels"; in de app nooit "rij" gebruiken voor een regel tekst.
 - Alles is in kleine letters, zonder leestekens.
 
@@ -45,57 +49,54 @@ Extra afspraken uit document 10 die de app raken:
 {
   "id": 0,
   "titel": "Welkom in het toetsenbordhuis",
-  "nieuweToetsen": [" "],
-  "geleerdeToetsen": [" "],
+  "begroeting": "Hoi! Wij zijn Fien en Jef. Kom je mee naar het toetsenbordhuis?",
+  "nieuweToetsen": [
+    " "
+  ],
+  "geleerdeToetsen": [
+    " "
+  ],
   "doelen": [
-    "Ik zit goed: voeten plat, rug recht.",
+    "Ik zit goed: voeten plat, rug recht, schouders los.",
     "Ik ken de drie verdiepingen van het toetsenbordhuis: zolder, woonkamer en kelder.",
-    "Ik weet dat elke vinger een eigen kleur heeft.",
-    "Ik druk de spatiebalk in met mijn duim."
+    "Ik ken vier toetsen bij naam: de spatiebalk, Enter, Backspace en Shift.",
+    "Ik vind met mijn wijsvingers de twee bultjes, zonder te kijken.",
+    "Ik tik met mijn linkerwijsvinger, mijn rechterwijsvinger en mijn duim, en leg ze daarna terug."
   ],
   "klassikaal": {
-    "duurMinuten": 10,
-    "materiaal": "Nodig: de Chromebooks en het gewone bord (krijt of whiteboard). Handig als je het hebt, maar niet nodig: een digibord, de klasplaat, losse toetsenborden, een doek of handdoek per kind. Teken voor de les op het bord een huis met drie verdiepingen: zolder, woonkamer, kelder.",
-    "stappen": [
-      {
-        "titel": "Wie typt er al?",
-        "duurMinuten": 1,
-        "leerkracht": "Vraag: \"Steek je hand op als je al eens getypt hebt. Met hoeveel vingers?\" Zeg dan: \"Wij leren typen met tien vingers, zonder te kijken. Zoals fietsen: in het begin kijk je naar de trappers, en na een tijd gaat het vanzelf.\"",
-        "kinderen": "Steken hun hand op en tonen met hoeveel vingers ze nu typen. Nog niet vertellen, alleen tonen."
-      },
-      {
-        "titel": "Voeten plat, rug recht",
-        "duurMinuten": 2,
-        "leerkracht": "Doe de houding voor: voeten plat op de grond, rug tegen de leuning, schouders los, de Chromebook vooraan op de bank, een handbreedte tussen je buik en de bank. Zeg: \"Voeten plat, rug recht!\" en wandel rond. Raken voeten de grond niet, leg er een boekentas of kistje onder.",
-        "kinderen": "Nemen de houding aan bij \"Voeten plat, rug recht!\". Twee keer: eerst rustig, dan snel na het teken van de leerkracht."
-      },
-      {
-        "titel": "Het toetsenbord is een huis",
-        "duurMinuten": 3,
-        "leerkracht": "Wijs het huis op het bord aan. \"Het toetsenbord is een huis met drie verdiepingen. Bovenaan de zolder, in het midden de woonkamer, onderaan de kelder. In de woonkamer wonen je vingers. Ze gaan soms eens naar de zolder of de kelder, maar ze komen altijd terug naar huis.\" Laat de kinderen de Chromebook openen (inloggen hoeft nog niet). Roep: \"Hand op de zolder! Op de kelder! Op de woonkamer!\" Wijs telkens de juiste verdieping op het bord aan.",
-        "kinderen": "Leggen een vlakke hand op de juiste rij van hun eigen toetsenbord. Wie twijfelt, kijkt naar het bord."
-      },
-      {
-        "titel": "Tien vingers, vier kleuren",
-        "duurMinuten": 3,
-        "leerkracht": "Steek je handen op. \"Elke vinger heeft een kleur: wijsvinger blauw, middelvinger oranje, ringvinger groen, pink paars. De duimen zijn grijs, die wonen op de spatiebalk.\" Speel daarna kort: roep een kleur, de kinderen laten die vingers wiebelen. Eerst traag, dan sneller, en eens een strikvraag (\"Rood!\": niemand beweegt).",
-        "kinderen": "Laten de vingers van de geroepen kleur wiebelen. Bij een kleur die niet bestaat, blijven ze stil."
-      },
-      {
-        "titel": "Handen in de woonkamer",
-        "duurMinuten": 1,
-        "leerkracht": "\"Leg nu je vingers in de woonkamer, vier van elke hand, en je duimen op de spatiebalk. Druk een keer op de spatiebalk met je duim.\" Zeg: \"Straks vertellen Fien en Jef waar ze precies wonen.\"",
-        "kinderen": "Leggen de vingers losjes op de middelste rij en drukken met een duim de spatiebalk in. De juiste plek komt in les 1."
-      }
-    ]
+    "duurMinuten": 0,
+    "materiaal": "Les 0 heeft geen eigen klassikale start meer. De oriëntatieles zonder scherm komt ervoor in de plaats: zie de handleiding, fiche oriëntatieles. Les 0 in de app is die oriëntatieles in het klein: dezelfde stappen, in dezelfde volgorde, met dezelfde woorden (goed zitten, het huis, vier toetsen bij naam, de bultjes voelen, droog tikken met links, rechts en duim).",
+    "stappen": []
   },
   "online": [
     {
       "type": "intro",
-      "titel": "Fien en Jef stellen hun huis voor",
+      "titel": "Welkom in het toetsenbordhuis",
       "prent": "huis",
-      "duurMinuten": 1,
-      "tekst": "Hallo! Wij zijn Fien en Jef. Dit is ons huis: het toetsenbord. Het heeft een zolder, een woonkamer en een kelder. In de woonkamer wonen je vingers. Kom je mee kijken?"
+      "rijnamen": true,
+      "duurMinuten": 0.5,
+      "tekst": "Hallo! Wij zijn Fien en Jef.\n\nHet toetsenbord is ons huis. Het heeft een zolder, een woonkamer en een kelder.\n\nVandaag leer je ons huis kennen."
+    },
+    {
+      "type": "houding",
+      "titel": "Goed zitten",
+      "duurMinuten": 0.5,
+      "tekst": "Ga goed zitten. Zit je klaar? Druk dan op ((Verder)).",
+      "zegt": "Voeten plat, rug recht, schouders los!",
+      "kaartjes": [
+        {
+          "titel": "Voeten plat",
+          "tekst": "op de grond"
+        },
+        {
+          "titel": "Rug recht",
+          "tekst": "tegen de leuning"
+        },
+        {
+          "titel": "Schouders los",
+          "tekst": "niet bij je oren"
+        }
+      ]
     },
     {
       "type": "toetsenbordcheck",
@@ -106,43 +107,105 @@ Extra afspraken uit document 10 die de app raken:
       "beschrijving": "De app vraagt eerst de indeling op aan de browser (als dat kan). Lukt dat niet, dan drukt het kind op de toets met de A (verwacht: code KeyQ geeft a, dus AZERTY) en op de toets met de 6 zonder Shift (verwacht: Belgisch geeft §, Frans geeft -). Klopt het niet, dan krijgt het kind de boodschap \"Vraag even hulp aan je juf of meester\" en de leerkracht een korte uitleg. Het kind mag gewoon verder met les 0; in les 1 verschijnt de waarschuwing opnieuw zolang het niet in orde is."
     },
     {
-      "type": "zoek-toets",
-      "titel": "Duim op de spatiebalk",
-      "duurMinuten": 0.5,
-      "toetsen": [" "],
-      "aantal": 5,
-      "tekst": "Leg je duimen op de spatiebalk en druk eerst op Start. Gaat de lamp aan? Druk [spatie]."
-    },
-    {
       "type": "spel",
       "titel": "Licht aan in het huis",
       "spel": "licht-aan",
-      "duurMinuten": 2,
-      "rijen": ["zolder", "woonkamer", "kelder"],
-      "rondes": 9,
+      "doel": "Het wordt donker. Doe jij de lichten aan? Elke goede toets laat een raam branden.",
+      "duurMinuten": 1,
+      "rijen": [
+        "zolder",
+        "woonkamer",
+        "kelder"
+      ],
+      "rondes": 6,
       "tekens": [],
-      "beschrijving": "Op het scherm staat het huis met drie verdiepingen, alle ramen donker. Links van het huis staan de woorden zolder, woonkamer en kelder, elk in een vakje. Het vakje van de verdieping die aan de beurt is, wordt donker en blijft stil staan (er knippert niets). De opdracht zegt: \"Druk op een toets van de zolder.\" In de eerste drie rondes licht de gevraagde rij ook op het schermtoetsenbord op, met dezelfde rand rond het woord in het huis, en zegt de opdracht waar de rij ligt (\"de bovenste rij\"). Daarna verschijnt die hulp alleen na een foute toets of na 3 seconden wachten. Elke toets van die rij is goed (herkend via de toetscode, dus los van de indeling): het raam gaat aan en de toets licht op het schermtoetsenbord op in de kleur van de vinger. Een toets van een andere rij: de juiste rij licht even op, er gaat niets verloren. Alleen de eerste toets per ronde telt, zodat rammen niet helpt. Ronde 1 tot 3 in vaste volgorde (woonkamer, zolder, kelder), daarna willekeurig. Na 9 rondes branden alle ramen. Fien en Jef staan stil naast het huis; pas op het einde steken ze hun duim op. Geen tijd, geen punten."
+      "beschrijving": "Op het scherm staat het huis met drie verdiepingen, alle ramen donker. Links van het huis staan de woorden zolder, woonkamer en kelder, elk in een vakje. Het vakje van de verdieping die aan de beurt is, wordt donker en blijft stil staan (er knippert niets). De opdracht zegt: \"Druk op een toets van de zolder.\" In de eerste drie rondes licht de gevraagde rij ook op het schermtoetsenbord op, met dezelfde rand rond het woord in het huis, en zegt de opdracht waar de rij ligt (\"de rij boven de bultjes\"). Daarna verschijnt die hulp alleen na een foute toets of na 3 seconden wachten. Elke toets van die rij is goed (herkend via de toetscode, dus los van de indeling): het raam gaat aan en de toets licht op het schermtoetsenbord op in de kleur van de vinger. Een toets van een andere rij: de juiste rij licht even op, er gaat niets verloren. Alleen de eerste toets per ronde telt, zodat rammen niet helpt. Zes rondes: ronde 1 tot 3 in vaste volgorde (woonkamer, zolder, kelder), daarna dezelfde drie door elkaar. Na 6 rondes gaan alle ramen aan. Fien en Jef staan stil naast het huis; pas op het einde steken ze hun duim op. Geen tijd, geen punten."
     },
     {
-      "type": "eindoefening",
-      "titel": "Klaar voor de start",
-      "duurMinuten": 0.5,
-      "regels": [],
-      "doelNauwkeurigheid": null,
-      "soort": "houding",
-      "beschrijving": "Fien en Jef zeggen \"Voeten plat, rug recht!\". Daarna legt het kind de handen in de woonkamer en drukt drie keer de spatiebalk in, telkens als de lamp aangaat (dezelfde lamp als in \"Duim op de spatiebalk\"). Drukt het kind te vroeg, dan verschijnt onder de lamp \"Wacht op de lamp.\"; dat telt niet als fout. Er wordt niets gemeten; les 1 gaat open zodra les 0 afgewerkt is."
+      "type": "toetsenjacht",
+      "titel": "Toetsenjacht",
+      "duurMinuten": 1.5,
+      "tekst": "Zoek de toets die je ziet en druk erop.",
+      "naamtoetsen": [
+        {
+          "toets": "spatie",
+          "naam": "De spatiebalk",
+          "zin": "De spatiebalk maakt een witruimte tussen twee woorden."
+        },
+        {
+          "toets": "enter",
+          "naam": "Enter",
+          "zin": "Enter begint een nieuwe regel."
+        },
+        {
+          "toets": "backspace",
+          "naam": "Backspace",
+          "zin": "Backspace wist het laatste teken: een stap terug."
+        },
+        {
+          "toets": "shift",
+          "naam": "Shift",
+          "zin": "Shift maakt een hoofdletter."
+        }
+      ],
+      "herhaling": [
+        "backspace",
+        "enter",
+        "spatie",
+        "shift"
+      ],
+      "fout": "Nog niet. Kijk op het toetsenbord.",
+      "slot": "Knap! Je kent al vier toetsen bij naam."
+    },
+    {
+      "type": "bultjes",
+      "titel": "Voel de bultjes",
+      "duurMinuten": 1,
+      "tekst": "Sluit je ogen. Voel met je wijsvingers de twee bultjes. Druk ze allebei in.",
+      "aantal": 3,
+      "gevonden": "Gevonden! Handen in je schoot, en zoek ze opnieuw.",
+      "fout": "Nog niet. Voel verder over de woonkamer.",
+      "slot": "Daar is thuis. Leg je andere vingers ernaast, en je duimen op de spatiebalk."
+    },
+    {
+      "type": "tik",
+      "titel": "Links, rechts, duim",
+      "duurMinuten": 1.5,
+      "tekst": "Tik met de vinger die je ziet. Daarna ligt hij weer op zijn plek.",
+      "volgorde": [
+        "links",
+        "rechts",
+        "duim",
+        "links",
+        "duim",
+        "rechts",
+        "rechts",
+        "links",
+        "duim",
+        "links",
+        "rechts",
+        "duim"
+      ],
+      "foutHand": "Andere hand!",
+      "foutVinger": "Andere vinger. Kijk naar de hand.",
+      "slot": "Goed zo! Je vingers vinden hun plek.",
+      "opKaart": {
+        "links": "Links",
+        "rechts": "Rechts",
+        "duim": "Duim"
+      }
     },
     {
       "type": "afsluiter",
       "titel": "Goed gedaan",
       "duurMinuten": 0.5,
-      "tekst": "Goed gedaan! Je kent ons huis. Straks leer je waar wij wonen."
+      "tekst": "Je kent ons huis, en je vingers vinden de bultjes. In les 1 leer je wie er op de bultjes woont."
     }
   ],
   "groepjes": [],
   "woorden": [],
   "zinnen": [],
-  "tipLeerkracht": "Typische fouten: kinderen zitten scheef of op het puntje van hun stoel, de Chromebook staat te ver of te dicht, en sommigen beginnen al wild te typen. Stuur bij met de startzin in plaats van met uitleg: \"Voeten plat, rug recht\" werkt sneller dan een opmerking per kind. Kinderen die links en rechts nog verwarren: laat ze duim en wijsvinger van beide handen strekken; de linkerhand maakt een L. Vragen ze naar de rij met cijfers: \"Dat is het dak, daar gaan we pas veel later naartoe.\" Krijgt een kind de melding dat het toetsenbord niet klopt, dan staat de Chromebook meestal op een andere taal of op Frans AZERTY. Je past dat aan in de instellingen van de Chromebook bij het toetsenbord (invoermethode Belgisch); op beheerde toestellen kan de ICT-coordinator dat voor alle toestellen tegelijk doen."
+  "tipLeerkracht": "Typische fouten: kinderen zitten scheef of op het puntje van hun stoel, de Chromebook staat te ver of te dicht, en sommigen beginnen al wild te typen. Stuur bij met de startzin in plaats van met uitleg: \"Voeten plat, rug recht, schouders los\" werkt sneller dan een opmerking per kind. Kinderen die links en rechts nog verwarren: laat ze duim en wijsvinger van beide handen strekken; de linkerhand maakt een L. Vragen ze naar de rij met cijfers: \"Dat is het dak, daar gaan we pas veel later naartoe.\" Krijgt een kind de melding dat het toetsenbord niet klopt, dan staat de Chromebook meestal op een andere taal of op Frans AZERTY. Je past dat aan in de instellingen van de Chromebook bij het toetsenbord (invoermethode Belgisch); op beheerde toestellen kan de ICT-coordinator dat voor alle toestellen tegelijk doen."
 }
 ```
 

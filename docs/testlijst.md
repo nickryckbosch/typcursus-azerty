@@ -11,7 +11,7 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 - [ ] Is de achtergrond havermoutkleurig, met witte kaarten en afgeronde hoeken?
 - [ ] Zijn de letters goed leesbaar (lettertype Andika in de oefenregels en op de toetsen)?
 - [ ] **Rust:** beweegt er tijdens het typen niets, behalve de toets en de vinger die oplichten? Geen schuddende letters, geen knipperende vlakken, geen zwaaiende of springende figuurtjes?
-- [ ] **Niets verspringt:** blijven de lamp, Fien en Jef, het huis en de opdracht op hun plaats terwijl je bezig bent, ook als er iets bij verschijnt?
+- [ ] **Niets verspringt:** blijven Fien en Jef, het huis, de kaartjes en de opdracht op hun plaats terwijl je bezig bent, ook als er iets bij verschijnt?
 - [ ] **De opdracht:** is de opdracht bovenaan in elke stap het duidelijkste wat je ziet, met de toets getekend in de zin?
 - [ ] **Voortgang:** staat er op elk oefenscherm onderaan de witte kaart een dunne grijze balk met rechts een teller (een spel heeft geen balk: de strook toont de stenen)?
 - [ ] **Snel typen:** typ zo snel als je kan, ook net als er een nieuwe letter, regel verschijnt, ook in "Over de beek". Telt elke toets?
@@ -35,24 +35,33 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 - [ ] Onder het toetsenbord staat de zin, bijvoorbeeld "Typ de j met je rechterwijsvinger" of "Druk de spatiebalk in met je duim".
 - [ ] Zien de handen er als handen uit (vier vingers, een handpalm, een duim die schuin naar de spatiebalk wijst)?
 
-## Les 0
+## Les 0 (de oriëntatieles in het klein, ongeveer 7 minuten)
 
-- [ ] Bovenaan staat "Les 0 · ..." met een balkje per blok (6 balkjes).
+Les 0 volgt de oriëntatieles zonder scherm: dezelfde stappen, dezelfde volgorde, dezelfde woorden. Er wordt niets gemeten.
+
+- [ ] Bovenaan staat "Les 0 · ..." met een balkje per stap (8 balkjes).
+- [ ] **Welkom:** staat het huis naast de tekst, met alle ramen uit? Staan de woorden zolder, woonkamer en kelder in de toets links van elke rij op het schermtoetsenbord, en zijn ze leesbaar? Zijn ze weg in de volgende stap?
+- [ ] **Goed zitten:** zeggen Fien en Jef "Voeten plat, rug recht, schouders los!"? Staan er drie rustige kaartjes, met de knop Verder eronder? Is er geen lamp meer? Gaat een kind echt goed zitten voor het op Verder drukt?
 - [ ] **Toetsenbordcheck:** zegt de app "In orde! Je toetsenbord typt de juiste letters."? Blijft die zin staan tot je op Verder drukt, ook als je de Enter van het vorige scherm lang inhoudt? Zet de Chromebook daarna eens op een andere invoermethode (bijvoorbeeld Engels) en doe les 0 opnieuw: verschijnt de melding "Vraag even hulp aan je juf of meester", met uitleg voor de leerkracht? Zet het daarna terug op Belgisch.
-- [ ] **Duim op de spatiebalk:** staat de lamp van bij het begin in beeld? Gaat ze duidelijk aan, en kan je pas drukken als ze brandt? Begrijpt een kind zonder uitleg wat het moet doen?
-- [ ] **Licht aan in het huis:** wordt het woord van de juiste verdieping donker (zonder te knipperen)? Zijn de woorden links van het huis goed leesbaar? Licht bij een verkeerde rij de juiste rij op het toetsenbord op? Branden na 9 rondes alle ramen?
-- [ ] **Eerst lezen, dan starten:** blijft bij "Duim op de spatiebalk" en "Klaar voor de start" de lamp uit tot je op Start (of Enter) drukt? Heeft een kind genoeg tijd om de opdracht te lezen? Zegt een spatie voor de start "Druk eerst op Start."?
-- [ ] **Licht aan, doelzin:** staat boven Fien en Jef "Het wordt donker. Doe jij de lichten aan? Elke goede toets laat een raam branden."? Kan iemand zonder uitleg zeggen wat hij moet doen, en waar hij naartoe werkt?
-- [ ] **Over de beek, doelzin en opdracht:** staat de opdracht bovenaan, even groot als op de andere schermen, en de doelzin in een tekstballon direct boven Fien en Jef in de strook, met het staartje naar hen? Kan iemand zonder uitleg zeggen wat hij moet doen, en waar hij naartoe werkt?
-- [ ] **Oefenbord:** staat elke letter netjes in de kaart, ook de p, g en j, zonder de onderrand te raken? Houdt de kaart dezelfde maat bij "spatie"?
-- [ ] **Licht aan, hulp:** licht in de eerste drie rondes de juiste rij op het toetsenbord op, met dezelfde rand rond het woord in het huis? Zegt de opdracht "de middelste rij"? Verschijnt de hulp later alleen na een fout of na even wachten?
-- [ ] **Klaar voor de start:** is meteen duidelijk dat je op de spatiebalk moet drukken als de lamp aangaat? Telt de spatiebalk telkens mee (3 keer)?
-- [ ] **Te vroeg drukken** bij beide lampoefeningen: verschijnt "Wacht op de lamp." onder de lamp, zonder dat er iets verspringt? Verdwijnt de zin als de lamp aangaat?
-- [ ] **Intro van les 0:** staat het huis naast de tekst, met alle ramen uit? Staan de woorden zolder, woonkamer en kelder in de toets links van elke rij op het schermtoetsenbord, en zijn ze leesbaar? Zijn ze weg in de volgende stap?
 - [ ] **Toetsenbordcheck, indeling:** staat Fien met de duim omhoog groot in het midden, met "In orde! ..." in een tekstballon boven haar en de knop Verder eronder?
+- [ ] **Licht aan in het huis:** wordt het woord van de juiste verdieping donker (zonder te knipperen)? Zijn de woorden links van het huis goed leesbaar? Licht bij een verkeerde rij de juiste rij op het toetsenbord op? Branden na 6 rondes alle ramen?
+- [ ] **Licht aan, doelzin:** staat boven Fien en Jef "Het wordt donker. Doe jij de lichten aan? Elke goede toets laat een raam branden."? Kan iemand zonder uitleg zeggen wat hij moet doen, en waar hij naartoe werkt?
+- [ ] **Licht aan, hulp:** licht in de eerste drie rondes (woonkamer, zolder, kelder) de juiste rij op het toetsenbord op, met dezelfde rand rond het woord in het huis? Zegt de opdracht waar de rij ligt ("de rij met de bultjes")? Verschijnt de hulp in de laatste drie rondes alleen na een fout of na even wachten?
 - [ ] **Licht aan, groep:** staan Fien en Jef met hun tekstballon vlak naast het huis? Is de blauwe rand rond het woord (bv. "woonkamer") overal volledig te zien? Stopt de blauwe rand op het toetsenbord voor de Entertoets?
 - [ ] **Licht aan, einde:** staat "Alle lichten branden! Goed gedaan!" in de tekstballon van Fien en Jef, en vindt het kind de knop Verder bovenaan (op de plaats van de opdracht)?
-- [ ] Op het einde: staan Fien en Jef groot in het midden met hun duim omhoog, hun zin in een tekstballon erboven en de knoppen even breed eronder? Kan je met de knop meteen naar les 1?
+- [ ] **Toetsenjacht:** staat de toets groot getekend, met haar naam eronder, en zeggen Fien en Jef wat ze doet? Lijken de vier tekeningen op de toetsen van de Chromebook (lange spatiebalk, Enter in de vorm van een omgekeerde L, Backspace met een pijl naar links, Shift met een pijl naar boven)?
+- [ ] **Toetsenjacht, schermtoetsenbord:** staan Shift (links en rechts), Enter en Backspace met hun naam op het schermtoetsenbord, Backspace rechts boven Enter? Wijst het toetsenbord de eerste vier keer de toets aan, en daarna pas na een verkeerde toets?
+- [ ] **Toetsenjacht, Enter:** gaat Enter tijdens de oefening niet naar het volgende scherm? Zijn de linker en de rechter Shift allebei goed? Staat bij een verkeerde toets "Nog niet. Kijk op het toetsenbord." onder de naam, zonder dat er iets verspringt?
+- [ ] **Toetsenjacht, einde:** staat "Knap! Je kent al vier toetsen bij naam." in de tekstballon, met de knop Verder bovenaan?
+- [ ] **Voel de bultjes:** tonen de getekende handen de twee wijsvingers in kleur? Worden de twee kaartjes blauw als je de toetsen met de bultjes indrukt, en blijven ze blauw tot je ze allebei hebt? Staat er nergens een letter in de opdracht of op de kaartjes?
+- [ ] **Voel de bultjes, drie keer:** staat er tussenin "Gevonden! Handen in je schoot, en zoek ze opnieuw."? Lukt het met de ogen dicht? Bij een andere toets: staat er "Nog niet. Voel verder over de woonkamer.", en lichten de twee toetsen op het schermtoetsenbord op?
+- [ ] **Voel de bultjes, einde:** staat "Daar is thuis. Leg je andere vingers ernaast, en je duimen op de spatiebalk." in de tekstballon?
+- [ ] **Links, rechts, duim:** toont de kaart "Links", "Rechts" of "Duim", en toont de getekende hand die vinger in kleur en de andere lichter? Twaalf keer? Zegt de app "Andere hand!" bij de verkeerde wijsvinger en "Andere vinger. Kijk naar de hand." bij een andere toets, en wacht ze op de juiste toets?
+- [ ] **Links, rechts, duim, twee keer hetzelfde woord:** merkt het kind dat de eerste tik geteld is (de teller onderaan, de toets die oplicht)? Zo niet: noteer het.
+- [ ] **Een toets die je indrukt** licht in Toetsenjacht, Voel de bultjes en Links, rechts, duim een halve seconde op in de kleur van de vinger. Is dat duidelijk, en niet storend?
+- [ ] **Over de beek, doelzin en opdracht:** staat de opdracht bovenaan, even groot als op de andere schermen, en de doelzin in een tekstballon direct boven Fien en Jef in de strook, met het staartje naar hen? Kan iemand zonder uitleg zeggen wat hij moet doen, en waar hij naartoe werkt?
+- [ ] **Oefenbord:** staat elke letter netjes in de kaart, ook de p, g en j, zonder de onderrand te raken? Houdt de kaart dezelfde maat bij "spatie"?
+- [ ] **Goed gedaan:** staan Fien en Jef groot in het midden met hun duim omhoog, met drie sterren en de zin "Je kent ons huis, en je vingers vinden de bultjes. In les 1 leer je wie er op de bultjes woont." in een tekstballon erboven, en de knoppen even breed eronder? Kan je met de knop meteen naar les 1?
 
 ## Les 1
 
