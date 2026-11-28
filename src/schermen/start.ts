@@ -99,10 +99,12 @@ export function startScherm(app: App, wortel: HTMLElement): Scherm {
         ),
       );
     }
+    // Wie nog nergens was, kan niet "verder waar je was": dan staat er "Begin hier".
+    const label = t(Object.keys(app.voortgang.lessen).length === 0 ? "start.begin" : "start.verder");
     return el(
       "section",
-      { class: "kaart verder-kaart", "aria-label": t("start.verder") },
-      el("div", { class: "verder-links" }, el("p", { class: "verder-label" }, t("start.verder")), ...inhoud),
+      { class: "kaart verder-kaart", "aria-label": label },
+      el("div", { class: "verder-links" }, el("p", { class: "verder-label" }, label), ...inhoud),
       el("div", { class: "verder-knoppen" }, ...knoppen),
     );
   }
@@ -114,6 +116,8 @@ export function startScherm(app: App, wortel: HTMLElement): Scherm {
     const voortgang = lv(les);
     const heeftMeting = les.online.some((b) => b.type === "eindoefening" && b.doelNauwkeurigheid !== null);
     const vorige = vorigeVan(les);
+    // Een les zonder meting (les 0) geeft iedereen drie sterren.
+    const sterren = heeftMeting ? voortgang.sterren : 3;
 
     const icoon =
       staat === "klaar"
@@ -146,11 +150,11 @@ export function startScherm(app: App, wortel: HTMLElement): Scherm {
       el(
         "span",
         { class: "rij-sterren" },
-        staat === "klaar" && heeftMeting
+        staat === "klaar"
           ? el(
               "span",
-              { class: "sterren-klein", role: "img", "aria-label": t("les.sterren", { aantal: voortgang.sterren }) },
-              ...[1, 2, 3].map((i) => sterIcoon(i <= voortgang.sterren, 18)),
+              { class: "sterren-klein", role: "img", "aria-label": t("les.sterren", { aantal: sterren }) },
+              ...[1, 2, 3].map((i) => sterIcoon(i <= sterren, 18)),
             )
           : null,
       ),

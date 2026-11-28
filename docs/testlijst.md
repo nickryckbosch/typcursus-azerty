@@ -24,7 +24,7 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 - [ ] Links staan Fien en Jef, stil en zwaaiend, met hun tekstballon er vlak boven (met een staartje naar de figuurtjes), ook op een groot scherm.
 - [ ] De kaart "Verder waar je was" toont les 0, met de knop "Start de les". Enter start de les meteen.
 - [ ] Op het eerste scherm van elke les staat op de knop "Tokkelen maar!". Op alle andere schermen staat "Verder" of "Start".
-- [ ] Onder "Alle lessen" staat het tabblad "1 · Woonkamer". Les 0 is "nu aan de beurt" (blauwe stip), les 1 staat op slot ("Na les 0"), les 2 tot 5 staan op "Komt binnenkort".
+- [ ] Onder "Alle lessen" staat het tabblad "1 · Woonkamer". Les 0 is "nu aan de beurt" (blauwe stip), les 1 tot 5 staan op slot ("Na les 0", "Na les 1" ...). In de kaart bovenaan staat "Begin hier".
 - [ ] Zet voorlezen aan met de kleine knop bovenaan. Hoor je een Vlaamse of Nederlandse stem in de les? Klinkt ze goed genoeg voor de klas?
 
 ## Schermtoetsenbord en handen
@@ -77,7 +77,7 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 - [ ] Na de 4 regels: een korte afsluiter van Fien en Jef, zonder sterren: groot in het midden, met twee even brede knoppen.
 - [ ] Ga terug naar het startscherm: de sterren en het slot van les 2 zijn niet veranderd.
 - [ ] Leerkrachtscherm: is het aantal bij "Toetsen" gestegen na extra oefenen?
-- [ ] "Extra oefenen" staat alleen bij een les die je tot het einde gedaan hebt. (Les 2 tot 5 staan nog op "Komt binnenkort".)
+- [ ] "Extra oefenen" staat alleen bij een les die je tot het einde gedaan hebt.
 
 ## Schalen als een dia (nieuw)
 

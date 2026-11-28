@@ -329,6 +329,8 @@ export function slotscherm(ctx: BlokContext, opties: SlotschermOpties): Oefensch
   if (opties.knoppen?.some((k) => k.enter)) ctx.toetsenbord.toonEnter(true);
   scherm.voet.replaceChildren(el("div", { class: "knoppen even-breed" }, ...knoppen));
   // Met Enter kies je de eerste knop; met Tab ga je naar de andere.
-  if (opties.focus !== false) knoppen[0]?.focus();
+  // De focus komt pas na een korte tijd: een Enter of spatie die nog bij de
+  // vorige oefening hoorde, kiest zo geen knop voor het kind het scherm zag.
+  if (opties.focus !== false) ctx.later(() => knoppen[0]?.focus(), 700);
   return scherm;
 }

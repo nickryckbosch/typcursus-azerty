@@ -105,6 +105,11 @@ export function typRegels(
     opToets(e) {
       if (klaar || !teltAlsTeken(e)) return;
       const oef = oefeningen[r];
+      // Een spatie voor de eerste letter van een regel telt niet: wie uit
+      // gewoonte een spatie typt na het laatste groepje van de vorige regel
+      // (of van de vorige oefening), maakt geen fout. In de eindoefening kostte
+      // dat anders een ster (test van 28 november 2026).
+      if (e.key === " " && oef.aanslagen.length === 0 && volgendTeken(oef) !== " ") return;
       const { juist, klaar: regelKlaar } = typ(oef, e.key, performance.now());
       ctx.toetsenbord.flits(e.code, juist);
       if (!juist) {

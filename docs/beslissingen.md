@@ -465,6 +465,21 @@ Beslist door Nick; de volledige redenering staat in projectdocument 27 (M1 tot M
 - **Tegen:** de kinderen in het logo zijn ouder getekend (11 tot 12 jaar) dan de twaalf prenten in de app; het logo staat klein in de bovenbalk.
 - **Waarop steunt dit? Eigen keuze** (het oordeel van Nick), na de merkcontrole. Geen advies van een jurist.
 
+## 12t. Fouten na een test als drie soorten kinderen, en les 2 tot 5 voorlopig open (28 november 2026)
+
+Fable speelde les 0 en 1 door op 1366 x 768 als een kind dat alles leest, een kind dat niets leest en op de toetsen ramt, en als nalezer met de code ernaast. Daarbij kwamen opmerkingen van Nicks zoon en vader. Alles hieronder is een fout of een kleine keuze; er is niets aan de vormgeving veranderd.
+
+- **Een slotscherm slokt geen toets meer op.** Na de laatste letter van een oefening stond het slotscherm er meteen, met de focus op de hoofdknop. Een spatie of Enter die het kind nog typte, koos die knop: de sterren waren weg voor het kind ze zag, en een rammend kind mislukte twee keer in enkele seconden. Nu kiest een spatie nooit een knop op een slotscherm, telt een ingehouden Enter niet, en komt de focus pas na 0,7 seconde (`app.ts`, `slotscherm()`).
+- **De eindoefening begint na Start (K28).** Ze beslist of de volgende les opengaat. Vroeger begon ze meteen na de vorige oefening, zodat een toets te veel al een fout was. Nu staat de opdracht eerst in een tekstballon met de knop Start.
+- **Een spatie voor de eerste letter van een regel telt niet.** Kinderen typen uit gewoonte een spatie na het laatste groepje van een regel. Dat kostte in de eindoefening een ster (`typregels.ts`).
+- **De korte eindoefening is niet strenger dan de gewone.** Ze telt 15 tekens: 90% liet daar maar een fout toe, de gewone versie vier. Wie de korte versie krijgt, heeft het net moeilijk. Nu mogen er altijd twee fouten, en gehaald is minstens een ster. De aanmoediging zegt niet meer "Het lukt bijna!" (dat stond er ook bij 42%) en begint niet meer met "Fien en Jef:" in hun eigen tekstballon.
+- **"Zoek de toets": nooit twee keer na elkaar dezelfde toets.** Bij een herhaling verscheen de letter kort opnieuw, de getekende spatiebalk niet. Een kind van het zesde leerjaar en een volwassene merkten de herhaling niet op: het leek alsof de toets niet telde. We maken het signaal niet sterker (er zou meer bewegen), we nemen de herhaling weg (`zoekReeks`).
+- **Les 0 geeft iedereen drie sterren.** Vraag van Nicks zoon: "Waarom krijg ik geen drie sterren op les 0?" Er wordt in les 0 niets gemeten, dus niemand wordt bevoordeeld; geen sterren naast de sterren van les 1 leest als "slecht gedaan". Voorstel van Nick. Makkelijk terug te draaien.
+- **"Begin hier"** in plaats van "Verder waar je was" voor een kind dat nog nergens was.
+- **Les 2 tot 5 staan voorlopig open.** Vraag van Nick voor de Chromebook-test van 30 november: kinderen die al kunnen typen, vliegen door les 0 en 1. Alles behalve het spel bestond al. De vier spellen (overgooien, dijk, slee, egel) gebruiken voorlopig de stapstenen van "Over de beek", met de letters of de woorden van hun les (`voorlopigSpel` in `spellen/beek.ts`). Ze heten dan ook "Over de beek" en krijgen de doelzin van de beek, want de prent is de beek (`titelVan`). De lesdata is niet veranderd: de titels, doelzinnen en beschrijvingen van de latere spellen blijven staan. Elk spel krijgt later zijn eigen strook (K22); haal het dan uit de lijst in `spellen/index.ts`.
+- **Wat er nog niet in zit:** de bewegingspauze en het houdingspunt per les (13c).
+- **Waarop steunt dit? Eigen vaststelling** (de test hierboven, nagespeeld voor en na de wijziging) **en eigen keuze** (twee fouten in de korte versie, drie sterren voor les 0), te toetsen in de klastest.
+- **Wat ons van mening zou doen veranderen:** vinden kinderen vier keer dezelfde beek saai, dan krijgen de spellen eerst hun eigen strook. Typen kinderen bewust een spatie om een knop te kiezen en lukt dat niet, dan herbekijken we de regel voor de slotschermen.
 
 ## 13. Privacy en veiligheid
 

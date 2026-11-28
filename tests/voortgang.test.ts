@@ -104,3 +104,13 @@ describe("extra oefenen gaat open (K15)", () => {
     expect(isExtraOpen(v, 1)).toBe(true);
   });
 });
+
+describe("korte eindoefening", () => {
+  it("laat twee fouten toe en geeft dan minstens een ster", () => {
+    const v = nieuweVoortgang();
+    const tekens = 15;
+    const doel = Math.min(0.9, (tekens - 2) / tekens);
+    expect(registreerEindoefening(v, 1, 12 / 15, 5, doel).gehaald).toBe(false);
+    expect(registreerEindoefening(v, 1, 13 / 15, 5, doel)).toEqual({ gehaald: true, sterren: 1 });
+  });
+});
