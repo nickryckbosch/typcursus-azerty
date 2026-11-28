@@ -4,7 +4,7 @@
 
 import type { App, Scherm } from "../app";
 import { t, type TekstSleutel } from "../content";
-import type { Blok, Les } from "../content/types";
+import type { Blok, Les, ZoekToetsBlok } from "../content/types";
 import { blokFunctie, titelVan } from "../blokken";
 import { slotscherm } from "../blokken/oefenscherm";
 import { maakExtraRegels } from "../logica/extraoefenen";
@@ -27,14 +27,26 @@ export interface LesOpties {
   extra?: boolean;
 }
 
+/** Zoveel kaarten "druk op de toets die je ziet" aan het begin van een beurt extra oefenen. */
+const EXTRA_KAARTEN = 10;
+
 /**
- * De blokken van een beurt extra oefenen: 4 nieuw samengestelde oefenregels
- * en een korte afsluiter van Fien en Jef. Ze gebruiken dezelfde blokken als
+ * De blokken van een beurt extra oefenen: een tiental kaarten als opwarming,
+ * 4 nieuw samengestelde oefenregels en een korte afsluiter van Fien en Jef. Ze gebruiken dezelfde blokken als
  * een gewone les, maar er telt niets mee voor de voortgang.
  */
 function extraBlokken(app: App, les: Les): Blok[] {
   const vroegere = app.lessen.filter((l) => l.id < les.id);
+  // Afwisseling (28 november 2026): een beurt begint met een tiental kaarten
+  // "druk op de toets die je ziet", met dezelfde toetsen als in de les (vooral
+  // de nieuwe), en gaat dan naar de regels. Twaalf regels na elkaar zonder
+  // iets anders was eentonig. De regels blijven de hoofdzaak.
+  const zoek = les.online.find((b): b is ZoekToetsBlok => b.type === "zoek-toets");
+  const opwarming: Blok[] = zoek
+    ? [{ type: "zoek-toets", titel: t("extra.titel"), duurMinuten: 1, tekst: t("extra.zoek"), toetsen: zoek.toetsen, nadruk: zoek.nadruk, aantal: EXTRA_KAARTEN }]
+    : [];
   return [
+    ...opwarming,
     {
       type: "reeks",
       titel: t("extra.titel"),
