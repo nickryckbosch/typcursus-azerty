@@ -19,7 +19,10 @@ export const intro: BlokFunctie<IntroBlok> = (blok, ctx) => {
     opbouw: "midden",
     klasse: blok.prent === "huis" ? "blok-intro met-huis" : "blok-intro",
   });
-  const ballon = el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, blok.tekst ?? ""));
+  // Een witregel in de lestekst ("\n\n") wordt een nieuwe alinea: zo leest een
+  // langere tekst rustiger (test van 28 november).
+  const alineas = (blok.tekst ?? "").split(/\n\s*\n/).map((a) => a.trim()).filter((a) => a !== "");
+  const ballon = el("div", { class: "ballon" }, ...alineas.map((a) => el("p", { class: "grote-tekst" }, a)));
   if (blok.prent === "huis") {
     // Les 0: het huis van "Licht aan in het huis" (alle ramen uit, het dak leeg),
     // zodat woord en beeld kloppen en het kind het huis al kent voor het spel.

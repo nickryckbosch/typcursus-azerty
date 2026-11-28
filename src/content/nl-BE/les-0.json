@@ -56,11 +56,11 @@
       "titel": "Fien en Jef stellen hun huis voor",
       "prent": "huis",
       "duurMinuten": 1,
-      "tekst": "Hallo! Wij zijn Fien en Jef. Het toetsenbord is ons huis. De bovenste rij is de zolder, de middelste rij de woonkamer en de onderste rij de kelder. In de woonkamer wonen je vingers. Vandaag leer je ons huis kennen."
+      "tekst": "Hallo! Wij zijn Fien en Jef. Het toetsenbord is ons huis.\n\nDe bovenste rij is de zolder, de middelste rij de woonkamer en de onderste rij de kelder. In de woonkamer wonen je vingers.\n\nVandaag leer je ons huis kennen."
     },
     {
       "type": "toetsenbordcheck",
-      "titel": "Klopt je toetsenbord?",
+      "titel": "Je toetsenbord nakijken",
       "duurMinuten": 0.5,
       "blokkeert": false,
       "tekst": "Zoek de toets met de letter A en druk erop. Druk nu op de toets met het cijfer 6.",
@@ -74,7 +74,7 @@
         " "
       ],
       "aantal": 5,
-      "tekst": "Leg je duimen op de spatiebalk. Gaat de lamp aan? Druk [spatie]."
+      "tekst": "Leg je duimen op de spatiebalk en druk eerst op Start. Gaat de lamp aan? Druk [spatie]."
     },
     {
       "type": "spel",

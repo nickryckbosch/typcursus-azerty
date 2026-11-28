@@ -346,6 +346,17 @@ Gebouwd op 27 november 2026 (tak `claude/spelsjabloon`), na een mockup die Nick 
 - **Wat ons van mening zou doen veranderen:** zegt een kind van 9 of 10 jaar dat het spel saai is, of ziet het geen verschil met de oefenregels, dan krijgt het spel een korte beloning op het einde of een kleine verandering in de strook, nooit in de tekst.
 - **Nog niet gedaan:** het huis op de strook is het huis van de prenten (met een puntgevel), niet het huis met vier lagen van "Licht aan in het huis" (12e). Dat zijn nu twee huizen in de app. Niet getest op een echte Chromebook.
 
+## 12m. Bijsturingen na de test van 28 november
+
+Nick testte op 28 november op een groot scherm, deels met een kind. Dit zijn de fouten en tekstpunten; de vormgeving volgt in een aparte beurt met Fable (projectdocument 22).
+
+- **Toetsenbordcheck: "In orde! Je toetsenbord typt de juiste letters."** in plaats van "Je toetsenbord klopt!". De titel bovenaan heet "Je toetsenbord nakijken" in plaats van "Klopt je toetsenbord?". Ook de wachtzin zegt nu wat er gecontroleerd wordt: "We kijken even of je toetsenbord de juiste letters typt...". Waarom: een kind vroeg "Mijn toetsenbord klopt?". Op een Chromebook leest de app de indeling meestal zelf, zodat de uitkomst meteen verschijnt; dan moet de zin zelf uitleggen wat er gebeurd is.
+- **Toetsenbordcheck: een ingehouden Enter telt niet.** Een herhaalde Enter (`event.repeat`) van het vorige scherm slaat de uitkomst niet meer over. Waarom: de uitkomst verschijnt meteen, en een kind dat Enter iets te lang indrukt, zag ze anders niet.
+- **Lampopdrachten: "druk eerst op Start" staat in de opdracht.** "Leg je duimen op de spatiebalk en druk eerst op Start. Gaat de lamp aan? Druk [spatie]." en hetzelfde in "Klaar voor de start". Waarom: Nick vond het niet duidelijk dat de lamp pas na Start komt (K28). Drie korte zinnen, binnen de grens van de test.
+- **De lamp wacht na Start een seconde langer:** 1,9 seconde in "Duim op de spatiebalk" (was 0,9), 2,2 seconden in "Klaar voor de start" (was 1,2). De tijd tussen twee lampen blijft. Waarom: Nick vond de wachttijd goed, behalve meteen na Start: dan moet je je handen nog klaarleggen.
+- **"Over de beek", slotzin: "Het is je gelukt! We zijn thuis."** in plaats van "Droge voeten! We zijn thuis." Waarom: keuze van Nick; de zin zegt rechtstreeks dat het kind het gedaan heeft.
+- **De intro van les 0 in alinea's.** Een witregel in een introtekst (`\n\n` in de lesdata) wordt een nieuwe alinea in de tekstballon, met een halve regel wit ertussen. Waarom: de tekst was een blok van vijf zinnen; in drie alinea's (wie we zijn, de rijen, wat je vandaag leert) leest hij rustiger.
+
 ## 13. Privacy en veiligheid
 
 - Geen externe bronnen: geen CDN, geen analytics, geen Google Fonts.

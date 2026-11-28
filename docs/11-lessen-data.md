@@ -99,7 +99,7 @@ Extra afspraken uit document 10 die de app raken:
     },
     {
       "type": "toetsenbordcheck",
-      "titel": "Klopt je toetsenbord?",
+      "titel": "Je toetsenbord nakijken",
       "duurMinuten": 0.5,
       "blokkeert": false,
       "tekst": "Zoek de toets met de letter A en druk erop. Druk nu op de toets met het cijfer 6.",
@@ -111,7 +111,7 @@ Extra afspraken uit document 10 die de app raken:
       "duurMinuten": 0.5,
       "toetsen": [" "],
       "aantal": 5,
-      "tekst": "Leg je duimen op de spatiebalk. Gaat de lamp aan? Druk!"
+      "tekst": "Leg je duimen op de spatiebalk en druk eerst op Start. Gaat de lamp aan? Druk [spatie]."
     },
     {
       "type": "spel",
@@ -233,7 +233,7 @@ Extra afspraken uit document 10 die de app raken:
       "tekens": ["f", "j", " "],
       "doel": "Ons huis staat aan de overkant van de beek. Elke goede letter legt een stapsteen. Leg drie rijen stenen, dan zijn we thuis!",
       "tekst": "Typ wat je ziet.",
-      "beschrijving": "Het spel gebruikt het spelsjabloon. Bovenaan staat de opdracht. In het midden staat, groot, een regel van 12 tekens: f, j en de spatie (elk derde teken is een spatie), in dezelfde vorm als bij de oefenregels. Links staat de doelzin in een tekstballon. Onderaan staat de strook: Fien en Jef aan deze kant van de beek, hun huis aan de overkant, en in het water drie rijen van 12 plaatsen voor een stapsteen. Een juiste toets: er ligt een steen bij, en de plaats van de volgende steen krijgt een donkere rand. Een foute toets: de letter krijgt een stippelrand, en de juiste toets en de juiste vinger lichten op. Na 12 tekens komt er een nieuwe regel. Drie regels (36 toetsen). Fien en Jef staan stil; pas op het einde staan ze bij hun huis: \"Droge voeten! We zijn thuis.\" Geen tijd, geen punten."
+      "beschrijving": "Het spel gebruikt het spelsjabloon. Bovenaan staat de opdracht. In het midden staat, groot, een regel van 12 tekens: f, j en de spatie (elk derde teken is een spatie), in dezelfde vorm als bij de oefenregels. Links staat de doelzin in een tekstballon. Onderaan staat de strook: Fien en Jef aan deze kant van de beek, hun huis aan de overkant, en in het water drie rijen van 12 plaatsen voor een stapsteen. Een juiste toets: er ligt een steen bij, en de plaats van de volgende steen krijgt een donkere rand. Een foute toets: de letter krijgt een stippelrand, en de juiste toets en de juiste vinger lichten op. Na 12 tekens komt er een nieuwe regel. Drie regels (36 toetsen). Fien en Jef staan stil; pas op het einde staan ze bij hun huis: \"Het is je gelukt! We zijn thuis.\" Geen tijd, geen punten."
     },
     {
       "type": "reeks",

@@ -37,7 +37,9 @@ export function houding(_blok: EindoefeningBlok, ctx: BlokContext): BlokInstanti
     if (gestart) return;
     gestart = true;
     scherm.verbergEnter();
-    ctx.later(lampAan, 1200);
+    // Na Start wacht de lamp iets meer dan twee seconden: tijd om de vingers
+    // klaar te leggen (test van 28 november: 1,2 seconde was te kort).
+    ctx.later(lampAan, 2200);
   }
   scherm.voortgang.zetBalk(0, AANTAL);
   ctx.zeg(t("houding.zeg"));

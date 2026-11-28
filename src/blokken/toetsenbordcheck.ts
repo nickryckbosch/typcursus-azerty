@@ -69,7 +69,9 @@ export const toetsenbordcheck: BlokFunctie<ToetsenbordcheckBlok> = (_blok, ctx) 
   return {
     opToets(e) {
       if (stap === "klaar") {
-        if (e.key === "Enter") ctx.volgende();
+        // Een ingehouden Enter (herhaling van het vorige scherm) telt niet:
+        // anders verdwijnt de uitkomst voor het kind ze kon lezen.
+        if (e.key === "Enter" && !e.repeat) ctx.volgende();
         return;
       }
       if (stap === "drukA") {
