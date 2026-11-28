@@ -151,8 +151,10 @@ export interface Oefenscherm {
   /**
    * Toon de knop Verder, met de Enter-toets erin getekend; Enter doet hetzelfde.
    * Met "start": de knop Start (K28: eerst lezen, dan starten).
+   * Met "les": de knop "Tokkelen maar!", alleen op het eerste scherm van een
+   * les (de slogan, projectdocument 25, N5).
    */
-  toonEnter(actie?: () => void, soort?: "verder" | "start"): void;
+  toonEnter(actie?: () => void, soort?: EnterSoort): void;
   /** verberg de knop weer (zijn plaats blijft) */
   verbergEnter(): void;
   /**
@@ -162,6 +164,9 @@ export interface Oefenscherm {
    */
   enter: HTMLElement;
 }
+
+/** Wat op de knop staat: Verder, Start, of "Tokkelen maar!" bij het begin van een les. */
+export type EnterSoort = "verder" | "start" | "les";
 
 export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): Oefenscherm {
   const opdracht = el("p", { class: "opdracht-tekst" });
@@ -181,8 +186,8 @@ export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): O
     enterLabel,
     el("span", { class: "toets-in-tekst", "aria-hidden": "true" }, t("toets.enter")),
   );
-  function zetEnterTekst(soort: "verder" | "start"): void {
-    enterLabel.textContent = t(soort === "start" ? "knop.start" : "knop.verder");
+  function zetEnterTekst(soort: EnterSoort): void {
+    enterLabel.textContent = t(soort === "start" ? "knop.start" : soort === "les" ? "knop.tokkelen" : "knop.verder");
   }
   const enterRij = startVerborgen(el("div", { class: "enter-rij" }, enterKnop));
   const enterBijOpdracht = opties.enterPlaats === "opdracht";

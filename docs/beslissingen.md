@@ -421,6 +421,22 @@ Nick testte op 28 november op een groot scherm, deels met een kind. Dit zijn de 
 
 **Wat ons van mening zou doen veranderen:** mist een kind op de Chromebook de knop Verder bovenaan bij "Licht aan", of zoekt het de slotzin van een spel, dan gaat de slotzin terug naar de plaats van de opdracht. Vindt Nick het slotscherm zonder toetsenbord te anders, dan komt de lege plaats terug (een regel in de stijl).
 
+## 12q. Naam Tokkelaar, logo, icoon en slogan (28 november 2026)
+
+Beslist door Nick; de volledige redenering staat in projectdocument 25 (N1 tot N5).
+
+- **Naam:** de methode heet **Tokkelaar**. Tokkeldorp is het deel voor het vierde leerjaar. In de app: `app.titel` is "Tokkelaar", de ondertitel begint met "Tokkeldorp", en de titel van het tabblad is "Tokkelaar · typcursus op Belgisch AZERTY". Waarom: een naam en een logo voor alles (dorp, stad, diploma), en de naam zegt wat het kind wordt.
+- **Logo in de bovenbalk van het startscherm:** de prent `src/beelden/logo-tokkelaar.webp` (640 px breed, doorzichtige achtergrond) vervangt het getekende huisje met de toetsen f en j en de naam in tekst. Het logo toont het woord tokkelaar met Fien en Jef in een huisje op de twee k-toetsen. De naam staat als alt-tekst in de `h1`, voor schermlezers. De functie `merkteken()` en haar stijlen zijn verwijderd.
+- **Icoon:** `src/beelden/icoon-tokkelaar.png` (192 px) is het icoon van het tabblad, in plaats van het blauwe vakje met "FJ".
+- **Bronbestanden:** de prenten op volle grootte staan in `docs/beelden/logo/` (uit ChatGPT, chat "Logovoorstellen Tokkeldorp"). Het zijn prenten, geen vectoren; voor drukwerk is een nagetekende versie nodig.
+- **Slogan "Klaar? Tokkelen maar!":** sluit de startzin af. Op het startscherm staat hij op een tweede regel onder de startzin (tekst `slogan`). Op het eerste scherm van elke les (blok 0, niet bij extra oefenen) heet de knop "Tokkelen maar!" (tekst `knop.tokkelen`, soort `"les"` in `toonEnter`). Alle andere knoppen blijven Verder of Start. Waarom: de startzin somde vier dingen op zonder slot; de slogan is vraag en antwoord (de leerkracht zegt "Klaar?", de klas antwoordt) en rijmt op de naam. Alleen bij het begin van een les: anders verliest de zin zijn kracht, en een woord betekent altijd hetzelfde (K26).
+- **Lesdata:** de klassikale start van les 1 en les 2 noemt de vraag en het antwoord. Les 0 leert de startzin nog zonder "vingers thuis" en zonder slogan; de knop op het eerste scherm heet daar wel al "Tokkelen maar!".
+- **Bovenbalk op een smal scherm:** de knoppen staan nu altijd rechts (`grid-column: 3`), ook als de startzin wegvalt onder 1180 px. Vroeger schoven ze dan naar het midden.
+- **Niet veranderd:** de schermindeling (K20), de grote Fien en Jef op het startscherm (zij komen uit het blad met zes houdingen; het logo gebruikt de slankere figuren van de personagekaart, zie 12o).
+- **Tegen:** het logo is een rasterprent en wordt in de bovenbalk klein getoond; de figuren in het logo en de grote figuren eronder zijn niet uit dezelfde reeks prenten.
+- **Waarop steunt dit? Eigen keuze** (het oordeel van Nick). Te toetsen in de klastest: antwoordt de klas vanzelf op "Klaar?", en denkt niemand bij het logo aan kinderopvang?
+
+
 ## 13. Privacy en veiligheid
 
 - Geen externe bronnen: geen CDN, geen analytics, geen Google Fonts.
