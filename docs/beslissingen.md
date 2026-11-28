@@ -452,6 +452,20 @@ Beslist door Nick; de volledige redenering staat in projectdocument 25 (N1 tot N
 - **Waarop steunt dit? Eigen keuze** (het oordeel van Nick), te toetsen in de klastest: spreekt de stijl kinderen aan?
 
 
+## 12s. Merk Fien en Jef: naam, logo en icoon (28 november 2026)
+
+Beslist door Nick; de volledige redenering staat in projectdocument 27 (M1 tot M5). Dit vervangt de naam Tokkelaar en het logo met het huisje uit 12q. De slogan en de knop "Tokkelen maar!" uit 12q blijven.
+
+- **Waarom een andere naam:** "Tokkel" is een ingeschreven Benelux-merk voor educatieve software voor kinderen en cursussen (projectdocument 26). Tokkelaar bevat dat hele merk.
+- **Naam:** de methode heet **Fien en Jef**, voluit met "en". In de app: `app.titel` is "Fien en Jef" en het tabblad toont "Fien en Jef · typcursus op Belgisch AZERTY". De delen blijven Tokkeldorp en Tokkelstad (keuze van Nick); de ondertitel onder het logo begint dus nog met "Tokkeldorp".
+- **Logo in de bovenbalk:** `src/beelden/logo-fien-en-jef.webp` (640 px breed, doorzichtig), de liggende versie: Fien en Jef leunen op twee schuine witte toetsen F en J, met ernaast de naam en in het blauw "fijn en juist". Geen huis meer. Waarom: een witte f op een blauw vlak leek op het icoon van Facebook, en twee kinderen onder een dak deden aan kinderopvang denken (projectdocumenten 25 en 27).
+- **Icoon:** `src/beelden/icoon-fien-en-jef.png` (192 px): de twee toetsen met de hoofden erboven.
+- **Bronbestanden:** `docs/beelden/logo/` bevat het hoofdlogo (naam onder de groep), de liggende versie en het icoon op volle grootte. De beelden van Tokkelaar blijven er als geschiedenis; uit `src/beelden/` zijn ze verwijderd.
+- **"fijn en juist"** staat alleen in het logo zelf, niet als losse tekst in de app. De regel onder de startzin blijft "Klaar? Tokkelen maar!".
+- **Tegen:** de kinderen in het logo zijn ouder getekend (11 tot 12 jaar) dan de twaalf prenten in de app; het logo staat klein in de bovenbalk.
+- **Waarop steunt dit? Eigen keuze** (het oordeel van Nick), na de merkcontrole. Geen advies van een jurist.
+
+
 ## 13. Privacy en veiligheid
 
 - Geen externe bronnen: geen CDN, geen analytics, geen Google Fonts.

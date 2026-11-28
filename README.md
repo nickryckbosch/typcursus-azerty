@@ -74,7 +74,7 @@ Werkafspraken voor wie met toestemming aan de cursus werkt:
 
 ## Prenten
 
-Fien en Jef komen uit twaalf losse prenten in `docs/beelden/figuren/` (gemaakt met ChatGPT, vrij te gebruiken in dit project). De prenten in `src/beelden/` worden daaruit gemaakt met `scripts/maak-figuren.py` (Python 3 met Pillow). Het logo en het icoon van Tokkelaar staan in `docs/beelden/logo/`. De prenten "duim omhoog" en de beekprent (`beek.webp`) zijn door Nick aangeleverd en verkleind. Fien en Jef staan altijd stil: zie [docs/stijlgids.md](docs/stijlgids.md).
+Fien en Jef komen uit twaalf losse prenten in `docs/beelden/figuren/` (gemaakt met ChatGPT, vrij te gebruiken in dit project). De prenten in `src/beelden/` worden daaruit gemaakt met `scripts/maak-figuren.py` (Python 3 met Pillow). Het logo en het icoon van Fien en Jef staan in `docs/beelden/logo/` (de beelden van het vroegere logo Tokkelaar staan er nog bij, als geschiedenis). De prenten "duim omhoog" en de beekprent (`beek.webp`) zijn door Nick aangeleverd en verkleind. Fien en Jef staan altijd stil: zie [docs/stijlgids.md](docs/stijlgids.md).
 
 ## Lettertypes
 

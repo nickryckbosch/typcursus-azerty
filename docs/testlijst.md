@@ -20,7 +20,7 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 
 ## Startscherm
 
-- [ ] Bovenaan staat links het logo van Tokkelaar (Fien en Jef in een huisje op de twee k-toetsen) met eronder "Tokkeldorp", in het midden de startzin "Voeten plat, rug recht, schouders los, vingers thuis!" met eronder "Klaar? Tokkelen maar!", rechts de knoppen. Het tabblad van de browser toont het icoon met het huisje. Oogt de bovenbalk aantrekkelijk en rustig?
+- [ ] Bovenaan staat links het logo van Fien en Jef (de twee kinderen leunen op de schuine toetsen F en J, met ernaast de naam en "fijn en juist") met eronder "Tokkeldorp", in het midden de startzin "Voeten plat, rug recht, schouders los, vingers thuis!" met eronder "Klaar? Tokkelen maar!", rechts de knoppen. Het tabblad van de browser toont het icoon met de toetsen F en J en de naam "Fien en Jef". Oogt de bovenbalk aantrekkelijk en rustig?
 - [ ] Links staan Fien en Jef, stil en zwaaiend, met hun tekstballon er vlak boven (met een staartje naar de figuurtjes), ook op een groot scherm.
 - [ ] De kaart "Verder waar je was" toont les 0, met de knop "Start de les". Enter start de les meteen.
 - [ ] Op het eerste scherm van elke les staat op de knop "Tokkelen maar!". Op alle andere schermen staat "Verder" of "Start".
