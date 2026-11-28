@@ -68,7 +68,10 @@ Waarop steunt dit? **Eigen keuze** (een rustige, warme achtergrond met donkere t
 ## 3. Lettertypes
 
 - **Andika**: alles wat kinderen lezen en typen (oefenregels, letters op toetsen en stenen).
-- **Nunito**: koppen, knoppen en korte tekst van de app.
+- **Andika, gewone dikte (400)**: lopende tekst, dus alles in een tekstballon en de zinnen van een intro.
+- **Andika, vet (700)**: de opdracht bovenaan, "Vandaag leer je ...", en korte meldingen zoals "Wacht op de lamp.". Nooit dikker dan 700.
+- **Nunito**: koppen, knoppen, de bovenbalk en korte labels van de app.
+- Waarom: bijna alle tekst stond in Nunito 700 en de opdracht in 800. Nick vond dat "heel vet en druk" (28 november 2026). Vet is voor wat moet opvallen, niet voor alles.
 - De lettertypes zitten in de repository (`src/lettertypes/`), alleen de Latijnse tekens. Geen Google Fonts, geen CDN. Beide vallen onder de SIL Open Font License; de licentieteksten staan in dezelfde map.
 - De huidige oefenregel is ongeveer 48 px groot.
 
@@ -188,6 +191,7 @@ Elke tekst die een kind leest, volgt deze regels. Ze gelden ook voor elke nieuwe
 
 - **Gebeurt er in een oefening iets vanzelf** (een lamp die aangaat, later de vallende letters van Letterregen, alles met een tijd), **dan begint ze pas als het kind op Start drukt.** Tot dan staat de opdracht in beeld en gebeurt er niets. De start is Enter of de knop Start, waarin de Enter-toets getekend staat (`scherm.toonEnter(start, "start")`). De knop staat bij het signaal, bijvoorbeeld onder de lamp (K27, deel 10); een losse zin "Druk op Enter om te starten" is er niet meer.
 - Een toets voor de start krijgt wel een reactie (K23): "Druk eerst op Start." Hij telt niet als aanslag en niet als fout.
+- **Een knop in een zin wordt getekend**, zoals een toets: `((Start))` wordt een klein blauw knopje, net als `[spatie]` een getekende toets wordt. Geen aanhalingstekens ("Start" lijkt dan een citaat) en geen los woord (dan lijkt het een gewoon woord). Zo herkent het kind meteen wat het op het scherm moet zoeken (Nick, 28 november 2026).
 - Oefeningen die op het kind wachten (oefenregels, "Zoek de toets", een spel waarin je typt), hebben geen startknop nodig: daar gebeurt niets voor het kind typt. De eindoefening had al een start.
 - **Waarom:** bij "Duim op de spatiebalk" ging de lamp na 0,9 seconde aan, terwijl het kind de opdracht nog moest lezen (Nick, 27 november 2026). Een kind dat traag leest of de voorleesstem afwacht, mist zo het signaal.
 

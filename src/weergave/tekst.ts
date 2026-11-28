@@ -1,11 +1,12 @@
 // Teksten met een eenvoudige opmaak:
 //   [spatie]  wordt een getekende toets, zoals op het toetsenbord
 //   **zolder** wordt vet
+//   ((Start)) wordt een klein getekend knopje, zoals de echte knop op het scherm
 // Zo kan een opdracht in de JSON-bestanden de toets tonen die het kind moet indrukken.
 
 import { el } from "./dom";
 
-const PATROON = /\[([^\]]+)\]|\*\*([^*]+)\*\*/g;
+const PATROON = /\[([^\]]+)\]|\*\*([^*]+)\*\*|\(\(([^)]+)\)\)/g;
 
 /**
  * @param beelden optioneel: zet een klein beeldje meteen na een woord in de tekst,
@@ -16,7 +17,9 @@ export function tekstMetToetsen(tekst: string, beelden: Record<string, () => Nod
   let vanaf = 0;
   for (const m of tekst.matchAll(PATROON)) {
     if (m.index > vanaf) uit.push(document.createTextNode(tekst.slice(vanaf, m.index)));
-    uit.push(m[1] !== undefined ? el("span", { class: "toets-in-tekst" }, m[1]) : el("strong", {}, m[2]));
+    if (m[1] !== undefined) uit.push(el("span", { class: "toets-in-tekst" }, m[1]));
+    else if (m[3] !== undefined) uit.push(el("span", { class: "knop-in-tekst" }, m[3]));
+    else uit.push(el("strong", {}, m[2]));
     vanaf = m.index + m[0].length;
   }
   if (vanaf < tekst.length) uit.push(document.createTextNode(tekst.slice(vanaf)));
@@ -41,5 +44,5 @@ function voegBeeldenToe(node: Node, beelden: Record<string, () => Node>): Node[]
 
 /** Dezelfde tekst zonder opmaak, om voor te lezen. */
 export function zonderOpmaak(tekst: string): string {
-  return tekst.replace(PATROON, (_, toets: string | undefined, vet: string | undefined) => (toets ?? vet ?? "").replace("↵", "").trim());
+  return tekst.replace(PATROON, (_, toets: string | undefined, vet: string | undefined, knop: string | undefined) => (toets ?? vet ?? knop ?? "").replace("↵", "").trim());
 }

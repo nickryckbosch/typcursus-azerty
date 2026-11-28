@@ -75,7 +75,7 @@
         " "
       ],
       "aantal": 5,
-      "tekst": "Leg je duimen op de spatiebalk en druk eerst op Start. Gaat de lamp aan? Druk [spatie]."
+      "tekst": "Leg je duimen op de spatiebalk en druk eerst op ((Start)). Gaat de lamp aan? Druk [spatie]."
     },
     {
       "type": "spel",

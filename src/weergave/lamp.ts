@@ -6,6 +6,7 @@
 // De stralen zorgen dat je ook zonder op de kleur te letten ziet dat ze brandt.
 // Dezelfde tekening staat klein in de opdracht, naast het woord "lamp".
 
+import { tekstMetToetsen } from "./tekst";
 import { el, svg } from "./dom";
 
 const LIJN = "#1F1F1F";
@@ -73,7 +74,7 @@ export function lampMetWachtzin(wachtzin: string, binnen: () => ParentNode, star
       if (aan) zin.classList.add("onzichtbaar");
     },
     teVroeg(tekst = wachtzin) {
-      zin.textContent = tekst;
+      zin.replaceChildren(...tekstMetToetsen(tekst));
       zin.classList.remove("onzichtbaar");
     },
   };
