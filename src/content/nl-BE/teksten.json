@@ -1,7 +1,8 @@
 {
-  "app.titel": "Tokkeldorp",
-  "app.ondertitel": "Leer tokkelen met tien vingers, samen met Fien en Jef",
+  "app.titel": "Tokkelaar",
+  "app.ondertitel": "Tokkeldorp \u00b7 leer tokkelen met tien vingers",
   "startzin": "Voeten plat, rug recht, schouders los, vingers thuis!",
+  "slogan": "Klaar? Tokkelen maar!",
 
   "start.verder": "Verder waar je was",
   "start.alleLessen": "Alle lessen",
@@ -40,6 +41,7 @@
   "knop.terugTitel": "Terug naar de lessen (Esc)",
   "knop.verder": "Verder",
   "knop.start": "Start",
+  "knop.tokkelen": "Tokkelen maar!",
   "knop.opnieuw": "Probeer de eindoefening opnieuw",
   "knop.naarBegin": "Naar de lessen",
   "knop.volgendeLes": "Naar les {nummer}",
