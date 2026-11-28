@@ -112,9 +112,9 @@
   "eind.nietAlleSterren": "Nog niet alle sterren? Probeer de eindoefening nog eens, wij wachten op je.",
 
   "houding.zeg": "Voeten plat, rug recht, schouders los!",
-  "houding.opdracht": "Leg je vingers in de woonkamer, de rij met de bultjes, en druk eerst op Start. Gaat de lamp aan? Druk [spatie].",
+  "houding.opdracht": "Leg je vingers in de woonkamer, de rij met de bultjes, en druk eerst op ((Start)). Gaat de lamp aan? Druk [spatie].",
   "lamp.wacht": "Wacht op de lamp.",
-  "lamp.eerstStart": "Druk eerst op Start.",
+  "lamp.eerstStart": "Druk eerst op ((Start)).",
   "intro.huis": "Het huis van Fien en Jef: de zolder, de woonkamer en de kelder.",
   "houding.klaar": "Klaar voor de start!",
 

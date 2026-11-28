@@ -1204,6 +1204,21 @@ button {
   white-space: nowrap;
 }
 
+/* Een knop in de tekst, bv. "druk eerst op ((Start))": een klein blauw knopje,
+   zoals de echte knop, zodat het kind ziet wat het moet zoeken. Geen
+   aanhalingstekens en geen los woord (Nick, 28 november 2026). */
+.knop-in-tekst {
+  display: inline-block;
+  padding: 0.02em 0.55em;
+  margin: 0 0.1em;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--kop);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
 .hint-enter {
   font-size: 1.15rem;
 }
@@ -1582,7 +1597,22 @@ button {
 }
 .podium .grote-tekst { font-size: clamp(15px, 7.4cqh, 26px); }
 .podium .blok > .opdracht,
-.podium .hint-enter { font-size: clamp(14px, 6cqh, 20px); }
+.podium /* Een knop in de tekst, bv. "druk eerst op ((Start))": een klein blauw knopje,
+   zoals de echte knop, zodat het kind ziet wat het moet zoeken. Geen
+   aanhalingstekens en geen los woord (Nick, 28 november 2026). */
+.knop-in-tekst {
+  display: inline-block;
+  padding: 0.02em 0.55em;
+  margin: 0 0.1em;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--kop);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.hint-enter { font-size: clamp(14px, 6cqh, 20px); }
 .podium .ballon { padding: clamp(4px, 2.6cqh, 14px) 1.1rem; }
 .podium .enter-rij .knop-hoofd,
 .podium .knoppen .knop { font-size: clamp(14px, 5.6cqh, 18px); min-height: clamp(30px, 13cqh, 48px); }

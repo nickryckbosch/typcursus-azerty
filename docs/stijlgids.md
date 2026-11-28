@@ -188,6 +188,7 @@ Elke tekst die een kind leest, volgt deze regels. Ze gelden ook voor elke nieuwe
 
 - **Gebeurt er in een oefening iets vanzelf** (een lamp die aangaat, later de vallende letters van Letterregen, alles met een tijd), **dan begint ze pas als het kind op Start drukt.** Tot dan staat de opdracht in beeld en gebeurt er niets. De start is Enter of de knop Start, waarin de Enter-toets getekend staat (`scherm.toonEnter(start, "start")`). De knop staat bij het signaal, bijvoorbeeld onder de lamp (K27, deel 10); een losse zin "Druk op Enter om te starten" is er niet meer.
 - Een toets voor de start krijgt wel een reactie (K23): "Druk eerst op Start." Hij telt niet als aanslag en niet als fout.
+- **Een knop in een zin wordt getekend**, zoals een toets: `((Start))` wordt een klein blauw knopje, net als `[spatie]` een getekende toets wordt. Geen aanhalingstekens ("Start" lijkt dan een citaat) en geen los woord (dan lijkt het een gewoon woord). Zo herkent het kind meteen wat het op het scherm moet zoeken (Nick, 28 november 2026).
 - Oefeningen die op het kind wachten (oefenregels, "Zoek de toets", een spel waarin je typt), hebben geen startknop nodig: daar gebeurt niets voor het kind typt. De eindoefening had al een start.
 - **Waarom:** bij "Duim op de spatiebalk" ging de lamp na 0,9 seconde aan, terwijl het kind de opdracht nog moest lezen (Nick, 27 november 2026). Een kind dat traag leest of de voorleesstem afwacht, mist zo het signaal.
 

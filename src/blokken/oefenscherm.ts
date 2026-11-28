@@ -137,7 +137,7 @@ export interface Oefenscherm {
   /** de zone met de knop Verder, of de knoppen van de afsluiter (rechts; bij opbouw "midden" onder de groep) */
   voet: HTMLElement;
   voortgang: Voortgangsbalk;
-  /** zet de opdracht (opmaak: [toets], **vet**) en lees ze voor; beelden: zie tekstMetToetsen */
+  /** zet de opdracht (opmaak: [toets], **vet**, ((knop))) en lees ze voor; beelden: zie tekstMetToetsen */
   zetOpdracht(tekst: string, voorlezen?: boolean, beelden?: Record<string, () => Node>): void;
   /** een andere houding van Fien en Jef, op dezelfde plaats */
   zetFiguren(uitdrukking: Uitdrukking): void;
