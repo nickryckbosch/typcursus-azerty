@@ -239,7 +239,9 @@ export function startScherm(app: App, wortel: HTMLElement): Scherm {
           el(
             "section",
             { class: "kaart lessen-kaart", "aria-label": t("start.alleLessen") },
-            el("div", { class: "lessen-kop" }, el("h2", {}, t("start.alleLessen")), tabs),
+            // Zolang er maar een deel is, staat er geen tabblad: er valt niets te kiezen,
+            // en "Woonkamer" klopte niet (les 3 gaat al naar de zolder, voor de e en de i).
+            el("div", { class: "lessen-kop" }, el("h2", {}, t("start.alleLessen")), DELEN.length > 1 ? tabs : null),
             lijst,
           ),
         ),
