@@ -46,7 +46,8 @@ export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
     start();
   } else {
     // Eerst een aanmoediging, dan de korte oefening.
-    const scherm = oefenscherm(ctx, { figuren: "aanmoedigend", klasse: "blok-intro" });
+    // Fien en Jef met hun tekstballon als een groep in het midden, de knop eronder (K27).
+    const scherm = oefenscherm(ctx, { figuren: "aanmoedigend", opbouw: "midden", klasse: "blok-intro" });
     scherm.veld.append(el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, t("eind.aanmoediging"))));
     scherm.toonEnter(start);
     ctx.zeg(t("eind.aanmoediging"));

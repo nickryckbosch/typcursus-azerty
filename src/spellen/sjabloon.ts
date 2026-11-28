@@ -18,12 +18,14 @@
 //   een steen, een bal of een vlaggetje.
 // - De strook onderaan is de prent van het spel en toont de vooruitgang. Er is
 //   geen aparte teller: de strook zegt het zelf.
-// - De doelzin (K26) staat het hele spel in een tekstballon, links, boven Fien
-//   en Jef in de strook.
+// - De doelzin (K26) staat het hele spel in een tekstballon, direct boven Fien
+//   en Jef in de strook, met het staartje naar hen (K27 fase 2). Op het einde
+//   staat de slotzin op dezelfde manier boven Fien en Jef, waar ze dan staan.
 // - Bij een fout krijgt de letter een stippelrand; de juiste toets en vinger
 //   lichten op. Er schudt niets.
 // - Er beweegt niets tijdens het typen. Alleen op het einde verandert de strook
-//   (het resultaat) en komt de slotzin op de plaats van de opdracht.
+//   (het resultaat), komt de slotzin in een tekstballon boven Fien en Jef en
+//   komt de knop Verder op de plaats van de regel.
 //
 // Een nieuw spel is dus: een strook (zie beek-strook.ts als voorbeeld), een
 // lijst met wat het kind typt, en een slotzin.
@@ -42,6 +44,12 @@ export interface SpelschermOpties {
   doel: string;
   /** de strook van dit spel: een prent die ook de vooruitgang toont */
   strook: Element;
+  /**
+   * Waar Fien en Jef in de strook staan, als deel van de breedte van de strook
+   * (0 = links, 1 = rechts): bij de start en op het einde. Daar wijst het
+   * staartje van de tekstballon naar.
+   */
+  figuren: { start: number; einde: number };
   /** extra klasse op de kaart, voor eigen opmaak van een spel */
   klasse?: string;
 }
@@ -53,8 +61,9 @@ export interface Spelscherm {
   /** na een foute toets: de letter die aan de beurt is, krijgt een stippelrand */
   toonFout(): void;
   /**
-   * Het slot: de slotzin komt op de plaats van de opdracht, de knop Verder op
-   * de plaats van de regel. De doelzin verdwijnt (zijn plaats blijft).
+   * Het slot: de slotzin komt in een tekstballon boven Fien en Jef (waar ze op
+   * het einde staan), de knop Verder op de plaats van de regel. De opdracht en
+   * de doelzin verdwijnen (hun plaats blijft).
    */
   toonSlot(zin: string, verder: () => void): void;
 }
@@ -67,6 +76,9 @@ function cursorKlasse(teken: string): string {
 export function spelscherm(ctx: BlokContext, opties: SpelschermOpties): Spelscherm {
   const opdracht = el("p", { class: "opdracht-tekst" }, opties.opdracht);
   const ballon = el("p", { class: "ballon staart-onder spel-doel" }, opties.doel);
+  // De slotzin staat er van bij het begin, onzichtbaar, boven de plaats waar
+  // Fien en Jef op het einde staan.
+  const slotBallon = startVerborgen(el("p", { class: "ballon staart-onder spel-doel spel-slotzin" }));
   const regel = el("div", { class: "typregel spel-regel", "aria-hidden": "true" });
   // voor wie een schermlezer gebruikt: de regel als gewone tekst
   const voorlezer = el("p", { class: "verborgen" });
@@ -84,9 +96,12 @@ export function spelscherm(ctx: BlokContext, opties: SpelschermOpties): Spelsche
 
   const element = el(
     "section",
-    { class: `blok kaart spelkaart ${opties.klasse ?? ""}` },
+    {
+      class: `blok kaart spelkaart ${opties.klasse ?? ""}`,
+      style: `--figuur-start:${opties.figuren.start};--figuur-einde:${opties.figuren.einde}`,
+    },
     el("div", { class: "zone-opdracht" }, opdracht),
-    el("div", { class: "spel-ballon" }, ballon),
+    el("div", { class: "spel-ballon" }, ballon, slotBallon),
     el("div", { class: "spel-veld stapel" }, regel, slot, voorlezer),
     el("div", { class: "spel-strook" }, opties.strook),
   );
@@ -116,8 +131,10 @@ export function spelscherm(ctx: BlokContext, opties: SpelschermOpties): Spelsche
     },
     toonSlot(zin, verder) {
       verderActie = verder;
-      opdracht.textContent = zin;
+      toon(opdracht, false);
       toon(ballon, false);
+      slotBallon.textContent = zin;
+      toon(slotBallon);
       toon(regel, false);
       toon(slot);
       knop.removeAttribute("tabindex");

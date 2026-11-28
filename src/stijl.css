@@ -1280,27 +1280,57 @@ button {
   overflow: hidden;
 }
 
-/* De doelzin (K26): links, in een tekstballon. Het staartje wijst naar onder,
-   naar Fien en Jef in de strook. */
-.spel-ballon {
-  grid-column: 1;
-  grid-row: 2;
-  min-height: 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 0 0 clamp(6px, 3cqh, 14px) clamp(14px, 3.4cqw, 44px);
+/* De doelzin (K26): in een tekstballon direct boven Fien en Jef in de strook,
+   met het staartje naar hen (K27 fase 2). De plaats van Fien en Jef volgt uit
+   de maat van de strook:
+   --kaart: de breedte van de kaart; --strook-h: de hoogte van de strook
+   (hoogstens 38% van het podium); --tekening-b en --tekening-x: de breedte van
+   de tekening in de strook en waar ze begint (ze krimpt mee en blijft in het
+   midden). --figuur-start en --figuur-einde komen uit het spel (sjabloon.ts). */
+.podium .blok.spelkaart {
+  --kaart: min(100cqw, 1270px);
+  --strook-h: min(calc(var(--kaart) * 150 / 1270), 38cqh);
+  --tekening-b: calc(var(--strook-h) * 1270 / 150);
+  --tekening-x: calc((var(--kaart) - var(--tekening-b)) / 2);
+  --ballon-links: clamp(12px, 1.9cqw, 24px);
 }
 
+.spel-ballon {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  min-height: 0;
+  position: relative;
+  pointer-events: none;
+}
+
+/* Dezelfde lettergrootte als de andere tekstballonnen met een doelzin. */
 .podium .spel-doel {
+  position: absolute;
+  left: var(--ballon-links);
+  bottom: clamp(5px, 2cqh, 9px);
   margin: 0;
-  max-width: 300px;
-  font-size: clamp(12px, 3.9cqh, 16.5px);
-  line-height: 1.36;
+  max-width: min(330px, 27cqw);
+  font-size: clamp(13px, 4.4cqh, 17px);
+  line-height: 1.35;
 }
 
 .spel-doel.staart-onder::after {
-  left: clamp(40px, 22%, 70px);
+  left: calc(var(--tekening-x) + var(--tekening-b) * var(--figuur-start) - var(--ballon-links) - 7px);
+  transform: rotate(-45deg);
+}
+
+/* De slotzin: boven Fien en Jef waar ze op het einde staan, iets groter. */
+.podium .spel-slotzin {
+  left: calc(var(--tekening-x) + var(--tekening-b) * var(--figuur-einde));
+  transform: translateX(-50%);
+  max-width: 400px;
+  width: max-content;
+  font-size: clamp(15px, 5.6cqh, 21px);
+}
+
+.spel-slotzin.staart-onder::after {
+  left: 50%;
+  transform: translateX(-50%) rotate(-45deg);
 }
 
 /* Wat het kind typt: groot, in het midden, altijd op dezelfde plek. */
@@ -2037,7 +2067,7 @@ button {
 /* Het huis waarover Fien en Jef praten: kleiner en rustiger dan de tekst. */
 .oefenkaart-midden .zone-veld .huis {
   flex: none;
-  height: min(184px, 52cqh);
+  height: min(230px, 58cqh);
   width: auto;
 }
 
@@ -2165,4 +2195,202 @@ button {
 .oefenkaart-toren .zone-figuren {
   padding: 0 clamp(16px, 2.4cqw, 34px);
   border-bottom: 2px solid var(--rand-knop);
+}
+
+/* ---------- Toetsenbordcheck (K27 fase 2) ----------
+   Fien of Jef, de toets en de uitleg voor de leerkracht staan gestapeld op
+   dezelfde plek in het midden. */
+.blok-check .zone-veld {
+  padding: 0 clamp(16px, 4cqw, 56px);
+}
+
+.blok-check .stapel {
+  width: 100%;
+  height: 100%;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.check-figuur {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 clamp(16px, 2.4cqw, 34px);
+  border-bottom: 2px solid var(--rand-knop);
+}
+
+.podium .check-figuur .figuur {
+  height: min(var(--h), 100%);
+  max-height: 52cqh;
+}
+
+.check-fout {
+  max-height: 100%;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 2cqw, 28px);
+}
+
+.podium .check-fout .figuur {
+  flex: none;
+  height: min(var(--h), 40cqh);
+}
+
+.check-fout .leerkracht-uitleg {
+  max-width: 720px;
+}
+
+/* ---------- De namen van de rijen in de randtoetsen (intro van les 0) ----------
+   Zolder, woonkamer en kelder staan in de lege toets links van hun rij. De
+   toets wordt wit met een donker woord, zoals een woordvakje naast het huis.
+   Er knippert niets (K16). */
+.rij-naam {
+  display: none;
+  font-family: var(--lees);
+  font-size: calc(var(--k) * 0.3);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.met-rijnamen .toets-rijnaam {
+  background: var(--vlak);
+  border-color: var(--tekst);
+  border-bottom-color: var(--tekst);
+  color: var(--tekst);
+}
+
+.met-rijnamen .rij-naam {
+  display: block;
+}
+
+/* ---------- Tekstballon met het staartje rechts ---------- */
+.ballon.staart-rechts::after {
+  left: auto;
+  right: -8px;
+  transform: translateY(-50%) rotate(-135deg);
+}
+
+/* ---------- Intro in stukken (les 1; K27 fase 2) ----------
+   Van boven naar onder: de losse zinnen, Fien en Jef groot met elk een eigen
+   tekstballon, de zin over vandaag, de knop Verder. */
+.oefenkaart-midden .zone-figuren:empty {
+  display: none;
+}
+
+.blok-intro.in-stukken .zone-veld {
+  flex-direction: column;
+  gap: clamp(4px, 2.6cqh, 14px);
+}
+
+.intro-boven p,
+.intro-onder {
+  font-size: clamp(15px, 5.5cqh, 23px);
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.intro-duo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 1.4cqw, 20px);
+}
+
+.podium .intro-duo .ballon {
+  width: clamp(170px, 19cqw, 250px);
+  margin: 0 0 8cqh;
+  padding: clamp(6px, 2.4cqh, 12px) 16px;
+  font-size: clamp(14px, 4.8cqh, 20px);
+  line-height: 1.3;
+}
+
+.intro-duo .figuren {
+  gap: clamp(2px, 0.5cqw, 8px);
+}
+
+.podium .intro-duo .figuur {
+  height: min(var(--h), 45cqh);
+}
+
+/* ---------- Fien en Jef dicht bij het huis of de lamp (K27 fase 2) ----------
+   "Licht aan in het huis": Fien en Jef staan met hun tekstballon vlak links
+   naast het huis, en samen staan ze als een groep in het midden van de kaart.
+   De knop Verder komt op het einde op de plaats van de opdracht, zodat er
+   rechts geen lege zone nodig is.
+   "Klaar voor de start": de lamp blijft in het midden (zoals bij "Duim op de
+   spatiebalk"), Fien en Jef staan er vlak links naast.
+   De maten liggen vast: er verspringt niets (K20). */
+.podium .blok.oefenkaart.blok-lichtaan {
+  grid-template-columns: minmax(0, 1fr) auto auto minmax(0, 1fr);
+}
+
+.blok-lichtaan .zone-figuren {
+  grid-column: 2;
+}
+
+.blok-lichtaan .zone-veld {
+  grid-column: 3;
+}
+
+.blok-lichtaan .zone-voet {
+  display: none;
+}
+
+.podium .blok.oefenkaart.blok-houding {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+
+/* De knop Verder op de plaats van de opdracht: ze staan gestapeld. */
+.zone-opdracht.met-enter {
+  display: grid;
+  place-items: center;
+}
+
+.zone-opdracht.met-enter > * {
+  grid-area: 1 / 1;
+}
+
+/* Het huis is zo hoog als zijn zone; de breedte volgt uit de tekening (538 op 316). */
+.blok-lichtaan .zone-veld .huis {
+  height: calc(74cqh - clamp(16px, 7cqh, 26px));
+  width: auto;
+  aspect-ratio: 538 / 316;
+}
+
+.blok-houding .zone-veld {
+  width: clamp(190px, 20cqw, 260px);
+}
+
+.blok-lichtaan .zone-figuren.met-doel,
+.blok-houding .zone-figuren.met-doel {
+  align-items: flex-end;
+  padding: 0 clamp(8px, 1.4cqw, 20px) 0 0;
+}
+
+.blok-lichtaan .zone-figuren.met-doel {
+  width: clamp(200px, 24cqw, 310px);
+}
+
+.blok-lichtaan .zone-figuren.met-doel > *,
+.blok-houding .zone-figuren.met-doel > * {
+  width: min(100%, 290px);
+}
+
+.blok-lichtaan .zone-figuren.met-doel .doel-ballon,
+.blok-houding .zone-figuren.met-doel .doel-ballon {
+  display: flex;
+  align-items: center;
+}
+
+.podium .blok-lichtaan .zone-figuren.met-doel .figuur,
+.podium .blok-houding .zone-figuren.met-doel .figuur {
+  object-position: top;
+}
+
+/* De slotzin in de tekstballon van de doelzin (einde van "Licht aan"): iets groter. */
+.zone-figuren.met-doel .doel-ballon.is-slot {
+  font-size: clamp(15px, 5.6cqh, 21px);
 }

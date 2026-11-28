@@ -18,6 +18,19 @@ export interface IntroBlok extends BlokBasis {
   type: "intro";
   /** een prent bij de tekst, in de zone van de prent; "huis": het huis van "Licht aan in het huis" */
   prent?: "huis";
+  /**
+   * Een intro in stukken (les 1), in plaats van een tekst in een tekstballon:
+   * bovenaan een of twee losse zinnen, Fien en Jef groot in het midden met elk
+   * een eigen tekstballon, en onderaan een zin boven de knop Verder.
+   * Heeft het blok "fien" en "jef", dan gebruikt de intro deze indeling.
+   */
+  boven?: string[];
+  /** wat Fien zegt, in haar eigen tekstballon */
+  fien?: string;
+  /** wat Jef zegt, in zijn eigen tekstballon */
+  jef?: string;
+  /** de zin boven de knop Verder, bv. wat het kind vandaag leert */
+  onder?: string;
 }
 
 export interface ToetsenbordcheckBlok extends BlokBasis {

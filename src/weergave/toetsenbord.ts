@@ -5,7 +5,7 @@
 // De regels voor het uitzicht staan in docs/stijlgids.md, deel 5.
 
 import { kleurVanVinger, RIJEN, type Rij, type Toets } from "../logica/indeling";
-import { t } from "../content";
+import { t, type TekstSleutel } from "../content";
 import { el } from "./dom";
 
 export interface ToetsenbordWeergave {
@@ -22,6 +22,11 @@ export interface ToetsenbordWeergave {
   toonRij(rij: Rij | null): void;
   /** toon of verberg dat het kind op Enter moet drukken */
   toonEnter(aan: boolean): void;
+  /**
+   * Toon de naam van elke rij (zolder, woonkamer, kelder) in de lege randtoets
+   * links van die rij. Alleen in de intro van les 0 (docs/beslissingen.md, 12p).
+   */
+  toonRijNamen(aan: boolean): void;
 }
 
 // Breedtes in dezelfde eenheid als het ontwerp: een lettertoets is 48 breed,
@@ -76,7 +81,15 @@ export function maakToetsenbord(geleerd: string[]): ToetsenbordWeergave {
     // Rijen met een stuk van de Enter-toets: de hulprand (toonRij) stopt voor
     // de Enter-toets, want die hoort bij twee rijen (--na is haar breedte).
     const rijEl = el("div", enter ? { class: `tb-rij tb-rij-${rij} met-enter`, style: `--na:${na}` } : { class: `tb-rij tb-rij-${rij}` });
-    rijEl.append(el("div", { class: "toets toets-rand", style: `--w:${voor}` }));
+    // De randtoets links (Tab, de hoofdlettertoets, Shift) draagt de naam van de
+    // rij; de naam is alleen te zien als toonRijNamen aan staat.
+    rijEl.append(
+      el(
+        "div",
+        { class: "toets toets-rand toets-rijnaam", style: `--w:${voor}` },
+        el("span", { class: "rij-naam" }, t(`rij.${rij}` as TekstSleutel)),
+      ),
+    );
     for (const toets of toetsen) rijEl.append(toetsElement(toets, TOETS));
     if (enter) {
       const deel = el(
@@ -131,6 +144,9 @@ export function maakToetsenbord(geleerd: string[]): ToetsenbordWeergave {
     },
     toonEnter(aan) {
       for (const d of enterDelen) d.classList.toggle("enter-wacht", aan);
+    },
+    toonRijNamen(aan) {
+      element.classList.toggle("met-rijnamen", aan);
     },
     toonRij(rij) {
       for (const [r, el] of perRij) el.classList.toggle("rij-hulp", r === rij);

@@ -15,7 +15,7 @@
 //   wordt donker en blijft stil staan;
 // - de raamkleuren zijn nagemeten tegen de vingerkleuren: verander ze niet
 //   zonder nieuwe meting.
-// Fien en Jef staan naast het huis, niet in een raam.
+// Fien en Jef staan vlak naast het huis, niet in een raam.
 
 import { t, type TekstSleutel } from "../content";
 import type { BlokFunctie } from "../blokken/context";
@@ -106,7 +106,9 @@ export function maakHuis(label: string): HuisTekening {
   const woorden = new Map<Rij, SVGGElement>();
   // De viewBox is het deel van de referentie waar iets staat, zodat de tekening
   // zo groot mogelijk in haar zone past. De verhoudingen blijven die van K21.
-  const huis = svg("svg", { class: "huis", viewBox: "14 14 532 316", role: "img", "aria-label": label }, huisVorm());
+  // Links begint ze op 8: de hulprand rond een woordvakje (tot x = 11) valt er
+  // volledig binnen en wordt nergens afgekapt (test van 28 november).
+  const huis = svg("svg", { class: "huis", viewBox: "8 14 538 316", role: "img", "aria-label": label }, huisVorm());
   for (const rij of VERDIEPINGEN) {
     const lijst = RAAM_X.map((x) => raam(x, LAAG[rij].ramen));
     ramen.set(rij, lijst);
@@ -135,9 +137,10 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
 
   const { svg: huis, ramen, woorden } = maakHuis(blok.titel);
 
-  // Het huis staat in het midden in zijn vaste zone, Fien en Jef staan links ernaast.
-  // Boven Fien en Jef staat de doelzin (K26): het kind weet waarom het de toetsen indrukt.
-  const scherm = oefenscherm(ctx, { figuren: "blij", klasse: "blok-lichtaan", doel: blok.doel });
+  // Het huis staat in het midden in zijn vaste zone, Fien en Jef staan er vlak
+  // links naast, als een groep (K27 fase 2). Boven Fien en Jef staat de doelzin
+  // (K26): het kind weet waarom het de toetsen indrukt.
+  const scherm = oefenscherm(ctx, { figuren: "blij", klasse: "blok-lichtaan", doel: blok.doel, figuurHoogte: 150, enterPlaats: "opdracht" });
   ctx.zeg(blok.doel);
   scherm.veld.append(huis);
 
@@ -207,8 +210,12 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
       toonHulp(false);
       for (const w of woorden.values()) w.classList.remove("aan-de-beurt");
       scherm.voortgang.zetBalk(rondes.length, rondes.length);
+      // De slotzin is wat Fien en Jef zeggen: hij komt in hun tekstballon, op de
+      // plaats van de doelzin. De opdracht is klaar: op haar plaats komt de knop Verder.
       scherm.zetFiguren("duim");
-      scherm.zetOpdracht(t("lichtaan.klaar"));
+      scherm.zetDoel(t("lichtaan.klaar"));
+      scherm.verbergOpdracht();
+      ctx.zeg(t("lichtaan.klaar"));
       scherm.toonEnter();
     },
     opruimen() {

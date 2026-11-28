@@ -123,6 +123,12 @@ export interface OefenschermOpties {
    * "kolom": opdracht, een vak in het midden en de knop eronder, zonder zijzones.
    */
   opbouw?: "zones" | "midden" | "toren" | "kolom";
+  /**
+   * Waar de knop Verder staat. "opdracht": op de plaats van de opdracht, die op
+   * het einde verdwijnt (verbergOpdracht). Zo is er geen aparte zone rechts
+   * nodig en staat de groep in het midden ("Licht aan in het huis").
+   */
+  enterPlaats?: "voet" | "opdracht";
   /** hoe hoog Fien en Jef hoogstens zijn (in px van het ontwerp); weglaten: de standaardmaat */
   figuurHoogte?: number;
 }
@@ -181,7 +187,8 @@ export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): O
     enterLabel.textContent = t(soort === "start" ? "knop.start" : "knop.verder");
   }
   const enterRij = startVerborgen(el("div", { class: "enter-rij" }, enterKnop));
-  const voet = el("div", { class: "zone-voet" }, enterRij);
+  const enterBijOpdracht = opties.enterPlaats === "opdracht";
+  const voet = el("div", { class: "zone-voet" }, enterBijOpdracht ? null : enterRij);
   const voortgang = maakVoortgang();
 
   const opbouw = opties.opbouw ?? "zones";
@@ -202,7 +209,7 @@ export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): O
   const element = el(
     "section",
     { class: `blok oefenkaart ${opbouwKlasse} ${opties.klasse ?? ""}` },
-    el("div", { class: "zone-opdracht" }, opdracht),
+    el("div", { class: enterBijOpdracht ? "zone-opdracht met-enter" : "zone-opdracht" }, opdracht, enterBijOpdracht ? enterRij : null),
     ...inhoud,
     voet,
     voortgang.element,
@@ -226,6 +233,7 @@ export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): O
       if (!doelBallon) return;
       doelBallon.style.minHeight = `${doelBallon.offsetHeight}px`;
       doelBallon.textContent = tekst;
+      doelBallon.classList.add("is-slot");
     },
     verbergOpdracht() {
       toon(opdracht, false);
