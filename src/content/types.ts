@@ -79,7 +79,6 @@ export interface EindoefeningBlok extends BlokBasis {
   regels: string[];
   regelsKort?: string[];
   doelNauwkeurigheid: number | null;
-  soort?: "houding";
   /** korte tip van Fien of Jef, in de tekstballon naast de oefenregels */
   tip?: string;
   beschrijving?: string;
@@ -89,6 +88,59 @@ export interface AfsluiterBlok extends BlokBasis {
   type: "afsluiter";
 }
 
+// ---------- De stappen van de oriëntatieles (les 0) ----------
+// Elke stap is een beweging die de app kan nakijken, geen overhoring. Er wordt
+// niets gemeten. Alle teksten staan in de lesdata. De opdracht staat in "tekst".
+
+/** Goed zitten: de houding, met drie rustige kaartjes. Geen toetsen. */
+export interface HoudingBlok extends BlokBasis {
+  type: "houding";
+  /** wat Fien en Jef zeggen, in hun tekstballon */
+  zegt: string;
+  kaartjes: { titel: string; tekst: string }[];
+}
+
+/** Een toets die het kind bij naam leert. De app herkent ze aan de toetscode. */
+export type NaamToets = "spatie" | "enter" | "backspace" | "shift";
+
+/** Toetsenjacht: zoek de toets die je ziet (spatiebalk, Enter, Backspace, Shift). */
+export interface ToetsenjachtBlok extends BlokBasis {
+  type: "toetsenjacht";
+  /** de toetsen, in de volgorde van de eerste ronde; het schermtoetsenbord wijst ze dan aan */
+  naamtoetsen: { toets: NaamToets; naam: string; zin: string }[];
+  /** de tweede ronde: zonder hulp, tot na een fout. De laatste is nooit Enter. */
+  herhaling: NaamToets[];
+  /** na een verkeerde toets, op een vaste plek */
+  fout: string;
+  /** wat Fien en Jef op het einde zeggen */
+  slot: string;
+}
+
+/** Voel de bultjes: druk met gesloten ogen de twee toetsen met een bultje in. */
+export interface BultjesBlok extends BlokBasis {
+  type: "bultjes";
+  /** hoe vaak het kind de twee bultjes zoekt */
+  aantal: number;
+  /** tussen twee beurten, als beide bultjes gevonden zijn */
+  gevonden: string;
+  /** na een andere toets */
+  fout: string;
+  slot: string;
+}
+
+/** Links, rechts, duim: tik met de vinger die je ziet (de twee bultjes en de spatiebalk). */
+export interface TikBlok extends BlokBasis {
+  type: "tik";
+  volgorde: ("links" | "rechts" | "duim")[];
+  /** het woord op de kaart, per vinger */
+  opKaart: { links: string; rechts: string; duim: string };
+  /** de wijsvinger van de verkeerde hand */
+  foutHand: string;
+  /** een andere verkeerde toets */
+  foutVinger: string;
+  slot: string;
+}
+
 export type Blok =
   | IntroBlok
   | ToetsenbordcheckBlok
@@ -96,7 +148,11 @@ export type Blok =
   | ReeksBlok
   | SpelBlok
   | EindoefeningBlok
-  | AfsluiterBlok;
+  | AfsluiterBlok
+  | HoudingBlok
+  | ToetsenjachtBlok
+  | BultjesBlok
+  | TikBlok;
 
 export interface Les {
   id: number;

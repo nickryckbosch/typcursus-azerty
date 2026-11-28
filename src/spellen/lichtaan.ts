@@ -188,7 +188,10 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
       if (!toets || e.repeat) return; // Shift, Tab, Enter... tellen niet mee
       const gevraagd = rondes[ronde];
       const juist = toets.rij === gevraagd;
-      ctx.toetsenbord.flits(e.code, juist);
+      // Een juiste toets licht een halve seconde op in de kleur van de vinger
+      // (les 0, docs/beslissingen.md 12u). Een verkeerde toets licht niet op:
+      // dan valt alleen de rij op die gevraagd is.
+      if (juist) ctx.toetsenbord.lichtOp(e.code);
       if (!juist) {
         // Het lukt niet: de hulp verschijnt en blijft tot de juiste toets er is.
         clearTimeout(hulpTimer);
@@ -209,6 +212,8 @@ export const lichtAan: BlokFunctie<SpelBlok> = (blok, ctx) => {
       clearTimeout(hulpTimer);
       toonHulp(false);
       for (const w of woorden.values()) w.classList.remove("aan-de-beurt");
+      // Op het einde branden alle ramen, ook als er minder rondes dan ramen waren.
+      for (const lijst of ramen.values()) for (const r of lijst) r.classList.add("aan");
       scherm.voortgang.zetBalk(rondes.length, rondes.length);
       // De slotzin is wat Fien en Jef zeggen: hij komt in hun tekstballon, op de
       // plaats van de doelzin. De opdracht is klaar: op haar plaats komt de knop Verder.

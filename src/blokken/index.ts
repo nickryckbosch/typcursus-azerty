@@ -6,6 +6,10 @@ import { t } from "../content";
 import { SPELLEN, isVoorlopig } from "../spellen";
 import type { BlokFunctie } from "./context";
 import { afsluiter } from "./afsluiter";
+import { bultjes } from "./bultjes";
+import { houding } from "./houding";
+import { tik } from "./tik";
+import { toetsenjacht } from "./toetsenjacht";
 import { eindoefening } from "./eindoefening";
 import { intro } from "./intro";
 import { reeks } from "./reeks";
@@ -14,6 +18,10 @@ import { zoekToets } from "./zoektoets";
 
 const BLOKKEN: Partial<Record<Blok["type"], BlokFunctie<never>>> = {
   intro,
+  houding,
+  toetsenjacht,
+  bultjes,
+  tik,
   toetsenbordcheck,
   "zoek-toets": zoekToets,
   reeks,

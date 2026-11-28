@@ -57,6 +57,8 @@
 
   "hint.enter": "Druk op {toets} om verder te gaan.",
   "toets.enter": "Enter \u21b5",
+  "toets.shift": "Shift",
+  "toets.backspace": "Backspace",
   "teller": "{nummer} van {totaal}",
   "teken.spatie": "spatie",
 
@@ -115,12 +117,9 @@
   "eind.nietGehaald": "Nog geen ster. Dat geeft niet: probeer de eindoefening nog eens. Rustig en juist, wij wachten op je.",
   "eind.nietAlleSterren": "Nog niet alle sterren? Probeer de eindoefening nog eens, wij wachten op je.",
 
-  "houding.zeg": "Voeten plat, rug recht, schouders los!",
-  "houding.opdracht": "Leg je vingers in de woonkamer, de rij met de bultjes, en druk eerst op ((Start)). Gaat de lamp aan? Druk [spatie].",
   "lamp.wacht": "Wacht op de lamp.",
   "lamp.eerstStart": "Druk eerst op ((Start)).",
   "intro.huis": "Het huis van Fien en Jef: de zolder, de woonkamer en de kelder.",
-  "houding.klaar": "Klaar voor de start!",
 
   "lichtaan.opdracht": "Druk op een toets van de **{rij}**.",
   "lichtaan.opdrachtMetPlaats": "Druk op een toets van de **{rij}**: {plaats}.",

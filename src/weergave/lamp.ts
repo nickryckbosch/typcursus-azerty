@@ -1,6 +1,8 @@
-// De lamp van "Duim op de spatiebalk" (les 0): een getekende gloeilamp, in
+// De lamp van "Duim op de spatiebalk": een getekende gloeilamp, in
 // dezelfde stijl als het huis van "Licht aan" (omtrek #1F1F1F, afgeronde lijnen).
 // Ze staat van bij het begin (uit) in beeld en gaat zichtbaar aan.
+// Sinds les 0 de oriëntatieles volgt (docs/beslissingen.md, 12u) gebruikt geen
+// les de lamp nog. De bouwsteen blijft bestaan voor later.
 //   uit: donker glas (#3B4256), geen stralen
 //   aan: lichtgeel glas (#FFEE99) met stralen errond
 // De stralen zorgen dat je ook zonder op de kleur te letten ziet dat ze brandt.
@@ -59,7 +61,7 @@ export interface LampMetWachtzin {
 /**
  * De lamp met daaronder een vaste plek voor de zin "Wacht op de lamp.". Die
  * plek is er van bij het begin, zodat er niets verspringt als de zin verschijnt.
- * Gebruikt in "Duim op de spatiebalk" en "Klaar voor de start" (les 0).
+ * Gebruikt door "zoek-toets" met alleen de spatiebalk ("Duim op de spatiebalk").
  * startKnop: de knop Start van het oefenscherm (scherm.enter); hij komt onder de zin.
  */
 export function lampMetWachtzin(wachtzin: string, binnen: () => ParentNode, startKnop?: HTMLElement): LampMetWachtzin {

@@ -1,7 +1,8 @@
 // Zoek de toets: een letter verschijnt groot, het kind drukt de toets.
 // Hier is de hulp altijd zichtbaar: toets en vinger lichten op.
 //
-// Bestaat het blok alleen uit de spatie (les 0, "Duim op de spatiebalk"), dan
+// Bestaat het blok alleen uit de spatie ("Duim op de spatiebalk"; sinds de
+// ombouw van les 0 gebruikt geen les dit nog, zie docs/beslissingen.md 12u), dan
 // staat er een getekende lamp. Ze staat van bij het begin (uit) in beeld, op
 // een vaste plek, en gaat zichtbaar aan: dan mag het kind drukken. Een doel,
 // een voorwerp, een signaal: er komt geen kaart "spatie" meer bij. Drukt het
