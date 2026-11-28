@@ -78,6 +78,8 @@ export class App {
     this.schermNaam = naam;
     this.scherm = maak(this.inhoud);
     window.scrollTo(0, 0);
+    // Schaalt het scherm als een dia, dan scrolt een lang scherm binnen de dia.
+    this.inhoud.parentElement?.scrollTo?.(0, 0);
   }
 
   private werkHoofdlettersBij(e: KeyboardEvent): void {
