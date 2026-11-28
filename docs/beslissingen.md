@@ -421,6 +421,15 @@ Nick testte op 28 november op een groot scherm, deels met een kind. Dit zijn de 
 
 **Wat ons van mening zou doen veranderen:** mist een kind op de Chromebook de knop Verder bovenaan bij "Licht aan", of zoekt het de slotzin van een spel, dan gaat de slotzin terug naar de plaats van de opdracht. Vindt Nick het slotscherm zonder toetsenbord te anders, dan komt de lege plaats terug (een regel in de stijl).
 
+## 12q. Scherpe figuren: losse tekeningen in plaats van een blad (28 november 2026)
+
+- **Keuze:** Fien en Jef komen nu uit twaalf losse tekeningen van ChatGPT (`docs/beelden/figuren/`, 1024 x 1536, doorzichtige achtergrond), in plaats van uitgeknipt uit een blad met twaalf figuren. De app gebruikt WebP met alle kleuren en zachte randen, twee keer zo groot als vroeger (hele figuur 720 pixels hoog, bovenlijf 600).
+- **Waarom:** Nick vond de figuren niet scherp en hakkelig uitgesneden (test op 27 inch). Drie oorzaken: elke figuur was op het blad maar ongeveer 250 pixels breed; het script knipte de achtergrond weg met een harde rand; en de prenten waren bewaard met 256 kleuren. Met het schalen als een dia (12p) worden de figuren op een groot scherm tot bijna twee keer vergroot.
+- **Hoe:** `scripts/knip-figuren.py` haalt bijna doorzichtige spikkels rond de figuur weg, gebruikt een schaal per kind voor alle houdingen (zodat Fien in elke houding even groot is en Jef iets groter blijft), zet de voeten op dezelfde lijn, en snijdt de bovenlijven op de helft af zoals vroeger. `src/beelden/maten.json` bewaart de maten, zodat de strook van "Over de beek" geen verhouding meer moet raden.
+- **Anders dan het blad:** bij "aanmoedigend" steken Fien en Jef hun open handen naar voren in plaats van een vuist met streepjes (zonder versiering, deel 1 van de stijlgids). Nick kan de vuist nog vragen.
+- **Grootte:** de twaalf prenten zijn samen ongeveer 540 kB (WebP, kwaliteit 92).
+- **Waarop steunt dit? Eigen keuze**, na de vaststelling van Nick.
+
 ## 13. Privacy en veiligheid
 
 - Geen externe bronnen: geen CDN, geen analytics, geen Google Fonts.

@@ -1,0 +1,50 @@
+{
+  "fien-zwaai": {
+    "breedte": 261,
+    "hoogte": 720
+  },
+  "fien-duim": {
+    "breedte": 349,
+    "hoogte": 600
+  },
+  "fien-blij": {
+    "breedte": 349,
+    "hoogte": 600
+  },
+  "fien-trots": {
+    "breedte": 429,
+    "hoogte": 600
+  },
+  "fien-aanmoedigend": {
+    "breedte": 465,
+    "hoogte": 600
+  },
+  "fien-nadenkend": {
+    "breedte": 335,
+    "hoogte": 600
+  },
+  "jef-zwaai": {
+    "breedte": 292,
+    "hoogte": 720
+  },
+  "jef-duim": {
+    "breedte": 361,
+    "hoogte": 600
+  },
+  "jef-blij": {
+    "breedte": 404,
+    "hoogte": 600
+  },
+  "jef-trots": {
+    "breedte": 476,
+    "hoogte": 600
+  },
+  "jef-aanmoedigend": {
+    "breedte": 556,
+    "hoogte": 600
+  },
+  "jef-nadenkend": {
+    "breedte": 325,
+    "hoogte": 600
+  }
+}

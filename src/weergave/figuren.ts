@@ -1,7 +1,8 @@
-// Fien en Jef, uitgeknipt uit het blad met zes houdingen
-// (docs/beelden/fien-en-jef-zes-houdingen.png) met scripts/knip-figuren.py.
-// Een nieuwe uitdrukking toevoegen: zet ze op het blad, voeg de naam toe in dat
-// script, voer het uit, en voeg de naam toe aan Uitdrukking.
+// Fien en Jef: losse tekeningen in docs/beelden/figuren/, omgezet met
+// scripts/knip-figuren.py naar src/beelden/<wie>-<houding>.webp.
+// Een nieuwe uitdrukking toevoegen: zet de twee tekeningen (fien en jef) in
+// docs/beelden/figuren/, voeg de naam toe in dat script, voer het uit, en voeg
+// de naam toe aan Uitdrukking.
 //
 // Fien en Jef staan altijd stil (docs/stijlgids.md, deel 1). Ze veranderen
 // alleen van houding bij de start (zwaai) en op het einde (duim of aanmoedigend).
@@ -10,11 +11,11 @@ import { svg } from "./dom";
 
 export type Uitdrukking = "zwaai" | "duim" | "blij" | "trots" | "nadenkend" | "aanmoedigend";
 
-const BEELDEN = import.meta.glob("../beelden/*.png", { eager: true, import: "default" }) as Record<string, string>;
+const BEELDEN = import.meta.glob("../beelden/*.webp", { eager: true, import: "default" }) as Record<string, string>;
 
 function figuur(wie: "fien" | "jef", uitdrukking: Uitdrukking, hoogte: number): HTMLImageElement {
   const img = document.createElement("img");
-  img.src = BEELDEN[`../beelden/${wie}-${uitdrukking}.png`];
+  img.src = BEELDEN[`../beelden/${wie}-${uitdrukking}.webp`];
   img.alt = wie === "fien" ? "Fien" : "Jef";
   img.className = `figuur figuur-${wie} ${uitdrukking === "zwaai" ? "figuur-heel" : "figuur-gezicht"}`;
   // De hoogte is een maximum: in een lesscherm wordt de figuur kleiner als er weinig plaats is.
