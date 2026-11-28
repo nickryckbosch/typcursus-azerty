@@ -18,7 +18,7 @@
     "Na elke toets gaat mijn vinger terug naar zijn plek."
   ],
   "klassikaal": {
-    "duurMinuten": 10,
+    "duurMinuten": 9,
     "materiaal": "Nodig: de Chromebooks en het gewone bord (krijt of whiteboard). Handig als je het hebt, maar niet nodig: een digibord, de klasplaat, losse toetsenborden, een doek of handdoek per kind. In de eerste sessie zitten de kinderen al aan hun Chromebook (na het online deel van les 0).",
     "stappen": [
       {
@@ -29,10 +29,10 @@
         "kinderen": "Wijzen de verdiepingen aan op hun toetsenbord en laten de vingers van een geroepen kleur wiebelen."
       },
       {
-        "titel": "Fien en Jef ontdekken",
-        "duurMinuten": 3,
-        "leerkracht": "\"Sluit je ogen en voel met je wijsvingers over de woonkamer. Op twee toetsen zit een klein bultje. Gevonden? Daar wonen Fien en Jef: Fien op de F, Jef op de J.\" Wandel rond en kijk of elke wijsvinger op het bultje ligt. Leg uit: \"De andere vingers liggen ernaast in de woonkamer, de duimen op de spatiebalk.\"",
-        "kinderen": "Zoeken met gesloten ogen de bultjes, openen de ogen en controleren: linkerwijsvinger op F, rechterwijsvinger op J. Drie keer: handen in de schoot, en weer zoeken."
+        "titel": "Wie woont er op de bultjes?",
+        "duurMinuten": 2,
+        "leerkracht": "\"Sluit je ogen en zoek de twee bultjes, zoals in de oriëntatieles. Gevonden? Daar wonen Fien en Jef: Fien op de F, Jef op de J.\" Wandel rond en kijk of elke wijsvinger op het bultje ligt. Herhaal: \"De andere vingers liggen ernaast in de woonkamer, de duimen op de spatiebalk.\"",
+        "kinderen": "Zoeken met gesloten ogen de bultjes, openen de ogen en lezen de letters: linkerwijsvinger op F, rechterwijsvinger op J. Een keer opnieuw: handen in de schoot, en weer zoeken."
       },
       {
         "titel": "De hele startzin",
@@ -43,7 +43,7 @@
       {
         "titel": "Droog typen",
         "duurMinuten": 4,
-        "leerkracht": "Laat het oefenbord van de app openen (dat toont alleen de toets die je drukt, groot en in kleur, zonder punten). Roep \"Fien!\", \"Jef!\" of \"Spatie!\". Eerst traag, met na elke toets \"Terug naar je plek!\", dan sneller, en eens een reeksje (\"Fien, Fien, Jef!\"). Kijk vooral naar de handen: welke vinger drukt?",
+        "leerkracht": "Zeg eerst: \"In les 0 tikte je op Links, Rechts en Duim. Nu hebben die toetsen een naam: Fien, Jef en Spatie.\" Laat dan het oefenbord van de app openen (dat toont alleen de toets die je drukt, groot en in kleur, zonder punten). Roep \"Fien!\", \"Jef!\" of \"Spatie!\". Eerst traag, met na elke toets \"Terug naar je plek!\", dan sneller, en eens een reeksje (\"Fien, Fien, Jef!\"). Kijk vooral naar de handen: welke vinger drukt?",
         "kinderen": "Drukken de juiste toets met de juiste vinger en laten de vinger meteen terugvallen op het bultje. Ze kijken naar het scherm om te zien of het klopt."
       },
       {
@@ -60,8 +60,8 @@
       "titel": "Fien en Jef stellen zich voor",
       "duurMinuten": 1,
       "tekstBoven": [
-        "In de woonkamer heeft elk zijn eigen toets. Leg je wijsvingers op de F en de J.",
-        "Voel je de bultjes? Dan zijn Fien en Jef thuis."
+        "Zoek de twee bultjes met je wijsvingers. Je kent ze al!",
+        "Weet je wie daar woont?"
       ],
       "fien": "Ik ben Fien en ik woon op de F.",
       "jef": "Ik ben Jef en ik woon op de J.",
