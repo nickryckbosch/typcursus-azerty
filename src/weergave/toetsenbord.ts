@@ -24,9 +24,10 @@ export interface ToetsenbordWeergave {
   toonEnter(aan: boolean): void;
   /**
    * Toon de naam van elke rij (zolder, woonkamer, kelder) in de lege randtoets
-   * links van die rij. Alleen in de intro van les 0 (docs/beslissingen.md, 12p).
+   * links van die rij. Een intro zet dit aan met "rijnamen": true in de lesdata
+   * (docs/beslissingen.md, 12p).
    */
-  toonRijNamen(aan: boolean): void;
+  toonRijnamen(aan: boolean): void;
 }
 
 // Breedtes in dezelfde eenheid als het ontwerp: een lettertoets is 48 breed,
@@ -82,7 +83,7 @@ export function maakToetsenbord(geleerd: string[]): ToetsenbordWeergave {
     // de Enter-toets, want die hoort bij twee rijen (--na is haar breedte).
     const rijEl = el("div", enter ? { class: `tb-rij tb-rij-${rij} met-enter`, style: `--na:${na}` } : { class: `tb-rij tb-rij-${rij}` });
     // De randtoets links (Tab, de hoofdlettertoets, Shift) draagt de naam van de
-    // rij; de naam is alleen te zien als toonRijNamen aan staat.
+    // rij; de naam is alleen te zien als toonRijnamen aan staat.
     rijEl.append(
       el(
         "div",
@@ -145,7 +146,7 @@ export function maakToetsenbord(geleerd: string[]): ToetsenbordWeergave {
     toonEnter(aan) {
       for (const d of enterDelen) d.classList.toggle("enter-wacht", aan);
     },
-    toonRijNamen(aan) {
+    toonRijnamen(aan) {
       element.classList.toggle("met-rijnamen", aan);
     },
     toonRij(rij) {

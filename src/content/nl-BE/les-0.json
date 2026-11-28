@@ -55,6 +55,7 @@
       "type": "intro",
       "titel": "Fien en Jef stellen hun huis voor",
       "prent": "huis",
+      "rijnamen": true,
       "duurMinuten": 1,
       "tekst": "Hallo! Wij zijn Fien en Jef. Het toetsenbord is ons huis.\n\nDe woonkamer is de rij met de bultjes, waar de F en de J liggen. Erboven is de zolder, eronder de kelder. In de woonkamer wonen je vingers.\n\nVandaag leer je ons huis kennen."
     },

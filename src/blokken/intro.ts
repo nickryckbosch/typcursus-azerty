@@ -4,8 +4,11 @@
 // - een tekst in een tekstballon naast Fien en Jef (met in les 0 het huis erbij);
 // - een intro in stukken (les 1): bovenaan een of twee losse zinnen, Fien en
 //   Jef groot in het midden met elk een eigen tekstballon, en onderaan een zin
-//   boven de knop Verder. De lesdata kiest: heeft het blok "fien" en "jef",
-//   dan is het de tweede indeling.
+//   boven de knop Verder. De lesdata kiest, voor elke les: heeft het blok de
+//   velden "fien" en "jef" (met "tekstBoven" en "tekstOnder"), dan is het de
+//   tweede indeling; anders de eerste.
+// Met "rijnamen": true in de lesdata staan zolder, woonkamer en kelder in de
+// randtoetsen van het schermtoetsenbord, zolang de intro in beeld is.
 
 import type { IntroBlok } from "../content/types";
 import { toetsVoorTeken } from "../logica/indeling";
@@ -30,7 +33,7 @@ export const intro: BlokFunctie<IntroBlok> = (blok, ctx) => {
     // er vlak naast (het staartje wijst naar wie spreekt), de zin over vandaag
     // en de knop Verder.
     const scherm = oefenscherm(ctx, { opbouw: "midden", klasse: "blok-intro in-stukken" });
-    const boven = blok.boven ?? [];
+    const boven = blok.tekstBoven ?? [];
     scherm.veld.append(
       el("div", { class: "intro-boven" }, ...boven.map((zin) => el("p", {}, zin))),
       el(
@@ -40,10 +43,10 @@ export const intro: BlokFunctie<IntroBlok> = (blok, ctx) => {
         el("div", { class: "figuren" }, fien("zwaai", 210), jef("zwaai", 210)),
         el("p", { class: "ballon" }, blok.jef),
       ),
-      ...(blok.onder ? [el("p", { class: "intro-onder" }, blok.onder)] : []),
+      ...(blok.tekstOnder ? [el("p", { class: "intro-onder" }, blok.tekstOnder)] : []),
     );
     scherm.toonEnter();
-    voorlezen = [...boven, blok.fien, blok.jef, blok.onder].filter(Boolean).join(" ");
+    voorlezen = [...boven, blok.fien, blok.jef, blok.tekstOnder].filter(Boolean).join(" ");
   } else {
     // Fien en Jef met hun tekstballon vlak ernaast, als een groep in het midden (K27).
     const scherm = oefenscherm(ctx, {
@@ -61,15 +64,15 @@ export const intro: BlokFunctie<IntroBlok> = (blok, ctx) => {
       // zodat woord en beeld kloppen en het kind het huis al kent voor het spel.
       // De ballon staat naast Fien en Jef; het huis waarover ze praten, staat ernaast.
       scherm.veld.append(ballon, maakHuis(t("intro.huis")).svg);
-      // De woorden zolder, woonkamer en kelder staan ook in de lege randtoets
-      // links van elke rij op het schermtoetsenbord: zo ziet het kind welke rij
-      // welke verdieping is. Alleen hier, en er knippert niets (K16).
-      ctx.toetsenbord.toonRijNamen(true);
     } else {
       scherm.veld.append(ballon);
     }
     scherm.toonEnter();
   }
+  // De woorden zolder, woonkamer en kelder in de lege randtoets links van elke
+  // rij op het schermtoetsenbord: zo ziet het kind welke rij welke verdieping
+  // is. De lesdata zet dit aan; er knippert niets (K16).
+  if (blok.rijnamen) ctx.toetsenbord.toonRijnamen(true);
   ctx.zeg(voorlezen);
 
   return {
@@ -77,7 +80,7 @@ export const intro: BlokFunctie<IntroBlok> = (blok, ctx) => {
       if (e.key === "Enter") ctx.volgende();
     },
     opruimen() {
-      ctx.toetsenbord.toonRijNamen(false);
+      ctx.toetsenbord.toonRijnamen(false);
     },
   };
 };

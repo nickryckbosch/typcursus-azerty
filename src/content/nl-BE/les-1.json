@@ -59,13 +59,13 @@
       "type": "intro",
       "titel": "Fien en Jef stellen zich voor",
       "duurMinuten": 1,
-      "boven": [
+      "tekstBoven": [
         "In de woonkamer heeft elk zijn eigen toets. Leg je wijsvingers op de F en de J.",
         "Voel je de bultjes? Dan zijn Fien en Jef thuis."
       ],
       "fien": "Ik ben Fien en ik woon op de F.",
       "jef": "Ik ben Jef en ik woon op de J.",
-      "onder": "Vandaag leer je de f en de j."
+      "tekstOnder": "Vandaag leer je de f en de j."
     },
     {
       "type": "zoek-toets",
