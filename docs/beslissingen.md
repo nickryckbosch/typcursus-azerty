@@ -346,6 +346,42 @@ Gebouwd op 27 november 2026 (tak `claude/spelsjabloon`), na een mockup die Nick 
 - **Wat ons van mening zou doen veranderen:** zegt een kind van 9 of 10 jaar dat het spel saai is, of ziet het geen verschil met de oefenregels, dan krijgt het spel een korte beloning op het einde of een kleine verandering in de strook, nooit in de tekst.
 - **Nog niet gedaan:** het huis op de strook is het huis van de prenten (met een puntgevel), niet het huis met vier lagen van "Licht aan in het huis" (12e). Dat zijn nu twee huizen in de app. Niet getest op een echte Chromebook.
 
+## 12m. Bijsturingen na de test van 28 november
+
+Nick testte op 28 november op een groot scherm, deels met een kind. Dit zijn de fouten en tekstpunten; de vormgeving volgt in een aparte beurt met Fable (projectdocument 22).
+
+- **Toetsenbordcheck: "In orde! Je toetsenbord typt de juiste letters."** in plaats van "Je toetsenbord klopt!". De titel bovenaan heet "Je toetsenbord nakijken" in plaats van "Klopt je toetsenbord?". Ook de wachtzin zegt nu wat er gecontroleerd wordt: "We kijken even of je toetsenbord de juiste letters typt...". Waarom: een kind vroeg "Mijn toetsenbord klopt?". Op een Chromebook leest de app de indeling meestal zelf, zodat de uitkomst meteen verschijnt; dan moet de zin zelf uitleggen wat er gebeurd is.
+- **Toetsenbordcheck: een ingehouden Enter telt niet.** Een herhaalde Enter (`event.repeat`) van het vorige scherm slaat de uitkomst niet meer over. Waarom: de uitkomst verschijnt meteen, en een kind dat Enter iets te lang indrukt, zag ze anders niet.
+- **Lampopdrachten: "druk eerst op Start" staat in de opdracht.** "Leg je duimen op de spatiebalk en druk eerst op Start. Gaat de lamp aan? Druk [spatie]." en hetzelfde in "Klaar voor de start". Waarom: Nick vond het niet duidelijk dat de lamp pas na Start komt (K28). Drie korte zinnen, binnen de grens van de test.
+- **De lamp wacht na Start een seconde langer:** 1,9 seconde in "Duim op de spatiebalk" (was 0,9), 2,2 seconden in "Klaar voor de start" (was 1,2). De tijd tussen twee lampen blijft. Waarom: Nick vond de wachttijd goed, behalve meteen na Start: dan moet je je handen nog klaarleggen.
+- **"Over de beek", slotzin: "Het is je gelukt! We zijn thuis."** in plaats van "Droge voeten! We zijn thuis." Waarom: keuze van Nick; de zin zegt rechtstreeks dat het kind het gedaan heeft.
+- **De intro van les 0 in alinea's.** Een witregel in een introtekst (`\n\n` in de lesdata) wordt een nieuwe alinea in de tekstballon, met een halve regel wit ertussen. Waarom: de tekst was een blok van vijf zinnen; in drie alinea's (wie we zijn, de rijen, wat je vandaag leert) leest hij rustiger.
+
+## 12n. Nieuwe startzin (28 november 2026)
+
+- **Keuze:** de startzin is "Voeten plat, rug recht, schouders los, vingers thuis!". Les 0 leert "Voeten plat, rug recht, schouders los."; vanaf les 1 komt "vingers thuis!" erbij. Beslist door Nick.
+- **Waarom:** de oude zin ("Voeten plat, rug recht, Fien en Jef thuis!") sprak niet aan, en "Fien en Jef thuis" klonk raar bij het hardop zeggen: twee stukjes over je lichaam, en dan plots twee figuurtjes zonder werkwoord. De nieuwe zin heeft vier keer hetzelfde patroon (een lichaamsdeel en hoe het moet) en loopt van onder naar boven door het lichaam. De volledige redenering, met de varianten die we niet kozen, staat in projectdocument 08 (7.4).
+- **Wat veranderde:** `startzin` en `houding.zeg` in teksten.json; in les 0 het doel, de klassikale stap, de beschrijving van "Klaar voor de start" en de tip; in les 1 de stap "De hele startzin" en de tip ("Vingers thuis" voor de startpositie); in les 2 de stap "Startzin en opwarmen"; de stijlgids (wat "thuis" betekent) en de testlijst.
+- **Wat bleef:** "Dan zijn Fien en Jef thuis" (intro van les 1) en "Fien en Jef blijven thuis" (les 2 tot 4). Die zinnen leggen uit wat "thuis" is: de wijsvingers op de bultjes.
+- **Nog niet aangepast:** de afdrukbare houdingskaart op het ontwerpcanvas, waar de startzin bovenaan staat (op de prent zelf staat geen tekst), en de bewegingspauze, die nog niet in de lesdata zit (13c in de takenlijst). docs/08 en docs/11 in deze map zijn oude kopies; de projectdocumenten zijn de actuele versie.
+- **Waarop steunt dit? Eigen keuze**, na het hardop proberen door Nick. Nog te toetsen bij een kind van 9 of 10 jaar en in de klastest.
+
+
+## 12o. Nieuwe Fien en Jef: het blad met zes houdingen (28 november 2026)
+
+- **Keuze:** de figuren in de app komen nu uit `docs/beelden/fien-en-jef-zes-houdingen.png`: de eerste stripstijl van ChatGPT, slanker en ouder. Alleen de prenten in `src/beelden` zijn vervangen; de indeling van de schermen is niet veranderd.
+- **Waarom nu:** Nick wil de nieuwe figuren al zien bij de test op een Chromebook (30 november). De rest van de opdracht `docs/opdrachten/2026-11-28-vormgeving-na-test.md` (rijen benoemen, rust en overzicht, schalen) blijft voor na die test. Punt 1 van die opdracht is hiermee gedaan.
+- **Waarom deze figuren:** Nick vond deze stijl mooier en beter passen bij kinderen van 9 tot 12 jaar (projectdocument 22).
+- **Hoe (`scripts/knip-figuren.py`):**
+  - het script zoekt de twaalf figuren zelf op het blad, aan de lege kolommen ertussen;
+  - de roomwitte achtergrond wordt doorzichtig, ook tussen paardenstaart en nek; het koele wit van schoenen, ogen en tanden blijft; het lichte randje rond de zwarte lijn gaat weg, zodat er geen wit randje staat op het gras van de strook;
+  - elke houding krijgt dezelfde lichaamslengte en dezelfde voetlijn, en Fien en Jef houden hun verhouding van het blad (Jef is iets groter). Zo verspringt er niets als een houding wisselt (K20);
+  - "zwaai" is de hele figuur; de vijf andere houdingen zijn afgesneden op de helft van de prent (ter hoogte van de zak van de trui), zoals de vorige figuren, omdat de zones naast de oefening daarvoor gemaakt zijn;
+  - "trots" is nu een eigen houding en geen kopie van "duim" meer.
+- **Wat opvalt:** de nieuwe figuren hebben een kleiner hoofd, dus de gezichten naast de oefening zijn kleiner dan vroeger. Groter tonen vraagt een andere indeling; dat hoort bij de opdracht voor na de Chromebook-test (Fien en Jef groot in het midden).
+- **Waarop steunt dit? Eigen keuze** (oordeel van Nick), te toetsen in de klastest: spreekt de stijl kinderen aan?
+
+
 ## 13. Privacy en veiligheid
 
 - Geen externe bronnen: geen CDN, geen analytics, geen Google Fonts.

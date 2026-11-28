@@ -1,6 +1,7 @@
-// Fien en Jef, uitgeknipt uit het modelblad (docs/beelden/fien-en-jef-modelblad.png)
-// met scripts/knip-figuren.py. Een nieuwe uitdrukking toevoegen: zet een zone in
-// dat script, voer het uit, en voeg de naam toe aan Uitdrukking.
+// Fien en Jef, uitgeknipt uit het blad met zes houdingen
+// (docs/beelden/fien-en-jef-zes-houdingen.png) met scripts/knip-figuren.py.
+// Een nieuwe uitdrukking toevoegen: zet ze op het blad, voeg de naam toe in dat
+// script, voer het uit, en voeg de naam toe aan Uitdrukking.
 //
 // Fien en Jef staan altijd stil (docs/stijlgids.md, deel 1). Ze veranderen
 // alleen van houding bij de start (zwaai) en op het einde (duim of aanmoedigend).

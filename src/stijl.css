@@ -828,6 +828,11 @@ button {
   max-width: 900px;
 }
 
+/* Een tekst in alinea's (intro): een halve regel wit tussen de alinea's. */
+.ballon .grote-tekst + .grote-tekst {
+  margin-top: 0.5em;
+}
+
 .opdracht {
   font-size: 17px;
   color: var(--zacht);

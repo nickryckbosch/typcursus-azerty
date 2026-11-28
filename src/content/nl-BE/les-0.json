@@ -9,7 +9,7 @@
     " "
   ],
   "doelen": [
-    "Ik zit goed: voeten plat, rug recht.",
+    "Ik zit goed: voeten plat, rug recht, schouders los.",
     "Ik ken de drie verdiepingen van het toetsenbordhuis: zolder, woonkamer en kelder.",
     "Ik weet dat elke vinger een eigen kleur heeft.",
     "Ik druk de spatiebalk in met mijn duim."
@@ -25,10 +25,10 @@
         "kinderen": "Steken hun hand op en tonen met hoeveel vingers ze nu typen. Nog niet vertellen, alleen tonen."
       },
       {
-        "titel": "Voeten plat, rug recht",
+        "titel": "Voeten plat, rug recht, schouders los",
         "duurMinuten": 2,
-        "leerkracht": "Doe de houding voor: voeten plat op de grond, rug tegen de leuning, schouders los, de Chromebook vooraan op de bank, een handbreedte tussen je buik en de bank. Zeg: \"Voeten plat, rug recht!\" en wandel rond. Raken voeten de grond niet, leg er een boekentas of kistje onder.",
-        "kinderen": "Nemen de houding aan bij \"Voeten plat, rug recht!\". Twee keer: eerst rustig, dan snel na het teken van de leerkracht."
+        "leerkracht": "Doe de houding voor: voeten plat op de grond, rug tegen de leuning, schouders los, de Chromebook vooraan op de bank, een handbreedte tussen je buik en de bank. Zeg: \"Voeten plat, rug recht, schouders los!\" en wandel rond. Raken voeten de grond niet, leg er een boekentas of kistje onder.",
+        "kinderen": "Nemen de houding aan bij \"Voeten plat, rug recht, schouders los!\". Twee keer: eerst rustig, dan snel na het teken van de leerkracht."
       },
       {
         "titel": "Het toetsenbord is een huis",
@@ -56,11 +56,11 @@
       "titel": "Fien en Jef stellen hun huis voor",
       "prent": "huis",
       "duurMinuten": 1,
-      "tekst": "Hallo! Wij zijn Fien en Jef. Het toetsenbord is ons huis. De bovenste rij is de zolder, de middelste rij de woonkamer en de onderste rij de kelder. In de woonkamer wonen je vingers. Vandaag leer je ons huis kennen."
+      "tekst": "Hallo! Wij zijn Fien en Jef. Het toetsenbord is ons huis.\n\nDe bovenste rij is de zolder, de middelste rij de woonkamer en de onderste rij de kelder. In de woonkamer wonen je vingers.\n\nVandaag leer je ons huis kennen."
     },
     {
       "type": "toetsenbordcheck",
-      "titel": "Klopt je toetsenbord?",
+      "titel": "Je toetsenbord nakijken",
       "duurMinuten": 0.5,
       "blokkeert": false,
       "tekst": "Zoek de toets met de letter A en druk erop. Druk nu op de toets met het cijfer 6.",
@@ -74,7 +74,7 @@
         " "
       ],
       "aantal": 5,
-      "tekst": "Leg je duimen op de spatiebalk. Gaat de lamp aan? Druk [spatie]."
+      "tekst": "Leg je duimen op de spatiebalk en druk eerst op Start. Gaat de lamp aan? Druk [spatie]."
     },
     {
       "type": "spel",
@@ -98,7 +98,7 @@
       "regels": [],
       "doelNauwkeurigheid": null,
       "soort": "houding",
-      "beschrijving": "Fien en Jef zeggen \"Voeten plat, rug recht!\". Daarna legt het kind de handen in de woonkamer en drukt drie keer de spatiebalk in, telkens als de lamp aangaat (dezelfde lamp als in \"Duim op de spatiebalk\"). Drukt het kind te vroeg, dan verschijnt onder de lamp \"Wacht op de lamp.\"; dat telt niet als fout. Er wordt niets gemeten; les 1 gaat open zodra les 0 afgewerkt is."
+      "beschrijving": "Fien en Jef zeggen \"Voeten plat, rug recht, schouders los!\". Daarna legt het kind de handen in de woonkamer en drukt drie keer de spatiebalk in, telkens als de lamp aangaat (dezelfde lamp als in \"Duim op de spatiebalk\"). Drukt het kind te vroeg, dan verschijnt onder de lamp \"Wacht op de lamp.\"; dat telt niet als fout. Er wordt niets gemeten; les 1 gaat open zodra les 0 afgewerkt is."
     },
     {
       "type": "afsluiter",
@@ -110,5 +110,5 @@
   "groepjes": [],
   "woorden": [],
   "zinnen": [],
-  "tipLeerkracht": "Typische fouten: kinderen zitten scheef of op het puntje van hun stoel, de Chromebook staat te ver of te dicht, en sommigen beginnen al wild te typen. Stuur bij met de startzin in plaats van met uitleg: \"Voeten plat, rug recht\" werkt sneller dan een opmerking per kind. Kinderen die links en rechts nog verwarren: laat ze duim en wijsvinger van beide handen strekken; de linkerhand maakt een L. Vragen ze naar de rij met cijfers: \"Dat is het dak, daar gaan we pas veel later naartoe.\" Krijgt een kind de melding dat het toetsenbord niet klopt, dan staat de Chromebook meestal op een andere taal of op Frans AZERTY. Je past dat aan in de instellingen van de Chromebook bij het toetsenbord (invoermethode Belgisch); op beheerde toestellen kan de ICT-coordinator dat voor alle toestellen tegelijk doen."
+  "tipLeerkracht": "Typische fouten: kinderen zitten scheef of op het puntje van hun stoel, de Chromebook staat te ver of te dicht, en sommigen beginnen al wild te typen. Stuur bij met de startzin in plaats van met uitleg: \"Voeten plat, rug recht, schouders los\" werkt sneller dan een opmerking per kind. Kinderen die links en rechts nog verwarren: laat ze duim en wijsvinger van beide handen strekken; de linkerhand maakt een L. Vragen ze naar de rij met cijfers: \"Dat is het dak, daar gaan we pas veel later naartoe.\" Krijgt een kind de melding dat het toetsenbord niet klopt, dan staat de Chromebook meestal op een andere taal of op Frans AZERTY. Je past dat aan in de instellingen van de Chromebook bij het toetsenbord (invoermethode Belgisch); op beheerde toestellen kan de ICT-coordinator dat voor alle toestellen tegelijk doen."
 }

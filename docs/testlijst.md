@@ -20,7 +20,7 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 
 ## Startscherm
 
-- [ ] Bovenaan staat de titel, rechts de startzin "Voeten plat, rug recht, Fien en Jef thuis!".
+- [ ] Bovenaan staat de titel, rechts de startzin "Voeten plat, rug recht, schouders los, vingers thuis!".
 - [ ] Links staan Fien en Jef, stil en zwaaiend, met een tekstballon (met een staartje naar de figuurtjes).
 - [ ] De kaart "Verder waar je was" toont les 0, met de knop "Start de les". Enter start de les meteen.
 - [ ] Onder "Alle lessen" staat het tabblad "1 · Woonkamer". Les 0 is "nu aan de beurt" (blauwe stip), les 1 staat op slot ("Na les 0"), les 2 tot 5 staan op "Komt binnenkort".
@@ -37,7 +37,7 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 ## Les 0
 
 - [ ] Bovenaan staat "Les 0 · ..." met een balkje per blok (6 balkjes).
-- [ ] **Toetsenbordcheck:** zegt de app dat je toetsenbord klopt? Zet de Chromebook daarna eens op een andere invoermethode (bijvoorbeeld Engels) en doe les 0 opnieuw: verschijnt de melding "Vraag even hulp aan je juf of meester", met uitleg voor de leerkracht? Zet het daarna terug op Belgisch.
+- [ ] **Toetsenbordcheck:** zegt de app "In orde! Je toetsenbord typt de juiste letters."? Blijft die zin staan tot je op Verder drukt, ook als je de Enter van het vorige scherm lang inhoudt? Zet de Chromebook daarna eens op een andere invoermethode (bijvoorbeeld Engels) en doe les 0 opnieuw: verschijnt de melding "Vraag even hulp aan je juf of meester", met uitleg voor de leerkracht? Zet het daarna terug op Belgisch.
 - [ ] **Duim op de spatiebalk:** staat de lamp van bij het begin in beeld? Gaat ze duidelijk aan, en kan je pas drukken als ze brandt? Begrijpt een kind zonder uitleg wat het moet doen?
 - [ ] **Licht aan in het huis:** wordt het woord van de juiste verdieping donker (zonder te knipperen)? Zijn de woorden links van het huis goed leesbaar? Licht bij een verkeerde rij de juiste rij op het toetsenbord op? Branden na 9 rondes alle ramen?
 - [ ] **Eerst lezen, dan starten:** blijft bij "Duim op de spatiebalk" en "Klaar voor de start" de lamp uit tot je op Start (of Enter) drukt? Heeft een kind genoeg tijd om de opdracht te lezen? Zegt een spatie voor de start "Druk eerst op Start."?
@@ -58,7 +58,7 @@ Test op een Chromebook in Chrome. Duur: ongeveer 25 minuten. Noteer bij elk punt
 - [ ] Is de toets die moet komen al zichtbaar voor je typt (hulp altijd zichtbaar)?
 - [ ] Typ expres een fout. Blijft de cursor staan, en lichten de juiste toets en vinger even sterker op, zonder dat er iets schudt?
 - [ ] Na een regel: staat de afgewerkte regel grijs met een vinkje boven de nieuwe regel?
-- [ ] **Over de beek (spelsjabloon):** staat de regel groot in het midden, zoals bij de oefenregels? Ligt er bij elke goede toets een stapsteen bij in de beek onderaan, en heeft de plaats van de volgende steen een donkere rand? Krijgt de letter bij een foute toets een stippelrand, zonder dat er iets schudt? Blijft alles op zijn plaats? Staan Fien en Jef na drie rijen stenen bij hun huis, met "Droge voeten! We zijn thuis." en de knop Verder?
+- [ ] **Over de beek (spelsjabloon):** staat de regel groot in het midden, zoals bij de oefenregels? Ligt er bij elke goede toets een stapsteen bij in de beek onderaan, en heeft de plaats van de volgende steen een donkere rand? Krijgt de letter bij een foute toets een stippelrand, zonder dat er iets schudt? Blijft alles op zijn plaats? Staan Fien en Jef na drie rijen stenen bij hun huis, met "Het is je gelukt! We zijn thuis." en de knop Verder?
 - [ ] **Over de beek, saai of leuk:** wat zegt het kind over het spel? Ziet het een verschil met de oefenregels?
 - [ ] **Eindoefening, met veel fouten:** 0 sterren, Fien en Jef moedigen aan, en de knop "Probeer de eindoefening opnieuw".
 - [ ] **Nog een keer met veel fouten:** daarna komt een aanmoediging van Fien en Jef, en is de eindoefening korter (1 regel).

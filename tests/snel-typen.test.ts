@@ -128,7 +128,7 @@ describe("snel typen: geen enkele aanslag gaat verloren", () => {
     expect(aanslagen().every((a) => a.juist)).toBe(true);
     // het slot: alle stenen liggen er, de slotzin staat op de plaats van de opdracht, de knop Verder verschijnt
     expect(ctx.podium.querySelectorAll(".beek-steen")).toHaveLength(36);
-    expect(ctx.podium.querySelector(".opdracht-tekst")!.textContent).toBe("Droge voeten! We zijn thuis.");
+    expect(ctx.podium.querySelector(".opdracht-tekst")!.textContent).toBe("Het is je gelukt! We zijn thuis.");
     expect(ctx.podium.querySelector(".spel-slot")!.classList.contains("onzichtbaar")).toBe(false);
     druk(inst, "Enter");
     expect(aantalVolgende()).toBe(1);
@@ -174,7 +174,7 @@ describe("snel typen: geen enkele aanslag gaat verloren", () => {
     druk(inst, " "); // de lamp is nog uit
     expect(zin.classList.contains("onzichtbaar")).toBe(false);
     expect(zin.textContent).toBe("Wacht op de lamp.");
-    vi.advanceTimersByTime(1000); // de lamp gaat aan
+    vi.advanceTimersByTime(2000); // de lamp gaat aan (na Start bijna twee seconden)
     expect(zin.classList.contains("onzichtbaar")).toBe(true);
     for (let i = 0; i < blok.aantal; i++) {
       druk(inst, " ");
@@ -197,6 +197,8 @@ describe("snel typen: geen enkele aanslag gaat verloren", () => {
     expect(zin.textContent).toBe("Druk eerst op Start.");
     expect(aanslagen()).toHaveLength(0);
     druk(inst, "Enter");
+    vi.advanceTimersByTime(1000); // na Start: tijd om de duimen klaar te leggen
+    expect(lamp().classList.contains("aan")).toBe(false);
     vi.advanceTimersByTime(1000);
     expect(lamp().classList.contains("aan")).toBe(true);
   });

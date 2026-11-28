@@ -64,7 +64,9 @@ export const zoekToets: BlokFunctie<ZoekToetsBlok> = (blok, ctx) => {
     if (gestart) return;
     gestart = true;
     scherm.verbergEnter();
-    ctx.later(zetLampAan, 900);
+    // Na Start wacht de lamp twee seconden: tijd om de duimen klaar te leggen
+    // (test van 28 november: 0,9 seconde was te kort).
+    ctx.later(zetLampAan, 1900);
   }
   if (metLamp) scherm.toonEnter(start, "start");
   toonHuidig();

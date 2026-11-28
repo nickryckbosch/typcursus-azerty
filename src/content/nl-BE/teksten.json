@@ -1,7 +1,7 @@
 {
   "app.titel": "Typcursus",
   "app.ondertitel": "Leer typen met tien vingers, samen met Fien en Jef",
-  "startzin": "Voeten plat, rug recht, Fien en Jef thuis!",
+  "startzin": "Voeten plat, rug recht, schouders los, vingers thuis!",
 
   "start.verder": "Verder waar je was",
   "start.alleLessen": "Alle lessen",
@@ -96,10 +96,10 @@
   "melding.hoofdletters": "De hoofdletters staan aan. Zet ze uit (op een Chromebook: Alt en de zoektoets samen), of vraag hulp aan je juf of meester.",
   "melding.toetsenbord": "Je toetsenbord staat niet goed ingesteld. Vraag even hulp aan je juf of meester.",
 
-  "check.bezig": "Even kijken of je toetsenbord klopt...",
+  "check.bezig": "We kijken even of je toetsenbord de juiste letters typt...",
   "check.drukA": "Zoek de toets met de letter [A] en druk erop.",
   "check.druk6": "Druk nu op de toets met het cijfer [6].",
-  "check.ok": "Je toetsenbord klopt!",
+  "check.ok": "In orde! Je toetsenbord typt de juiste letters.",
   "check.fout": "Vraag even hulp aan je juf of meester.",
   "check.verderMag": "Je mag gewoon verder doen.",
   "check.voorLeerkracht": "Voor de leerkracht",
@@ -111,8 +111,8 @@
   "eind.nietGehaald": "Nog geen ster. Dat geeft niet: probeer de eindoefening nog eens. Rustig en juist, wij wachten op je.",
   "eind.nietAlleSterren": "Nog niet alle sterren? Probeer de eindoefening nog eens, wij wachten op je.",
 
-  "houding.zeg": "Voeten plat, rug recht!",
-  "houding.opdracht": "Leg je vingers in de woonkamer, de middelste rij. Gaat de lamp aan? Druk [spatie].",
+  "houding.zeg": "Voeten plat, rug recht, schouders los!",
+  "houding.opdracht": "Leg je vingers in de woonkamer, de middelste rij, en druk eerst op Start. Gaat de lamp aan? Druk [spatie].",
   "lamp.wacht": "Wacht op de lamp.",
   "lamp.eerstStart": "Druk eerst op Start.",
   "intro.huis": "Het huis van Fien en Jef: de zolder, de woonkamer en de kelder.",
@@ -125,7 +125,7 @@
   "lichtaan.onderste": "de onderste rij",
   "lichtaan.klaar": "Alle lichten branden! Goed gedaan!",
 
-  "beek.klaar": "Droge voeten! We zijn thuis.",
+  "beek.klaar": "Het is je gelukt! We zijn thuis.",
   "beek.strook": "De beek. Er liggen {gelegd} van de {totaal} stapstenen. Het huis van Fien en Jef staat aan de overkant.",
   "beek.thuis": "Alle stapstenen liggen in de beek. Fien en Jef staan bij hun huis en zwaaien.",
 
