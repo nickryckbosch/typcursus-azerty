@@ -147,7 +147,7 @@ Voorwerpen die de app zelf tekent, hebben dezelfde tekenstijl als de prenten van
 - Vier even hoge lagen van 66: dak, zolder, woonkamer en kelder (onder de grondlijn). Het dak is de cijferrij, een vierde rij boven de zolder; het blijft leeg in les 0 tot 5.
 - Negen even grote ramen van 38 x 38 met een kruis, geen vensterbank. De rijen zijn gelijk, omdat de rijen op het toetsenbord ook gelijk zijn.
 - De woorden staan in een eigen kolom links, in afgeronde vakjes van 150 x 40, in Andika (24). Nooit over de tekening. De vakjes zijn groter dan in de eerste referentie, voor de leesbaarheid op een kleine Chromebook.
-- Het vakje van de verdieping die aan de beurt is, wordt donker (`#1B2A4A` met witte tekst) en blijft stil staan. Er knippert niets.
+- Het vakje van de verdieping die aan de beurt is, wordt geel (`#FFEE99`, de kleur van een raam dat brandt) met een donkere omtrek en vette donkere tekst, en blijft stil staan. Er knippert niets. De hulprand eromheen blijft blauw, net als de balk rond de rij op het schermtoetsenbord: zo horen woord en rij bij elkaar. Waarom geel: "hier gaat het licht aan" past bij de doelzin (Nick, 28 november 2026). Blauw op het toetsenbord omdat geel op de lichte toetsen te weinig opvalt.
 - Fien en Jef staan naast het huis, niet in een raam.
 - De referentietekening staat in de code: `src/spellen/lichtaan.ts`.
 

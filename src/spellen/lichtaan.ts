@@ -12,7 +12,7 @@
 // - negen gelijke ramen, omdat de rijen op het toetsenbord ook gelijk zijn;
 // - de woorden staan in een eigen kolom links, nooit over de tekening;
 // - er knippert niets (K16): het vakje van het woord dat aan de beurt is,
-//   wordt donker en blijft stil staan;
+//   wordt geel (de kleur van een raam dat brandt) en blijft stil staan;
 // - de raamkleuren zijn nagemeten tegen de vingerkleuren: verander ze niet
 //   zonder nieuwe meting.
 // Fien en Jef staan vlak naast het huis, niet in een raam.
