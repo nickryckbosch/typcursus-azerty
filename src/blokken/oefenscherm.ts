@@ -111,6 +111,8 @@ export interface OefenschermOpties {
   /**
    * De doelzin van een spel (K26), in een tekstballon boven Fien en Jef. Hij
    * blijft het hele spel staan: het kind kan altijd teruglezen waar het naartoe werkt.
+   * Een lege tekst (""): de tekstballon heeft zijn plaats al, maar is onzichtbaar
+   * tot zetDoel() er iets in zet (bv. alleen een slotzin).
    */
   doel?: string;
   /**
@@ -144,8 +146,9 @@ export interface Oefenscherm {
   /**
    * Een andere zin in de tekstballon van de doelzin (bv. de slotzin van een
    * spel). De ballon houdt minstens zijn hoogte, zodat er niets verspringt.
+   * Met slot = false blijft de gewone lettergrootte (een zin tijdens de oefening).
    */
-  zetDoel(tekst: string): void;
+  zetDoel(tekst: string, slot?: boolean): void;
   /** verberg de opdracht bovenaan (haar plaats blijft), bv. op het einde van een spel */
   verbergOpdracht(): void;
   /**
@@ -172,8 +175,10 @@ export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): O
   const opdracht = el("p", { class: "opdracht-tekst" });
   // Met een doelzin: de tekstballon bovenaan, Fien en Jef eronder (zelfde opbouw
   // als de tip naast de oefenregels). Zonder doelzin staan de figuren alleen.
-  const figurenRij = el("div", { class: opties.doel ? "figuren-rij" : "zone-figuren" });
-  const doelBallon = opties.doel ? el("p", { class: "ballon staart-onder doel-ballon" }, opties.doel) : null;
+  const metDoel = opties.doel !== undefined;
+  const figurenRij = el("div", { class: metDoel ? "figuren-rij" : "zone-figuren" });
+  const doelBallon = metDoel ? el("p", { class: "ballon staart-onder doel-ballon" }, opties.doel) : null;
+  if (doelBallon && opties.doel === "") doelBallon.classList.add("zacht", "onzichtbaar");
   const figuren = doelBallon ? el("div", { class: "zone-figuren met-doel" }, doelBallon, figurenRij) : figurenRij;
   const veld = el("div", { class: "zone-veld" });
   let enterActie = () => ctx.volgende();
@@ -233,11 +238,12 @@ export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): O
         ...(wie !== "fien" ? [jef(uitdrukking, opties.figuurHoogte)] : []),
       );
     },
-    zetDoel(tekst) {
+    zetDoel(tekst, slot = true) {
       if (!doelBallon) return;
       doelBallon.style.minHeight = `${doelBallon.offsetHeight}px`;
       doelBallon.textContent = tekst;
-      doelBallon.classList.add("is-slot");
+      doelBallon.classList.toggle("is-slot", slot);
+      toon(doelBallon);
     },
     verbergOpdracht() {
       toon(opdracht, false);
