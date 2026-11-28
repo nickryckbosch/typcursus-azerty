@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { beekStenen, lichtAanRondes, zoekReeks } from "../src/logica/reeksen";
+import { beekStenen, lichtAanRondes, woordRegels, zoekReeks } from "../src/logica/reeksen";
 
 // Eenvoudige voorspelbare toevalsgenerator voor de tests.
 function toeval(zaad = 1) {
@@ -44,5 +44,31 @@ describe("beek", () => {
     expect(s.filter((_, i) => i % 3 === 2).every((x) => x === " ")).toBe(true);
     expect(s.filter((_, i) => i % 3 !== 2).every((x) => x === "f" || x === "j")).toBe(true);
     expect(drieOpRij(s.filter((x) => x !== " "))).toBe(false);
+  });
+});
+
+describe("zoekReeks zonder herhaling", () => {
+  it("geeft nooit twee keer na elkaar dezelfde toets", () => {
+    for (let z = 1; z <= 50; z++) {
+      let x = z;
+      const rnd = () => ((x = (x * 9301 + 49297) % 233280), x / 233280);
+      for (const [toetsen, nadruk] of [[["f", "j", " "], ["f", "j"]], [["d", "k", "f", "j", " "], ["d", "k"]], [["e", "i"], undefined]] as const) {
+        const r = zoekReeks([...toetsen], nadruk ? [...nadruk] : undefined, 40, rnd);
+        for (let i = 1; i < r.length; i++) expect(r[i]).not.toBe(r[i - 1]);
+      }
+    }
+  });
+});
+
+describe("woordRegels", () => {
+  it("maakt regels van woorden die op een spatie eindigen, zonder dubbels", () => {
+    const woorden = ["ei", "ik", "je", "die", "kei", "eik", "dek", "dik", "jij", "kijk"];
+    const regels = woordRegels(woorden, 3, 3);
+    expect(regels).toHaveLength(3);
+    const alle = regels.flatMap((r) => r.trim().split(" "));
+    expect(alle).toHaveLength(9);
+    expect(new Set(alle).size).toBe(9);
+    for (const r of regels) expect(r.endsWith(" ")).toBe(true);
+    for (const w of alle) expect(woorden).toContain(w);
   });
 });

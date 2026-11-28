@@ -5,7 +5,7 @@
 import type { App, Scherm } from "../app";
 import { t, type TekstSleutel } from "../content";
 import type { Blok, Les } from "../content/types";
-import { blokFunctie } from "../blokken";
+import { blokFunctie, titelVan } from "../blokken";
 import { slotscherm } from "../blokken/oefenscherm";
 import { maakExtraRegels } from "../logica/extraoefenen";
 import { verderBij, zetBezigBij } from "../logica/voortgang";
@@ -176,9 +176,9 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, opties: LesOp
           {
             class: i < index ? "balkje klaar" : i === index ? "balkje huidig" : "balkje",
             "aria-current": i === index ? "step" : undefined,
-            title: blok.titel,
+            title: titelVan(blok),
           },
-          el("span", { class: "verborgen" }, t("les.stap", { nummer: i + 1, totaal: blokken.length, titel: blok.titel })),
+          el("span", { class: "verborgen" }, t("les.stap", { nummer: i + 1, totaal: blokken.length, titel: titelVan(blok) })),
         ),
       ),
     );
@@ -206,7 +206,7 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, opties: LesOp
     werkStapjesBij();
     werkToetsenbordMeldingBij();
     const blok = blokken[i];
-    titel.textContent = t("les.kop", { nummer: les.id, titel: blok.titel });
+    titel.textContent = t("les.kop", { nummer: les.id, titel: titelVan(blok) });
     const functie = blokFunctie(blok);
     instantie = functie ? functie(blok, ctx) : null;
   }
@@ -222,7 +222,7 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, opties: LesOp
   function toonVerderVraag(blok: number): void {
     index = blok;
     werkStapjesBij();
-    const blokTitel = blokken[blok].titel;
+    const blokTitel = titelVan(blokken[blok]);
     titel.textContent = t("les.kop", { nummer: les.id, titel: blokTitel });
     const tekst = t("verder.vraag", { nummer: blok + 1, titel: blokTitel });
     // Een slotscherm (K27 fase 2): Fien en Jef stellen de vraag in hun tekstballon.

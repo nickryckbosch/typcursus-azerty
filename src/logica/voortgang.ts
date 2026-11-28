@@ -105,7 +105,8 @@ export function registreerEindoefening(
 ): { gehaald: boolean; sterren: number } {
   const lv = lesVoortgang(v, lesId);
   const gehaald = nauwk + 1e-9 >= doel;
-  const st = gehaald ? sterren(nauwk) : 0;
+  // Gehaald is altijd minstens een ster (ook bij de korte versie, waar twee fouten mogen).
+  const st = gehaald ? Math.max(1, sterren(nauwk)) : 0;
   lv.pogingen++;
   lv.snelheden = [...lv.snelheden, Math.round(wpm * 10) / 10].slice(-20);
   lv.besteNauwkeurigheid = Math.max(lv.besteNauwkeurigheid ?? 0, nauwk);

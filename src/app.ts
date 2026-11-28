@@ -83,6 +83,8 @@ export class App {
   }
 
   private werkHoofdlettersBij(e: KeyboardEvent): void {
+    // Een knop reageert op de spatie bij het loslaten: ook dan niet op een slotscherm.
+    if (e.type === "keyup" && e.key === " " && document.activeElement?.closest?.(".blok-slot")) e.preventDefault();
     const aan = e.getModifierState?.("CapsLock") ?? false;
     this.hoofdletterMelding.hidden = !aan || this.schermNaam === "start" || this.schermNaam === "leerkracht";
   }
@@ -106,6 +108,14 @@ export class App {
     const actief = document.activeElement;
     if (actief instanceof HTMLInputElement || actief instanceof HTMLTextAreaElement || actief instanceof HTMLSelectElement) return;
     if (actief instanceof HTMLButtonElement && (e.key === "Enter" || e.key === " ")) {
+      // Op een slotscherm (einde van een les, "Je was al bezig") kiest alleen
+      // een bewuste Enter de hoofdknop. Een spatie die het kind nog typte na de
+      // laatste letter, of een ingehouden Enter, mag het scherm niet overslaan
+      // (test van 28 november 2026: de sterren waren weg voor je ze zag).
+      if (actief.closest(".blok-slot") && (e.key === " " || e.repeat)) {
+        e.preventDefault();
+        return;
+      }
       // Uitzondering tijdens het typen: een knop in de bovenbalk (bv. "Voorlezen",
       // aangeklikt met de muis) mag geen spatie of Enter opslokken. Een spatie is
       // dan een getypt teken; een Enter ook, tenzij het kind bewust met Tab naar

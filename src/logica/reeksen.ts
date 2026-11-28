@@ -30,21 +30,21 @@ function kiesZonderDrieOpRij(lijst: string[], vorige: string[], rnd: Toeval): st
 
 /**
  * Reeks voor "zoek-toets": ongeveer twee derde uit `nadruk`, de rest uit de
- * andere toetsen.
+ * andere toetsen. Nooit twee keer na elkaar dezelfde toets (als er keuze is):
+ * een kaart die niet verandert, lijkt een toets die niet telde (test van 28
+ * november 2026: een kind en een volwassene merkten de herhaling niet op).
  */
 export function zoekReeks(toetsen: string[], nadruk: string[] | undefined, aantal: number, rnd: Toeval = Math.random): string[] {
   const veel = nadruk && nadruk.length > 0 ? nadruk : toetsen;
   const rest = toetsen.filter((t) => !veel.includes(t));
   const uit: string[] = [];
   for (let i = 0; i < aantal; i++) {
+    const vorige = uit[uit.length - 1];
     const uitNadruk = rest.length === 0 || rnd() < 2 / 3;
-    let lijst = uitNadruk ? veel : rest;
-    // Zou dit de derde keer op rij hetzelfde teken geven, kies dan uit de andere groep.
-    const n = uit.length;
-    if (lijst.length === 1 && n >= 2 && uit[n - 1] === lijst[0] && uit[n - 2] === lijst[0]) {
-      lijst = uitNadruk ? (rest.length > 0 ? rest : veel) : veel;
-    }
-    uit.push(kiesZonderDrieOpRij(lijst, uit, rnd));
+    const eerst = (uitNadruk ? veel : rest).filter((t) => t !== vorige);
+    const anders = (uitNadruk ? rest : veel).filter((t) => t !== vorige);
+    const lijst = eerst.length > 0 ? eerst : anders.length > 0 ? anders : toetsen;
+    uit.push(kies(lijst, rnd));
   }
   return uit;
 }
@@ -82,4 +82,24 @@ export function beekStenen(letters: string[], aantal: number, rnd: Toeval = Math
     }
   }
   return uit;
+}
+
+/**
+ * Regels met woorden voor een spel in het spelsjabloon: `aantalRegels` regels
+ * van `perRegel` woorden, elk woord hoogstens een keer (als de lijst lang
+ * genoeg is). Elke regel eindigt op een spatie, zoals bij "Over de beek": wie
+ * uit gewoonte een spatie typt na het laatste woord, maakt zo geen fout.
+ */
+export function woordRegels(woorden: string[], aantalRegels: number, perRegel: number, rnd: Toeval = Math.random): string[] {
+  let voorraad: string[] = [];
+  const regels: string[] = [];
+  for (let r = 0; r < aantalRegels; r++) {
+    const regel: string[] = [];
+    for (let w = 0; w < perRegel; w++) {
+      if (voorraad.length === 0) voorraad = schud(woorden, rnd);
+      regel.push(voorraad.pop()!);
+    }
+    regels.push(`${regel.join(" ")} `);
+  }
+  return regels;
 }

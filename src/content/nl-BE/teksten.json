@@ -5,6 +5,7 @@
   "slogan": "Klaar? Tokkelen maar!",
 
   "start.verder": "Verder waar je was",
+  "start.begin": "Begin hier",
   "start.alleLessen": "Alle lessen",
   "start.delen": "Delen van de cursus",
   "start.deel": "{nummer} \u00b7 {titel}",
@@ -109,7 +110,7 @@
   "check.uitlegAnders": "Dit toestel staat niet op Belgisch AZERTY (bijvoorbeeld op QWERTY of op een andere taal). Dan geven de toetsen andere letters dan wat erop staat.",
 
 
-  "eind.aanmoediging": "Fien en Jef: Het lukt bijna! We maken de eindoefening wat korter. Rustig en juist, jij kan dat!",
+  "eind.aanmoediging": "We maken de eindoefening wat korter. Rustig en juist, jij kan dat!",
   "eind.nietGehaald": "Nog geen ster. Dat geeft niet: probeer de eindoefening nog eens. Rustig en juist, wij wachten op je.",
   "eind.nietAlleSterren": "Nog niet alle sterren? Probeer de eindoefening nog eens, wij wachten op je.",
 
@@ -128,6 +129,8 @@
   "lichtaan.klaar": "Alle lichten branden! Goed gedaan!",
 
   "beek.klaar": "Het is je gelukt! We zijn thuis.",
+  "spel.voorlopig.titel": "Over de beek",
+  "spel.voorlopig.doel": "Ons huis staat aan de overkant van de beek. Elke goede letter legt een stapsteen. Liggen alle stenen er, dan zijn we thuis!",
   "beek.strook": "De beek. Er liggen {gelegd} van de {totaal} stapstenen. Het huis van Fien en Jef staat aan de overkant.",
   "beek.thuis": "Alle stapstenen liggen in de beek. Fien en Jef staan bij hun huis en zwaaien.",
 

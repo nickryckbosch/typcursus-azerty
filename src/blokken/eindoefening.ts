@@ -29,12 +29,16 @@ export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
       const nauwk = ctx.bewaarPoging(oefeningen);
       const tekens = oefeningen.reduce((som, o) => som + o.doel.length, 0);
       const duur = oefeningen.reduce((som, o) => som + ((o.eindTijd ?? 0) - (o.startTijd ?? 0)), 0);
+      // De korte versie telt weinig tekens: 90% laat daar maar een fout toe,
+      // terwijl de gewone versie er vier toelaat. Wie de korte versie krijgt,
+      // heeft het net moeilijk: daar mogen altijd twee fouten.
+      const doel = blok.doelNauwkeurigheid ?? DOEL_NAUWKEURIGHEID;
       const { gehaald, sterren } = registreerEindoefening(
         ctx.app.voortgang,
         ctx.les.id,
         nauwk,
         woordenPerMinuut(tekens, duur),
-        blok.doelNauwkeurigheid ?? DOEL_NAUWKEURIGHEID,
+        kort ? Math.min(doel, (tekens - 2) / tekens) : doel,
       );
       ctx.app.bewaar();
       ctx.sessie.resultaat = { nauwkeurigheid: nauwk, gehaald, sterren, kort };
@@ -42,21 +46,20 @@ export const eindoefening: BlokFunctie<EindoefeningBlok> = (blok, ctx) => {
     }, blok.tip);
   }
 
-  if (!kort) {
-    start();
-  } else {
-    // Eerst een aanmoediging, dan de korte oefening.
-    // Fien en Jef met hun tekstballon als een groep in het midden, de knop eronder (K27).
-    const scherm = oefenscherm(ctx, { figuren: "aanmoedigend", opbouw: "midden", klasse: "blok-intro" });
-    scherm.veld.append(el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, t("eind.aanmoediging"))));
-    scherm.toonEnter(start);
-    ctx.zeg(t("eind.aanmoediging"));
-  }
+  // Eerst lezen, dan starten (K28): de eindoefening beslist of de volgende les
+  // opengaat. Ze begint pas na de knop Start, zodat een toets die nog bij de
+  // vorige oefening hoorde, niet als fout telt. Bij de korte versie staat hier
+  // de aanmoediging.
+  const zin = kort ? t("eind.aanmoediging") : (blok.tekst ?? "");
+  const scherm = oefenscherm(ctx, { figuren: kort ? "aanmoedigend" : "blij", opbouw: "midden", klasse: "blok-intro" });
+  scherm.veld.append(el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, zin)));
+  scherm.toonEnter(start, "start");
+  ctx.zeg(zin);
 
   return {
     opToets(e) {
       if (actief) actief.opToets?.(e);
-      else if (e.key === "Enter") start();
+      else if (e.key === "Enter" && !e.repeat) start();
     },
     opruimen() {
       actief?.opruimen?.();

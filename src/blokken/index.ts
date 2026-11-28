@@ -2,7 +2,8 @@
 // toevoegen: schrijf de functie en zet ze hier (of in spellen/index.ts) in de lijst.
 
 import type { Blok, Les } from "../content/types";
-import { SPELLEN } from "../spellen";
+import { t } from "../content";
+import { SPELLEN, isVoorlopig } from "../spellen";
 import type { BlokFunctie } from "./context";
 import { afsluiter } from "./afsluiter";
 import { eindoefening } from "./eindoefening";
@@ -28,4 +29,12 @@ export function blokFunctie(blok: Blok): BlokFunctie | undefined {
 /** Een les is beschikbaar als elk blok (en elk spel) al gebouwd is. */
 export function isBeschikbaar(les: Les): boolean {
   return les.online.every((b) => blokFunctie(b) !== undefined);
+}
+
+/**
+ * De titel van een blok zoals het kind hem ziet. Een voorlopig spel toont de
+ * beek: dan heet het ook "Over de beek", niet de titel van het latere spel.
+ */
+export function titelVan(blok: Blok): string {
+  return blok.type === "spel" && isVoorlopig(blok.spel) ? t("spel.voorlopig.titel") : blok.titel;
 }

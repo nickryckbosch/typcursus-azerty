@@ -69,6 +69,9 @@ export function houding(_blok: EindoefeningBlok, ctx: BlokContext): BlokInstanti
         ctx.later(lampAan, 1200 + Math.random() * 1000);
       } else {
         markeerAfgewerkt(ctx.app.voortgang, ctx.les.id);
+        // Een les zonder meting geeft iedereen drie sterren, als aanmoediging
+        // (vraag van een kind, 28 november 2026: "waarom krijg ik geen sterren?").
+        ctx.sessie.resultaat = { nauwkeurigheid: 1, gehaald: true, sterren: 3, kort: false };
         ctx.app.bewaar();
         scherm.zetOpdracht(t("houding.klaar"));
         ctx.later(() => ctx.volgende(), 1200);
