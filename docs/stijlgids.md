@@ -87,6 +87,7 @@ Waarop steunt dit? **Eigen keuze.** Andika is door SIL ontworpen voor beginnende
 - De knop Verder of Start: de hoofdknop met de Enter-toets erin getekend ("Verder" en daarnaast het toetsje "Enter ↵"). Enter en de knop doen hetzelfde (K27, deel 10).
 - Focus (toetsenbordbediening): een ring van 3 px in `--tekst` rond de knop, op 3 px afstand (`outline` met `outline-offset`). De ring verandert de vorm of de maat van de knop niet.
 - Tekstballon: wat Fien en Jef zeggen staat in een witte ballon met afgeronde hoeken, een dunne rand en een staartje dat naar het figuurtje wijst.
+- Tekst in een tekstballon: overal even groot (`--ballon-tekst`, 21 px op een Chromebook, nooit kleiner dan 16 px). Dat geldt voor de doelzin, de tip naast de oefenregels, wat Fien en Jef zeggen in de intro en op het startscherm. Een opdracht of uitleg in een ballon (`.grote-tekst`) is groter. Kleiner is Andika in gewone dikte te fijn om vlot te lezen (Nick, 28 november 2026).
 
 Waarop steunt dit? **Eigen keuze.**
 

@@ -67,6 +67,12 @@
   --lees: "Andika", system-ui, sans-serif; /* wat kinderen lezen en typen */
   --kop: "Nunito", system-ui, "Segoe UI", Roboto, Arial, sans-serif; /* koppen en knoppen */
 
+  /* De korte zin in een tekstballon (doelzin, tip, wat Fien en Jef zeggen):
+     overal even groot. Andika in gewone dikte is kleiner te fijn om vlot te
+     lezen (Nick, 28 november 2026: "heel fijn en klein"). De ballonnen met een
+     opdracht of uitleg in .grote-tekst zijn nog groter. */
+  --ballon-tekst: clamp(16px, 5.6cqh, 21px);
+
   /* De hoogte en de breedte van het venster, per honderdste: gebruik deze twee
      in plaats van vh en vw. Schaalt het scherm als een dia (zie onderaan), dan
      zijn ze de honderdste van de ontwerpmaat. */
@@ -503,7 +509,8 @@ button {
 }
 
 .start-figuren .ballon {
-  font-size: clamp(15px, calc(2.3 * var(--vh)), 18px);
+  /* even groot als --ballon-tekst, maar volgens het venster (geen podium hier) */
+  font-size: clamp(16px, calc(2.75 * var(--vh)), 21px);
   padding: 14px 16px;
 }
 
@@ -918,7 +925,7 @@ button {
 }
 
 .tip-zijde {
-  width: clamp(150px, calc(17 * var(--vw)), 230px);
+  width: clamp(170px, calc(20 * var(--vw)), 270px);
   flex: none;
   display: flex;
   flex-direction: column;
@@ -928,7 +935,7 @@ button {
 }
 
 .tip {
-  font-size: clamp(14px, 5.2cqh, 17px);
+  font-size: var(--ballon-tekst);
   padding: clamp(6px, 3.5cqh, 14px) 16px;
 }
 
@@ -1356,8 +1363,8 @@ button {
   left: var(--ballon-links);
   bottom: clamp(5px, 2cqh, 9px);
   margin: 0;
-  max-width: min(330px, 27cqw);
-  font-size: clamp(13px, 4.4cqh, 17px);
+  max-width: min(400px, 31cqw);
+  font-size: var(--ballon-tekst);
   line-height: 1.35;
 }
 
@@ -1372,7 +1379,7 @@ button {
   transform: translateX(-50%);
   max-width: 400px;
   width: max-content;
-  font-size: clamp(15px, 5.6cqh, 21px);
+  font-size: var(--ballon-tekst);
 }
 
 .spel-slotzin.staart-onder::after {
@@ -1615,7 +1622,7 @@ button {
 }
 .zone-figuren.met-doel .doel-ballon {
   margin: 0;
-  font-size: clamp(13px, 4.4cqh, 17px);
+  font-size: var(--ballon-tekst);
   line-height: 1.35;
   max-width: 100%;
 }
@@ -2368,7 +2375,7 @@ button {
   width: clamp(170px, 19cqw, 250px);
   margin: 0 0 8cqh;
   padding: clamp(6px, 2.4cqh, 12px) 16px;
-  font-size: clamp(14px, 4.8cqh, 20px);
+  font-size: var(--ballon-tekst);
   line-height: 1.3;
   text-wrap: balance;
 }
@@ -2428,11 +2435,11 @@ button {
 }
 
 .blok-lichtaan .zone-figuren.met-doel {
-  width: clamp(200px, 24cqw, 310px);
+  width: clamp(240px, 29cqw, 380px);
 }
 
 .blok-lichtaan .zone-figuren.met-doel > * {
-  width: min(100%, 290px);
+  width: min(100%, 360px);
 }
 
 .blok-lichtaan .zone-figuren.met-doel .doel-ballon {
@@ -2446,7 +2453,7 @@ button {
 
 /* De slotzin in de tekstballon van de doelzin (einde van "Licht aan"): iets groter. */
 .zone-figuren.met-doel .doel-ballon.is-slot {
-  font-size: clamp(15px, 5.6cqh, 21px);
+  font-size: var(--ballon-tekst);
 }
 
 /* ---------- Schalen als een dia (docs/beslissingen.md, 12p) ----------
@@ -2504,12 +2511,12 @@ html.als-dia #app {
 
 .blok-groep .zone-figuren.met-doel {
   align-items: flex-end;
-  width: clamp(200px, 24cqw, 310px);
+  width: clamp(240px, 29cqw, 380px);
   padding: 0 clamp(8px, 1.4cqw, 20px) 0 0;
 }
 
 .blok-groep .zone-figuren.met-doel > * {
-  width: min(100%, 290px);
+  width: min(100%, 360px);
 }
 
 /* De tekstballon is altijd drie regels hoog: een langere of kortere zin
