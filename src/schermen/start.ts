@@ -28,6 +28,26 @@ function toetsChip(teken: string, klasse = ""): HTMLElement {
   );
 }
 
+/**
+ * Het merkteken van Tokkeldorp: een huisje met onder het dak de toetsen f en j
+ * (waar Fien en Jef wonen), in de klare lijn van het huis uit les 0.
+ */
+function merkteken(): SVGSVGElement {
+  const toets = (x: number, letter: string) => [
+    svg("rect", { x, y: 27, width: 21, height: 22, rx: 5, class: "merk-toets-rand" }),
+    svg("rect", { x, y: 25, width: 21, height: 20.5, rx: 5, class: "merk-toets" }),
+    svg("text", { x: x + 10.5, y: 35.5, "text-anchor": "middle", "dominant-baseline": "central", class: "merk-letter" }, letter),
+  ];
+  return svg(
+    "svg",
+    { class: "merkteken", viewBox: "0 0 62 52", "aria-hidden": "true" },
+    svg("rect", { x: 43, y: 5, width: 7, height: 12, class: "merk-schouw" }),
+    svg("polygon", { points: "3,23 31,3 59,23", class: "merk-dak" }),
+    ...toets(8, "f"),
+    ...toets(33, "j"),
+  );
+}
+
 /** "Nieuwe letters voor je middelvingers": afgeleid uit de vingers van de nieuwe toetsen. */
 function nieuwVoor(les: Les): string {
   const kleuren = new Set(les.nieuweToetsen.map((x) => toetsVoorTeken(x)?.toets.vinger).map((v) => (v ? kleurVanVinger(v) : "")));
@@ -201,15 +221,16 @@ export function startScherm(app: App, wortel: HTMLElement): Scherm {
       el(
         "header",
         { class: "start-kop" },
-        el("div", { class: "start-merk", "aria-hidden": "true" }, toetsChip("f", "chip-merk"), toetsChip("j", "chip-merk")),
-        el("div", { class: "start-titel" }, el("h1", {}, t("app.titel")), el("p", {}, t("app.ondertitel"))),
+        // Links het merk (het huisje met de toetsen f en j, de naam), in het midden
+        // de startzin, rechts de twee knoppen: drie rustige blokken.
+        el("div", { class: "start-merk" }, merkteken(), el("div", { class: "start-titel" }, el("h1", {}, t("app.titel")), el("p", {}, t("app.ondertitel")))),
+        el("p", { class: "startzin" }, t("startzin")),
         el(
           "div",
           { class: "start-knoppen" },
           voorleesKnop(app),
           el("button", { class: "knop knop-klein", type: "button", onclick: () => app.naarOefenbord() }, t("knop.oefenbord")),
         ),
-        el("p", { class: "startzin" }, t("startzin")),
       ),
       el(
         "main",

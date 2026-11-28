@@ -409,20 +409,64 @@ button {
   gap: clamp(8px, 2.3vh, 18px);
 }
 
+/* De bovenbalk van het startscherm: links het merk (huisje en naam), in het
+   midden de startzin, rechts de knoppen. Rustig: niets beweegt. */
 .start-kop {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+}
+
+.start-merk {
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-.start-merk {
-  display: flex;
-  gap: 6px;
+.merkteken {
+  height: clamp(46px, 8vh, 60px);
+  width: auto;
+  flex: none;
+}
+
+.merk-dak {
+  fill: #d8693b;
+  stroke: #1f1f1f;
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+}
+
+.merk-schouw {
+  fill: #c9824f;
+  stroke: #1f1f1f;
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+}
+
+.merk-toets-rand {
+  fill: var(--blauw);
+  stroke: #1f1f1f;
+  stroke-width: 1.6;
+}
+
+.merk-toets {
+  fill: #ffffff;
+  stroke: #1f1f1f;
+  stroke-width: 1.6;
+}
+
+.merk-letter {
+  font-family: var(--lees);
+  font-size: 15px;
+  font-weight: 700;
+  fill: var(--tekst);
 }
 
 .start-titel h1 {
-  font-size: clamp(22px, 3.9vh, 30px);
-  letter-spacing: -0.01em;
+  font-size: clamp(26px, 4.6vh, 36px);
+  letter-spacing: -0.015em;
+  line-height: 1.05;
 }
 
 .start-titel p {
@@ -431,17 +475,19 @@ button {
 }
 
 .start-knoppen {
-  margin-left: auto;
   display: flex;
   gap: 8px;
 }
 
+/* De startzin: wat de kinderen samen zeggen voor ze beginnen. */
 .startzin {
+  justify-self: center;
   background: var(--vlak);
   border: 1px solid var(--rand);
   border-radius: 999px;
-  padding: 10px 20px;
+  padding: 9px 22px;
   font-size: 17px;
+  text-align: center;
 }
 
 .start-inhoud {
@@ -455,7 +501,7 @@ button {
    tekstballon bovenaan, Fien en Jef eronder. De figuurtjes krimpen mee met
    de hoogte van het venster en worden nooit afgesneden. */
 .start-figuren {
-  width: clamp(170px, 18.5vw, 250px);
+  width: clamp(170px, 19.5vw, 266px);
   flex: none;
   min-height: 0;
   display: flex;
@@ -474,10 +520,12 @@ button {
   gap: 2px;
 }
 
+/* De figuren zijn nooit hoger dan hun vak: zo staat de tekstballon altijd
+   vlak boven Fien en Jef, ook op een groot scherm (test van 28 november). */
 .start-figuren .figuren {
   flex: 0 1 auto;
   min-height: 0;
-  height: min(40vh, 15vw);
+  height: min(44vh, 21vw, 320px);
   align-items: flex-end;
 }
 
@@ -596,14 +644,6 @@ button {
 .chip-groot.chip-spatie {
   font-size: 15px;
   padding: 0 10px;
-}
-
-.chip-merk {
-  width: 40px;
-  height: 40px;
-  border-radius: 9px;
-  border-bottom-width: 4px;
-  font-size: 22px;
 }
 
 /* "Alle lessen" */
@@ -1583,6 +1623,12 @@ button {
     display: none;
   }
 
+  .startzin {
+    display: none;
+  }
+}
+
+@media (max-width: 1180px) {
   .startzin {
     display: none;
   }
