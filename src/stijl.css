@@ -810,10 +810,12 @@ button {
   visibility: hidden;
 }
 
-/* Geen toetsenbord nodig (afsluiter, vraag om verder te gaan): onzichtbaar,
-   maar het houdt zijn plaats, zodat er niets verspringt. */
+/* Geen toetsenbord nodig (een slotscherm: de afsluiter, de vraag om verder te
+   gaan): het toetsenbord is weg en de kaart vult het scherm, zodat Fien en Jef
+   groot in het midden staan (K27 fase 2; docs/beslissingen.md, 12p). Een
+   slotscherm is een nieuw scherm: er verspringt niets tijdens een oefening. */
 .zonder-toetsenbord .typzone {
-  visibility: hidden;
+  display: none;
 }
 
 /* Een blok is een witte kaart die het podium vult. */
@@ -2070,4 +2072,97 @@ button {
 
 .blok-intro.met-huis .grote-tekst {
   font-size: clamp(14px, 6.4cqh, 22px);
+}
+
+/* ---------- Opbouw "toren": een slotscherm (K27 fase 2) ----------
+   Fien en Jef groot in het midden, hun zin in een tekstballon erboven, de
+   knoppen even breed eronder (src/blokken/oefenscherm.ts, slotscherm()). */
+.oefenkaart-toren .zone-groep {
+  flex-direction: column;
+  gap: clamp(8px, 2.6cqh, 18px);
+}
+
+.oefenkaart-toren .zone-veld {
+  flex-direction: column;
+  gap: clamp(4px, 1.6cqh, 12px);
+}
+
+.oefenkaart-toren .zone-veld .ballon {
+  max-width: 700px;
+  text-align: center;
+}
+
+.podium .oefenkaart-toren .ballon {
+  padding: clamp(6px, 2cqh, 14px) 1.4rem;
+}
+
+.podium .oefenkaart-toren .grote-tekst {
+  font-size: clamp(16px, 4.2cqh, 26px);
+  /* geen los woordje op de laatste regel */
+  text-wrap: pretty;
+}
+
+.oefenkaart-toren .zone-figuren {
+  gap: clamp(2px, 0.4cqw, 6px);
+}
+
+.podium .oefenkaart-toren .zone-figuren .figuur {
+  height: min(var(--h), 38cqh);
+}
+
+.podium .oefenkaart-toren .sterren .ster {
+  width: clamp(28px, 10cqh, 64px);
+  height: clamp(28px, 10cqh, 64px);
+}
+
+.podium .oefenkaart-toren .sterren-tekst {
+  font-size: clamp(13px, 2.8cqh, 18px);
+  margin-bottom: clamp(2px, 1cqh, 8px);
+}
+
+/* Alle knoppen van een slotscherm zijn even breed: zo breed als de breedste. */
+.knoppen.even-breed {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  max-width: 100%;
+  gap: clamp(8px, 1.4cqw, 16px);
+}
+
+.oefenkaart-midden .zone-voet .knoppen.even-breed .knop {
+  width: 100%;
+  min-height: clamp(34px, 8cqh, 52px);
+  padding: 0 26px;
+  font-size: clamp(14px, 3.2cqh, 18px);
+}
+
+/* ---------- Opbouw "kolom": opdracht, een vak en de knop eronder ----------
+   Zonder zijzones: alles staat in de middenkolom (de toetsenbordcheck). De
+   rijen hebben een vaste maat: wat in het vak wisselt, verschuift niets. */
+.podium .blok.oefenkaart.oefenkaart-kolom {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 24cqh minmax(0, 1fr) auto;
+  padding-bottom: clamp(8px, 4.5cqh, 20px);
+}
+
+.oefenkaart-kolom .zone-opdracht,
+.oefenkaart-kolom .zone-veld,
+.oefenkaart-kolom .zone-voet {
+  grid-column: 1;
+}
+
+.oefenkaart-kolom .zone-voet {
+  grid-row: 3;
+  padding: clamp(4px, 2.5cqh, 12px) 0 0;
+}
+
+.oefenkaart-kolom > .voortgang {
+  display: none;
+}
+
+/* De figuren zijn afgesneden ter hoogte van hun trui: een dunne lijn eronder
+   maakt er een rand van waar ze achter staan. */
+.oefenkaart-toren .zone-figuren {
+  padding: 0 clamp(16px, 2.4cqw, 34px);
+  border-bottom: 2px solid var(--rand-knop);
 }

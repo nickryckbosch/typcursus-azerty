@@ -6,7 +6,7 @@ import type { App, Scherm } from "../app";
 import { t, type TekstSleutel } from "../content";
 import type { Blok, Les } from "../content/types";
 import { blokFunctie } from "../blokken";
-import { oefenscherm } from "../blokken/oefenscherm";
+import { slotscherm } from "../blokken/oefenscherm";
 import { maakExtraRegels } from "../logica/extraoefenen";
 import { verderBij, zetBezigBij } from "../logica/voortgang";
 import type { BlokContext, BlokInstantie } from "../blokken/context";
@@ -222,21 +222,20 @@ export function lesScherm(app: App, les: Les, wortel: HTMLElement, opties: LesOp
   function toonVerderVraag(blok: number): void {
     index = blok;
     werkStapjesBij();
-    ctx.toonToetsenbord(false);
     const blokTitel = blokken[blok].titel;
     titel.textContent = t("les.kop", { nummer: les.id, titel: blokTitel });
     const tekst = t("verder.vraag", { nummer: blok + 1, titel: blokTitel });
-    const opnieuw = el("button", { class: "knop", type: "button", onclick: () => toonBlok(0) }, t("verder.opnieuw"));
-    const verder = el(
-      "button",
-      { class: "knop knop-hoofd", type: "button", onclick: () => toonBlok(blok) },
-      t("verder.knop", { nummer: blok + 1, titel: blokTitel }),
-    );
-    const vraag = oefenscherm(ctx, { figuren: "zwaai", klasse: "blok-verder" });
-    vraag.zetOpdracht(tekst);
-    vraag.voet.replaceChildren(el("div", { class: "knoppen" }, verder, opnieuw));
-    // Enter kiest "verdergaan" (de knop heeft de focus); met Tab kies je "opnieuw beginnen".
-    verder.focus();
+    // Een slotscherm (K27 fase 2): Fien en Jef stellen de vraag in hun tekstballon.
+    // Enter kiest "verdergaan" (de eerste knop heeft de focus); met Tab kies je "opnieuw beginnen".
+    slotscherm(ctx, {
+      figuren: "zwaai",
+      zin: tekst,
+      klasse: "blok-verder",
+      knoppen: [
+        { tekst: t("verder.knop", { nummer: blok + 1, titel: blokTitel }), actie: () => toonBlok(blok) },
+        { tekst: t("verder.opnieuw"), actie: () => toonBlok(0) },
+      ],
+    });
   }
 
   return {

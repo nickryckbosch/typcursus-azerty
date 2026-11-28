@@ -30,6 +30,20 @@
 //
 // Een manier om verder te gaan: de knop Verder, met de Enter-toets erin
 // getekend. De losse zin "Druk op Enter om verder te gaan" is weg (K27).
+//
+// Opbouw "toren" (K27 fase 2; docs/beslissingen.md, 12p): voor een slotscherm.
+// Fien en Jef staan groot in het midden, hun zin in een tekstballon erboven,
+// de knoppen even breed eronder. Gebruik slotscherm() hieronder.
+//
+//   +-----------------------------------------------+
+//   |              ( tekstballon )                  |
+//   |               Fien en Jef                     |   zone-groep
+//   |          [ knop ]  [ knop ]  [ knop ]         |   zone-voet
+//   +-----------------------------------------------+
+//
+// Opbouw "kolom": de opdracht bovenaan, een vak in het midden en de knop
+// Verder eronder, zonder zijzones (de toetsenbordcheck). De rijen hebben een
+// vaste maat, zoals bij de zones.
 
 import { t } from "../content";
 import { el } from "../weergave/dom";
@@ -105,8 +119,12 @@ export interface OefenschermOpties {
   /**
    * "midden" (K27): Fien en Jef, hun tekstballon en de prent staan als een groep
    * in het midden, met de knoppen eronder. Voor schermen zonder typopdracht.
+   * "toren": een slotscherm, de tekstballon boven Fien en Jef (zie slotscherm()).
+   * "kolom": opdracht, een vak in het midden en de knop eronder, zonder zijzones.
    */
-  opbouw?: "zones" | "midden";
+  opbouw?: "zones" | "midden" | "toren" | "kolom";
+  /** hoe hoog Fien en Jef hoogstens zijn (in px van het ontwerp); weglaten: de standaardmaat */
+  figuurHoogte?: number;
 }
 
 export interface Oefenscherm {
@@ -119,6 +137,13 @@ export interface Oefenscherm {
   zetOpdracht(tekst: string, voorlezen?: boolean, beelden?: Record<string, () => Node>): void;
   /** een andere houding van Fien en Jef, op dezelfde plaats */
   zetFiguren(uitdrukking: Uitdrukking): void;
+  /**
+   * Een andere zin in de tekstballon van de doelzin (bv. de slotzin van een
+   * spel). De ballon houdt minstens zijn hoogte, zodat er niets verspringt.
+   */
+  zetDoel(tekst: string): void;
+  /** verberg de opdracht bovenaan (haar plaats blijft), bv. op het einde van een spel */
+  verbergOpdracht(): void;
   /**
    * Toon de knop Verder, met de Enter-toets erin getekend; Enter doet hetzelfde.
    * Met "start": de knop Start (K28: eerst lezen, dan starten).
@@ -139,9 +164,8 @@ export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): O
   // Met een doelzin: de tekstballon bovenaan, Fien en Jef eronder (zelfde opbouw
   // als de tip naast de oefenregels). Zonder doelzin staan de figuren alleen.
   const figurenRij = el("div", { class: opties.doel ? "figuren-rij" : "zone-figuren" });
-  const figuren = opties.doel
-    ? el("div", { class: "zone-figuren met-doel" }, el("p", { class: "ballon staart-onder doel-ballon" }, opties.doel), figurenRij)
-    : figurenRij;
+  const doelBallon = opties.doel ? el("p", { class: "ballon staart-onder doel-ballon" }, opties.doel) : null;
+  const figuren = doelBallon ? el("div", { class: "zone-figuren met-doel" }, doelBallon, figurenRij) : figurenRij;
   const veld = el("div", { class: "zone-veld" });
   let enterActie = () => ctx.volgende();
   // Een manier om verder te gaan (K27): een knop, met de Enter-toets erin
@@ -160,12 +184,26 @@ export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): O
   const voet = el("div", { class: "zone-voet" }, enterRij);
   const voortgang = maakVoortgang();
 
-  const midden = opties.opbouw === "midden";
+  const opbouw = opties.opbouw ?? "zones";
+  const opbouwKlasse = {
+    zones: "",
+    midden: "oefenkaart-midden",
+    toren: "oefenkaart-midden oefenkaart-toren",
+    kolom: "oefenkaart-kolom",
+  }[opbouw];
+  const inhoud =
+    opbouw === "midden"
+      ? [el("div", { class: "zone-groep" }, figuren, veld)]
+      : opbouw === "toren"
+        ? [el("div", { class: "zone-groep" }, veld, figuren)]
+        : opbouw === "kolom"
+          ? [veld]
+          : [figuren, veld];
   const element = el(
     "section",
-    { class: `blok oefenkaart ${midden ? "oefenkaart-midden" : ""} ${opties.klasse ?? ""}` },
+    { class: `blok oefenkaart ${opbouwKlasse} ${opties.klasse ?? ""}` },
     el("div", { class: "zone-opdracht" }, opdracht),
-    ...(midden ? [el("div", { class: "zone-groep" }, figuren, veld)] : [figuren, veld]),
+    ...inhoud,
     voet,
     voortgang.element,
   );
@@ -182,7 +220,15 @@ export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): O
       if (voorlezen) ctx.zeg(tekst);
     },
     zetFiguren(uitdrukking) {
-      figurenRij.replaceChildren(fien(uitdrukking), jef(uitdrukking));
+      figurenRij.replaceChildren(fien(uitdrukking, opties.figuurHoogte), jef(uitdrukking, opties.figuurHoogte));
+    },
+    zetDoel(tekst) {
+      if (!doelBallon) return;
+      doelBallon.style.minHeight = `${doelBallon.offsetHeight}px`;
+      doelBallon.textContent = tekst;
+    },
+    verbergOpdracht() {
+      toon(opdracht, false);
     },
     toonEnter(actie, soort = "verder") {
       if (actie) enterActie = actie;
@@ -198,5 +244,51 @@ export function oefenscherm(ctx: BlokContext, opties: OefenschermOpties = {}): O
     },
   };
   if (opties.figuren) scherm.zetFiguren(opties.figuren);
+  return scherm;
+}
+
+export interface SlotKnop {
+  tekst: string;
+  actie: () => void;
+}
+
+export interface SlotschermOpties {
+  /** de houding van Fien en Jef */
+  figuren: Uitdrukking;
+  /** wat Fien en Jef zeggen, in de tekstballon boven hen */
+  zin: string;
+  /** de eerste knop is de hoofdknop (vol blauw): die kiest Enter */
+  knoppen: SlotKnop[];
+  /** iets boven de tekstballon, bv. de sterren */
+  boven?: Node[];
+  klasse?: string;
+}
+
+/**
+ * Een slotscherm (K27 fase 2; docs/stijlgids.md, deel 10): het einde van een
+ * les, het einde van extra oefenen, de vraag "wil je verdergaan?". Fien en Jef
+ * staan groot in het midden, hun zin in een tekstballon erboven, de knoppen
+ * even breed eronder. Er valt niets te typen: het toetsenbord is weg en de
+ * kaart vult het scherm.
+ */
+export function slotscherm(ctx: BlokContext, opties: SlotschermOpties): Oefenscherm {
+  ctx.toonToetsenbord(false);
+  const scherm = oefenscherm(ctx, {
+    figuren: opties.figuren,
+    opbouw: "toren",
+    klasse: `blok-slot ${opties.klasse ?? ""}`,
+    figuurHoogte: 250,
+  });
+  scherm.veld.append(
+    ...(opties.boven ?? []),
+    el("div", { class: "ballon staart-onder" }, el("p", { class: "grote-tekst" }, opties.zin)),
+  );
+  ctx.zeg(opties.zin);
+  const knoppen = opties.knoppen.map((k, i) =>
+    el("button", { class: i === 0 ? "knop knop-hoofd" : "knop knop-tweede", type: "button", onclick: k.actie }, k.tekst),
+  );
+  scherm.voet.replaceChildren(el("div", { class: "knoppen even-breed" }, ...knoppen));
+  // Met Enter kies je de eerste knop; met Tab ga je naar de andere.
+  knoppen[0]?.focus();
   return scherm;
 }

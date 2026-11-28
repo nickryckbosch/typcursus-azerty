@@ -1,5 +1,6 @@
 // Afsluiter: "Goed gedaan!" met sterren. Is het doel niet gehaald, dan kan
-// het kind de eindoefening meteen opnieuw doen.
+// het kind de eindoefening meteen opnieuw doen. Het is een slotscherm: Fien en
+// Jef groot in het midden, hun zin in een tekstballon, de knoppen eronder.
 
 import { t } from "../content";
 import type { AfsluiterBlok } from "../content/types";
@@ -7,29 +8,25 @@ import { heeftExtraOefenen } from "../logica/extraoefenen";
 import { isLesOpen, markeerEindeBereikt } from "../logica/voortgang";
 import { el } from "../weergave/dom";
 import { sterIcoon } from "../weergave/figuren";
-import { oefenscherm } from "./oefenscherm";
+import { slotscherm } from "./oefenscherm";
 import { isBeschikbaar } from ".";
 import type { BlokFunctie } from "./context";
 
 export const afsluiter: BlokFunctie<AfsluiterBlok> = (blok, ctx) => {
   const { app, les } = ctx;
   const resultaat = ctx.sessie.resultaat;
-  // Hier is niets te typen: het toetsenbord en de handen worden onzichtbaar,
-  // maar houden hun plaats, zodat er niets verspringt.
-  ctx.toonToetsenbord(false);
-
   // Extra oefenen (K15): een korte afsluiter. Er telt niets mee voor de voortgang.
+  // "Naar de lessen" is de hoofdknop: dat is de knop die Enter kiest.
   if (ctx.extra) {
-    // K27: Fien en Jef en wat ze zeggen staan als een groep in het midden, de
-    // knoppen eronder. De hoofdknop (vol blauw) is de knop die Enter kiest.
-    const terug = el("button", { class: "knop knop-hoofd", type: "button", onclick: () => app.naarStart() }, t("knop.naarLessen"));
-    const nogEens = el("button", { class: "knop knop-tweede", type: "button", onclick: () => app.naarExtra(les) }, t("extra.nogEens"));
-    const scherm = oefenscherm(ctx, { figuren: "duim", opbouw: "midden", klasse: "blok-extra-einde" });
-    const tekst = blok.tekst ?? "";
-    scherm.veld.append(el("div", { class: "ballon" }, el("p", { class: "grote-tekst" }, tekst)));
-    ctx.zeg(tekst);
-    scherm.voet.replaceChildren(el("div", { class: "knoppen" }, terug, nogEens));
-    terug.focus();
+    slotscherm(ctx, {
+      figuren: "duim",
+      zin: blok.tekst ?? "",
+      klasse: "blok-extra-einde",
+      knoppen: [
+        { tekst: t("knop.naarLessen"), actie: () => app.naarStart() },
+        { tekst: t("extra.nogEens"), actie: () => app.naarExtra(les) },
+      ],
+    });
     return {};
   }
 
@@ -51,12 +48,13 @@ export const afsluiter: BlokFunctie<AfsluiterBlok> = (blok, ctx) => {
   const knop = (tekst: string, actie: () => void, extra = false) => keuzes.push({ tekst, actie, extra });
 
   // De houding op het einde: duim omhoog, of aanmoedigen als het doel niet gehaald is.
-  const uitdrukking = resultaat && !resultaat.gehaald ? "aanmoedigend" : "duim";
-  const scherm = oefenscherm(ctx, { figuren: uitdrukking, klasse: "blok-afsluiter" });
   const nietGehaald = resultaat !== null && resultaat !== undefined && !resultaat.gehaald;
+  // Wat Fien en Jef zeggen: het staat in hun tekstballon (K27 fase 2).
+  let zin = blok.tekst ?? "";
+  const boven: Node[] = [];
 
   if (resultaat) {
-    scherm.veld.append(
+    boven.push(
       el(
         "div",
         { class: "sterren", role: "img", "aria-label": t("les.sterren", { aantal: resultaat.sterren }) },
@@ -66,30 +64,30 @@ export const afsluiter: BlokFunctie<AfsluiterBlok> = (blok, ctx) => {
     );
     if (resultaat.gehaald) {
       // Minder dan drie sterren: de app voegt zelf de uitnodiging toe, voor elke les.
-      const tekst = resultaat.sterren < 3 ? `${blok.tekst ?? ""} ${t("eind.nietAlleSterren")}`.trim() : blok.tekst ?? "";
-      scherm.zetOpdracht(tekst);
+      if (resultaat.sterren < 3) zin = `${zin} ${t("eind.nietAlleSterren")}`.trim();
       if (volgendeOpen) knop(t("knop.volgendeLes", { nummer: volgendeLes.id }), () => app.naarLes(volgendeLes));
       if (resultaat.sterren < 3) knop(t("knop.meerSterren"), () => ctx.gaNaar(ctx.indexVan("eindoefening")));
     } else {
-      scherm.zetOpdracht(t("eind.nietGehaald"));
+      zin = t("eind.nietGehaald");
       knop(t("knop.opnieuw"), () => ctx.gaNaar(ctx.indexVan("eindoefening")));
     }
-  } else {
-    scherm.zetOpdracht(blok.tekst ?? "");
-    if (volgendeOpen) knop(t("knop.volgendeLes", { nummer: volgendeLes.id }), () => app.naarLes(volgendeLes));
+  } else if (volgendeOpen) {
+    knop(t("knop.volgendeLes", { nummer: volgendeLes.id }), () => app.naarLes(volgendeLes));
   }
   if (heeftExtraOefenen(les)) knop(t("knop.extra"), () => app.naarExtra(les), true);
   knop(t("knop.naarBegin"), () => app.naarStart());
 
   // Niet gehaald: "Opnieuw" blijft vooraan. Anders gaat "Extra oefenen" vooraan.
   if (!nietGehaald) keuzes.sort((a, b) => Number(b.extra === true) - Number(a.extra === true));
-  const knoppen = keuzes.map((k, i) =>
-    el("button", { class: i === 0 ? "knop knop-hoofd" : "knop knop-tweede", type: "button", onclick: k.actie }, k.tekst),
-  );
 
-  scherm.voet.replaceChildren(el("div", { class: "knoppen" }, ...knoppen));
-  // Met Enter kies je de eerste knop; met Tab ga je naar de andere.
-  knoppen[0].focus();
+  // Fien en Jef groot in het midden, hun zin erboven, de knoppen even breed eronder.
+  slotscherm(ctx, {
+    figuren: nietGehaald ? "aanmoedigend" : "duim",
+    zin,
+    boven,
+    klasse: "blok-afsluiter",
+    knoppen: keuzes,
+  });
 
   return {};
 };
